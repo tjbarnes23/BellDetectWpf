@@ -47,9 +47,14 @@ namespace BellDetectWpf
         [StructLayout(LayoutKind.Explicit)]
         public struct InputUnion
         {
-            [FieldOffset(0)] public MouseInput mi;
-            [FieldOffset(0)] public KeyboardInput ki;
-            [FieldOffset(0)] public HardwareInput hi;
+            [FieldOffset(0)]
+            public MouseInput mi;
+
+            [FieldOffset(0)]
+            public KeyboardInput ki;
+
+            [FieldOffset(0)]
+            public HardwareInput hi;
         }
 
         public struct Input
@@ -66,7 +71,7 @@ namespace BellDetectWpf
             Scancode = 0x0008
         }    
 
-        public static void Press()
+        public static void Press(byte key)
         {
             Input[] inputs = new Input[]
             {
@@ -78,7 +83,7 @@ namespace BellDetectWpf
                         ki = new KeyboardInput
                         {
                             wVk = 0,
-                            wScan = 0x11, // W
+                            wScan = key,
                             dwFlags = (uint)(KeyEventF.KeyDown | KeyEventF.Scancode),
                             dwExtraInfo = GetMessageExtraInfo()
                         }
@@ -92,7 +97,7 @@ namespace BellDetectWpf
                         ki = new KeyboardInput
                         {
                             wVk = 0,
-                            wScan = 0x11, // W
+                            wScan = key,
                             dwFlags = (uint)(KeyEventF.KeyUp | KeyEventF.Scancode),
                             dwExtraInfo = GetMessageExtraInfo()
                         }

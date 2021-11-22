@@ -31,7 +31,8 @@ namespace BellDetectWpf
                     // The loading of a method to call into the StartStopTxtChanged event is done by the compiler,
                     // which sees we have a XAML element that we are binding to a property called StartStopTxt,
                     // and it checks if there is a corresponding StartStopTxtChanged event.
-                    // If there is, it loads a built-in method to be called into the event, and two-way binding is therefore established.
+                    // If there is, it loads a built-in method to be called into the event,
+                    // and two-way binding is therefore established.
                     StartStopTxtChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
@@ -59,12 +60,23 @@ namespace BellDetectWpf
 
         public static async Task StartDetecting()
         {
+            var random = new Random();
             await Task.Delay(2000);
 
             do
             {
-                KeyPress.Press();
+                byte rand = (byte)random.Next(0, 2);
 
+                if (rand == 0)
+                {
+                    rand = 0x21; // f key
+                }
+                else
+                {
+                    rand = 0x24; // j key
+                }
+
+                KeyPress.Press(rand);
                 await Task.Delay(1000);
             }
             while (StartStopTxt == "Stop detecting");
