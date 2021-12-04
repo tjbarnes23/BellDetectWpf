@@ -32,7 +32,7 @@ namespace BellDetectWpf
 
         private void GenerateWav_Click(object sender, RoutedEventArgs e)
         {
-            WavFileGen.GenerateWavFile();
+            WavFileGenMono.GenerateMonoWavFile();
         }
 
         private void Window_Closed(object sender, EventArgs e)
