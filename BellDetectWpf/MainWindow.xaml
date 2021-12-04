@@ -9,18 +9,23 @@
         Width="350"
         Height="350"
         Closed="Window_Closed">
-    <Canvas x:Name="MainCanvas" Width="300" Height="300">
+    <Canvas Width="300" Height="300">
         <TextBlock Canvas.Left="10" Canvas.Top="25" Width="280" Height="50"
                 TextAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Bell Detect
         </TextBlock>
 
-        <Button x:Name="StartStopBtn"
-                Canvas.Left="60" Canvas.Top="100" Width="180" Height="50"
+        <Button Canvas.Left="60" Canvas.Top="100" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="StartStopBtn_Click"
                 Content="{Binding Path=(local:ViewModel.StartStopTxt)}">
+        </Button>
+
+        <Button Canvas.Left="60" Canvas.Top="175" Width="180" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="GenerateWav_Click">
+            Generate .wav file
         </Button>
     </Canvas>
 </Window>

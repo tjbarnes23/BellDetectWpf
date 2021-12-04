@@ -30,6 +30,11 @@ namespace BellDetectWpf
             await ViewModel.StartStop();
         }
 
+        private void GenerateWav_Click(object sender, RoutedEventArgs e)
+        {
+            WavFileGen.GenerateWavFile();
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             Application.Current.Shutdown();

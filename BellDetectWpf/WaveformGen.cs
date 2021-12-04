@@ -14,7 +14,7 @@ namespace BellDetectWpf
             int bitsPerSample = 8;
 
             //WaveFile is custom class to create a wav file.
-            WaveFile file = new WaveFile(channels, bitsPerSample, 11025);
+            // WaveFile file = new WaveFile(channels, bitsPerSample, 11025);
 
             int seconds = 60;
             int samples = 11025 * seconds; //Create x seconds of audio
@@ -28,7 +28,7 @@ namespace BellDetectWpf
             {
                 data[i] = (byte)(256 * Math.Sin(i));
             }
-            file.SetData(data, samples);
+            // file.SetData(data, samples);
         }
     }
 }

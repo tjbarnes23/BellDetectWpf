@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,36 +12,72 @@ namespace BellDetectWpf
     {
         public static void GenerateWavFile()
         {
-            uint numsamples = 44100;
-            ushort numchannels = 1;
-            ushort samplelength = 1; // in bytes
-            uint samplerate = 22050;
+            uint sampleRate; // kHz
+            ushort sampleLength; // seconds
+            uint numSamples; // number
+            uint sampleSize; // bytes
+            ushort numChannels; // number
+            uint dataSize; // bytes
+            uint dataHeaderSize; // bytes
+            uint headerSize; // bytes
+            ushort format; // number
+            uint dataRate; // bytes per second
+            ushort blockAlignment; // bytes
+            ushort bitsPerSample; // bits
+
+            sampleRate = 22050; // kHz
+            sampleLength = 2; // seconds
+            numSamples = sampleRate * sampleLength; // number
+            sampleSize = 1; // bytes
+            numChannels = 1; // number
+            dataSize = numSamples * sampleSize * numChannels; // bytes
+            dataHeaderSize = dataSize + 36;
+            headerSize = 16;
+            format = 1;
+            dataRate = sampleRate * sampleSize * numChannels;
+            blockAlignment = (ushort)(sampleSize * numChannels);
+            bitsPerSample = (ushort)(sampleSize * 8);
 
             FileStream f = new FileStream("a.wav", FileMode.Create);
             BinaryWriter wr = new BinaryWriter(f);
 
             wr.Write(Encoding.ASCII.GetBytes("RIFF"));
-            wr.Write(36 + numsamples * numchannels * samplelength);
-            wr.Write(Encoding.ASCII.GetBytes("WAVEfmt"));
-            wr.Write(16);
-            wr.Write((ushort)1);
-            wr.Write(numchannels);
-            wr.Write(samplerate);
-            wr.Write(samplerate * samplelength * numchannels);
-            wr.Write(samplelength * numchannels);
-            wr.Write((ushort)(8 * samplelength));
+            wr.Write(dataHeaderSize);
+            wr.Write(Encoding.ASCII.GetBytes("WAVE")); // 
+            wr.Write(Encoding.ASCII.GetBytes("fmt "));
+            wr.Write(headerSize); // 
+            wr.Write(format);
+            wr.Write(numChannels);
+            wr.Write(sampleRate);
+            wr.Write(dataRate);
+            wr.Write(blockAlignment);
+            wr.Write(bitsPerSample);
             wr.Write(Encoding.ASCII.GetBytes("data"));
-            wr.Write(numsamples * samplelength);
-
-            // for now, just a square wave
-            // Waveform a = new Waveform(440, 50);
+            wr.Write(dataSize);
 
             double t = 0.0;
+            double x;
+            double yd;
+            double fr = 440.0;
+            byte y;
 
-            for (int i = 0; i < numsamples; i++, t += 1.0 / samplerate)
+            for (int i = 0; i < numSamples; i++)
             {
-                // wr.Write((byte)((a.sample(t) + (samplelength == 1 ? 128 : 0)) & 0xff));
+                t += (1.0 / sampleRate);
+
+                x = t * fr * 2.0 * Math.PI;
+
+                yd = Math.Sin(x);
+                yd = (yd * 127.0) + 127.0;
+                y = (byte)Math.Round(yd);
+                
+                Debug.Print(y.ToString());
+
+                wr.Write(y);
             }
+
+            wr.Close();
+            f.Close();
         }
     }
 }
