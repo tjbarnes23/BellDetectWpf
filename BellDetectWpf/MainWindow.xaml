@@ -24,8 +24,8 @@
 
         <Button Canvas.Left="60" Canvas.Top="175" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="GenerateWav_Click">
-            Generate .wav file
+                Click="RunFFT_Click">
+            Run FFT
         </Button>
     </Canvas>
 </Window>

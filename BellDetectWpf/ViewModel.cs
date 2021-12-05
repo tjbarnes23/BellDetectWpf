@@ -12,7 +12,12 @@ namespace BellDetectWpf
     {
         private static string startStopTxt;
         public static event EventHandler StartStopTxtChanged;
-        
+
+        internal static short[] Waveform;
+
+        internal static double[] XRe;
+        internal static double[] XIm;
+
         public static MainWindow Mw { get; set; }
 
         public static string StartStopTxt
@@ -80,6 +85,30 @@ namespace BellDetectWpf
                 await Task.Delay(1000);
             }
             while (StartStopTxt == "Stop detecting");
+        }
+
+        public static void RunFFT()
+        {
+            // This populates the waveform into Waveform array
+            WavFileGenMono.GenerateMonoWavFile();
+
+            // Copy the first 256 items in the Waveform array into XRe array, and set XIm array values to zero
+            XRe = new double[256];
+            XIm = new double[256];
+
+            for (int i = 0; i < 256; i++)
+            {
+                XRe[i] = Waveform[i];
+                XIm[i] = 0;
+            }
+
+            // Initalize FFT routine
+            FFT fft = new FFT();
+            fft.Init(8); // arument is LogN where N is 256 bins
+            fft.Run();
+
+            // Output results to a txt file
+            FFTResults.CreateResultsFile();
         }
     }
 }
