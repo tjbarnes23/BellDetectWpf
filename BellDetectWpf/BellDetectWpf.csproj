@@ -7,4 +7,20 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="BellSamples\8th handstroke mono 96 kHz signed 16-bit.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="BellSamples\8th handstroke mono 96 kHz signed 16-bit.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\MicStream\" />
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\Main\" />
+  </ItemGroup>
+
 </Project>

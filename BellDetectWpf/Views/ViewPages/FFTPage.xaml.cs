@@ -12,32 +12,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BellDetectWpf.ViewModels;
+using BellDetectWpf.ViewModels.FFT;
 
-namespace BellDetectWpf
+namespace BellDetectWpf.Views.ViewPages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FFTPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FFTPage : Page
     {
-        public MainWindow()
+        public FFTPage()
         {
             InitializeComponent();
         }
 
-        private async void StartStopBtn_Click(object sender, RoutedEventArgs e)
+        private void FFT_Click(object sender, RoutedEventArgs e)
         {
-            await ViewModel.StartStop();
+            FFTVM.RunFFT();
         }
 
-        private void RunFFT_Click(object sender, RoutedEventArgs e)
+        private void Return_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.RunFFT();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            Application.Current.Shutdown();
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MainPage.xaml", UriKind.Relative);
         }
     }
 }

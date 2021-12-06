@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BellDetectWpf
+namespace BellDetectWpf.ViewModels.WavFile
 {
-    public static class WavFileGenStereo
+    public static class L2WavFileGenStereo
     {
-        public static void GenerateStereoWavFile()
+        public static void WavFileGenStereo()
         {
             // Declare variables
             uint formatParametersSize; // bytes

@@ -4,12 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.ViewModels;
 
-namespace BellDetectWpf
+namespace BellDetectWpf.ViewModels.FFT
 {
-    public static class FFTResults
+    public static class L2SaveFFT
     {
-        public static void CreateResultsFile()
+        public static void SaveFFT()
         {
             string fileName = @"C:\temp\results.txt";
             StringBuilder sb = new StringBuilder();
@@ -28,11 +29,11 @@ namespace BellDetectWpf
             Byte[] row = new UTF8Encoding(true).GetBytes("Bin\tAmplitude\tPhase\n");
             fs.Write(row, 0, row.Length);
 
-            for (int i = 0; i < 256; i++)
+            for (int i = 0; i < 128; i++)
             {
                 bin = (44100 / 256) * (i + 1);
-                amplitude = Math.Sqrt(Math.Pow(ViewModel.XRe[i], 2) + Math.Pow(ViewModel.XIm[i], 2));
-                phase = Math.Atan2(ViewModel.XIm[i], ViewModel.XRe[i]);
+                amplitude = Math.Sqrt(Math.Pow(FFTVM.XRe[i], 2) + Math.Pow(FFTVM.XIm[i], 2));
+                phase = Math.Atan2(FFTVM.XIm[i], FFTVM.XRe[i]);
 
                 amplitude = Math.Round(amplitude, 3);
                 phase = Math.Round(phase, 3);

@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BellDetectWpf
+namespace BellDetectWpf.ViewModels.KeyPress
 {
-    public static class KeyPress
+    public static class L2KeyPress
     {
         [DllImport("user32.dll", SetLastError = true)]
         private static extern uint SendInput(uint nInputs, Input[] pInputs, int cbSize);

@@ -5,12 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.ViewModels;
 
-namespace BellDetectWpf
+namespace BellDetectWpf.ViewModels.WavFile
 {
-    public static class WavFileGenTrinity8th
+    public static class L2WavFileGenMono
     {
-        public static void GenerateTrinity8thWavFile()
+        public static void WavFileGenMono()
         {
             // Declare variables
             uint formatParametersSize; // bytes
@@ -28,6 +29,9 @@ namespace BellDetectWpf
             uint dataSize; // bytes
             uint fileSize; // bytes
 
+            string fileName;
+            StringBuilder sb;
+
             // Set variables
             formatParametersSize = 16; // bytes
             wavType = 1; // number
@@ -44,9 +48,16 @@ namespace BellDetectWpf
             dataSize = (uint)((bitsPerSamplePerChannel * numChannels * numSamples) / 8); // bytes
             fileSize = dataSize + 36; // bytes
 
+            fileName = @"C:\temp\waveform.wav";
+
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
             // Create .wav file
-            FileStream f = new FileStream(@"C:\temp\waveform.wav", FileMode.Create);
-            BinaryWriter wr = new BinaryWriter(f);
+            using FileStream f = new FileStream(fileName, FileMode.Create);
+            using BinaryWriter wr = new BinaryWriter(f);
 
             wr.Write(Encoding.ASCII.GetBytes("RIFF"));
             wr.Write(fileSize);
@@ -63,26 +74,17 @@ namespace BellDetectWpf
             wr.Write(dataSize);
             
             // Create waveform data
-            int numWaves = 11;
+            int numWaves = 2;
             double[,] waveSpec = new double[numWaves, 2];
-            double scaleFactor = 2000;
+            double scaleFactor = 1;
 
             // Frequency and amplitude
-            waveSpec[0, 0] = 221.5;     waveSpec[0, 1] = 2.1756; // hum
-            waveSpec[1, 0] = 441.5;     waveSpec[1, 1] = 1.659; // prime
-            waveSpec[2, 0] = 524.0;     waveSpec[2, 1] = 1.117; // tierce
-            waveSpec[3, 0] = 659.0;     waveSpec[3, 1] = 0.174; // quint
-            waveSpec[4, 0] = 883.5;     waveSpec[4, 1] = 3.464; // nominal
-            waveSpec[5, 0] = 1188.5;    waveSpec[5, 1] = 0.9506; // unnamed
-            waveSpec[6, 0] = 1322.5;    waveSpec[6, 1] = 2.526; // superquint
-            waveSpec[7, 0] = 1465.5;    waveSpec[7, 1] = 0.631; // unnamed
-            waveSpec[8, 0] = 1832.5;    waveSpec[8, 1] = 0.6237; // octave above nominal
-            waveSpec[9, 0] = 2389.0;    waveSpec[9, 1] = 0.6646; // unnamed
-            waveSpec[10, 0] = 2994.0;   waveSpec[10, 1] = 0.484; // unnamed
+            waveSpec[0, 0] = 4400.0;     waveSpec[0, 1] = 16383.0;
+            waveSpec[1, 0] = 8800.0;     waveSpec[1, 1] = 16383.0;
 
             double[] time = new double[numSamples];
             double[,] waves = new double[numWaves, numSamples];
-            short[] wavesSum = new short[numSamples];
+            WaveformVM.Waveform = new short[numSamples];
 
             double x;
             double w;
@@ -110,17 +112,47 @@ namespace BellDetectWpf
                     }
                 }
 
-                wavesSum[i] = (short)Math.Round(wSum);
+                // Prevent any clipping
+                if (wSum > 32767)
+                {
+                    wSum = 32767;
+                }
+                else if (wSum < -32767)
+                {
+                    wSum = -32767;
+                }
+
+                WaveformVM.Waveform[i] = (short)Math.Round(wSum);
             }
 
             // Write the summed waveforms to the binary write
             for (int i = 0; i < numSamples; i++)
             {
-                wr.Write(wavesSum[i]);
+                wr.Write(WaveformVM.Waveform[i]);
             }
             
-            wr.Close();
-            f.Close();
+            // Write out waveform to a text file (first 256 samples)
+            
+            fileName = @"C:\temp\waveform.txt";
+
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+            sb = new StringBuilder();
+
+            using FileStream fs = File.Create(fileName);
+
+            for (int i = 0; i < 256; i++)
+            {
+                sb.Clear();
+                sb.Append(WaveformVM.Waveform[i]);
+                sb.Append('\n');
+
+                Byte[] row = new UTF8Encoding(true).GetBytes(sb.ToString());
+                fs.Write(row, 0, row.Length);
+            }
         }
     }
 }

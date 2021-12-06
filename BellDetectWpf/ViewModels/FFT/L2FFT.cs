@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.ViewModels;
 
-namespace BellDetectWpf
+namespace BellDetectWpf.ViewModels.FFT
 {
-    public class FFT
+    public class L2FFT
     {
         // Element for linked list in which we store the input/output data. We use a linked list because
         // for sequential access it's faster than array index.
@@ -72,8 +73,8 @@ namespace BellDetectWpf
                 
             while (x != null)
             {
-                x.re = scale * ViewModel.XRe[k];
-                x.im = scale * ViewModel.XIm[k];
+                x.re = scale * FFTVM.XRe[k];
+                x.im = scale * FFTVM.XIm[k];
                 x = x.next;
                 k++;
             }
@@ -153,8 +154,8 @@ namespace BellDetectWpf
             while (x != null)
             {
                 uint target = x.revTgt;
-                ViewModel.XRe[target] = x.re;
-                ViewModel.XIm[target] = x.im;
+                FFTVM.XRe[target] = x.re;
+                FFTVM.XIm[target] = x.im;
                 x = x.next;
             }
         }
