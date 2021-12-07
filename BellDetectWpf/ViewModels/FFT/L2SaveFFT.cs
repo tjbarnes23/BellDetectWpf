@@ -29,9 +29,11 @@ namespace BellDetectWpf.ViewModels.FFT
             Byte[] row = new UTF8Encoding(true).GetBytes("Bin\tAmplitude\tPhase\n");
             fs.Write(row, 0, row.Length);
 
-            for (int i = 0; i < 128; i++)
+            // *** Update this to be parameter driven depending on sample frequency and number of bins to be used ***
+
+            for (int i = 0; i < 256; i++) // Only interested in bottom 1/4 of frequency buckets
             {
-                bin = (44100 / 256) * (i + 1);
+                bin = (96000 / 1024) * (i + 1);
                 amplitude = Math.Sqrt(Math.Pow(FFTVM.XRe[i], 2) + Math.Pow(FFTVM.XIm[i], 2));
                 phase = Math.Atan2(FFTVM.XIm[i], FFTVM.XRe[i]);
 

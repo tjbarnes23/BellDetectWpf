@@ -8,22 +8,18 @@ using System.Threading.Tasks;
 
 namespace BellDetectWpf.ViewModels.WavFile
 {
-    public static class L2WavRead
+    public static class L2LoadWav
     {
-        public static void WavRead()
+        public static void LoadWav()
         {
             uint fileSize;
             uint formatParametersSize;
             ushort wavType;
             ushort numChannels;
-            uint sampleFrequency;
             uint dataRate;
             ushort blockAlignment;
             ushort bitsPerSamplePerChannel;
             uint dataSizeBytes;
-            uint dataSizeShorts;
-
-            short[] data;
 
             string fileName;
 
@@ -59,7 +55,7 @@ namespace BellDetectWpf.ViewModels.WavFile
             numChannels = br.ReadUInt16();
 
             // Read sampleFrequency (uint)
-            sampleFrequency = br.ReadUInt32();
+            WaveformVM.SampleFrequency = br.ReadUInt32();
 
             // Read dataRate (uint)
             dataRate = br.ReadUInt32();
@@ -70,18 +66,22 @@ namespace BellDetectWpf.ViewModels.WavFile
             // Read bitsPerSamplePerChannel (ushort)
             bitsPerSamplePerChannel = br.ReadUInt16();
 
-            // Read dataSize (uint)
-            dataSizeBytes = br.ReadUInt32();
-            dataSizeShorts = dataSizeBytes / 2;
-
-            data = new short[dataSizeShorts];
-
-            for (int i = 0; i < dataSizeShorts; i++)
+            // Read 'data'
+            for (int i = 0; i < 4; i++)
             {
-                data[i] = br.ReadInt16();
+                _ = br.ReadByte();
             }
 
-            Debug.Print(dataSizeShorts.ToString());
+            // Read dataSize (uint)
+            dataSizeBytes = br.ReadUInt32();
+            WaveformVM.NumSamples = dataSizeBytes / 2;
+
+            WaveformVM.Waveform = new short[WaveformVM.NumSamples];
+
+            for (int i = 0; i < WaveformVM.NumSamples; i++)
+            {
+                WaveformVM.Waveform[i] = br.ReadInt16();
+            }
         }
     }
 }

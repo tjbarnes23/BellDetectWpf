@@ -24,11 +24,17 @@
 
         <Button Canvas.Left="410" Canvas.Top="225" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="SaveWaveform_Click">
-            Save waveform
+                Click="LoadWav_Click">
+            Load .wav file
+        </Button>
+        
+        <Button Canvas.Left="410" Canvas.Top="325" Width="180" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="SaveWav_Click">
+            Save as .wav file
         </Button>
 
-        <Button Canvas.Left="410" Canvas.Top="325" Width="180" Height="50"
+        <Button Canvas.Left="410" Canvas.Top="425" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="Return_Click">
             Return to main page

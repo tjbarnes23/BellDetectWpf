@@ -9,9 +9,9 @@ using BellDetectWpf.ViewModels;
 
 namespace BellDetectWpf.ViewModels.WavFile
 {
-    public static class L2SaveWaveform
+    public static class L2SaveWav
     {
-        public static void SaveWaveform()
+        public static void SaveWav()
         {
             // Declare variables
             uint formatParametersSize; // bytes

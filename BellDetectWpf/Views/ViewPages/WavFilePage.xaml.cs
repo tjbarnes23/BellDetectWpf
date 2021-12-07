@@ -16,16 +16,19 @@ namespace BellDetectWpf.Views.ViewPages
             InitializeComponent();
         }
 
-        private void SaveWaveform_Click(object sender, RoutedEventArgs e)
+        private void LoadWav_Click(object sender, RoutedEventArgs e)
         {
-            L2SaveWaveform.SaveWaveform();
+            L2LoadWav.LoadWav();
+        }
+
+        private void SaveWav_Click(object sender, RoutedEventArgs e)
+        {
+            L2SaveWav.SaveWav();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MainPage.xaml", UriKind.Relative);
         }
-
-        
     }
 }
