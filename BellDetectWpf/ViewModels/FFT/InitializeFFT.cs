@@ -7,35 +7,26 @@ namespace BellDetectWpf.ViewModels.FFT
     {
         public static void InitializeFFT()
         {
-            uint n = (uint)(1 << (int)FFTVM.Log2N); // number of bins
-
             // Initialize arrays
-            FFTVM.XRe = new double[n];
-            FFTVM.XIm = new double[n];
-
-            // Copy required items in the Waveform array into XRe array, and set XIm array values to zero
-            for (int i = 0; i < n; i++)
-            {
-                FFTVM.XRe[i] = WaveformVM.Waveform[i + FFTVM.Offset];
-                FFTVM.XIm[i] = 0;
-            }
+            FFTVM.XRe = new double[FFTVM.N];
+            FFTVM.XIm = new double[FFTVM.N];
 
             // Initialize elements for linked list of complex numbers.
-            FFTVM.X = new FFTElement[n];
+            FFTVM.X = new FFTElement[FFTVM.N];
 
-            for (uint i = 0; i < n; i++)
+            for (uint i = 0; i < FFTVM.N; i++)
             {
                 FFTVM.X[i] = new FFTElement(); // Initialize array elements
             }
 
             // Set up 'next' pointers.
-            for (uint i = 0; i < n - 1; i++)
+            for (uint i = 0; i < FFTVM.N - 1; i++)
             {
                 FFTVM.X[i].Next = FFTVM.X[i + 1];
             }
 
             // Specify target for bit reversal re-ordering.
-            for (uint i = 0; i < n; i++)
+            for (uint i = 0; i < FFTVM.N; i++)
             {
                 FFTVM.X[i].RevTarget = C_L2FFT.BitReverse(i, FFTVM.Log2N);
             }

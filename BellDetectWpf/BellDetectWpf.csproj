@@ -22,4 +22,8 @@
     <Folder Include="ViewModels\Main\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NLog" Version="4.7.13" />
+  </ItemGroup>
+
 </Project>
