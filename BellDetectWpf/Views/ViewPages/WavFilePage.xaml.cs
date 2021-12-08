@@ -6,9 +6,6 @@ using BellDetectWpf.ViewModels.WavFile;
 
 namespace BellDetectWpf.Views.ViewPages
 {
-    /// <summary>
-    /// Interaction logic for WavFilePage.xaml
-    /// </summary>
     public partial class WavFilePage : Page
     {
         public WavFilePage()
@@ -18,12 +15,12 @@ namespace BellDetectWpf.Views.ViewPages
 
         private void LoadWav_Click(object sender, RoutedEventArgs e)
         {
-            L2LoadWav.LoadWav();
+            C_WavFile.LoadWav();
         }
 
         private void SaveWav_Click(object sender, RoutedEventArgs e)
         {
-            L2SaveWav.SaveWav();
+            C_WavFile.SaveWav();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

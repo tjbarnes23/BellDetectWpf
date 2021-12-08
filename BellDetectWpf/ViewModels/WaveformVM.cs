@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BellDetectWpf.ViewModels
 {
@@ -16,15 +12,11 @@ namespace BellDetectWpf.ViewModels
 
         public static int NumWaves { get; set; } // The number of waves underlying the waveform
 
-        public static double ScaleFactor { get; set; } // For scaling wave amplitude
-
         public static uint SampleFrequency { get; set; } // Will eventually be set from UI
-
-        public static uint TotalSampleTime { get; set; } // Length of waveform in seconds
 
         public static uint NumSamples { get; set; } // Total number of samples in waveform
 
-        public static double[,] WaveSpec { get; set; } // Holds the specification of each underlying wave
+        public static double[,] WaveSpec { get; set; } // Holds the specifications of the underlying waves: freq, amplitude, envelope
 
         public static double[] Time { get; set; } // Array to hold elapsed time
 
@@ -35,10 +27,8 @@ namespace BellDetectWpf.ViewModels
         static WaveformVM()
         {
             NumWaves = 2; // Will eventually be set from UI
-            ScaleFactor = 1; // Will eventually be set from UI
             SampleFrequency = 44100; // Will eventually be set from UI
-            TotalSampleTime = 2; // Will eventually be set from UI
-            NumSamples = SampleFrequency * TotalSampleTime;
+            NumSamples = 88200;  // Will eventually be set from UI
 
             WaveSpec = new double[NumWaves, 2]; // Will eventually be set from UI
             Time = new double[NumSamples];

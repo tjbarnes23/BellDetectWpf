@@ -1,33 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace BellDetectWpf.ViewModels.WavFile
 {
-    public static class L2LoadWav
+    public static partial class C_WavFile
     {
         public static void LoadWav()
         {
-            uint fileSize;
-            uint formatParametersSize;
-            ushort wavType;
-            ushort numChannels;
-            uint dataRate;
-            ushort blockAlignment;
-            ushort bitsPerSamplePerChannel;
-            uint dataSizeBytes;
-
-            string fileName;
-
             // Set filename
-            fileName = @"C:\Users\Tim\source\repos\tjbarnes23\BellDetectWpf\BellDetectWpf\BellSamples\8th handstroke mono 96 kHz signed 16-bit.wav";
+            WavFileVM.FilePathName = @"C:\Users\Tim\source\repos\tjbarnes23\BellDetectWpf\BellDetectWpf\BellSamples\8th handstroke mono 96 kHz signed 16-bit.wav";
 
             // Read .wav file
-            using FileStream f = new FileStream(fileName, FileMode.Open);
+            using FileStream f = new FileStream(WavFileVM.FilePathName, FileMode.Open);
             using BinaryReader br = new BinaryReader(f);
 
             // Read 'RIFF'
@@ -37,7 +20,7 @@ namespace BellDetectWpf.ViewModels.WavFile
             }
 
             // Read fileSize (uint)
-            fileSize = br.ReadUInt32();
+            WavFileVM.FileSize = br.ReadUInt32();
 
             // Read 'WAVE' and 'fmt '
             for (int i = 0; i < 8; i++)
@@ -46,25 +29,25 @@ namespace BellDetectWpf.ViewModels.WavFile
             }
 
             // Read formatParametersSize (uint)
-            formatParametersSize = br.ReadUInt32();
+            WavFileVM.FormatParametersSize = br.ReadUInt32();
 
             // Read wavType (ushort)
-            wavType = br.ReadUInt16();
+            WavFileVM.WavType = br.ReadUInt16();
 
             // Read numChannels (ushort)
-            numChannels = br.ReadUInt16();
+            WavFileVM.NumChannels = br.ReadUInt16();
 
             // Read sampleFrequency (uint)
             WaveformVM.SampleFrequency = br.ReadUInt32();
 
             // Read dataRate (uint)
-            dataRate = br.ReadUInt32();
+            WavFileVM.DataRate = br.ReadUInt32();
 
             // Read blockAlignment (ushort)
-            blockAlignment = br.ReadUInt16();
+            WavFileVM.BlockAlignment = br.ReadUInt16();
 
             // Read bitsPerSamplePerChannel (ushort)
-            bitsPerSamplePerChannel = br.ReadUInt16();
+            WavFileVM.BitsPerSamplePerChannel = br.ReadUInt16();
 
             // Read 'data'
             for (int i = 0; i < 4; i++)
@@ -73,8 +56,9 @@ namespace BellDetectWpf.ViewModels.WavFile
             }
 
             // Read dataSize (uint)
-            dataSizeBytes = br.ReadUInt32();
-            WaveformVM.NumSamples = dataSizeBytes / 2;
+            WavFileVM.DataSizeBytes = br.ReadUInt32();
+            WaveformVM.NumSamples = (uint)(WavFileVM.DataSizeBytes /
+                    ((WavFileVM.BitsPerSamplePerChannel / 8) * WavFileVM.NumChannels));
 
             WaveformVM.Waveform = new short[WaveformVM.NumSamples];
 

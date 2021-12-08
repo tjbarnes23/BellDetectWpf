@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using BellDetectWpf.ViewModels;
 
 namespace BellDetectWpf.ViewModels.FFT
 {
-    public static class L2SaveFFT
+    public static partial class C_FFT
     {
         public static void SaveFFT()
         {

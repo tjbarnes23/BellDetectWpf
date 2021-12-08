@@ -2,7 +2,7 @@
 
 namespace BellDetectWpf.ViewModels.MainWin
 {
-    public static class L2Initialize
+    public static partial class C_MainWin
     {
         public static void Initialize()
         {

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BellDetectWpf.Views;
 
 namespace BellDetectWpf.ViewModels
 {
     public static class MainWinVM
     {
         // Window properties
-        public static Views.MainWindow Mw { get; set; }
+        public static MainWindow Mw { get; set; }
     }
 }

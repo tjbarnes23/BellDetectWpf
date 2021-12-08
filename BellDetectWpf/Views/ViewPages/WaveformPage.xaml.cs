@@ -15,7 +15,7 @@ namespace BellDetectWpf.Views.ViewPages
 
         private void GenerateWaveform_Click(object sender, RoutedEventArgs e)
         {
-            L2GenerateWaveform.GenerateWaveform();
+            C_Waveform.GenerateWaveform();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

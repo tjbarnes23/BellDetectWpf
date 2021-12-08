@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace BellDetectWpf.ViewModels.MainWin
 {
-    public static class L2Exit
+    public static partial class C_MainWin
     {
         public static void Exit()
         {

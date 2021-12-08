@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using BellDetectWpf.ViewModels.KeyPress;
 
@@ -60,7 +57,7 @@ namespace BellDetectWpf.ViewModels
                     rand = 0x24; // j key
                 }
 
-                L2KeyPress.Press(rand);
+                C_KeyPress.Press(rand);
                 await Task.Delay(1000);
             }
             while (StartStopTxt == "Stop detecting");

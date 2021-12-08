@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BellDetectWpf.ViewModels.Waveform
 {
-    public static class L2GenerateWaveform
+    public static class C_Waveform
     {
         public static void GenerateWaveform()
         {
@@ -30,7 +26,7 @@ namespace BellDetectWpf.ViewModels.Waveform
                     if (WaveformVM.WaveSpec[j, 0] != 0.0)
                     {
                         x = WaveformVM.Time[i] * WaveformVM.WaveSpec[j, 0] * 2.0 * Math.PI;
-                        w = Math.Sin(x) * WaveformVM.WaveSpec[j, 1] * WaveformVM.ScaleFactor;
+                        w = Math.Sin(x) * WaveformVM.WaveSpec[j, 1];
                         WaveformVM.Waves[j, i] = w;
                         wSum += w;
                     }

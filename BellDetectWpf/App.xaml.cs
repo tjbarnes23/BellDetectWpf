@@ -14,7 +14,7 @@ namespace BellDetectWpf
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            L2Initialize.Initialize();
+            C_MainWin.Initialize();
         }
     }
 }

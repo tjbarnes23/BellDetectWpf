@@ -40,7 +40,7 @@ namespace BellDetectWpf.Views.ViewPages
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            L2Exit.Exit();
+            C_MainWin.Exit();
         }
     }
 }

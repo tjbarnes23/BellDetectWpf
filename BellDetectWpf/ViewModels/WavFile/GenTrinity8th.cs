@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BellDetectWpf.ViewModels.WavFile
 {
-    public static class L2WavFileGenStereo
+    public static partial class C_WavFile
     {
-        public static void WavFileGenStereo()
+        public static void GenTrinity8th()
         {
             // Declare variables
             uint formatParametersSize; // bytes
@@ -31,7 +27,7 @@ namespace BellDetectWpf.ViewModels.WavFile
             // Set variables
             formatParametersSize = 16; // bytes
             wavType = 1; // number
-            numChannels = 2; // number
+            numChannels = 1; // number
             sampleFrequency = 44100; // kHz
 
             bitsPerSamplePerChannel = 16; // bits
@@ -61,20 +57,32 @@ namespace BellDetectWpf.ViewModels.WavFile
             wr.Write(bitsPerSamplePerChannel);
             wr.Write(Encoding.ASCII.GetBytes("data"));
             wr.Write(dataSize);
-
             
             // Create waveform data
-            int numWaves = 1;
+            int numWaves = 11;
+            double[,] waveSpec = new double[numWaves, 2];
+            double scaleFactor = 2000;
+
+            // Frequency and amplitude
+            waveSpec[0, 0] = 221.5;     waveSpec[0, 1] = 2.1756; // hum
+            waveSpec[1, 0] = 441.5;     waveSpec[1, 1] = 1.659; // prime
+            waveSpec[2, 0] = 524.0;     waveSpec[2, 1] = 1.117; // tierce
+            waveSpec[3, 0] = 659.0;     waveSpec[3, 1] = 0.174; // quint
+            waveSpec[4, 0] = 883.5;     waveSpec[4, 1] = 3.464; // nominal
+            waveSpec[5, 0] = 1188.5;    waveSpec[5, 1] = 0.9506; // unnamed
+            waveSpec[6, 0] = 1322.5;    waveSpec[6, 1] = 2.526; // superquint
+            waveSpec[7, 0] = 1465.5;    waveSpec[7, 1] = 0.631; // unnamed
+            waveSpec[8, 0] = 1832.5;    waveSpec[8, 1] = 0.6237; // octave above nominal
+            waveSpec[9, 0] = 2389.0;    waveSpec[9, 1] = 0.6646; // unnamed
+            waveSpec[10, 0] = 2994.0;   waveSpec[10, 1] = 0.484; // unnamed
+
             double[] time = new double[numSamples];
-            double[,] left = new double[numWaves, numSamples];
-            double[,] right = new double[numWaves, numSamples];
-            short[] leftSum = new short[numSamples];
-            short[] rightSum = new short[numSamples];
+            double[,] waves = new double[numWaves, numSamples];
+            short[] wavesSum = new short[numSamples];
 
             double x;
-            double frl = 440.0;
-            double frr = 660.0;
             double w;
+            double wSum;
 
             // Create time array
             for (int i = 0; i < numSamples; i++)
@@ -82,57 +90,29 @@ namespace BellDetectWpf.ViewModels.WavFile
                 time[i] = (double)i / sampleFrequency;
             }
 
-            // Create left wave 1 (zero based)
+            // Create waves 1 (zero based)
             for (int i = 0; i < numSamples; i++)
             {
-                x = time[i] * frl * 2.0 * Math.PI;
-                left[0, i] = Math.Sin(x) * 32767.0;
-            }
-
-            // Create right wave 1 (zero based)
-            for (int i = 0; i < numSamples; i++)
-            {
-                x = time[i] * frr * 2.0 * Math.PI;
-                right[0, i] = Math.Sin(x) * 32767.0;
-            }
-
-            // Create additional waves
-
-            // Sum the left waves and convert to short format
-            for (int i = 0; i < numSamples; i++)
-            {
-                w = 0;
+                wSum = 0.0;
 
                 for (int j = 0; j < numWaves; j++)
                 {
-                    w += left[j, i];
+                    if (waveSpec[j, 0] != 0.0)
+                    {
+                        x = time[i] * waveSpec[j, 0] * 2.0 * Math.PI;
+                        w = Math.Sin(x) * waveSpec[j, 1] * scaleFactor;
+                        waves[j, i] = w;
+                        wSum += w;
+                    }
                 }
 
-                leftSum[i] = (short)Math.Round(w);
-
-                // Debug.Print(leftSum[i].ToString());
-            }
-
-            // Sum the right waves and convert to short format
-            for (int i = 0; i < numSamples; i++)
-            {
-                w = 0;
-
-                for (int j = 0; j < numWaves; j++)
-                {
-                    w += right[j, i];
-                }
-
-                rightSum[i] = (short)Math.Round(w);
-
-                // Debug.Print(rightSum[i].ToString());
+                wavesSum[i] = (short)Math.Round(wSum);
             }
 
             // Write the summed waveforms to the binary write
             for (int i = 0; i < numSamples; i++)
             {
-                wr.Write(leftSum[i]);
-                wr.Write(rightSum[i]);
+                wr.Write(wavesSum[i]);
             }
             
             wr.Close();
