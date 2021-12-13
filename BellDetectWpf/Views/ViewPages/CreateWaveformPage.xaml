@@ -1,0 +1,152 @@
+﻿<Page x:Class="BellDetectWpf.Views.ViewPages.CreateWaveformPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BellDetectWpf.Views.ViewPages"
+      xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
+      mc:Ignorable="d"
+      d:DesignWidth="1000"
+      d:DesignHeight="800">
+
+    <Canvas Width="1000" Height="800">
+        <TextBlock Canvas.Left="360" Canvas.Top="25" Width="280" Height="50"
+                TextAlignment="Center"
+                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+            Bell Detect
+        </TextBlock>
+
+        <TextBlock Canvas.Left="360" Canvas.Top="125" Width="280" Height="50"
+                TextAlignment="Center"
+                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+            Create waveform
+        </TextBlock>
+
+        <!-- Wave 1 -->
+        
+        <Label Canvas.Left="10" Canvas.Top="225" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14">
+            Wave 1 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="225" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:CreateWaveformVM.Wave1Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="225" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14">
+            Wave 1 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="225" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:CreateWaveformVM.Wave1Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 2 -->
+        
+        <Label Canvas.Left="10" Canvas.Top="275" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14">
+            Wave 2 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="275" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:CreateWaveformVM.Wave2Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="275" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14">
+            Wave 2 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="275" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:CreateWaveformVM.Wave2Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Meta data -->
+        
+        <Label Canvas.Left="10" Canvas.Top="350" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14">
+            Sample frequency (Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="350" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:LoadWavVM.SampleFrequency), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="350" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14">
+            Sample length (seconds):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="350" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:LoadWavVM.SampleLengthSeconds), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- File name -->
+
+        <Label Canvas.Left="10" Canvas.Top="425" Width="180" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14">
+            File name:
+        </Label>
+
+        <TextBox Canvas.Left="210" Canvas.Top="425" Width="530" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:LoadWavVM.FilePathName), Mode=OneWay}">
+        </TextBox>
+
+        <Button Canvas.Left="760" Canvas.Top="415" Width="180" Height="45"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="Browse_Click">
+            Browse
+        </Button>
+
+        <!-- Create button -->
+        
+        <Button Canvas.Left="410" Canvas.Top="525" Width="180" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="CreateWaveform_Click">
+            Create waveform
+        </Button>
+
+        <!-- Return button -->
+        
+        <Button Canvas.Left="410" Canvas.Top="625" Width="180" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="Return_Click">
+            Return to main page
+        </Button>
+    </Canvas>
+</Page>

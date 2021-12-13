@@ -1,20 +1,24 @@
 ﻿using System;
+using BellDetectWpf.ViewModels.CreateWaveform;
 
 namespace BellDetectWpf.ViewModels
 {
-    public static class WaveformVM
+    public static class CreateWaveformVM
     {
+        private static double wave1Freq;
+        private static double wave1Amp;
+        private static double wave2Freq;
+        private static double wave2Amp;
+
         // Events
         public static event EventHandler Wave1FreqChanged;
         public static event EventHandler Wave1AmpChanged;
         public static event EventHandler Wave2FreqChanged;
         public static event EventHandler Wave2AmpChanged;
 
-        public static int NumWaves { get; set; } // The number of waves underlying the waveform
-
-        public static uint SampleFrequency { get; set; } // Will eventually be set from UI
-
         public static uint NumSamples { get; set; } // Total number of samples in waveform
+
+        public static int NumWaves { get; set; } // The number of waves underlying the waveform
 
         public static double[,] WaveSpec { get; set; } // Holds the specifications of the underlying waves: freq, amplitude, envelope
 
@@ -23,30 +27,18 @@ namespace BellDetectWpf.ViewModels
         public static double[,] Waves { get; set; } // Array to hold underlying waves
 
         public static short[] Waveform { get; set; } // Array to hold resulting waveform
-
-        static WaveformVM()
-        {
-            NumWaves = 2; // Will eventually be set from UI
-            SampleFrequency = 44100; // Will eventually be set from UI
-            NumSamples = 88200;  // Will eventually be set from UI
-
-            WaveSpec = new double[NumWaves, 2]; // Will eventually be set from UI
-            Time = new double[NumSamples];
-            Waves = new double[NumWaves, NumSamples];
-            Waveform = new short[NumSamples];
-        }
-
+                
         public static double Wave1Freq
         {
             get
             {
-                return WaveSpec[0, 0];
+                return wave1Freq;
             }
             set
             {
-                if (WaveSpec[0, 0] != value)
+                if (wave1Freq != value)
                 {
-                    WaveSpec[0, 0] = value;
+                    wave1Freq = value;
                     Wave1FreqChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
@@ -56,13 +48,13 @@ namespace BellDetectWpf.ViewModels
         {
             get
             {
-                return WaveSpec[0, 1];
+                return wave1Amp;
             }
             set
             {
-                if (WaveSpec[0, 1] != value)
+                if (wave1Amp != value)
                 {
-                    WaveSpec[0, 1] = value;
+                    wave1Amp = value;
                     Wave1AmpChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
@@ -72,13 +64,13 @@ namespace BellDetectWpf.ViewModels
         {
             get
             {
-                return WaveSpec[1, 0];
+                return wave2Freq;
             }
             set
             {
-                if (WaveSpec[1, 0] != value)
+                if (wave2Freq != value)
                 {
-                    WaveSpec[1, 0] = value;
+                    wave2Freq = value;
                     Wave2FreqChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
@@ -88,16 +80,22 @@ namespace BellDetectWpf.ViewModels
         {
             get
             {
-                return WaveSpec[1, 1];
+                return wave2Amp;
             }
             set
             {
-                if (WaveSpec[1, 1] != value)
+                if (wave2Amp != value)
                 {
-                    WaveSpec[1, 1] = value;
+                    wave2Amp = value;
                     Wave2AmpChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
+        }
+
+        public static void CreateWaveform()
+        {
+            C_CreateWaveform.GenerateWaveform();
+            C_CreateWaveform.SaveWav();
         }
     }
 }

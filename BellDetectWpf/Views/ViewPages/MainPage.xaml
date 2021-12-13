@@ -24,14 +24,14 @@
 
         <Button Canvas.Left="410" Canvas.Top="225" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Waveforms_Click">
-            Waveforms
+                Click="WavFile_Click">
+            Load a Wav file
         </Button>
-
+        
         <Button Canvas.Left="410" Canvas.Top="325" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="WavFile_Click">
-            Wav file
+                Click="Waveforms_Click">
+            Create a waveform
         </Button>
 
         <Button Canvas.Left="410" Canvas.Top="425" Width="180" Height="50"

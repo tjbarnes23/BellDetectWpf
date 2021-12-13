@@ -23,7 +23,7 @@ namespace BellDetectWpf.ViewModels
             Log2N = 13; // Use 8192 bins
 
             N = (uint)(1 << (int)Log2N); // number of bins
-            NA = (uint)(WaveformVM.NumSamples / N);
+            NA = (uint)(CreateWaveformVM.NumSamples / N);
             Results = new double[N / 4, NA];
             
             Stopwatch sw = new Stopwatch();
@@ -39,7 +39,7 @@ namespace BellDetectWpf.ViewModels
                 // Copy required items in the Waveform array into XRe array, and set XIm array values to zero
                 for (int j = 0; j < N; j++)
                 {
-                    XRe[j] = WaveformVM.Waveform[Offset + j];
+                    XRe[j] = CreateWaveformVM.Waveform[Offset + j];
                     XIm[j] = 0;
                 }
 

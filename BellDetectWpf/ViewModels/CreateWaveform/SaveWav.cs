@@ -2,26 +2,34 @@
 using System.IO;
 using System.Text;
 
-namespace BellDetectWpf.ViewModels.WavFile
+namespace BellDetectWpf.ViewModels.CreateWaveform
 {
-    public static partial class C_WavFile
+    public static partial class C_CreateWaveform
     {
         public static void SaveWav()
         {
+            uint fileSize;
+            uint formatParametersSize;
+            ushort wavType;
+            uint dataRate;
+            ushort blockAlignment;
+
             StringBuilder sb;
 
             // Set variables
-            WavFileVM.FormatParametersSize = 16; // 16 bytes per the WAV file spec
-            WavFileVM.WavType = 1; // 1 = PCM
+            formatParametersSize = 16; // 16 bytes per the WAV file spec
+            wavType = 1; // 1 = PCM
             WavFileVM.NumChannels = 1;
-            WavFileVM.BitsPerSamplePerChannel = 16;
-            WavFileVM.DataRate = (uint)(WaveformVM.SampleFrequency * (WavFileVM.BitsPerSamplePerChannel / 8) *
+            WavFileVM.SampleDepth = 16;
+            dataRate = (uint)(WavFileVM.SampleFrequency * (WavFileVM.SampleDepth / 8) *
                     WavFileVM.NumChannels); // bytes per second
-            WavFileVM.BlockAlignment = (ushort)((WavFileVM.BitsPerSamplePerChannel / 8) *
+            blockAlignment = (ushort)((WavFileVM.SampleDepth / 8) *
                     WavFileVM.NumChannels); // bytes per sample
-            WavFileVM.DataSizeBytes = (uint)((WavFileVM.BitsPerSamplePerChannel * WavFileVM.NumChannels *
-                    WaveformVM.NumSamples) / 8); // bytes
-            WavFileVM.FileSize = WavFileVM.DataSizeBytes + 36; // bytes
+
+            WavFileVM.SampleLengthBytes = (uint)(WavFileVM.SampleLengthSeconds * WavFileVM.SampleFrequency *
+                    (WavFileVM.SampleDepth / 8) * WavFileVM.NumChannels); // bytes
+            
+            fileSize = WavFileVM.SampleLengthBytes + formatParametersSize + 20; // bytes
 
             // Create .wav file
             WavFileVM.FilePathName = @"C:\temp\waveform.wav";
@@ -35,26 +43,27 @@ namespace BellDetectWpf.ViewModels.WavFile
             using BinaryWriter wr = new BinaryWriter(f);
 
             wr.Write(Encoding.ASCII.GetBytes("RIFF"));
-            wr.Write(WavFileVM.FileSize);
+            wr.Write(fileSize);
             wr.Write(Encoding.ASCII.GetBytes("WAVE")); // 
             wr.Write(Encoding.ASCII.GetBytes("fmt "));
-            wr.Write(WavFileVM.FormatParametersSize); // 
-            wr.Write(WavFileVM.WavType);
+            wr.Write(formatParametersSize); // 
+            wr.Write(wavType);
             wr.Write(WavFileVM.NumChannels);
-            wr.Write(WaveformVM.SampleFrequency);
-            wr.Write(WavFileVM.DataRate);
-            wr.Write(WavFileVM.BlockAlignment);
-            wr.Write(WavFileVM.BitsPerSamplePerChannel);
+            wr.Write(WavFileVM.SampleFrequency);
+            wr.Write(dataRate);
+            wr.Write(blockAlignment);
+            wr.Write(WavFileVM.SampleDepth);
             wr.Write(Encoding.ASCII.GetBytes("data"));
-            wr.Write(WavFileVM.DataSizeBytes);
+            wr.Write(WavFileVM.SampleLengthBytes);
 
             // Write the summed waveforms to the binary write
-            for (int i = 0; i < WaveformVM.NumSamples; i++)
+            for (int i = 0; i < CreateWaveformVM.NumSamples; i++)
             {
-                wr.Write(WaveformVM.Waveform[i]);
+                wr.Write(CreateWaveformVM.Waveform[i]);
             }
 
-            // Write out waveform to a text file (first 256 samples)
+
+            // Write out waveform to a text file
 
             WavFileVM.FilePathName = @"C:\temp\waveform.txt";
 
@@ -67,10 +76,10 @@ namespace BellDetectWpf.ViewModels.WavFile
 
             using FileStream fs = File.Create(WavFileVM.FilePathName);
 
-            for (int i = 0; i < 256; i++)
+            for (int i = 0; i < CreateWaveformVM.NumSamples; i++)
             {
                 sb.Clear();
-                sb.Append(WaveformVM.Waveform[i]);
+                sb.Append(CreateWaveformVM.Waveform[i]);
                 sb.Append('\n');
 
                 Byte[] row = new UTF8Encoding(true).GetBytes(sb.ToString());

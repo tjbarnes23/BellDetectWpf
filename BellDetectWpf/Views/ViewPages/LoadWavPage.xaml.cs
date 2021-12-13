@@ -2,20 +2,25 @@
 using System.Windows;
 using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
-using BellDetectWpf.ViewModels.Waveform;
+using BellDetectWpf.ViewModels.LoadWav;
 
 namespace BellDetectWpf.Views.ViewPages
 {
-    public partial class WaveformPage : Page
+    public partial class LoadWavPage : Page
     {
-        public WaveformPage()
+        public LoadWavPage()
         {
             InitializeComponent();
         }
 
-        private void GenerateWaveform_Click(object sender, RoutedEventArgs e)
+        private void Browse_Click(object sender, RoutedEventArgs e)
         {
-            C_Waveform.GenerateWaveform();
+
+        }
+
+        private void LoadWav_Click(object sender, RoutedEventArgs e)
+        {
+            C_LoadWav.LoadWav();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

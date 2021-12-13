@@ -2,25 +2,25 @@
 using System.Windows;
 using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
-using BellDetectWpf.ViewModels.WavFile;
+using BellDetectWpf.ViewModels.CreateWaveform;
 
 namespace BellDetectWpf.Views.ViewPages
 {
-    public partial class WavFilePage : Page
+    public partial class CreateWaveformPage : Page
     {
-        public WavFilePage()
+        public CreateWaveformPage()
         {
             InitializeComponent();
         }
 
-        private void LoadWav_Click(object sender, RoutedEventArgs e)
+        private void Browse_Click(object sender, RoutedEventArgs e)
         {
-            C_WavFile.LoadWav();
+
         }
 
-        private void SaveWav_Click(object sender, RoutedEventArgs e)
+        private void CreateWaveform_Click(object sender, RoutedEventArgs e)
         {
-            C_WavFile.SaveWav();
+            CreateWaveformVM.CreateWaveform();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

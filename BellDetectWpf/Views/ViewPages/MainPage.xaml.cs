@@ -20,12 +20,12 @@ namespace BellDetectWpf.Views.ViewPages
 
         private void Waveforms_Click(object sender, RoutedEventArgs e)
         {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\WaveformPage.xaml", UriKind.Relative);
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\CreateWaveformPage.xaml", UriKind.Relative);
         }
 
         private void WavFile_Click(object sender, RoutedEventArgs e)
         {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\WavFilePage.xaml", UriKind.Relative);
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\LoadWavPage.xaml", UriKind.Relative);
         }
 
         private void FFT_Click(object sender, RoutedEventArgs e)
