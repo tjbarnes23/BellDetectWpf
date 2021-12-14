@@ -8,25 +8,44 @@ namespace BellDetectWpf.ViewModels.FFT
     {
         public static void SaveFFT()
         {
-            string fileName = @"C:\temp\results.txt";
-            StringBuilder sb = new StringBuilder();
+            FFTVM.FilePathName = @"C:\temp\results.txt";
 
-            if (File.Exists(fileName))
+            StringBuilder sb = new StringBuilder();
+            double time;
+            double freq;
+
+            if (File.Exists(FFTVM.FilePathName))
             {
-                File.Delete(fileName);
+                File.Delete(FFTVM.FilePathName);
             }
 
             // Create a new file     
-            using FileStream fs = File.Create(fileName);
+            using FileStream fs = File.Create(FFTVM.FilePathName);
 
             Byte[] row = new UTF8Encoding(true).GetBytes("Bins down the page, Amplitude over time across the page\n");
             fs.Write(row, 0, row.Length);
 
-            // *** Update this to be parameter driven depending on sample frequency and number of bins to be used ***
+            sb.Clear();
+            sb.Append("Hz \\ sec\t");
 
-            for (int i = 0; i < FFTVM.N / 4; i++) // Only interested in bottom 1/4 of frequency buckets
+            for (int j = 0; j < FFTVM.NA; j++)
+            {
+                time = Math.Round(((double)FFTVM.N / WavFileVM.SampleFrequency) * j, 3);
+                sb.Append(time);
+                sb.Append('\t');
+            }
+            
+            sb.Append('\n');
+            row = new UTF8Encoding(true).GetBytes(sb.ToString());
+            fs.Write(row, 0, row.Length);
+
+            for (int i = 0; i < FFTVM.N / 2; i++) // Only interested in bottom half of frequency buckets
             {
                 sb.Clear();
+
+                freq = Math.Round(((double)WavFileVM.SampleFrequency / FFTVM.N) * (i + 1), 3);
+                sb.Append(freq);
+                sb.Append('\t');
 
                 for (int j = 0; j < FFTVM.NA; j++)
                 {

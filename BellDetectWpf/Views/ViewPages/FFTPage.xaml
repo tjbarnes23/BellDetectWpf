@@ -22,13 +22,49 @@
             FFT
         </TextBlock>
 
-        <Button Canvas.Left="410" Canvas.Top="225" Width="180" Height="50"
+        <Label Canvas.Left="160" Canvas.Top="225" Width="380" Height="30"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14">
+            Number of bins (a power of 2):
+        </Label>
+
+        <TextBox Canvas.Left="560" Canvas.Top="225" Width="80" Height="30"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:FFTVM.N), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- File name -->
+
+        <Label Canvas.Left="10" Canvas.Top="325" Width="180" Height="30"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14">
+            File name:
+        </Label>
+
+        <TextBox Canvas.Left="210" Canvas.Top="325" Width="530" Height="30"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="14"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:FFTVM.FilePathName), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Button Canvas.Left="760" Canvas.Top="315" Width="180" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="Browse_Click">
+            Browse
+        </Button>
+
+        <Button Canvas.Left="410" Canvas.Top="425" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="FFT_Click">
             Run FFT
         </Button>
 
-        <Button Canvas.Left="410" Canvas.Top="325" Width="180" Height="50"
+        <Button Canvas.Left="410" Canvas.Top="525" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="Return_Click">
             Return to main page

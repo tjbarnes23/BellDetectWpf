@@ -12,6 +12,11 @@ namespace BellDetectWpf.Views.ViewPages
             InitializeComponent();
         }
 
+        private void Browse_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void FFT_Click(object sender, RoutedEventArgs e)
         {
             FFTVM.RunFFT();

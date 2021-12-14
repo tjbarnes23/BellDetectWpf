@@ -34,7 +34,7 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Text="{Binding Path=(vm:LoadWavVM.FilePathName), Mode=OneWay}">
+                Text="{Binding Path=(vm:WavFileVM.FilePathName), Mode=OneWay}">
         </TextBox>
 
         <Button Canvas.Left="760" Canvas.Top="225" Width="180" Height="50"
@@ -61,7 +61,7 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:LoadWavVM.SampleFrequency), Mode=OneWay}">
+                Content="{Binding Path=(vm:WavFileVM.SampleFrequency), Mode=OneWay}">
         </Label>
 
         <Label Canvas.Left="510" Canvas.Top="425" Width="230" Height="25"
@@ -74,7 +74,7 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:LoadWavVM.SampleDepth), Mode=OneWay}">
+                Content="{Binding Path=(vm:WavFileVM.SampleDepth), Mode=OneWay}">
         </Label>
 
         <!-- Display meta data from .wav file: Row 2 -->
@@ -89,7 +89,7 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:LoadWavVM.NumChannels), Mode=OneWay}">
+                Content="{Binding Path=(vm:WavFileVM.NumChannels), Mode=OneWay}">
         </Label>
 
         <Label Canvas.Left="510" Canvas.Top="475" Width="230" Height="25"
@@ -102,7 +102,7 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:LoadWavVM.SampleLengthBytes), Mode=OneWay}">
+                Content="{Binding Path=(vm:WavFileVM.SampleLengthBytes), Mode=OneWay}">
         </Label>
 
         <!-- Display meta data from .wav file: Row 3 -->
@@ -117,7 +117,7 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:LoadWavVM.SampleLengthSeconds), Mode=OneWay}">
+                Content="{Binding Path=(vm:WavFileVM.SampleLengthSeconds), Mode=OneWay}">
         </Label>
 
         <Label Canvas.Left="510" Canvas.Top="525" Width="230" Height="25"
@@ -130,7 +130,7 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:LoadWavVM.WavFileFormatValid), Mode=OneWay}">
+                Content="{Binding Path=(vm:WavFileVM.WavFileFormatValid), Mode=OneWay}">
         </Label>
         
         <!-- Return button -->
