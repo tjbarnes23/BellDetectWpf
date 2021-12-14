@@ -14,8 +14,6 @@ namespace BellDetectWpf.ViewModels.CreateWaveform
             uint dataRate;
             ushort blockAlignment;
 
-            StringBuilder sb;
-
             // Set variables
             formatParametersSize = 16; // 16 bytes per the WAV file spec
             wavType = 1; // 1 = PCM
@@ -60,30 +58,6 @@ namespace BellDetectWpf.ViewModels.CreateWaveform
             for (int i = 0; i < CreateWaveformVM.NumSamples; i++)
             {
                 wr.Write(CreateWaveformVM.Waveform[i]);
-            }
-
-
-            // Write out waveform to a text file
-
-            WavFileVM.FilePathName = @"C:\temp\waveform.txt";
-
-            if (File.Exists(WavFileVM.FilePathName))
-            {
-                File.Delete(WavFileVM.FilePathName);
-            }
-
-            sb = new StringBuilder();
-
-            using FileStream fs = File.Create(WavFileVM.FilePathName);
-
-            for (int i = 0; i < CreateWaveformVM.NumSamples; i++)
-            {
-                sb.Clear();
-                sb.Append(CreateWaveformVM.Waveform[i]);
-                sb.Append('\n');
-
-                Byte[] row = new UTF8Encoding(true).GetBytes(sb.ToString());
-                fs.Write(row, 0, row.Length);
             }
         }
     }
