@@ -29,18 +29,18 @@
             i.e. a 2 second sample duration. The samples used will begin at the time provided in the box below.
         </TextBlock>
 
-        <Label Canvas.Left="160" Canvas.Top="325" Width="380" Height="30"
+        <Label Canvas.Left="110" Canvas.Top="325" Width="380" Height="30"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14">
             Start time (s):
         </Label>
 
-        <TextBox Canvas.Left="560" Canvas.Top="325" Width="80" Height="30"
+        <TextBox Canvas.Left="510" Canvas.Top="325" Width="180" Height="30"
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
                 Text="{Binding Path=(vm:DFTVM.StartTime), Mode=TwoWay, 
-                        UpdateSourceTrigger=PropertyChanged}">
+                        UpdateSourceTrigger=LostFocus}">
         </TextBox>
 
         <!-- File name -->
@@ -55,7 +55,7 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Text="{Binding Path=(vm:FFTVM.FilePathName), Mode=TwoWay, 
+                Text="{Binding Path=(vm:DFTVM.FilePathName), Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 

@@ -10,25 +10,53 @@ namespace BellDetectWpf.ViewModels
 {
     public static class DFTVM
     {
-        public static double StartTime { get; set; }
-        public static double FrequencyResolution { get; set; }
-        public static uint NumSamples { get; set; }
-        public static uint Offset { get; set; }
+        private static double startTime;
+        private static string filePathName;
+
+        public static event EventHandler StartTimeChanged;
+        public static event EventHandler FilePathNameChanged;
 
         public static double[] CosDFT { get; set; }
         public static double[] SinDFT { get; set; }
-
         public static double[] Results { get; set; }
 
-        public static string FilePathName { get; set; }
+        public static double StartTime
+        {
+            get
+            {
+                return startTime;
+            }
+            set
+            {
+                if (startTime != value)
+                {
+                    startTime = value;
+                    StartTimeChanged?.Invoke(null, EventArgs.Empty);
+                }
+            }
+        }
+
+        public static string FilePathName
+        {
+            get
+            {
+                return filePathName;
+            }
+
+            set
+            {
+                if (filePathName != value)
+                {
+                    filePathName = value;
+                    FilePathNameChanged?.Invoke(null, EventArgs.Empty);
+                }
+            }
+        }
 
         public static void RunDFT()
         {
-            FrequencyResolution = 0.5;
-            NumSamples = (uint)(WavFileVM.SampleFrequency / FrequencyResolution);
-
-            C_DFT.RunSpecificDFT();
-            C_DFT.SaveSpecificDFT();
+            C_DFT.RunDFT();
+            C_DFT.SaveDFT();
         }
     }
 }

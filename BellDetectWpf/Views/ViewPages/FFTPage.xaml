@@ -64,12 +64,6 @@
             Run FFT
         </Button>
 
-        <Button Canvas.Left="760" Canvas.Top="425" Width="180" Height="50"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="DFT_Click">
-            Run DFT
-        </Button>
-
         <Button Canvas.Left="410" Canvas.Top="525" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="Return_Click">

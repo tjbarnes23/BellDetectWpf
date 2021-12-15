@@ -22,11 +22,6 @@ namespace BellDetectWpf.Views.ViewPages
             FFTVM.RunFFT();
         }
 
-        private void DFT_Click(object sender, RoutedEventArgs e)
-        {
-            DFTVM.RunDFT();
-        }
-
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MainPage.xaml", UriKind.Relative);
