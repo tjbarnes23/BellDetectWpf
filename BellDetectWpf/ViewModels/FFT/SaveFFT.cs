@@ -43,7 +43,7 @@ namespace BellDetectWpf.ViewModels.FFT
             {
                 sb.Clear();
 
-                freq = Math.Round(((double)WavFileVM.SampleFrequency / FFTVM.N) * (i + 1), 3);
+                freq = Math.Round(((double)WavFileVM.SampleFrequency / FFTVM.N) * i, 1);
                 sb.Append(freq);
                 sb.Append('\t');
 

@@ -33,6 +33,11 @@ namespace BellDetectWpf.Views.ViewPages
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\FFTPage.xaml", UriKind.Relative);
         }
 
+        private void DFT_Click(object sender, RoutedEventArgs e)
+        {
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\DFTPage.xaml", UriKind.Relative);
+        }
+
         private void KeyPress_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\KeyPressPage.xaml", UriKind.Relative);
@@ -41,6 +46,11 @@ namespace BellDetectWpf.Views.ViewPages
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             C_MainWin.Exit();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

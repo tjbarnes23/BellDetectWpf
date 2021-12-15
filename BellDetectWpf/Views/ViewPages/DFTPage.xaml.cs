@@ -5,9 +5,9 @@ using BellDetectWpf.ViewModels;
 
 namespace BellDetectWpf.Views.ViewPages
 {
-    public partial class FFTPage : Page
+    public partial class DFTPage : Page
     {
-        public FFTPage()
+        public DFTPage()
         {
             InitializeComponent();
         }
@@ -15,11 +15,6 @@ namespace BellDetectWpf.Views.ViewPages
         private void Browse_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void FFT_Click(object sender, RoutedEventArgs e)
-        {
-            FFTVM.RunFFT();
         }
 
         private void DFT_Click(object sender, RoutedEventArgs e)

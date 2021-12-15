@@ -34,10 +34,16 @@
             Create a waveform
         </Button>
 
-        <Button Canvas.Left="410" Canvas.Top="425" Width="180" Height="50"
+        <Button Canvas.Left="210" Canvas.Top="425" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="FFT_Click">
             FFT
+        </Button>
+
+        <Button Canvas.Left="610" Canvas.Top="425" Width="180" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="DFT_Click">
+            DFT
         </Button>
 
         <Button Canvas.Left="410" Canvas.Top="525" Width="180" Height="50"

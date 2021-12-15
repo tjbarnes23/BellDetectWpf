@@ -83,11 +83,13 @@ namespace BellDetectWpf.ViewModels
 
                 C_FFT.RunFFT();
 
-                for (int j = 0; j < (N / 2); j++) // Only the bottom half of frequency buckets have valid data
+                // Add to Results array
+                // Double the amplitudes to adjust the 2-sided frequency plot, then divide by the number of samples
+                for (int j = 0; j < (N / 2); j++)
                 {
-                    amplitude = Math.Sqrt(Math.Pow(FFTVM.XRe[j], 2) + Math.Pow(FFTVM.XIm[j], 2));
-                    amplitude = Math.Round(amplitude, 0);
-                    Results[j, i] = amplitude;
+                    amplitude = Math.Sqrt(Math.Pow(XRe[j], 2) + Math.Pow(XIm[j], 2));
+                    amplitude = (amplitude * 2) / N;
+                    Results[j, i] = Math.Round(amplitude, 0);
                 }
 
                 MainWinVM.Logger.Info(sw.Elapsed.ToString());
