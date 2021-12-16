@@ -34,7 +34,8 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Text="{Binding Path=(vm:WavFileVM.FilePathName), Mode=OneWay}">
+                Text="{Binding Path=(vm:WavFileVM.FilePathName), Mode=TwoWay,
+                        UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
         <Button Canvas.Left="760" Canvas.Top="225" Width="180" Height="50"

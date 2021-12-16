@@ -16,9 +16,6 @@ namespace BellDetectWpf.ViewModels.LoadWav
             ushort blockAlignment;
             string data;
 
-            // Set filename
-            WavFileVM.FilePathName = @"C:\Users\Tim\source\repos\tjbarnes23\BellDetectWpf\BellDetectWpf\BellSamples\8th handstroke mono 96 kHz signed 16-bit.wav";
-
             // Read .wav file
             using FileStream f = new FileStream(WavFileVM.FilePathName, FileMode.Open);
             using BinaryReader br = new BinaryReader(f);

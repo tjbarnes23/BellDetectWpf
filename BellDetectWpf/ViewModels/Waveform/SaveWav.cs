@@ -29,14 +29,13 @@ namespace BellDetectWpf.ViewModels.Waveform
             
             fileSize = WavFileVM.SampleLengthBytes + formatParametersSize + 20; // bytes
 
-            // Create .wav file
-            WavFileVM.FilePathName = @"C:\temp\waveform.wav";
-
+            // Delete file if it already exists
             if (File.Exists(WavFileVM.FilePathName))
             {
                 File.Delete(WavFileVM.FilePathName);
             }
 
+            // Create .wav file
             using FileStream f = new FileStream(WavFileVM.FilePathName, FileMode.Create);
             using BinaryWriter wr = new BinaryWriter(f);
 

@@ -8,8 +8,6 @@ namespace BellDetectWpf.ViewModels.FFT
     {
         public static void SaveFFT()
         {
-            FFTVM.FilePathName = @"C:\temp\results.txt";
-
             StringBuilder sb = new StringBuilder();
             double time;
             double freq;

@@ -11,7 +11,6 @@ namespace BellDetectWpf.ViewModels.DFT
     {
         public static void SaveDFT()
         {
-            DFTVM.FilePathName = @"C:\temp\resultsDFT.txt";
             StringBuilder sb = new StringBuilder();
             Byte[] row;
             double freq;

@@ -1,4 +1,5 @@
 ﻿using System;
+using BellDetectWpf.ViewModels.LoadWav;
 
 namespace BellDetectWpf.ViewModels
 {
@@ -131,6 +132,11 @@ namespace BellDetectWpf.ViewModels
                     WavFileFormatValidChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
+        }
+
+        public static void LoadWav()
+        {
+            C_LoadWav.LoadWav();
         }
     }
 }

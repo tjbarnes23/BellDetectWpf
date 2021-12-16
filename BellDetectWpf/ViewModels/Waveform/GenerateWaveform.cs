@@ -9,9 +9,9 @@ namespace BellDetectWpf.ViewModels.Waveform
             double x;
             double w;
             
-            double m = -1.4;
+            double u = 0.2;
             double o = 1.0;
-            double a = 0.36;
+            double a = 0.3;
             double logNormDist;
             
             double wSum;
@@ -76,7 +76,7 @@ namespace BellDetectWpf.ViewModels.Waveform
                         else
                         {
                             logNormDist = (a / (o * Math.Sqrt(2.0 * Math.PI) * WaveformVM.Time[i])) *
-                                    Math.Pow(Math.E, -1 * (Math.Pow(Math.Log(WaveformVM.Time[i]) - m, 2) /
+                                    Math.Pow(Math.E, -1 * (Math.Pow(Math.Log(WaveformVM.Time[i]) - Math.Log(u), 2) /
                                     (2 * Math.Pow(o, 2))));
                         }
 

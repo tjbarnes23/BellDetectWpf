@@ -20,7 +20,7 @@ namespace BellDetectWpf.Views.ViewPages
 
         private void LoadWav_Click(object sender, RoutedEventArgs e)
         {
-            C_LoadWav.LoadWav();
+            WavFileVM.LoadWav();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
