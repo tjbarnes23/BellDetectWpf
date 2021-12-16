@@ -69,7 +69,16 @@ namespace BellDetectWpf.ViewModels.Waveform
                         w = Math.Sin(x) * WaveformVM.WaveSpec[j, 1];
 
                         // Now scale w by the lognormal distribution curve (approximates a bell amplitude envelope)
-                        logNormDist = (a / (o * Math.Sqrt(2.0 * Math.PI) * WaveformVM.Time[i])) * Math.Pow(Math.E, -1 * (Math.Pow(Math.Log(WaveformVM.Time[i]) - m, 2) / (2 * Math.Pow(o, 2))));
+                        if (i == 0)
+                        {
+                            logNormDist = 0;
+                        }
+                        else
+                        {
+                            logNormDist = (a / (o * Math.Sqrt(2.0 * Math.PI) * WaveformVM.Time[i])) *
+                                    Math.Pow(Math.E, -1 * (Math.Pow(Math.Log(WaveformVM.Time[i]) - m, 2) /
+                                    (2 * Math.Pow(o, 2))));
+                        }
 
                         w *= logNormDist;
 

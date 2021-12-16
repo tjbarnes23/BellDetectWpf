@@ -54,7 +54,7 @@ namespace BellDetectWpf.ViewModels.Waveform
             WaveformVM.Wave12Amp = 0.0;
 
             WavFileVM.SampleFrequency = 96000;
-            WavFileVM.SampleLengthSeconds = 2.5;
+            WavFileVM.SampleLengthSeconds = 5.0;
         }
     }
 }
