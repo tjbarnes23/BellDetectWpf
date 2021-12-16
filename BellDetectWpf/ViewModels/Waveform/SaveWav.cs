@@ -36,7 +36,7 @@ namespace BellDetectWpf.ViewModels.Waveform
             }
 
             // Create .wav file
-            using FileStream f = new FileStream(WavFileVM.FilePathName, FileMode.Create);
+            using FileStream f = new FileStream(WaveformVM.FilePathName, FileMode.Create);
             using BinaryWriter wr = new BinaryWriter(f);
 
             wr.Write(Encoding.ASCII.GetBytes("RIFF"));

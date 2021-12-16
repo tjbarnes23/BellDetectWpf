@@ -30,6 +30,8 @@ namespace BellDetectWpf.ViewModels
         private static double wave12Freq;
         private static double wave12Amp;
 
+        private static string filePathName;
+
         // Events
         public static event EventHandler Wave1FreqChanged;
         public static event EventHandler Wave1AmpChanged;
@@ -55,6 +57,8 @@ namespace BellDetectWpf.ViewModels
         public static event EventHandler Wave11AmpChanged;
         public static event EventHandler Wave12FreqChanged;
         public static event EventHandler Wave12AmpChanged;
+
+        public static event EventHandler FilePathNameChanged;
 
         public static uint NumSamples { get; set; } // Total number of samples in waveform
 
@@ -448,6 +452,23 @@ namespace BellDetectWpf.ViewModels
                 {
                     wave12Amp = value;
                     Wave12AmpChanged?.Invoke(null, EventArgs.Empty);
+                }
+            }
+        }
+
+        public static string FilePathName
+        {
+            get
+            {
+                return filePathName;
+            }
+
+            set
+            {
+                if (filePathName != value)
+                {
+                    filePathName = value;
+                    FilePathNameChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
         }

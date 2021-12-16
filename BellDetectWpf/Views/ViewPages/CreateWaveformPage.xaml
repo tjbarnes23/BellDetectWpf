@@ -436,7 +436,7 @@
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
-                Text="{Binding Path=(vm:WavFileVM.FilePathName), Mode=TwoWay, 
+                Text="{Binding Path=(vm:WaveformVM.FilePathName), Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
