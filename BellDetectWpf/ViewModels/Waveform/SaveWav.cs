@@ -2,9 +2,9 @@
 using System.IO;
 using System.Text;
 
-namespace BellDetectWpf.ViewModels.CreateWaveform
+namespace BellDetectWpf.ViewModels.Waveform
 {
-    public static partial class C_CreateWaveform
+    public static partial class C_Waveform
     {
         public static void SaveWav()
         {
@@ -55,9 +55,9 @@ namespace BellDetectWpf.ViewModels.CreateWaveform
             wr.Write(WavFileVM.SampleLengthBytes);
 
             // Write the summed waveforms to the binary write
-            for (int i = 0; i < CreateWaveformVM.NumSamples; i++)
+            for (int i = 0; i < WaveformVM.NumSamples; i++)
             {
-                wr.Write(CreateWaveformVM.Waveform[i]);
+                wr.Write(WaveformVM.Waveform[i]);
             }
         }
     }

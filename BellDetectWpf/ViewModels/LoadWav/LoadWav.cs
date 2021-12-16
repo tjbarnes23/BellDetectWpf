@@ -84,14 +84,14 @@ namespace BellDetectWpf.ViewModels.LoadWav
             // If file format is valid, read in .wav file data
             if (WavFileVM.WavFileFormatValid == "Yes")
             {
-                CreateWaveformVM.NumSamples = (uint)(WavFileVM.SampleLengthBytes /
+                WaveformVM.NumSamples = (uint)(WavFileVM.SampleLengthBytes /
                     ((WavFileVM.SampleDepth / 8) * WavFileVM.NumChannels));
 
-                CreateWaveformVM.Waveform = new short[CreateWaveformVM.NumSamples];
+                WaveformVM.Waveform = new short[WaveformVM.NumSamples];
 
-                for (int i = 0; i < CreateWaveformVM.NumSamples; i++)
+                for (int i = 0; i < WaveformVM.NumSamples; i++)
                 {
-                    CreateWaveformVM.Waveform[i] = br.ReadInt16();
+                    WaveformVM.Waveform[i] = br.ReadInt16();
                 }
             }
         }

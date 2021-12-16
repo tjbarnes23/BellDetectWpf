@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
-using BellDetectWpf.ViewModels.CreateWaveform;
+using BellDetectWpf.ViewModels.Waveform;
 
 namespace BellDetectWpf.Views.ViewPages
 {
@@ -13,6 +13,16 @@ namespace BellDetectWpf.Views.ViewPages
             InitializeComponent();
         }
 
+        private void LoadDefaultWaveform_Click(object sender, RoutedEventArgs e)
+        {
+            C_Waveform.DefaultWaveform();
+        }
+
+        private void ClearWaveform_Click(object sender, RoutedEventArgs e)
+        {
+            C_Waveform.ClearWaveform();
+        }
+
         private void Browse_Click(object sender, RoutedEventArgs e)
         {
 
@@ -20,12 +30,14 @@ namespace BellDetectWpf.Views.ViewPages
 
         private void CreateWaveform_Click(object sender, RoutedEventArgs e)
         {
-            CreateWaveformVM.CreateWaveform();
+            WaveformVM.CreateWaveform();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MainPage.xaml", UriKind.Relative);
         }
+
+        
     }
 }

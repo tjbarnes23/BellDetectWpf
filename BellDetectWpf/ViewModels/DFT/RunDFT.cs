@@ -33,9 +33,9 @@ namespace BellDetectWpf.ViewModels.DFT
                 {
                     j = (uint)(offset + (jx * scalingFactor));
 
-                    cos += CreateWaveformVM.Waveform[j] *
+                    cos += WaveformVM.Waveform[j] *
                             Math.Cos((double)(2.0 * Math.PI * i / 20000.0 * jx));
-                    sin += CreateWaveformVM.Waveform[j] *
+                    sin += WaveformVM.Waveform[j] *
                             Math.Sin((double)(2.0 * Math.PI * i / 20000.0 * jx));
                 }
 

@@ -16,81 +16,393 @@
             Bell Detect
         </TextBlock>
 
-        <TextBlock Canvas.Left="360" Canvas.Top="125" Width="280" Height="50"
+        <TextBlock Canvas.Left="360" Canvas.Top="65" Width="280" Height="30"
                 TextAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Create waveform
         </TextBlock>
 
+        <Button Canvas.Left="750" Canvas.Top="25" Width="180" Height="30"
+                FontFamily="Arial" FontSize="13" FontWeight="Bold"
+                Click="LoadDefaultWaveform_Click">
+            Load default waveform
+        </Button>
+
+        <Button Canvas.Left="750" Canvas.Top="65" Width="180" Height="30"
+                FontFamily="Arial" FontSize="13" FontWeight="Bold"
+                Click="ClearWaveform_Click">
+            Clear waveform
+        </Button>
+
         <!-- Wave 1 -->
         
-        <Label Canvas.Left="10" Canvas.Top="225" Width="380" Height="30"
+        <Label Canvas.Left="10" Canvas.Top="120" Width="380" Height="25"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14">
+                FontFamily="Arial" FontSize="13">
             Wave 1 frequency (0 - 20000 Hz):
         </Label>
 
-        <TextBox Canvas.Left="410" Canvas.Top="225" Width="80" Height="30"
+        <TextBox Canvas.Left="410" Canvas.Top="120" Width="80" Height="25"
                 VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
+                FontFamily="Arial" FontSize="13"
                 Padding="6, 0, 0, 0"
-                Text="{Binding Path=(vm:CreateWaveformVM.Wave1Freq), Mode=TwoWay, 
+                Text="{Binding Path=(vm:WaveformVM.Wave1Freq), Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
-        <Label Canvas.Left="510" Canvas.Top="225" Width="280" Height="30"
+        <Label Canvas.Left="510" Canvas.Top="120" Width="280" Height="25"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14">
+                FontFamily="Arial" FontSize="13">
             Wave 1 amplitude (0 - 32767):
         </Label>
 
-        <TextBox Canvas.Left="810" Canvas.Top="225" Width="80" Height="30"
+        <TextBox Canvas.Left="810" Canvas.Top="120" Width="80" Height="25"
                 VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
+                FontFamily="Arial" FontSize="13"
                 Padding="6, 0, 0, 0"
-                Text="{Binding Path=(vm:CreateWaveformVM.Wave1Amp), Mode=TwoWay, 
+                Text="{Binding Path=(vm:WaveformVM.Wave1Amp), Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
         <!-- Wave 2 -->
         
-        <Label Canvas.Left="10" Canvas.Top="275" Width="380" Height="30"
+        <Label Canvas.Left="10" Canvas.Top="150" Width="380" Height="25"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14">
+                FontFamily="Arial" FontSize="13">
             Wave 2 frequency (0 - 20000 Hz):
         </Label>
 
-        <TextBox Canvas.Left="410" Canvas.Top="275" Width="80" Height="30"
+        <TextBox Canvas.Left="410" Canvas.Top="150" Width="80" Height="25"
                 VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
+                FontFamily="Arial" FontSize="13"
                 Padding="6, 0, 0, 0"
-                Text="{Binding Path=(vm:CreateWaveformVM.Wave2Freq), Mode=TwoWay, 
+                Text="{Binding Path=(vm:WaveformVM.Wave2Freq), Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
-        <Label Canvas.Left="510" Canvas.Top="275" Width="280" Height="30"
+        <Label Canvas.Left="510" Canvas.Top="150" Width="280" Height="25"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14">
+                FontFamily="Arial" FontSize="13">
             Wave 2 amplitude (0 - 32767):
         </Label>
 
-        <TextBox Canvas.Left="810" Canvas.Top="275" Width="80" Height="30"
+        <TextBox Canvas.Left="810" Canvas.Top="150" Width="80" Height="25"
                 VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
+                FontFamily="Arial" FontSize="13"
                 Padding="6, 0, 0, 0"
-                Text="{Binding Path=(vm:CreateWaveformVM.Wave2Amp), Mode=TwoWay, 
+                Text="{Binding Path=(vm:WaveformVM.Wave2Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 3 -->
+
+        <Label Canvas.Left="10" Canvas.Top="180" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 3 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="180" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave3Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="180" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 3 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="180" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave3Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 4 -->
+
+        <Label Canvas.Left="10" Canvas.Top="210" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 4 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="210" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave4Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="210" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 4 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="210" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave4Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 5 -->
+
+        <Label Canvas.Left="10" Canvas.Top="240" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 5 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="240" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave5Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="240" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 5 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="240" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave5Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 6 -->
+
+        <Label Canvas.Left="10" Canvas.Top="270" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 6 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="270" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave6Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="270" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 6 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="270" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave6Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 7 -->
+
+        <Label Canvas.Left="10" Canvas.Top="300" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 7 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="300" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave7Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="300" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 7 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="300" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave7Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 8 -->
+
+        <Label Canvas.Left="10" Canvas.Top="330" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 8 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="330" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave8Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="330" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 8 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="330" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave8Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 9 -->
+
+        <Label Canvas.Left="10" Canvas.Top="360" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 9 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="360" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave9Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="360" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 9 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="360" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave9Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 10 -->
+
+        <Label Canvas.Left="10" Canvas.Top="390" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 10 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="390" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave10Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="390" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 10 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="390" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave10Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 11 -->
+
+        <Label Canvas.Left="10" Canvas.Top="420" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 11 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="420" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave11Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="420" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 11 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="420" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave11Amp), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <!-- Wave 12 -->
+
+        <Label Canvas.Left="10" Canvas.Top="450" Width="380" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 12 frequency (0 - 20000 Hz):
+        </Label>
+
+        <TextBox Canvas.Left="410" Canvas.Top="450" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave12Freq), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </TextBox>
+
+        <Label Canvas.Left="510" Canvas.Top="450" Width="280" Height="25"
+                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            Wave 12 amplitude (0 - 32767):
+        </Label>
+
+        <TextBox Canvas.Left="810" Canvas.Top="450" Width="80" Height="25"
+                VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                Padding="6, 0, 0, 0"
+                Text="{Binding Path=(vm:WaveformVM.Wave12Amp), Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
         <!-- Meta data -->
         
-        <Label Canvas.Left="10" Canvas.Top="350" Width="380" Height="30"
+        <Label Canvas.Left="10" Canvas.Top="500" Width="380" Height="30"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14">
             Sample frequency (Hz):
         </Label>
 
-        <TextBox Canvas.Left="410" Canvas.Top="350" Width="80" Height="30"
+        <TextBox Canvas.Left="410" Canvas.Top="500" Width="80" Height="30"
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
@@ -98,13 +410,13 @@
                         UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
-        <Label Canvas.Left="510" Canvas.Top="350" Width="280" Height="30"
+        <Label Canvas.Left="510" Canvas.Top="500" Width="280" Height="30"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14">
             Sample length (seconds):
         </Label>
 
-        <TextBox Canvas.Left="810" Canvas.Top="350" Width="80" Height="30"
+        <TextBox Canvas.Left="810" Canvas.Top="500" Width="80" Height="30"
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
@@ -114,13 +426,13 @@
 
         <!-- File name -->
 
-        <Label Canvas.Left="10" Canvas.Top="425" Width="180" Height="30"
+        <Label Canvas.Left="10" Canvas.Top="575" Width="180" Height="30"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14">
             File name:
         </Label>
 
-        <TextBox Canvas.Left="210" Canvas.Top="425" Width="530" Height="30"
+        <TextBox Canvas.Left="210" Canvas.Top="575" Width="530" Height="30"
                 VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14"
                 Padding="6, 0, 0, 0"
@@ -128,7 +440,7 @@
                         UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
-        <Button Canvas.Left="760" Canvas.Top="415" Width="180" Height="50"
+        <Button Canvas.Left="760" Canvas.Top="565" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="Browse_Click">
             Browse
@@ -136,7 +448,7 @@
 
         <!-- Create button -->
         
-        <Button Canvas.Left="410" Canvas.Top="525" Width="180" Height="50"
+        <Button Canvas.Left="410" Canvas.Top="650" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="CreateWaveform_Click">
             Create waveform
@@ -144,7 +456,7 @@
 
         <!-- Return button -->
         
-        <Button Canvas.Left="410" Canvas.Top="625" Width="180" Height="50"
+        <Button Canvas.Left="410" Canvas.Top="725" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="Return_Click">
             Return to main page
