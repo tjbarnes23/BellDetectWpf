@@ -8,22 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="BellSamples\TJB-HB-1-BS.wav" />
-    <None Remove="BellSamples\TJB-HB-1-HS.wav" />
-    <None Remove="BellSamples\TJB-HB-2-BS.wav" />
-    <None Remove="BellSamples\TJB-HB-2-HS.wav" />
-    <None Remove="BellSamples\TJB-HB-3-BS.wav" />
-    <None Remove="BellSamples\TJB-HB-3-HS.wav" />
-    <None Remove="BellSamples\TJB-HB-4-BS.wav" />
-    <None Remove="BellSamples\TJB-HB-4-HS.wav" />
-    <None Remove="BellSamples\TJB-HB-5-BS.wav" />
-    <None Remove="BellSamples\TJB-HB-5-HS.wav" />
-    <None Remove="BellSamples\TJB-HB-6-BS.wav" />
-    <None Remove="BellSamples\TJB-HB-6-HS.wav" />
-    <None Remove="BellSamples\TJB-HB-7-BS.wav" />
-    <None Remove="BellSamples\TJB-HB-7-HS.wav" />
-    <None Remove="BellSamples\TJB-HB-8-BS.wav" />
-    <None Remove="BellSamples\TJB-HB-8-HS.wav" />
+    <None Remove="BellSamples\PH8.wav" />
+    <None Remove="BellSamples\TJB-HB-1.wav" />
+    <None Remove="BellSamples\TJB-HB-2.wav" />
+    <None Remove="BellSamples\TJB-HB-3.wav" />
+    <None Remove="BellSamples\TJB-HB-4.wav" />
+    <None Remove="BellSamples\TJB-HB-5.wav" />
+    <None Remove="BellSamples\TJB-HB-6.wav" />
+    <None Remove="BellSamples\TJB-HB-7.wav" />
+    <None Remove="BellSamples\TJB-HB-8.wav" />
     <None Remove="BellSamples\Trinity-1.wav" />
     <None Remove="BellSamples\Trinity-10.wav" />
     <None Remove="BellSamples\Trinity-11.wav" />
@@ -41,52 +34,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="BellSamples\TJB-HB-1-BS.wav">
+    <Content Include="BellSamples\PH8.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="BellSamples\TJB-HB-1-HS.wav">
+    <Content Include="BellSamples\TJB-HB-1.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="BellSamples\TJB-HB-2-BS.wav">
+    <Content Include="BellSamples\TJB-HB-2.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="BellSamples\TJB-HB-2-HS.wav">
+    <Content Include="BellSamples\TJB-HB-3.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="BellSamples\TJB-HB-3-BS.wav">
+    <Content Include="BellSamples\TJB-HB-4.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="BellSamples\TJB-HB-3-HS.wav">
+    <Content Include="BellSamples\TJB-HB-5.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="BellSamples\TJB-HB-4-BS.wav">
+    <Content Include="BellSamples\TJB-HB-6.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="BellSamples\TJB-HB-4-HS.wav">
+    <Content Include="BellSamples\TJB-HB-7.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="BellSamples\TJB-HB-5-BS.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-5-HS.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-6-BS.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-6-HS.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-7-BS.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-7-HS.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-8-BS.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-8-HS.wav">
+    <Content Include="BellSamples\TJB-HB-8.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="BellSamples\Trinity-1.wav">
