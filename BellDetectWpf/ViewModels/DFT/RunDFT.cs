@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,12 +18,21 @@ namespace BellDetectWpf.ViewModels.DFT
             double scalingFactor;
             double amplitude;
 
+            Stopwatch sw;
+            StringBuilder sb;
+            TimeSpan currElapsed;
+
             DFTVM.CosDFT = new double[10000];
             DFTVM.SinDFT = new double[10000];
             DFTVM.Results = new double[10000];
 
             offset = (uint)(DFTVM.StartTime * WavFileVM.SampleFrequency);
             scalingFactor = WavFileVM.SampleFrequency / 10000.0;
+
+            sw = new Stopwatch();
+            sb = new StringBuilder();
+
+            sw.Start();
 
             for (uint i = 0; i < 10000; i++)
             {
@@ -51,6 +61,16 @@ namespace BellDetectWpf.ViewModels.DFT
                 amplitude = (amplitude * 2) / 20000;
                 DFTVM.Results[i] = Math.Round(amplitude, 0);
             }
+
+            currElapsed = sw.Elapsed;
+
+            sb.Append("DFT time: ");
+            sb.Append(currElapsed);
+            sb.Append('\n');
+
+            MainWinVM.Logger.Info(sb.ToString());
+
+            sw.Stop();
         }
     }
 }

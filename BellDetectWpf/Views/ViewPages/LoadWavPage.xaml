@@ -26,13 +26,13 @@
         
         <Label Canvas.Left="10" Canvas.Top="225" Width="120" Height="50"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="16">
+                FontFamily="Arial Black" FontSize="14">
             File name:
         </Label>
 
         <TextBox Canvas.Left="150" Canvas.Top="225" Width="600" Height="50"
                 VerticalContentAlignment="Center"
-                FontFamily="Arial" FontSize="14"
+                FontFamily="Arial" FontSize="13"
                 Padding="6, 0, 0, 0"
                 Text="{Binding Path=(vm:WavFileVM.FilePathName), Mode=TwoWay,
                         UpdateSourceTrigger=PropertyChanged}">

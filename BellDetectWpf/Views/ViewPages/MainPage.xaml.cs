@@ -18,7 +18,12 @@ namespace BellDetectWpf.Views.ViewPages
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MicStreamPage.xaml", UriKind.Relative);
         }
 
-        private void Waveforms_Click(object sender, RoutedEventArgs e)
+        private void SpecifyWaveform_Click(object sender, RoutedEventArgs e)
+        {
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\SpecifyWaveformPage.xaml", UriKind.Relative);
+        }
+
+        private void CreateWaveform_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\CreateWaveformPage.xaml", UriKind.Relative);
         }

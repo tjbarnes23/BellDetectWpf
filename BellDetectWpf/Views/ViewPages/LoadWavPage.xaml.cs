@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
 using BellDetectWpf.ViewModels.LoadWav;
+using Microsoft.Win32;
 
 namespace BellDetectWpf.Views.ViewPages
 {
@@ -15,7 +16,16 @@ namespace BellDetectWpf.Views.ViewPages
 
         private void Browse_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openDlg = new OpenFileDialog
+            {
+                Filter = string.Empty,
+                InitialDirectory = @"C:\ProgramData\BellDetect"
+            };
 
+            if (openDlg.ShowDialog() == true)
+            {
+                WavFileVM.FilePathName = openDlg.FileName;
+            }
         }
 
         private void LoadWav_Click(object sender, RoutedEventArgs e)

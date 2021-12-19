@@ -9,10 +9,14 @@ namespace BellDetectWpf.ViewModels.MainWin
         {
             MainWinVM.Logger = LogManager.GetCurrentClassLogger();
 
-            WaveformVM.FilePathName = @"C:\temp\waveform.wav";
-            WavFileVM.FilePathName = @"C:\Users\Tim\source\repos\tjbarnes23\BellDetectWpf\BellDetectWpf\BellSamples\Trinity-8.wav";
-            FFTVM.FilePathName = @"C:\temp\resultsFFT.txt";
-            DFTVM.FilePathName = @"C:\temp\resultsDFT.txt";
+            // Set default file path names for loading
+            WavFileVM.FilePathName = string.Empty;
+
+            // Set default file path names for saving
+            WaveformVM.FilePathName = @"C:\ProgramData\BellDetect\waveform.wav";
+            FFTVM.FilePathName = @"C:\ProgramData\BellDetect\resultsFFT.txt";
+            DFTVM.FilePathName = @"C:\ProgramData\BellDetect\resultsDFT.txt";
+            
             KeyPressVM.StartStopTxt = "Start detecting";
 
             MainWinVM.Mw = new MainWindow();

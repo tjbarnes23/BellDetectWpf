@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
 using BellDetectWpf.ViewModels.Waveform;
+using Microsoft.Win32;
 
 namespace BellDetectWpf.Views.ViewPages
 {
@@ -25,7 +26,16 @@ namespace BellDetectWpf.Views.ViewPages
 
         private void Browse_Click(object sender, RoutedEventArgs e)
         {
+            SaveFileDialog saveDlg = new SaveFileDialog
+            {
+                Filter = string.Empty,
+                InitialDirectory = @"C:\ProgramData\BellDetect"
+            };
 
+            if (saveDlg.ShowDialog() == true)
+            {
+                WaveformVM.FilePathName = saveDlg.FileName;
+            }
         }
 
         private void CreateWaveform_Click(object sender, RoutedEventArgs e)

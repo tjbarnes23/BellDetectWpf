@@ -27,20 +27,26 @@
                 Click="WavFile_Click">
             Load a Wav file
         </Button>
-        
-        <Button Canvas.Left="410" Canvas.Top="325" Width="180" Height="50"
+
+        <Button Canvas.Left="285" Canvas.Top="325" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Waveforms_Click">
+                Click="SpecifyWaveform_Click">
+            Specify a waveform
+        </Button>
+
+        <Button Canvas.Left="535" Canvas.Top="325" Width="180" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="CreateWaveform_Click">
             Create a waveform
         </Button>
 
-        <Button Canvas.Left="210" Canvas.Top="425" Width="180" Height="50"
+        <Button Canvas.Left="285" Canvas.Top="425" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="FFT_Click">
             FFT
         </Button>
 
-        <Button Canvas.Left="610" Canvas.Top="425" Width="180" Height="50"
+        <Button Canvas.Left="535" Canvas.Top="425" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="DFT_Click">
             DFT

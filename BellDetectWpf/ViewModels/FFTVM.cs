@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 using BellDetectWpf.Models;
 using BellDetectWpf.ViewModels.FFT;
 
@@ -57,18 +58,25 @@ namespace BellDetectWpf.ViewModels
         public static void RunFFT()
         {
             double amplitude;
+            Stopwatch sw;
+            StringBuilder sb;
+            TimeSpan currElapsed;
+            TimeSpan prevElapsed;
+            TimeSpan interval;
 
             Log2N = (uint)Math.Log2(N);
 
             N = (uint)(1 << (int)Log2N); // number of bins recalculated in case a non-power of 2 was entered
-            NA = (uint)(WaveformVM.NumSamples / N);
+            NA = (uint)(WaveformVM.NumSamples / N); // NA is number of FFTs that will be run
             Results = new double[N / 2, NA];
 
-            Stopwatch sw = new Stopwatch();
-            sw.Reset();
-            sw.Start();
-
             C_FFT.InitializeFFT();
+
+            sw = new Stopwatch();
+            sb = new StringBuilder();
+            prevElapsed = new TimeSpan(0);
+
+            sw.Start();
 
             for (int i = 0; i < NA; i++)
             {
@@ -92,7 +100,18 @@ namespace BellDetectWpf.ViewModels
                     Results[j, i] = Math.Round(amplitude, 0);
                 }
 
-                MainWinVM.Logger.Info(sw.Elapsed.ToString());
+                currElapsed = sw.Elapsed;
+                interval = currElapsed - prevElapsed;
+                
+                sb.Append("FFT time: ");
+                sb.Append(interval);
+                sb.Append('\t');
+                sb.Append("FFT cumulative time: ");
+                sb.Append(currElapsed);
+                sb.Append('\n');
+
+                MainWinVM.Logger.Info(sb.ToString());
+                prevElapsed = currElapsed;
             }
 
             sw.Stop();

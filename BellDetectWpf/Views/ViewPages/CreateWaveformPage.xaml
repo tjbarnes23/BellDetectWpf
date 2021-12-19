@@ -426,21 +426,21 @@
 
         <!-- File name -->
 
-        <Label Canvas.Left="10" Canvas.Top="575" Width="180" Height="30"
+        <Label Canvas.Left="10" Canvas.Top="575" Width="120" Height="30"
                 HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="14">
             File name:
         </Label>
 
-        <TextBox Canvas.Left="210" Canvas.Top="575" Width="530" Height="30"
+        <TextBox Canvas.Left="150" Canvas.Top="575" Width="600" Height="30"
                 VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
+                FontFamily="Arial Black" FontSize="13"
                 Padding="6, 0, 0, 0"
                 Text="{Binding Path=(vm:WaveformVM.FilePathName), Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
 
-        <Button Canvas.Left="760" Canvas.Top="565" Width="180" Height="50"
+        <Button Canvas.Left="770" Canvas.Top="565" Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="Browse_Click">
             Browse
