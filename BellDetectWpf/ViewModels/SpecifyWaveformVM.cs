@@ -38,28 +38,26 @@ namespace BellDetectWpf.ViewModels
         {
             WaveformSpec = new List<WaveSpec>();
 
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 20; i++)
             {
                 WaveformSpec.Add(new WaveSpec
                 {
                     Frequency = 0,
                     Amplitude = 0,
-                    Mean = 0.0,
-                    StdDev = 0.0,
-                    Scale = 0.0
+                    TimeToPeak = 0.0,
+                    TimeToDecayTo50pc = 0.0
                 });
             }
         }
 
         public static void Clear()
         {
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 20; i++)
             {
                 WaveformSpec[i].Frequency = 0;
                 WaveformSpec[i].Amplitude = 0;
-                WaveformSpec[i].Mean = 0.0;
-                WaveformSpec[i].StdDev = 0.0;
-                WaveformSpec[i].Scale = 0.0;
+                WaveformSpec[i].TimeToPeak = 0.0;
+                WaveformSpec[i].TimeToDecayTo50pc = 0.0;
             }
         }
 
@@ -79,11 +77,10 @@ namespace BellDetectWpf.ViewModels
                 foreach (var line in File.ReadLines(FilePathName))
                 {
                     var tempLine = line.Split('\t');
-                    WaveformSpec[i].Frequency = Convert.ToUInt32(tempLine[0]);
-                    WaveformSpec[i].Amplitude = Convert.ToUInt32(tempLine[1]);
-                    WaveformSpec[i].Mean = Convert.ToDouble(tempLine[2]);
-                    WaveformSpec[i].StdDev = Convert.ToDouble(tempLine[3]);
-                    WaveformSpec[i].Scale = Convert.ToDouble(tempLine[4]);
+                    WaveformSpec[i].Frequency = Convert.ToInt32(tempLine[0]);
+                    WaveformSpec[i].Amplitude = Convert.ToInt32(tempLine[1]);
+                    WaveformSpec[i].TimeToPeak = Convert.ToDouble(tempLine[2]);
+                    WaveformSpec[i].TimeToDecayTo50pc = Convert.ToDouble(tempLine[3]);
 
                     i++;
                 }
@@ -104,18 +101,16 @@ namespace BellDetectWpf.ViewModels
             // Create a new file     
             using FileStream fs = File.Create(FilePathName);
 
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 20; i++)
             {
                 sb.Clear();
                 sb.Append(WaveformSpec[i].Frequency);
                 sb.Append('\t');
                 sb.Append(WaveformSpec[i].Amplitude);
                 sb.Append('\t');
-                sb.Append(WaveformSpec[i].Mean);
+                sb.Append(WaveformSpec[i].TimeToPeak);
                 sb.Append('\t');
-                sb.Append(WaveformSpec[i].StdDev);
-                sb.Append('\t');
-                sb.Append(WaveformSpec[i].Scale);
+                sb.Append(WaveformSpec[i].TimeToDecayTo50pc);
                 sb.Append('\n');
 
                 Byte[] row = new UTF8Encoding(true).GetBytes(sb.ToString());

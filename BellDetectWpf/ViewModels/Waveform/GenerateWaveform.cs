@@ -8,44 +8,20 @@ namespace BellDetectWpf.ViewModels.Waveform
         {
             double x;
             double w;
-            
-            double u = 0.2;
-            double o = 1.0;
-            double a = 0.3;
-            double logNormDist;
-            
+            double scale;
+
+            int freq;
+            int amp;
+            double peak;
+            double decay;
+
             double wSum;
 
+            WavFileVM.SampleFrequency = 96000;
+            WavFileVM.SampleLengthSeconds = 5.0;
+            WaveformVM.NumWaves = 20;
+
             WaveformVM.NumSamples = (uint)(WavFileVM.SampleFrequency * WavFileVM.SampleLengthSeconds);
-
-            WaveformVM.NumWaves = 12;
-            WaveformVM.WaveSpec = new double[WaveformVM.NumWaves, 2];
-
-            WaveformVM.WaveSpec[0, 0] = WaveformVM.Wave1Freq;
-            WaveformVM.WaveSpec[0, 1] = WaveformVM.Wave1Amp;
-            WaveformVM.WaveSpec[1, 0] = WaveformVM.Wave2Freq;
-            WaveformVM.WaveSpec[1, 1] = WaveformVM.Wave2Amp;
-            WaveformVM.WaveSpec[2, 0] = WaveformVM.Wave3Freq;
-            WaveformVM.WaveSpec[2, 1] = WaveformVM.Wave3Amp;
-            WaveformVM.WaveSpec[3, 0] = WaveformVM.Wave4Freq;
-            WaveformVM.WaveSpec[3, 1] = WaveformVM.Wave4Amp;
-            WaveformVM.WaveSpec[4, 0] = WaveformVM.Wave5Freq;
-            WaveformVM.WaveSpec[4, 1] = WaveformVM.Wave5Amp;
-            WaveformVM.WaveSpec[5, 0] = WaveformVM.Wave6Freq;
-            WaveformVM.WaveSpec[5, 1] = WaveformVM.Wave6Amp;
-            WaveformVM.WaveSpec[6, 0] = WaveformVM.Wave7Freq;
-            WaveformVM.WaveSpec[6, 1] = WaveformVM.Wave7Amp;
-            WaveformVM.WaveSpec[7, 0] = WaveformVM.Wave8Freq;
-            WaveformVM.WaveSpec[7, 1] = WaveformVM.Wave8Amp;
-            WaveformVM.WaveSpec[8, 0] = WaveformVM.Wave9Freq;
-            WaveformVM.WaveSpec[8, 1] = WaveformVM.Wave9Amp;
-            WaveformVM.WaveSpec[9, 0] = WaveformVM.Wave10Freq;
-            WaveformVM.WaveSpec[9, 1] = WaveformVM.Wave10Amp;
-            WaveformVM.WaveSpec[10, 0] = WaveformVM.Wave11Freq;
-            WaveformVM.WaveSpec[10, 1] = WaveformVM.Wave11Amp;
-            WaveformVM.WaveSpec[11, 0] = WaveformVM.Wave12Freq;
-            WaveformVM.WaveSpec[11, 1] = WaveformVM.Wave12Amp;
-
             WaveformVM.Time = new double[WaveformVM.NumSamples];
             WaveformVM.Waves = new double[WaveformVM.NumWaves, WaveformVM.NumSamples];
             WaveformVM.Waveform = new short[WaveformVM.NumSamples];
@@ -63,24 +39,35 @@ namespace BellDetectWpf.ViewModels.Waveform
 
                 for (int j = 0; j < WaveformVM.NumWaves; j++)
                 {
-                    if (WaveformVM.WaveSpec[j, 0] != 0.0)
-                    {
-                        x = WaveformVM.Time[i] * WaveformVM.WaveSpec[j, 0] * 2.0 * Math.PI;
-                        w = Math.Sin(x) * WaveformVM.WaveSpec[j, 1];
+                    freq = SpecifyWaveformVM.WaveformSpec[j].Frequency;
+                    amp = SpecifyWaveformVM.WaveformSpec[j].Amplitude;
+                    peak = SpecifyWaveformVM.WaveformSpec[j].TimeToPeak;
+                    decay = SpecifyWaveformVM.WaveformSpec[j].TimeToDecayTo50pc;
 
-                        // Now scale w by the lognormal distribution curve (approximates a bell amplitude envelope)
+                    if (freq != 0)
+                    {
+                        x = WaveformVM.Time[i] * freq * 2.0 * Math.PI;
+                        w = Math.Sin(x) * amp;
+                        
+                        // At this point, w is the max amplitude of the wave at all points.
+                        // Now scale w by the bell envelope function
                         if (i == 0)
                         {
-                            logNormDist = 0;
+                            scale = 0;
                         }
                         else
                         {
-                            logNormDist = (a / (o * Math.Sqrt(2.0 * Math.PI) * WaveformVM.Time[i])) *
-                                    Math.Pow(Math.E, -1 * (Math.Pow(Math.Log(WaveformVM.Time[i]) - Math.Log(u), 2) /
-                                    (2 * Math.Pow(o, 2))));
+                            if (WaveformVM.Time[i] <= peak)
+                            {
+                                scale = (peak / WaveformVM.Time[i]) * Math.Pow(Math.E,1 - (peak / WaveformVM.Time[i]));
+                            }
+                            else
+                            {
+                                scale = Math.Pow(0.5, (WaveformVM.Time[i] - peak) / decay);
+                            }
                         }
 
-                        w *= logNormDist;
+                        w *= scale;
 
                         WaveformVM.Waves[j, i] = w;
                         wSum += w;

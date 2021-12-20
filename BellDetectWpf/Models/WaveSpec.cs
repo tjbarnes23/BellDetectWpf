@@ -8,14 +8,12 @@ namespace BellDetectWpf.Models
 {
     public class WaveSpec
     {
-        public uint Frequency { get; set; }
+        public int Frequency { get; set; }
 
-        public uint Amplitude { get; set; }
+        public int Amplitude { get; set; }
 
-        public double Mean { get; set; }
+        public double TimeToPeak { get; set; }
 
-        public double StdDev { get; set; }
-
-        public double Scale { get; set; }
+        public double TimeToDecayTo50pc { get; set; }
     }
 }
