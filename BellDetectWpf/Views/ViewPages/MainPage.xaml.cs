@@ -13,22 +13,12 @@ namespace BellDetectWpf.Views.ViewPages
             InitializeComponent();
         }
 
-        private void MicStream_Click(object sender, RoutedEventArgs e)
-        {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MicStreamPage.xaml", UriKind.Relative);
-        }
-
-        private void SpecifyWaveform_Click(object sender, RoutedEventArgs e)
+        private void WaveformSpec_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\SpecifyWaveformPage.xaml", UriKind.Relative);
         }
 
-        private void CreateWaveform_Click(object sender, RoutedEventArgs e)
-        {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\CreateWaveformPage.xaml", UriKind.Relative);
-        }
-
-        private void WavFile_Click(object sender, RoutedEventArgs e)
+        private void Waveform_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\LoadWavPage.xaml", UriKind.Relative);
         }
@@ -41,6 +31,10 @@ namespace BellDetectWpf.Views.ViewPages
         private void DFT_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\DFTPage.xaml", UriKind.Relative);
+        }
+        private void MicStream_Click(object sender, RoutedEventArgs e)
+        {
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MicStreamPage.xaml", UriKind.Relative);
         }
 
         private void KeyPress_Click(object sender, RoutedEventArgs e)
