@@ -5,8 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BellDetectWpf"
         mc:Ignorable="d"
-        Width="1000"
-        Height="810"
         Title="Bell Detect"
         Loaded="Window_Loaded"
         Closed="Window_Closed">

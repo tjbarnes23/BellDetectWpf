@@ -28,6 +28,26 @@ namespace BellDetectWpf.Views.ViewPages
             }
         }
 
+        private void Create_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveAs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void LoadWav_Click(object sender, RoutedEventArgs e)
         {
             WavFileVM.LoadWav();

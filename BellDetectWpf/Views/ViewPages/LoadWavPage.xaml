@@ -1,145 +1,226 @@
 ﻿<Page x:Class="BellDetectWpf.Views.ViewPages.LoadWavPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BellDetectWpf.Views.ViewPages"
-      xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
-      mc:Ignorable="d"
-      d:DesignWidth="1000"
-      d:DesignHeight="800">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:BellDetectWpf.Views.ViewPages"
+        xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
+        mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid MinWidth="800" MaxWidth="1200"
+                MinHeight="600" MaxHeight="900">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-    <Canvas Width="1000" Height="800">
-        <TextBlock Canvas.Left="360" Canvas.Top="25" Width="280" Height="50"
-                TextAlignment="Center"
-                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
-            Bell Detect
-        </TextBlock>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.8*" />
+                <RowDefinition Height="1.25*" />
+                <RowDefinition Height="0.75*" />
+                <RowDefinition Height="0.75*" />
+                <RowDefinition Height="0.75*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1.1*" />
+                <RowDefinition Height="1.1*" />
+            </Grid.RowDefinitions>
 
-        <TextBlock Canvas.Left="360" Canvas.Top="125" Width="280" Height="50"
-                TextAlignment="Center"
-                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
-            Load a Wav file
-        </TextBlock>
+            <!-- Title -->
 
-        <!-- File name -->
-        
-        <Label Canvas.Left="10" Canvas.Top="225" Width="120" Height="50"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14">
-            File name:
-        </Label>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+                Bell Detect
+            </Label>
 
-        <TextBox Canvas.Left="150" Canvas.Top="225" Width="600" Height="50"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial" FontSize="13"
-                Padding="6, 0, 0, 0"
-                Text="{Binding Path=(vm:WavFileVM.FilePathName), Mode=TwoWay,
-                        UpdateSourceTrigger=PropertyChanged}">
-        </TextBox>
+            <!-- Waveform -->
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+                Waveform
+            </Label>
 
-        <Button Canvas.Left="770" Canvas.Top="225" Width="180" Height="50"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Browse_Click">
-            Browse
-        </Button>
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    FontFamily="Arial" FontSize="13">
+                <TextBlock  TextWrapping="Wrap" LineHeight="20" MaxWidth="800">
+                    Use this page to create a waveform from the waveform specification
+                    that was entered or loaded on the previous page,
+                    or to load a waveform from a .wav file.
+                    The created waveform can also be saved to a .wav file.
+                </TextBlock>
+            </Label>
 
-        <Button Canvas.Left="410" Canvas.Top="325" Width="180" Height="50"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="LoadWav_Click">
-            Load .wav file
-        </Button>
+            <!-- Create or load waveform -->
 
-        <!-- Display meta data from .wav file: Row 1 -->
-        
-        <Label Canvas.Left="110" Canvas.Top="425" Width="230" Height="25"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Sample frequency (Hz):
-        </Label>
+            <Button Grid.Row="3" Grid.Column="0"
+                    Width="240" Height="60"
+                    Padding="10, 0, 10, 0"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="Create_Click">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                    Create waveform (from current waveform specification)
+                </TextBlock>
+            </Button>
 
-        <Label Canvas.Left="360" Canvas.Top="425" Width="130" Height="25"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:WavFileVM.SampleFrequency), Mode=OneWay}">
-        </Label>
+            <Button Grid.Row="3" Grid.Column="1"
+                    Width="180" Height="50"
+                    Padding="10, 0, 10, 0"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="Load_Click">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                    Load waveform (from .wav file)
+                </TextBlock>
+            </Button>
 
-        <Label Canvas.Left="510" Canvas.Top="425" Width="230" Height="25"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Sample depth (bits):
-        </Label>
+            <!-- Display meta data from .wav file: Row 1 -->
 
-        <Label Canvas.Left="760" Canvas.Top="425" Width="130" Height="25"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:WavFileVM.SampleDepth), Mode=OneWay}">
-        </Label>
+            <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
+                <Label Width="230" Height="30"
+                            HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                    Sample frequency (Hz):
+                </Label>
 
-        <!-- Display meta data from .wav file: Row 2 -->
+                <Label Width="130" Height="30"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14"
+                            Padding="6, 0, 0, 0"
+                            Content="{Binding Path=(vm:WavFileVM.SampleFrequency), Mode=OneWay}">
+                </Label>
+            </StackPanel>
 
-        <Label Canvas.Left="110" Canvas.Top="475" Width="230" Height="25"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Number of channels:
-        </Label>
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+                <Label Width="230" Height="30"
+                            HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                    Sample depth (bits):
+                </Label>
 
-        <Label Canvas.Left="360" Canvas.Top="475" Width="130" Height="25"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:WavFileVM.NumChannels), Mode=OneWay}">
-        </Label>
+                <Label Width="130" Height="30"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14"
+                            Padding="6, 0, 0, 0"
+                            Content="{Binding Path=(vm:WavFileVM.SampleDepth), Mode=OneWay}">
+                </Label>
+            </StackPanel>
 
-        <Label Canvas.Left="510" Canvas.Top="475" Width="230" Height="25"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Sample length (bytes):
-        </Label>
+            <!-- Display meta data from .wav file: Row 2 -->
 
-        <Label Canvas.Left="760" Canvas.Top="475" Width="130" Height="25"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:WavFileVM.SampleLengthBytes), Mode=OneWay}">
-        </Label>
+            <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal">
+                <Label Width="230" Height="30"
+                            HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                    Number of channels:
+                </Label>
 
-        <!-- Display meta data from .wav file: Row 3 -->
+                <Label Width="130" Height="30"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14"
+                            Padding="6, 0, 0, 0"
+                            Content="{Binding Path=(vm:WavFileVM.NumChannels), Mode=OneWay}">
+                </Label>
+            </StackPanel>
 
-        <Label Canvas.Left="110" Canvas.Top="525" Width="230" Height="25"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Sample length (seconds):
-        </Label>
+            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+                <Label Width="230" Height="30"
+                            HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                    Sample length (bytes):
+                </Label>
 
-        <Label Canvas.Left="360" Canvas.Top="525" Width="130" Height="25"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:WavFileVM.SampleLengthSeconds), Mode=OneWay}">
-        </Label>
+                <Label Width="130" Height="30"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14"
+                            Padding="6, 0, 0, 0"
+                            Content="{Binding Path=(vm:WavFileVM.SampleLengthBytes), Mode=OneWay}">
+                </Label>
+            </StackPanel>
 
-        <Label Canvas.Left="510" Canvas.Top="525" Width="230" Height="25"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Is .wav file format valid?
-        </Label>
+            <!-- Display meta data from .wav file: Row 3 -->
 
-        <Label Canvas.Left="760" Canvas.Top="525" Width="130" Height="25"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Padding="6, 0, 0, 0"
-                Content="{Binding Path=(vm:WavFileVM.WavFileFormatValid), Mode=OneWay}">
-        </Label>
-        
-        <!-- Return button -->
+            <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal">
+                <Label Width="230" Height="30"
+                            HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                    Sample length (seconds):
+                </Label>
 
-        <Button Canvas.Left="410" Canvas.Top="625" Width="180" Height="50"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Return_Click">
-            Return to main page
-        </Button>
-    </Canvas>
+                <Label Width="130" Height="30"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14"
+                            Padding="6, 0, 0, 0"
+                            Content="{Binding Path=(vm:WavFileVM.SampleLengthSeconds), Mode=OneWay}">
+                </Label>
+            </StackPanel>
+
+            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                <Label Width="230" Height="30"
+                            HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                    Is .wav file format valid?
+                </Label>
+
+                <Label Width="130" Height="30"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14"
+                            Padding="6, 0, 0, 0"
+                            Content="{Binding Path=(vm:WavFileVM.WavFileFormatValid), Mode=OneWay}">
+                </Label>
+            </StackPanel>
+
+            <!-- File name -->
+
+            <StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal">
+                <Label Width="230" Height="30"
+                            HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                            FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                    File name:
+                </Label>
+
+                <Label Width="130" Height="30"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Arial" FontSize="13"
+                            Padding="6, 0, 0, 0"
+                            Content="{Binding Path=(vm:WavFileVM.FilePathName), Mode=OneWay}">
+                </Label>
+            </StackPanel>
+
+            <!-- Save / Save As buttons -->
+
+            <Button Grid.Row="8" Grid.Column="0"
+                        Width="180" Height="50"
+                        Padding="10, 0, 10, 0"
+                        FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                        Click="Save_Click">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                        Save
+                </TextBlock>
+            </Button>
+
+            <Button Grid.Row="8" Grid.Column="1"
+                        Width="180" Height="50"
+                        Padding="10, 0, 10, 0"
+                        FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                        Click="SaveAs_Click">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                        Save As
+                </TextBlock>
+            </Button>
+
+            <!-- Return button -->
+
+            <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2"
+                        Width="180" Height="50"
+                        Padding="10, 0, 10, 0"
+                        FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                        Click="Return_Click">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                        Return to main page
+                </TextBlock>
+            </Button>
+        </Grid>
+    </ScrollViewer>
 </Page>
