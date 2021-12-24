@@ -1,10 +1,10 @@
 ﻿using System.IO;
 
-namespace BellDetectWpf.ViewModels.LoadWav
+namespace BellDetectWpf.ViewModels.Waveform
 {
-    public static partial class C_LoadWav
+    public static partial class C_Waveform
     {
-        public static void LoadWav()
+        public static void LoadWaveform()
         {
             string riff;
             uint fileSize;
@@ -17,7 +17,7 @@ namespace BellDetectWpf.ViewModels.LoadWav
             string data;
 
             // Read .wav file
-            using FileStream f = new FileStream(WavFileVM.FilePathName, FileMode.Open);
+            using FileStream f = new FileStream(WaveformVM.FilePathName, FileMode.Open);
             using BinaryReader br = new BinaryReader(f);
 
             // Read 'RIFF'
@@ -37,10 +37,10 @@ namespace BellDetectWpf.ViewModels.LoadWav
             wavType = br.ReadUInt16();
 
             // Read numChannels (ushort)
-            WavFileVM.NumChannels = br.ReadUInt16();
+            WaveformVM.NumChannels = br.ReadUInt16();
 
             // Read sampleFrequency (uint)
-            WavFileVM.SampleFrequency = br.ReadUInt32();
+            WaveformVM.SampleFrequency = br.ReadUInt32();
 
             // Read dataRate (uint)
             dataRate = br.ReadUInt32();
@@ -49,40 +49,40 @@ namespace BellDetectWpf.ViewModels.LoadWav
             blockAlignment = br.ReadUInt16();
 
             // Read bitsPerSamplePerChannel (ushort)
-            WavFileVM.SampleDepth = br.ReadUInt16();
+            WaveformVM.SampleDepth = br.ReadUInt16();
 
             // Read 'data'
             data = System.Text.Encoding.UTF8.GetString(br.ReadBytes(4));
 
             // Read dataSize (uint)
-            WavFileVM.SampleLengthBytes = br.ReadUInt32();
+            WaveformVM.SampleLengthBytes = br.ReadUInt32();
 
             // Calculate sample length in seconds
-            WavFileVM.SampleLengthSeconds = (double)(WavFileVM.SampleLengthBytes /
-                    (double)((WavFileVM.SampleDepth / 8) * WavFileVM.NumChannels * WavFileVM.SampleFrequency));
+            WaveformVM.SampleLengthSeconds = (double)(WaveformVM.SampleLengthBytes /
+                    (double)((WaveformVM.SampleDepth / 8) * WaveformVM.NumChannels * WaveformVM.SampleFrequency));
 
-            WavFileVM.WavFileFormatValid = "Yes";
+            WaveformVM.WavFileFormatValid = "Yes";
 
             if (riff != "RIFF" ||
-                    fileSize != (WavFileVM.SampleLengthBytes + formatParametersSize + 20) ||
+                    fileSize != (WaveformVM.SampleLengthBytes + formatParametersSize + 20) ||
                     wave != "WAVE" ||
                     fmt != "fmt " ||
                     formatParametersSize != 16 ||
                     wavType != 1 ||
-                    WavFileVM.NumChannels != 1 ||
-                    dataRate != WavFileVM.NumChannels * WavFileVM.SampleFrequency * (WavFileVM.SampleDepth / 8) ||
-                    blockAlignment != WavFileVM.NumChannels * (WavFileVM.SampleDepth / 8) ||
-                    WavFileVM.SampleDepth != 16 ||
+                    WaveformVM.NumChannels != 1 ||
+                    dataRate != WaveformVM.NumChannels * WaveformVM.SampleFrequency * (WaveformVM.SampleDepth / 8) ||
+                    blockAlignment != WaveformVM.NumChannels * (WaveformVM.SampleDepth / 8) ||
+                    WaveformVM.SampleDepth != 16 ||
                     data != "data")
             {
-                WavFileVM.WavFileFormatValid = "No";
+                WaveformVM.WavFileFormatValid = "No";
             }
 
             // If file format is valid, read in .wav file data
-            if (WavFileVM.WavFileFormatValid == "Yes")
+            if (WaveformVM.WavFileFormatValid == "Yes")
             {
-                WaveformVM.NumSamples = (uint)(WavFileVM.SampleLengthBytes /
-                    ((WavFileVM.SampleDepth / 8) * WavFileVM.NumChannels));
+                WaveformVM.NumSamples = (uint)(WaveformVM.SampleLengthBytes /
+                    ((WaveformVM.SampleDepth / 8) * WaveformVM.NumChannels));
 
                 WaveformVM.Waveform = new short[WaveformVM.NumSamples];
 

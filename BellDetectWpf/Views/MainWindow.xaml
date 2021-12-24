@@ -10,8 +10,8 @@
         Closed="Window_Closed">
     <Window.Background>
         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
-            <GradientStop Color="#FFDACFCF" Offset="0"/>
-            <GradientStop Color="#FF6E3838" Offset="1"/>
+            <GradientStop Color="LightBlue" Offset="0"/>
+            <GradientStop Color="LightSteelBlue" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
 

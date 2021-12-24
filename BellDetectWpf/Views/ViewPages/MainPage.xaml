@@ -55,52 +55,37 @@
 
             <Button Grid.Row="3" Grid.Column="0"
                     Width="240" Height="50"
-                    Padding="10, 0, 10, 0"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                     Click="FFT_Click">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                    Run FFT on waveform
-                </TextBlock>
+                Run FFT on waveform
             </Button>
 
             <Button Grid.Row="3" Grid.Column="1"
                     Width="240" Height="50"
-                    Padding="10, 0, 10, 0"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                     Click="DFT_Click">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                    Run DFT on waveform
-                </TextBlock>
+                Run DFT on waveform
             </Button>
 
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                     Width="240" Height="50"
-                    Padding="10, 0, 10, 0"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                     Click="MicStream_Click">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                    Process mic stream
-                </TextBlock>
+                Process mic stream
             </Button>
 
             <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
-                    Width="180" Height="50"
-                    Padding="10, 0, 10, 0"
+                    Width="240" Height="50"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                     Click="KeyPress_Click">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                    Generate key presses
-                </TextBlock>
+                Generate key presses
             </Button>
 
             <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                     Width="180" Height="50"
-                    Padding="10, 0, 10, 0"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                     Click="Exit_Click">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                    Exit
-                </TextBlock>
+                Exit
             </Button>
         </Grid>
     </ScrollViewer>

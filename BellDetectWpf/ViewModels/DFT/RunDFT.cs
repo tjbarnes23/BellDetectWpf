@@ -26,8 +26,8 @@ namespace BellDetectWpf.ViewModels.DFT
             DFTVM.SinDFT = new double[10000];
             DFTVM.Results = new double[10000];
 
-            offset = (uint)(DFTVM.StartTime * WavFileVM.SampleFrequency);
-            scalingFactor = WavFileVM.SampleFrequency / 10000.0;
+            offset = (uint)(DFTVM.StartTime * WaveformVM.SampleFrequency);
+            scalingFactor = WaveformVM.SampleFrequency / 10000.0;
 
             sw = new Stopwatch();
             sb = new StringBuilder();

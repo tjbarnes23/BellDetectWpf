@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BellDetectWpf.ViewModels.Waveform
+namespace BellDetectWpf.ViewModels.WaveformSpec
 {
-    public static partial class C_Waveform
+    public static partial class C_WaveformSpec
     {
         public static void GenerateWaveform()
         {
@@ -17,11 +17,11 @@ namespace BellDetectWpf.ViewModels.Waveform
 
             double wSum;
 
-            WavFileVM.SampleFrequency = 96000;
-            WavFileVM.SampleLengthSeconds = 5.0;
+            WaveformVM.SampleFrequency = 96000;
+            WaveformVM.SampleLengthSeconds = 5.0;
             WaveformVM.NumWaves = 20;
 
-            WaveformVM.NumSamples = (uint)(WavFileVM.SampleFrequency * WavFileVM.SampleLengthSeconds);
+            WaveformVM.NumSamples = (uint)(WaveformVM.SampleFrequency * WaveformVM.SampleLengthSeconds);
             WaveformVM.Time = new double[WaveformVM.NumSamples];
             WaveformVM.Waves = new double[WaveformVM.NumWaves, WaveformVM.NumSamples];
             WaveformVM.Waveform = new short[WaveformVM.NumSamples];
@@ -29,7 +29,7 @@ namespace BellDetectWpf.ViewModels.Waveform
             // Create time array
             for (int i = 0; i < WaveformVM.NumSamples; i++)
             {
-                WaveformVM.Time[i] = (double)i / WavFileVM.SampleFrequency;
+                WaveformVM.Time[i] = (double)i / WaveformVM.SampleFrequency;
             }
 
             // Create waves (zero based)
@@ -39,10 +39,10 @@ namespace BellDetectWpf.ViewModels.Waveform
 
                 for (int j = 0; j < WaveformVM.NumWaves; j++)
                 {
-                    freq = SpecifyWaveformVM.WaveformSpec[j].Frequency;
-                    amp = SpecifyWaveformVM.WaveformSpec[j].Amplitude;
-                    peak = SpecifyWaveformVM.WaveformSpec[j].TimeToPeak;
-                    decay = SpecifyWaveformVM.WaveformSpec[j].TimeToDecayTo50pc;
+                    freq = WaveformSpecVM.WaveformSpecArr[j].Frequency;
+                    amp = WaveformSpecVM.WaveformSpecArr[j].Amplitude;
+                    peak = WaveformSpecVM.WaveformSpecArr[j].TimeToPeak;
+                    decay = WaveformSpecVM.WaveformSpecArr[j].TimeToDecayTo50pc;
 
                     if (freq != 0)
                     {

@@ -28,7 +28,7 @@ namespace BellDetectWpf.ViewModels.FFT
 
             for (int j = 0; j < FFTVM.NA; j++)
             {
-                time = Math.Round(((double)FFTVM.N / WavFileVM.SampleFrequency) * j, 3);
+                time = Math.Round(((double)FFTVM.N / WaveformVM.SampleFrequency) * j, 3);
                 sb.Append(time);
                 sb.Append('\t');
             }
@@ -41,7 +41,7 @@ namespace BellDetectWpf.ViewModels.FFT
             {
                 sb.Clear();
 
-                freq = Math.Round(((double)WavFileVM.SampleFrequency / FFTVM.N) * i, 1);
+                freq = Math.Round(((double)WaveformVM.SampleFrequency / FFTVM.N) * i, 1);
                 sb.Append(freq);
                 sb.Append('\t');
 

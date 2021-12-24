@@ -16,15 +16,8 @@ namespace BellDetectWpf
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            // Ensure there is a BellDetect folder in C:\ProgramData
-            if (Directory.Exists(@"C:\ProgramData\BellDetect") == false)
-            {
-                Directory.CreateDirectory(@"C:\ProgramData\BellDetect");
-            }
-
+            
             C_MainWin.Initialize();
-            SpecifyWaveformVM.InitializeWaveformSpec();
         }
     }
 }

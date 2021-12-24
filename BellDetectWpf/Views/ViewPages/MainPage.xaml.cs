@@ -15,12 +15,12 @@ namespace BellDetectWpf.Views.ViewPages
 
         private void WaveformSpec_Click(object sender, RoutedEventArgs e)
         {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\SpecifyWaveformPage.xaml", UriKind.Relative);
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\WaveformSpecPage.xaml", UriKind.Relative);
         }
 
         private void Waveform_Click(object sender, RoutedEventArgs e)
         {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\LoadWavPage.xaml", UriKind.Relative);
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\WaveformPage.xaml", UriKind.Relative);
         }
 
         private void FFT_Click(object sender, RoutedEventArgs e)
