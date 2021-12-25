@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 
-namespace BellDetectWpf.ViewModels.WaveformSpec
+namespace BellDetectWpf.ViewModels.Waveform
 {
-    public static partial class C_WaveformSpec
+    public static partial class C_Waveform
     {
-        public static void GenerateWaveform()
+        public static async Task CreateWaveform()
         {
             double x;
             double w;
@@ -17,14 +18,22 @@ namespace BellDetectWpf.ViewModels.WaveformSpec
 
             double wSum;
 
-            WaveformVM.SampleFrequency = 96000;
-            WaveformVM.SampleLengthSeconds = 5.0;
+            WaveformVM.SampleFrequency = 44100;
+            WaveformVM.SampleDepth = 16;
+            WaveformVM.NumChannels = 1;
+            WaveformVM.LengthSeconds = 5.0;
+            WaveformVM.LengthBytes = Convert.ToUInt32(WaveformVM.SampleFrequency * (WaveformVM.SampleDepth / 8) *
+                    WaveformVM.LengthSeconds);
+            WaveformVM.WavFileFormatValid = "Yes";
+            WaveformVM.FilePathName = string.Empty;
+            
+            WaveformVM.NumSamples = (uint)(WaveformVM.SampleFrequency * WaveformVM.LengthSeconds);
             WaveformVM.NumWaves = 20;
-
-            WaveformVM.NumSamples = (uint)(WaveformVM.SampleFrequency * WaveformVM.SampleLengthSeconds);
             WaveformVM.Time = new double[WaveformVM.NumSamples];
             WaveformVM.Waves = new double[WaveformVM.NumWaves, WaveformVM.NumSamples];
-            WaveformVM.Waveform = new short[WaveformVM.NumSamples];
+            WaveformVM.WaveformArr = new short[WaveformVM.NumSamples];
+
+            WaveformVM.Message = "Creating waveform...";
 
             // Create time array
             for (int i = 0; i < WaveformVM.NumSamples; i++)
@@ -84,8 +93,10 @@ namespace BellDetectWpf.ViewModels.WaveformSpec
                     wSum = -32767;
                 }
 
-                WaveformVM.Waveform[i] = (short)Math.Round(wSum);
+                WaveformVM.WaveformArr[i] = (short)Math.Round(wSum);
             }
+
+            await Message("Waveform created");
         }
     }
 }

@@ -9,17 +9,19 @@ namespace BellDetectWpf.ViewModels
         private static uint sampleFrequency;
         private static ushort sampleDepth;
         private static ushort numChannels;
-        private static uint sampleLengthBytes;
-        private static double sampleLengthSeconds;
+        private static uint lengthBytes;
+        private static double lengthSeconds;
         private static string wavFileFormatValid;
+        private static string message;
 
         public static event EventHandler FilePathNameChanged;
         public static event EventHandler SampleFrequencyChanged;
         public static event EventHandler SampleDepthChanged;
         public static event EventHandler NumChannelsChanged;
-        public static event EventHandler SampleLengthBytesChanged;
-        public static event EventHandler SampleLengthSecondsChanged;
+        public static event EventHandler LengthBytesChanged;
+        public static event EventHandler LengthSecondsChanged;
         public static event EventHandler WavFileFormatValidChanged;
+        public static event EventHandler MessageChanged;
 
         public static uint NumSamples { get; set; } // Total number of samples in waveform
 
@@ -29,9 +31,7 @@ namespace BellDetectWpf.ViewModels
 
         public static double[,] Waves { get; set; } // Array to hold underlying waves
 
-        public static short[] Waveform { get; set; } // Array to hold resulting waveform
-
-
+        public static short[] WaveformArr { get; set; } // Array to hold resulting waveform
 
         public static string FilePathName
         {
@@ -98,34 +98,34 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
-        public static uint SampleLengthBytes
+        public static uint LengthBytes
         {
             get
             {
-                return sampleLengthBytes;
+                return lengthBytes;
             }
             set
             {
-                if (sampleLengthBytes != value)
+                if (lengthBytes != value)
                 {
-                    sampleLengthBytes = value;
-                    SampleLengthBytesChanged?.Invoke(null, EventArgs.Empty);
+                    lengthBytes = value;
+                    LengthBytesChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
         }
 
-        public static double SampleLengthSeconds
+        public static double LengthSeconds
         {
             get
             {
-                return sampleLengthSeconds;
+                return lengthSeconds;
             }
             set
             {
-                if (sampleLengthSeconds != value)
+                if (lengthSeconds != value)
                 {
-                    sampleLengthSeconds = value;
-                    SampleLengthSecondsChanged?.Invoke(null, EventArgs.Empty);
+                    lengthSeconds = value;
+                    LengthSecondsChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
         }
@@ -146,9 +146,20 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
-        public static void LoadWaveform()
+        public static string Message
         {
-            C_Waveform.LoadWaveform();
+            get
+            {
+                return message;
+            }
+            set
+            {
+                if (message != value)
+                {
+                    message = value;
+                    MessageChanged?.Invoke(null, EventArgs.Empty);
+                }
+            }
         }
     }
 }

@@ -20,7 +20,6 @@ namespace BellDetectWpf.ViewModels
         public static event EventHandler FilePathNameChanged;
         public static event EventHandler MessageChanged;
 
-
         public static ObservableCollection<WaveSpec> WaveformSpecArr { get; set; }
 
         public static string FilePathName

@@ -14,34 +14,24 @@ namespace BellDetectWpf.Views.ViewPages
             InitializeComponent();
         }
 
-        private void Create_Click(object sender, RoutedEventArgs e)
+        private async void Create_Click(object sender, RoutedEventArgs e)
         {
-
+            await C_Waveform.CreateWaveform();
         }
 
-        private void Load_Click(object sender, RoutedEventArgs e)
+        private async void Load_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openDlg = new OpenFileDialog
-            {
-                Filter = string.Empty,
-                InitialDirectory = @"C:\ProgramData\BellDetect"
-            };
-
-            if (openDlg.ShowDialog() == true)
-            {
-                WaveformVM.FilePathName = openDlg.FileName;
-                WaveformVM.LoadWaveform();
-            }
+            await C_Waveform.LoadWaveform();
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private async void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            await C_Waveform.SaveWaveform();
         }
 
-        private void SaveAs_Click(object sender, RoutedEventArgs e)
+        private async void SaveAs_Click(object sender, RoutedEventArgs e)
         {
-
+            await C_Waveform.SaveAsWaveform();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

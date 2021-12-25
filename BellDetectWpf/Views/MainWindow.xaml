@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="Bell Detect"
         Loaded="Window_Loaded"
-        Closed="Window_Closed">
+        Closed="Window_Closed"
+        Width="1000"
+        Height="750">
     <Window.Background>
         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
             <GradientStop Color="LightBlue" Offset="0"/>

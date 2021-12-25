@@ -85,7 +85,7 @@ namespace BellDetectWpf.ViewModels
                 // Copy required items in the Waveform array into XRe array, and set XIm array values to zero
                 for (int j = 0; j < N; j++)
                 {
-                    XRe[j] = WaveformVM.Waveform[Offset + j];
+                    XRe[j] = WaveformVM.WaveformArr[Offset + j];
                     XIm[j] = 0;
                 }
 

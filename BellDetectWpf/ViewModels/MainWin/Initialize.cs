@@ -21,14 +21,12 @@ namespace BellDetectWpf.ViewModels.MainWin
             // Populate zeros into waveform spec array
             C_WaveformSpec.InitializeWaveformSpec();
 
-            // Set default file path names for loading
+            // Set default file path names
+            WaveformSpecVM.FilePathName = string.Empty;
             WaveformVM.FilePathName = string.Empty;
+            FFTVM.FilePathName = string.Empty;
+            DFTVM.FilePathName = string.Empty;
 
-            // Set default file path names for saving
-            WaveformVM.FilePathName = @"C:\ProgramData\BellDetect\waveform.wav";
-            FFTVM.FilePathName = @"C:\ProgramData\BellDetect\resultsFFT.txt";
-            DFTVM.FilePathName = @"C:\ProgramData\BellDetect\resultsDFT.txt";
-            
             // Default text for key press button
             KeyPressVM.StartStopTxt = "Start detecting";
 
