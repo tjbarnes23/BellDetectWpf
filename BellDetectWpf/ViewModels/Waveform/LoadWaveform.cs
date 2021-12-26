@@ -100,10 +100,12 @@ namespace BellDetectWpf.ViewModels.Waveform
                     WaveformVM.NumSamples = (uint)(WaveformVM.LengthBytes /
                         ((WaveformVM.SampleDepth / 8) * WaveformVM.NumChannels));
 
+                    WaveformVM.Time = new double[WaveformVM.NumSamples];
                     WaveformVM.WaveformArr = new short[WaveformVM.NumSamples];
 
                     for (int i = 0; i < WaveformVM.NumSamples; i++)
                     {
+                        WaveformVM.Time[i] = (double)i / WaveformVM.SampleFrequency;
                         WaveformVM.WaveformArr[i] = br.ReadInt16();
                     }
 

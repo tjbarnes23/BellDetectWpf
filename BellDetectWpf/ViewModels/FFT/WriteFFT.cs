@@ -10,7 +10,8 @@ namespace BellDetectWpf.ViewModels.FFT
     {
         public static async Task WriteFFT()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb;
+            byte[] row;
             double time;
             double freq;
 
@@ -26,12 +27,18 @@ namespace BellDetectWpf.ViewModels.FFT
             // Create a new file     
             using FileStream fs = File.Create(FFTVM.FilePathName);
 
-            Byte[] row = new UTF8Encoding(true).GetBytes("Bins down the page, Amplitude over time across the page\n");
+            // Write description row
+            sb = new StringBuilder();
+            sb.Clear();
+            sb.Append("Bins down the page, Amplitude over time across the page\n");
+            
+            row = new UTF8Encoding(true).GetBytes(sb.ToString());
             fs.Write(row, 0, row.Length);
 
+            // Write header row
             sb.Clear();
             sb.Append("Hz \\ sec\t");
-
+            
             for (int j = 0; j < FFTVM.NA; j++)
             {
                 time = Math.Round(((double)FFTVM.N / WaveformVM.SampleFrequency) * j, 3);
@@ -43,6 +50,7 @@ namespace BellDetectWpf.ViewModels.FFT
             row = new UTF8Encoding(true).GetBytes(sb.ToString());
             fs.Write(row, 0, row.Length);
 
+            // Write data rows
             for (int i = 0; i < FFTVM.N / 2; i++) // Only interested in bottom half of frequency buckets
             {
                 sb.Clear();

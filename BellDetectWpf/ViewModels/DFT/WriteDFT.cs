@@ -12,8 +12,8 @@ namespace BellDetectWpf.ViewModels.DFT
     {
         public static async Task WriteDFT()
         {
-            StringBuilder sb = new StringBuilder();
-            Byte[] row;
+            StringBuilder sb;
+            byte[] row;
             double freq;
 
             SharedVM.StatusMsg = "Saving...";
@@ -28,9 +28,10 @@ namespace BellDetectWpf.ViewModels.DFT
             // Create a new file     
             using FileStream fs = File.Create(DFTVM.FilePathName);
 
-            // Write out range of sample times used in the DFT
             double endTime = DFTVM.StartTime + 2.0;
 
+            // Write description row
+            sb = new StringBuilder();
             sb.Clear();
             sb.Append("Sample range used: ");
             sb.Append(DFTVM.StartTime);
@@ -49,6 +50,7 @@ namespace BellDetectWpf.ViewModels.DFT
             row = new UTF8Encoding(true).GetBytes(sb.ToString());
             fs.Write(row, 0, row.Length);
 
+            // Write data rows
             for (int i = 0; i < 10000; i++) // Only interested in bottom half of frequency buckets
             {
                 sb.Clear();
