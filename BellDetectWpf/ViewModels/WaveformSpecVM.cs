@@ -15,10 +15,8 @@ namespace BellDetectWpf.ViewModels
     public static class WaveformSpecVM
     {
         private static string filePathName;
-        private static string message;
 
         public static event EventHandler FilePathNameChanged;
-        public static event EventHandler MessageChanged;
 
         public static ObservableCollection<WaveSpec> WaveformSpecArr { get; set; }
 
@@ -34,22 +32,6 @@ namespace BellDetectWpf.ViewModels
                 {
                     filePathName = value;
                     FilePathNameChanged?.Invoke(null, EventArgs.Empty);
-                }
-            }
-        }
-
-        public static string Message
-        {
-            get
-            {
-                return message;
-            }
-            set
-            {
-                if (message != value)
-                {
-                    message = value;
-                    MessageChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
         }

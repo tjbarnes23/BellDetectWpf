@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using BellDetectWpf.ViewModels.Shared;
 
 namespace BellDetectWpf.ViewModels.Waveform
 {
@@ -33,7 +34,8 @@ namespace BellDetectWpf.ViewModels.Waveform
             WaveformVM.Waves = new double[WaveformVM.NumWaves, WaveformVM.NumSamples];
             WaveformVM.WaveformArr = new short[WaveformVM.NumSamples];
 
-            WaveformVM.Message = "Creating waveform...";
+            SharedVM.StatusMsg = "Creating waveform...";
+            SharedVM.StatusForeground = "black";
 
             // Create time array
             for (int i = 0; i < WaveformVM.NumSamples; i++)
@@ -96,7 +98,7 @@ namespace BellDetectWpf.ViewModels.Waveform
                 WaveformVM.WaveformArr[i] = (short)Math.Round(wSum);
             }
 
-            await Message("Waveform created");
+            await C_Shared.Status("Waveform created", "black", 3000);
         }
     }
 }

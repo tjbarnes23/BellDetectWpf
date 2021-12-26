@@ -12,7 +12,6 @@ namespace BellDetectWpf.ViewModels
         private static uint lengthBytes;
         private static double lengthSeconds;
         private static string wavFileFormatValid;
-        private static string message;
 
         public static event EventHandler FilePathNameChanged;
         public static event EventHandler SampleFrequencyChanged;
@@ -21,7 +20,6 @@ namespace BellDetectWpf.ViewModels
         public static event EventHandler LengthBytesChanged;
         public static event EventHandler LengthSecondsChanged;
         public static event EventHandler WavFileFormatValidChanged;
-        public static event EventHandler MessageChanged;
 
         public static uint NumSamples { get; set; } // Total number of samples in waveform
 
@@ -142,22 +140,6 @@ namespace BellDetectWpf.ViewModels
                 {
                     wavFileFormatValid = value;
                     WavFileFormatValidChanged?.Invoke(null, EventArgs.Empty);
-                }
-            }
-        }
-
-        public static string Message
-        {
-            get
-            {
-                return message;
-            }
-            set
-            {
-                if (message != value)
-                {
-                    message = value;
-                    MessageChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
         }

@@ -4,12 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.ViewModels.Shared;
 
 namespace BellDetectWpf.ViewModels.DFT
 {
     public static partial class C_DFT
     {
-        public static void RunDFT()
+        public static async Task RunDFT()
         {
             // Operate on CreateWaveformVM.Waveform, a double array
             // Send outputs to CosDFT and SinDFT, which are double arrays
@@ -21,6 +22,9 @@ namespace BellDetectWpf.ViewModels.DFT
             Stopwatch sw;
             StringBuilder sb;
             TimeSpan currElapsed;
+
+            SharedVM.StatusMsg = "Running DFT...";
+            SharedVM.StatusForeground = "black";
 
             DFTVM.CosDFT = new double[10000];
             DFTVM.SinDFT = new double[10000];
@@ -71,6 +75,10 @@ namespace BellDetectWpf.ViewModels.DFT
             MainWinVM.Logger.Info(sb.ToString());
 
             sw.Stop();
+
+            DFTVM.FilePathName = String.Empty;
+
+            await C_Shared.Status("DFT completed", "black", 3000);
         }
     }
 }

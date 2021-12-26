@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
+using BellDetectWpf.ViewModels.DFT;
 
 namespace BellDetectWpf.Views.ViewPages
 {
@@ -12,14 +13,19 @@ namespace BellDetectWpf.Views.ViewPages
             InitializeComponent();
         }
 
-        private void Browse_Click(object sender, RoutedEventArgs e)
+        private async void RunDFT_Click(object sender, RoutedEventArgs e)
         {
-
+            await C_DFT.RunDFT();
         }
 
-        private void DFT_Click(object sender, RoutedEventArgs e)
+        private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            DFTVM.RunDFT();
+            await C_DFT.SaveDFT();
+        }
+
+        private async void SaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            await C_DFT.SaveAsDFT();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

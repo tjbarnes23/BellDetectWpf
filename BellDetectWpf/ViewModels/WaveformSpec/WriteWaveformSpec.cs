@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.ViewModels.Shared;
 
 namespace BellDetectWpf.ViewModels.WaveformSpec
 {
@@ -12,8 +13,31 @@ namespace BellDetectWpf.ViewModels.WaveformSpec
         public static async Task WriteWaveformSpec()
         {
             StringBuilder sb;
+            bool hasNonZeros;
 
-            WaveformSpecVM.Message = "Saving...";
+            SharedVM.StatusMsg = "Saving...";
+            SharedVM.StatusForeground = "black";
+
+            // Check grid contains at least one row of non-zeros
+            hasNonZeros = false;
+
+            for (int i = 0; i < 20; i++)
+            {
+                if (WaveformSpecVM.WaveformSpecArr[i].Frequency != 0 &&
+                        WaveformSpecVM.WaveformSpecArr[i].Amplitude != 0 &&
+                        WaveformSpecVM.WaveformSpecArr[i].TimeToPeak != 0.0 &&
+                        WaveformSpecVM.WaveformSpecArr[i].TimeToDecayTo50pc != 0.0)
+                {
+                    hasNonZeros = true;
+                    break;
+                }
+            }
+
+            if (hasNonZeros == false)
+            {
+                await C_Shared.Status("Grid has all zeros. Not saved", "red", 5000);
+                return;
+            }
 
             if (File.Exists(WaveformSpecVM.FilePathName))
             {
@@ -41,7 +65,7 @@ namespace BellDetectWpf.ViewModels.WaveformSpec
                 fs.Write(row, 0, row.Length);
             }
 
-            await Message("Saved");
+            await C_Shared.Status("Saved", "black", 3000);
         }
     }
 }

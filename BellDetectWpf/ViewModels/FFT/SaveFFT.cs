@@ -1,59 +1,33 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Win32;
 
 namespace BellDetectWpf.ViewModels.FFT
 {
     public static partial class C_FFT
     {
-        public static void SaveFFT()
+        public static async Task SaveFFT()
         {
-            StringBuilder sb = new StringBuilder();
-            double time;
-            double freq;
-
-            if (File.Exists(FFTVM.FilePathName))
+            if (string.IsNullOrEmpty(FFTVM.FilePathName))
             {
-                File.Delete(FFTVM.FilePathName);
-            }
-
-            // Create a new file     
-            using FileStream fs = File.Create(FFTVM.FilePathName);
-
-            Byte[] row = new UTF8Encoding(true).GetBytes("Bins down the page, Amplitude over time across the page\n");
-            fs.Write(row, 0, row.Length);
-
-            sb.Clear();
-            sb.Append("Hz \\ sec\t");
-
-            for (int j = 0; j < FFTVM.NA; j++)
-            {
-                time = Math.Round(((double)FFTVM.N / WaveformVM.SampleFrequency) * j, 3);
-                sb.Append(time);
-                sb.Append('\t');
-            }
-            
-            sb.Append('\n');
-            row = new UTF8Encoding(true).GetBytes(sb.ToString());
-            fs.Write(row, 0, row.Length);
-
-            for (int i = 0; i < FFTVM.N / 2; i++) // Only interested in bottom half of frequency buckets
-            {
-                sb.Clear();
-
-                freq = Math.Round(((double)WaveformVM.SampleFrequency / FFTVM.N) * i, 1);
-                sb.Append(freq);
-                sb.Append('\t');
-
-                for (int j = 0; j < FFTVM.NA; j++)
+                SaveFileDialog saveDlg = new SaveFileDialog
                 {
-                    sb.Append(FFTVM.Results[i, j]);
-                    sb.Append('\t');
-                }
+                    Filter = string.Empty,
+                    InitialDirectory = @"C:\ProgramData\BellDetect"
+                };
 
-                sb.Append('\n');
-                row = new UTF8Encoding(true).GetBytes(sb.ToString());
-                fs.Write(row, 0, row.Length);
+                if (saveDlg.ShowDialog() == true)
+                {
+                    FFTVM.FilePathName = saveDlg.FileName;
+                    await WriteFFT();
+                }
+            }
+            else
+            {
+                await WriteFFT();
             }
         }
     }

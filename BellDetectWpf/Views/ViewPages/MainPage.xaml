@@ -1,92 +1,93 @@
 ﻿<Page x:Class="BellDetectWpf.Views.ViewPages.MainPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BellDetectWpf.Views.ViewPages"
-      xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
-      mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid MinWidth="800" MaxWidth="1200"
-                MinHeight="600" MaxHeight="900">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:BellDetectWpf.Views.ViewPages"
+        xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
+        mc:Ignorable="d"
+        d:DesignWidth="800"
+        d:DesignHeight="600">
+    
+    <Grid MinWidth="800" MaxWidth="1200"
+            MinHeight="600" MaxHeight="900">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <!-- Title -->
+        <!-- Title -->
 
-            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
-                Bell Detect
-            </Label>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+            Bell Detect
+        </Label>
 
-            <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                    Width="240" Height="50"
-                    Padding="10, 0, 10, 0"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="WaveformSpec_Click">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                    Create or load a waveform specification
-                </TextBlock>
-            </Button>
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                Width="240" Height="55"
+                Padding="10, 0, 10, 0"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="WaveformSpec_Click">
+            <TextBlock TextWrapping="Wrap" LineHeight="20" TextAlignment="Center">
+                Create or load a waveform specification
+            </TextBlock>
+        </Button>
 
-            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                    Width="300" Height="60"
-                    Padding="10, 0, 10, 0"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="Waveform_Click">
-                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                    Create a waveform from a waveform specification,
-                    or load a waveform from a .wav file
-                </TextBlock>
-            </Button>
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                Width="300" Height="70"
+                Padding="10, 0, 10, 0"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="Waveform_Click">
+            <TextBlock TextWrapping="Wrap" LineHeight="20" TextAlignment="Center">
+                Create a waveform from a waveform specification,
+                or load a waveform from a .wav file
+            </TextBlock>
+        </Button>
 
-            <Button Grid.Row="3" Grid.Column="0"
-                    Width="240" Height="50"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="FFT_Click">
-                Run FFT on waveform
-            </Button>
+        <Button Grid.Row="3" Grid.Column="0"
+                Width="240" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="FFT_Click">
+            Run FFT on waveform
+        </Button>
 
-            <Button Grid.Row="3" Grid.Column="1"
-                    Width="240" Height="50"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="DFT_Click">
-                Run DFT on waveform
-            </Button>
+        <Button Grid.Row="3" Grid.Column="1"
+                Width="240" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="DFT_Click">
+            Run DFT on waveform
+        </Button>
 
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                    Width="240" Height="50"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="MicStream_Click">
-                Process mic stream
-            </Button>
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                Width="240" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="MicStream_Click">
+            Process mic stream
+        </Button>
 
-            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
-                    Width="240" Height="50"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="KeyPress_Click">
-                Generate key presses
-            </Button>
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                Width="240" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="KeyPress_Click">
+            Generate key presses
+        </Button>
 
-            <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
-                    Width="180" Height="50"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="Exit_Click">
-                Exit
-            </Button>
-        </Grid>
-    </ScrollViewer>
+        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                Width="180" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="Exit_Click">
+            Exit
+        </Button>
+    </Grid>
 </Page>

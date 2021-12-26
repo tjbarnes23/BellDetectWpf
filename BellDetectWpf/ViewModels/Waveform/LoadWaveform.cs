@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using BellDetectWpf.ViewModels.Shared;
 using Microsoft.Win32;
 
 namespace BellDetectWpf.ViewModels.Waveform
@@ -26,7 +27,8 @@ namespace BellDetectWpf.ViewModels.Waveform
 
             if (openDlg.ShowDialog() == true)
             {
-                WaveformVM.Message = "Loading...";
+                SharedVM.StatusMsg = "Loading...";
+                SharedVM.StatusForeground = "black";
 
                 WaveformVM.FilePathName = openDlg.FileName;
 
@@ -105,11 +107,11 @@ namespace BellDetectWpf.ViewModels.Waveform
                         WaveformVM.WaveformArr[i] = br.ReadInt16();
                     }
 
-                    await Message("Loaded");
+                    await C_Shared.Status("Loaded", "black", 3000);
                 }
                 else
                 {
-                    await Message("Not loaded");
+                    await C_Shared.Status("Not loaded", "red", 5000);
                 }
             }
         }

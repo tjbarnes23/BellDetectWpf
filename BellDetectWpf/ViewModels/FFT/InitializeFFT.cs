@@ -1,5 +1,4 @@
 ﻿using BellDetectWpf.Models;
-using BellDetectWpf.ViewModels.FFT.L2FFT;
 
 namespace BellDetectWpf.ViewModels.FFT
 {
@@ -28,7 +27,7 @@ namespace BellDetectWpf.ViewModels.FFT
             // Specify target for bit reversal re-ordering.
             for (uint i = 0; i < FFTVM.N; i++)
             {
-                FFTVM.X[i].RevTarget = C_L2FFT.BitReverse(i, FFTVM.Log2N);
+                FFTVM.X[i].RevTarget = BitReverse(i, FFTVM.Log2N);
             }
         }
     }

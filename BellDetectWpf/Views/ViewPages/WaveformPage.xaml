@@ -19,8 +19,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="0.7*" />
             <RowDefinition Height="0.8*" />
             <RowDefinition Height="1.25*" />
             <RowDefinition Height="0.75*" />
@@ -217,7 +217,7 @@
             </TextBlock>
         </Label>
 
-        <!-- Save / Save As buttons -->
+        <!-- Save -->
 
         <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
@@ -232,7 +232,6 @@
 
             <Button Grid.Row="0" Grid.Column="0"
                     Width="180" Height="40"
-                    Padding="10, 0, 10, 0"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                     Click="Save_Click">
                 Save
@@ -240,7 +239,6 @@
 
             <Button Grid.Row="0" Grid.Column="1"
                     Width="180" Height="40"
-                    Padding="10, 0, 10, 0"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                     Click="SaveAs_Click">
                 Save As
@@ -248,19 +246,20 @@
 
             <StackPanel Orientation="Vertical"
                     Grid.Row="0" Grid.Column="2"
-                    Width="180" Height="45">
-                <Label Width="180" Height="13"
+                    Width="240" Height="45">
+                <Label Height="13"
                     Padding="0"
                     FontFamily="Arial" FontSize="10">
                     Status:
                 </Label>
 
-                <Label Width="180" Height="28"
+                <Label Height="30"
                         BorderBrush="Black" BorderThickness="1"
                         Padding="5, 2, 5, 2"
-                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                        FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                        Content="{Binding Path=(vm:WaveformVM.Message), Mode=OneWay}">
+                        VerticalContentAlignment="Center"
+                        FontFamily="Arial" FontSize="13"
+                        Content="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
+                        Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
                 </Label>
             </StackPanel>
         </Grid>

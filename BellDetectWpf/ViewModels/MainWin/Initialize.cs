@@ -27,6 +27,10 @@ namespace BellDetectWpf.ViewModels.MainWin
             FFTVM.FilePathName = string.Empty;
             DFTVM.FilePathName = string.Empty;
 
+            // Set defaults for status
+            SharedVM.StatusMsg = string.Empty;
+            SharedVM.StatusForeground = "black";
+
             // Default text for key press button
             KeyPressVM.StartStopTxt = "Start detecting";
 

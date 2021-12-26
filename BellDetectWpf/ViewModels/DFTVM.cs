@@ -52,11 +52,5 @@ namespace BellDetectWpf.ViewModels
                 }
             }
         }
-
-        public static void RunDFT()
-        {
-            C_DFT.RunDFT();
-            C_DFT.SaveDFT();
-        }
     }
 }

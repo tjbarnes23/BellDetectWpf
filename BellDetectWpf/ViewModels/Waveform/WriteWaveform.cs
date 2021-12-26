@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.ViewModels.Shared;
 
 namespace BellDetectWpf.ViewModels.Waveform
 {
@@ -26,7 +27,8 @@ namespace BellDetectWpf.ViewModels.Waveform
                     WaveformVM.NumChannels); // bytes per sample
             fileSize = WaveformVM.LengthBytes + formatParametersSize + 20; // bytes
 
-            WaveformVM.Message = "Saving...";
+            SharedVM.StatusMsg = "Saving...";
+            SharedVM.StatusForeground = "black";
 
             // Delete file if it already exists
             if (File.Exists(WaveformVM.FilePathName))
@@ -58,7 +60,7 @@ namespace BellDetectWpf.ViewModels.Waveform
                 wr.Write(WaveformVM.WaveformArr[i]);
             }
 
-            await Message("Saved");
+            await C_Shared.Status("Saved", "black", 3000);
         }
     }
 }
