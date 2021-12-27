@@ -22,6 +22,9 @@ namespace BellDetectWpf.ViewModels.FFT
             SharedVM.StatusMsg = "Running FFTs...";
             SharedVM.StatusForeground = "black";
 
+            // Give the UI a chance to update the above
+            await Task.Delay(10);
+
             FFTVM.Log2N = (uint)Math.Log2(FFTVM.N);
 
             FFTVM.N = (uint)(1 << (int)FFTVM.Log2N); // number of bins recalculated in case a non-power of 2 was entered
@@ -61,12 +64,12 @@ namespace BellDetectWpf.ViewModels.FFT
                 currElapsed = sw.Elapsed;
                 interval = currElapsed - prevElapsed;
 
+                sb.Clear();
                 sb.Append("FFT time: ");
                 sb.Append(interval);
                 sb.Append('\t');
                 sb.Append("FFT cumulative time: ");
                 sb.Append(currElapsed);
-                sb.Append('\n');
 
                 MainWinVM.Logger.Info(sb.ToString());
                 prevElapsed = currElapsed;

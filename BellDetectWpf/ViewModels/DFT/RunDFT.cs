@@ -26,6 +26,9 @@ namespace BellDetectWpf.ViewModels.DFT
             SharedVM.StatusMsg = "Running DFT...";
             SharedVM.StatusForeground = "black";
 
+            // Give the UI a chance to update the above
+            await Task.Delay(10);
+
             DFTVM.CosDFT = new double[10000];
             DFTVM.SinDFT = new double[10000];
             DFTVM.Results = new double[10000];
@@ -68,9 +71,9 @@ namespace BellDetectWpf.ViewModels.DFT
 
             currElapsed = sw.Elapsed;
 
+            sb.Clear();
             sb.Append("DFT time: ");
             sb.Append(currElapsed);
-            sb.Append('\n');
 
             MainWinVM.Logger.Info(sb.ToString());
 
