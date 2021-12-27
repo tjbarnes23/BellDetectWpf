@@ -12,10 +12,7 @@
     <Grid MinWidth="800" MaxWidth="1200"
             MinHeight="600" MaxHeight="900">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.2*" />
-            <ColumnDefinition Width="0.8*" />
-            <ColumnDefinition Width="1.2*" />
-            <ColumnDefinition Width="0.8*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -23,30 +20,27 @@
             <RowDefinition Height="0.7*" />
             <RowDefinition Height="0.8*" />
             <RowDefinition Height="1.25*" />
-            <RowDefinition Height="0.75*" />
-            <RowDefinition Height="0.75*" />
-            <RowDefinition Height="0.75*" />
+            <RowDefinition Height="2.25*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="1.1*" />
-            <RowDefinition Height="1.1*" />
+            <RowDefinition Height="2.2*" />
         </Grid.RowDefinitions>
 
         <!-- Title -->
 
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
+        <Label Grid.Row="0" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Bell Detect
         </Label>
 
         <!-- Waveform -->
-        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"
+        <Label Grid.Row="1" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Waveform
         </Label>
 
-        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
+        <Label Grid.Row="2" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial" FontSize="13">
             <TextBlock TextWrapping="Wrap" LineHeight="20">
@@ -59,167 +53,204 @@
 
         <!-- Create or load waveform -->
 
-        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                Width="240" Height="60"
-                Padding="10, 0, 10, 0"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Create_Click">
-            <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                Create waveform (from current waveform specification)
-            </TextBlock>
-        </Button>
+        <Grid Grid.Row="3" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"
-                Width="180" Height="50"
-                Padding="10, 0, 10, 0"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Load_Click">
-            <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                Load waveform (from .wav file)
-            </TextBlock>
-        </Button>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0"
+                    Width="240" Height="60"
+                    Padding="10, 0, 10, 0"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="Create_Click">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                    Create waveform (from current waveform specification)
+                </TextBlock>
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="1"
+                    Width="180" Height="50"
+                    Padding="10, 0, 10, 0"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="Load_Click">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                    Load waveform (from .wav file)
+                </TextBlock>
+            </Button>
+        </Grid>
 
         <!-- Display meta data from .wav file: Row 1 -->
 
-        <Label Grid.Row="4" Grid.Column="0"
-                Width="230" Height="30"
-                Margin="0, 0, 10, 0"
-                HorizontalAlignment="Right"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Sample frequency (Hz):
-        </Label>
+        <Grid Grid.Row="4" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition Width="0.8*" />
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition Width="0.8*" />
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="4" Grid.Column="1"
-                Width="130" Height="30"
-                Margin="10, 0, 0, 0"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Content="{Binding Path=(vm:WaveformVM.SampleFrequency), Mode=OneWay}">
-        </Label>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <Label Grid.Row="4" Grid.Column="2"
-                Width="230" Height="30"
-                Margin="0, 0, 10, 0"
-                HorizontalAlignment="Right"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Sample depth (bits):
-        </Label>
+            <Label Grid.Row="0" Grid.Column="0"
+                    Width="230" Height="30"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Sample frequency (Hz):
+            </Label>
 
-        <Label Grid.Row="4" Grid.Column="3"
-                Width="130" Height="30"
-                Margin="10, 0, 0, 0"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Content="{Binding Path=(vm:WaveformVM.SampleDepth), Mode=OneWay}">
-        </Label>
+            <Label Grid.Row="0" Grid.Column="1"
+                    Width="130" Height="30"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Content="{Binding Path=(vm:WaveformVM.SampleFrequency), Mode=OneWay}">
+            </Label>
 
-        <!-- Display meta data from .wav file: Row 2 -->
+            <Label Grid.Row="0" Grid.Column="2"
+                    Width="230" Height="30"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Sample depth (bits):
+            </Label>
 
-        <Label Grid.Row="5" Grid.Column="0"
-                Width="230" Height="30"
-                Margin="0, 0, 10, 0"
-                HorizontalAlignment="Right"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Number of channels:
-        </Label>
+            <Label Grid.Row="0" Grid.Column="3"
+                    Width="130" Height="30"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Content="{Binding Path=(vm:WaveformVM.SampleDepth), Mode=OneWay}">
+            </Label>
 
-        <Label Grid.Row="5" Grid.Column="1"
-                Width="130" Height="30"
-                Margin="10, 0, 0, 0"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Content="{Binding Path=(vm:WaveformVM.NumChannels), Mode=OneWay}">
-        </Label>
+            <!-- Display meta data from .wav file: Row 2 -->
 
-        <Label Grid.Row="5" Grid.Column="2"
-                Width="230" Height="30"
-                Margin="0, 0, 10, 0"
-                HorizontalAlignment="Right"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Waveform length (bytes):
-        </Label>
+            <Label Grid.Row="1" Grid.Column="0"
+                    Width="230" Height="30"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Number of channels:
+            </Label>
 
-        <Label Grid.Row="5" Grid.Column="3"
-                Width="130" Height="30"
-                Margin="10, 0, 0, 0"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Content="{Binding Path=(vm:WaveformVM.LengthBytes), Mode=OneWay}">
-        </Label>
+            <Label Grid.Row="1" Grid.Column="1"
+                    Width="130" Height="30"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Content="{Binding Path=(vm:WaveformVM.NumChannels), Mode=OneWay}">
+            </Label>
 
-        <!-- Display meta data from .wav file: Row 3 -->
+            <Label Grid.Row="1" Grid.Column="2"
+                    Width="230" Height="30"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Waveform length (bytes):
+            </Label>
 
-        <Label Grid.Row="6" Grid.Column="0"
-                Width="230" Height="30"
-                Margin="0, 0, 10, 0"
-                HorizontalAlignment="Right"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Waveform length (seconds):
-        </Label>
+            <Label Grid.Row="1" Grid.Column="3"
+                    Width="130" Height="30"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Content="{Binding Path=(vm:WaveformVM.LengthBytes), Mode=OneWay}">
+            </Label>
 
-        <Label Grid.Row="6" Grid.Column="1"
-                Width="130" Height="30"
-                Margin="10, 0, 0, 0"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Content="{Binding Path=(vm:WaveformVM.LengthSeconds), Mode=OneWay}">
-        </Label>
+            <!-- Display meta data from .wav file: Row 3 -->
 
-        <Label Grid.Row="6" Grid.Column="2"
-                Width="230" Height="30"
-                Margin="0, 0, 10, 0"
-                HorizontalAlignment="Right"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            Is .wav file format valid?
-        </Label>
+            <Label Grid.Row="2" Grid.Column="0"
+                    Width="230" Height="30"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Waveform length (seconds):
+            </Label>
 
-        <Label Grid.Row="6" Grid.Column="3"
-                Width="130" Height="30"
-                Margin="10, 0, 0, 0"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14"
-                Content="{Binding Path=(vm:WaveformVM.WavFileFormatValid), Mode=OneWay}">
-        </Label>
+            <Label Grid.Row="2" Grid.Column="1"
+                    Width="130" Height="30"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Content="{Binding Path=(vm:WaveformVM.LengthSeconds), Mode=OneWay}">
+            </Label>
+
+            <Label Grid.Row="2" Grid.Column="2"
+                    Width="230" Height="30"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Is .wav file format valid?
+            </Label>
+
+            <Label Grid.Row="2" Grid.Column="3"
+                    Width="130" Height="30"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Content="{Binding Path=(vm:WaveformVM.WavFileFormatValid), Mode=OneWay}">
+            </Label>
+        </Grid>
 
         <!-- File name -->
 
-        <Label Grid.Row="7" Grid.Column="0"
-                Width="230" Height="30"
-                Margin="0, 0, 10, 0"
-                HorizontalAlignment="Right"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            <TextBlock TextWrapping="Wrap" LineHeight="20"
-                    Text="File name:">
-            </TextBlock>
-        </Label>
+        <Grid Grid.Row="5" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3"
-                Height="30"
-                Margin="10, 0, 0, 0"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial" FontSize="13">
-            <TextBlock TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=(vm:WaveformVM.FilePathName), Mode=OneWay}">
-            </TextBlock>
-        </Label>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <!-- Save -->
+            <Label Grid.Row="0" Grid.Column="0"
+                    Width="230" Height="30"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                        Text="File name:">
+                </TextBlock>
+            </Label>
 
-        <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4">
+            <Label Grid.Row="0" Grid.Column="1"
+                    Height="30"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial" FontSize="13">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                        Text="{Binding Path=(vm:WaveformVM.FilePathName), Mode=OneWay}">
+                </TextBlock>
+            </Label>
+        </Grid>
+
+        <!-- Save and return -->
+
+        <Grid Grid.Row="6" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -227,6 +258,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -262,16 +294,27 @@
                         Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
                 </Label>
             </StackPanel>
-        </Grid>
 
-        <!-- Return button -->
-
-        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4"
+            <Button Grid.Row="1" Grid.Column="0"
                     Width="180" Height="40"
-                    Padding="10, 0, 10, 0"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                     Click="Return_Click">
-            Return to main page
-        </Button>
+                Return to main page
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="1"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="FFT_Click">
+                FFT
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="2"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="DFT_Click">
+                DFT
+            </Button>
+        </Grid>
     </Grid>
 </Page>

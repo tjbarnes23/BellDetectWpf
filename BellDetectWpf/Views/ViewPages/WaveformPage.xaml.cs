@@ -38,5 +38,15 @@ namespace BellDetectWpf.Views.ViewPages
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MainPage.xaml", UriKind.Relative);
         }
+
+        private void FFT_Click(object sender, RoutedEventArgs e)
+        {
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\FFTPage.xaml", UriKind.Relative);
+        }
+
+        private void DFT_Click(object sender, RoutedEventArgs e)
+        {
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\DFTPage.xaml", UriKind.Relative);
+        }
     }
 }
