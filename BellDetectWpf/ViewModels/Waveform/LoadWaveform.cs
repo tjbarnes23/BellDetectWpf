@@ -78,8 +78,11 @@ namespace BellDetectWpf.ViewModels.Waveform
 
                 WaveformVM.WavFileFormatValid = "Yes";
 
+                // Note: Audacity may add meta data about the .wav file to the end of the file, such that the
+                // fileSize will be greater than LengthBytes + 36. The test below for fileSize is therefore
+                // 'less than' rather than 'not equal to'
                 if (riff != "RIFF" ||
-                        fileSize != (WaveformVM.LengthBytes + formatParametersSize + 20) ||
+                        fileSize < (WaveformVM.LengthBytes + formatParametersSize + 20) ||
                         wave != "WAVE" ||
                         fmt != "fmt " ||
                         formatParametersSize != 16 ||

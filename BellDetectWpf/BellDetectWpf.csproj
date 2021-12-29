@@ -8,104 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="BellSamples\PH8.wav" />
-    <None Remove="BellSamples\TJB-HB-1.wav" />
-    <None Remove="BellSamples\TJB-HB-2.wav" />
-    <None Remove="BellSamples\TJB-HB-3.wav" />
-    <None Remove="BellSamples\TJB-HB-4.wav" />
-    <None Remove="BellSamples\TJB-HB-5.wav" />
-    <None Remove="BellSamples\TJB-HB-6.wav" />
-    <None Remove="BellSamples\TJB-HB-7.wav" />
-    <None Remove="BellSamples\TJB-HB-8.wav" />
-    <None Remove="BellSamples\Trinity-1.wav" />
-    <None Remove="BellSamples\Trinity-10.wav" />
-    <None Remove="BellSamples\Trinity-11.wav" />
-    <None Remove="BellSamples\Trinity-12.wav" />
-    <None Remove="BellSamples\Trinity-2#.wav" />
-    <None Remove="BellSamples\Trinity-2.wav" />
-    <None Remove="BellSamples\Trinity-3.wav" />
-    <None Remove="BellSamples\Trinity-4.wav" />
-    <None Remove="BellSamples\Trinity-5.wav" />
-    <None Remove="BellSamples\Trinity-6.wav" />
-    <None Remove="BellSamples\Trinity-7.wav" />
-    <None Remove="BellSamples\Trinity-8.wav" />
-    <None Remove="BellSamples\Trinity-9.wav" />
     <None Remove="NLog.config" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="BellSamples\PH8.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-1.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-2.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-3.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-4.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-5.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-6.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-7.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\TJB-HB-8.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-1.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-10.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-11.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-12.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-2#.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-2.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-3.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-4.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-5.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-6.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-7.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-8.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BellSamples\Trinity-9.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="BellSamples\" />
     <Folder Include="ViewModels\MicStream\" />
     <Folder Include="ViewModels\Main\" />
   </ItemGroup>
