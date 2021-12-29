@@ -8,15 +8,18 @@ namespace BellDetectWpf.ViewModels.Shared
 {
     public static partial class C_Shared
     {
-        public static async Task Status(string msg, string foreground, int durationMs)
+        public static async Task Status(string msg, string foreground, int durationMs, bool revertToDefault)
         {
-            SharedVM.StatusMsg = msg;
+            SharedVM.StatusMsg = "Status: " + msg;
             SharedVM.StatusForeground = foreground;
 
             await Task.Delay(durationMs);
-            
-            SharedVM.StatusMsg = string.Empty;
-            SharedVM.StatusForeground = "black";
+
+            if (revertToDefault == true)
+            {
+                SharedVM.StatusMsg = "Status:";
+                SharedVM.StatusForeground = "black";
+            }
         }
     }
 }

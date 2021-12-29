@@ -226,18 +226,16 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0"
-                    Width="230" Height="30"
                     Margin="0, 0, 10, 0"
                     HorizontalAlignment="Right"
                     HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                <TextBlock TextWrapping="Wrap" LineHeight="20"
-                        Text="File name:">
+                <TextBlock TextWrapping="Wrap" LineHeight="20">
+                    File name:
                 </TextBlock>
             </Label>
 
             <Label Grid.Row="0" Grid.Column="1"
-                    Height="30"
                     Margin="10, 0, 0, 0"
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
@@ -276,44 +274,36 @@
                 Save As
             </Button>
 
-            <StackPanel Orientation="Vertical"
-                    Grid.Row="0" Grid.Column="2"
-                    Width="240" Height="45">
-                <Label Height="13"
-                    Padding="0"
-                    FontFamily="Arial" FontSize="10">
-                    Status:
-                </Label>
-
-                <Label Height="30"
-                        BorderBrush="Black" BorderThickness="1"
-                        Padding="5, 2, 5, 2"
-                        VerticalContentAlignment="Center"
-                        FontFamily="Arial" FontSize="13"
-                        Content="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
-                        Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
-                </Label>
-            </StackPanel>
+            <Label Grid.Row="0" Grid.Column="2"
+                   Margin="0, 0, 10, 0"
+                    BorderBrush="Black" BorderThickness="1"
+                    Padding="5, 2, 5, 2"
+                    FontFamily="Arial" FontSize="13">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                    Text="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
+                    Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
+                </TextBlock>
+            </Label>
 
             <Button Grid.Row="1" Grid.Column="0"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="DFTPage_Click">
+                DFT
+            </Button>
+            
+            <Button Grid.Row="1" Grid.Column="1"
                     Width="180" Height="40"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                     Click="Return_Click">
                 Return to main page
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="1"
-                    Width="180" Height="40"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="FFT_Click">
-                FFT
-            </Button>
-
             <Button Grid.Row="1" Grid.Column="2"
                     Width="180" Height="40"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="DFT_Click">
-                DFT
+                    Click="FFTPage_Click">
+                FFT
             </Button>
         </Grid>
     </Grid>

@@ -11,11 +11,9 @@
         d:DesignHeight="600" 
         Title="SpecifyWaveform">
     
-    <Grid x:Name="grid" MinWidth="800" MaxWidth="1200"
-                        MinHeight="600" MaxHeight="900">
+    <Grid MinWidth="800" MaxWidth="1200"
+            MinHeight="600" MaxHeight="900">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -26,116 +24,136 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="3*" />
             <RowDefinition Height="0.9*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="1"
-                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                            FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+        <Label Grid.Row="0" Grid.Column="0"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Bell Detect
         </Label>
 
-        <Label Grid.Row="1" Grid.Column="1"
-                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                            FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+        <Label Grid.Row="1" Grid.Column="0"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Waveform Specification
         </Label>
 
-        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
-                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                            FontFamily="Arial" FontSize="13">
+        <Label Grid.Row="2" Grid.Column="0"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
             <TextBlock TextWrapping="Wrap" LineHeight="20">
-                            Use this page to enter a waveform specification,
-                            or to load a previously saved waveform specification from a .txt file.
-                            An entered waveform specification can also be saved to a .txt file.
+                Use this page to enter a waveform specification,
+                or to load a previously saved waveform specification from a .txt file.
+                An entered waveform specification can also be saved to a .txt file.
             </TextBlock>
         </Label>
 
-        <Button Grid.Row="3" Grid.Column="1"
-                            Width="180" Height="40"
-                            FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                            Click="Load_Click">
+        <Button Grid.Row="3" Grid.Column="0"
+                Width="180" Height="40"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="Load_Click">
             Load waveform spec
         </Button>
 
         <DataGrid Name="WaveformSpecDataGrid"
-                            Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
-                            RowHeight="25"
-                            CanUserAddRows="False"
-                            Margin="5, 5, 5, 5"
-                            GridLinesVisibility="Vertical" HeadersVisibility="All"
-                            ColumnWidth="*"
-                            Background="DarkGray" RowBackground="Silver" AlternatingRowBackground="Gainsboro"
-                            BorderBrush="Black" BorderThickness="2"
-                            ItemsSource="{Binding Path=(vm:WaveformSpecVM.WaveformSpecArr), Mode=TwoWay, 
-                                    UpdateSourceTrigger=PropertyChanged}">
+                Grid.Row="4" Grid.Column="0"
+                RowHeight="25"
+                CanUserAddRows="False"
+                Margin="5, 5, 5, 5"
+                GridLinesVisibility="Vertical" HeadersVisibility="All"
+                ColumnWidth="*"
+                Background="DarkGray" RowBackground="Silver" AlternatingRowBackground="Gainsboro"
+                BorderBrush="Black" BorderThickness="2"
+                ItemsSource="{Binding Path=(vm:WaveformSpecVM.WaveformSpecArr), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
         </DataGrid>
 
         <!-- File name -->
 
-        <Label Grid.Row="5" Grid.Column="0"
-                Width="230" Height="30"
-                Margin="0, 0, 10, 0"
-                HorizontalAlignment="Right"
-                HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14" Foreground="#444">
-            <TextBlock TextWrapping="Wrap" LineHeight="20"
-                    Text="File name:">
-            </TextBlock>
-        </Label>
+        <Grid Grid.Row="5" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
-                Height="30"
-                Margin="10, 0, 0, 0"
-                HorizontalAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontFamily="Arial" FontSize="13">
-            <TextBlock TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=(vm:WaveformSpecVM.FilePathName), Mode=OneWay}">
-            </TextBlock>
-        </Label>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                        Text="File name:">
+                </TextBlock>
+            </Label>
+
+            <Label Grid.Row="0" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial" FontSize="13">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                        Text="{Binding Path=(vm:WaveformVM.FilePathName), Mode=OneWay}">
+                </TextBlock>
+            </Label>
+        </Grid>
 
         <!-- Save -->
-        
-        <Button Grid.Row="6" Grid.Column="0"
-                Width="120" Height="40"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Save_Click">
-            Save
-        </Button>
 
-        <Button Grid.Row="6" Grid.Column="1"
-                Width="120" Height="40"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="SaveAs_Click">
-            Save As
-        </Button>
+        <Grid Grid.Row="6" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical"
-                    Grid.Row="6" Grid.Column="2"
-                    Width="240" Height="45">
-            <Label Height="13"
-                    Padding="0"
-                    FontFamily="Arial" FontSize="10">
-                Status:
-            </Label>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-            <Label Height="30"
+            <Button Grid.Row="0" Grid.Column="0"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="Save_Click">
+                Save
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="1"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="SaveAs_Click">
+                Save As
+            </Button>
+
+            <Label Grid.Row="0" Grid.Column="2"
+                   Margin="0, 0, 10, 0"
                     BorderBrush="Black" BorderThickness="1"
                     Padding="5, 2, 5, 2"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial" FontSize="13"
-                    Content="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
+                    FontFamily="Arial" FontSize="13">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                    Text="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
                     Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
+                </TextBlock>
             </Label>
-        </StackPanel>
 
-        <Button Grid.Row="7" Grid.Column="1"
-                Width="180" Height="40"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Return_Click">
-            Return to main page
-        </Button>
+            <Button Grid.Row="1" Grid.Column="1"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="Return_Click">
+                Return to main page
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="2"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="WaveformPage_Click">
+                Waveform page
+            </Button>
+        </Grid>
     </Grid>
 </Page>

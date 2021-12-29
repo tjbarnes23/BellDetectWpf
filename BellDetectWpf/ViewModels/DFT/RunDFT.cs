@@ -23,11 +23,7 @@ namespace BellDetectWpf.ViewModels.DFT
             StringBuilder sb;
             TimeSpan currElapsed;
 
-            SharedVM.StatusMsg = "Running DFT...";
-            SharedVM.StatusForeground = "black";
-
-            // Give the UI a chance to update the above
-            await Task.Delay(10);
+            await C_Shared.Status("Running DFT...", "black", 10, false);
 
             DFTVM.CosDFT = new double[10000];
             DFTVM.SinDFT = new double[10000];
@@ -81,7 +77,7 @@ namespace BellDetectWpf.ViewModels.DFT
 
             DFTVM.FilePathName = String.Empty;
 
-            await C_Shared.Status("DFT completed", "black", 3000);
+            await C_Shared.Status("DFT completed", "black", 3000, true);
         }
     }
 }

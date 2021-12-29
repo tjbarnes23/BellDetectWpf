@@ -47,5 +47,10 @@ namespace BellDetectWpf.Views.ViewPages
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MainPage.xaml", UriKind.Relative);
         }
+
+        private void WaveformPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\WaveformPage.xaml", UriKind.Relative);
+        }
     }
 }

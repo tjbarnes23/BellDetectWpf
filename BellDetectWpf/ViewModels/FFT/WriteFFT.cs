@@ -15,8 +15,7 @@ namespace BellDetectWpf.ViewModels.FFT
             double time;
             double freq;
 
-            SharedVM.StatusMsg = "Saving...";
-            SharedVM.StatusForeground = "black";
+            await C_Shared.Status("Saving FFTs...", "black", 10, false);
 
             // Delete file if it already exists
             if (File.Exists(FFTVM.FilePathName))
@@ -70,7 +69,7 @@ namespace BellDetectWpf.ViewModels.FFT
                 fs.Write(row, 0, row.Length);
             }
 
-            await C_Shared.Status("Saved", "black", 3000);
+            await C_Shared.Status("FFTs saved", "black", 3000, true);
         }
     }
 }

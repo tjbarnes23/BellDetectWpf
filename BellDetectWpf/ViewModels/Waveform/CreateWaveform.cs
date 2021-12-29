@@ -8,6 +8,8 @@ namespace BellDetectWpf.ViewModels.Waveform
     {
         public static async Task CreateWaveform()
         {
+            bool hasNonZeros;
+
             double x;
             double w;
             double scale;
@@ -19,6 +21,28 @@ namespace BellDetectWpf.ViewModels.Waveform
 
             double wSum;
 
+            // Check waveform spec array contains at least one row of non-zeros
+            hasNonZeros = false;
+
+            for (int i = 0; i < 20; i++)
+            {
+                if (WaveformSpecVM.WaveformSpecArr[i].Frequency != 0 &&
+                        WaveformSpecVM.WaveformSpecArr[i].Amplitude != 0 &&
+                        WaveformSpecVM.WaveformSpecArr[i].TimeToPeak != 0.0 &&
+                        WaveformSpecVM.WaveformSpecArr[i].TimeToDecayTo50pc != 0.0)
+                {
+                    hasNonZeros = true;
+                    break;
+                }
+            }
+
+            if (hasNonZeros == false)
+            {
+                await C_Shared.Status("No waveform specification loaded. Waveform not created", "red", 7000, true);
+                return;
+            }
+
+            // Initialize variables
             WaveformVM.SampleFrequency = 44100;
             WaveformVM.SampleDepth = 16;
             WaveformVM.NumChannels = 1;
@@ -34,8 +58,7 @@ namespace BellDetectWpf.ViewModels.Waveform
             WaveformVM.Waves = new double[WaveformVM.NumWaves, WaveformVM.NumSamples];
             WaveformVM.WaveformArr = new short[WaveformVM.NumSamples];
 
-            SharedVM.StatusMsg = "Creating waveform...";
-            SharedVM.StatusForeground = "black";
+            await C_Shared.Status("Creating waveform...", "black", 10, false);
 
             // Create time array
             for (int i = 0; i < WaveformVM.NumSamples; i++)
@@ -98,7 +121,7 @@ namespace BellDetectWpf.ViewModels.Waveform
                 WaveformVM.WaveformArr[i] = (short)Math.Round(wSum);
             }
 
-            await C_Shared.Status("Waveform created", "black", 3000);
+            await C_Shared.Status("Waveform created", "black", 3000, true);
         }
     }
 }

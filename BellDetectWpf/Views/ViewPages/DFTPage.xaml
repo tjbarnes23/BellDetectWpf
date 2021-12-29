@@ -115,24 +115,16 @@
                 Save As
             </Button>
 
-            <StackPanel Orientation="Vertical"
-                    Grid.Row="0" Grid.Column="2"
-                    Width="240" Height="45">
-                <Label Height="13"
-                    Padding="0"
-                    FontFamily="Arial" FontSize="10">
-                    Status:
-                </Label>
-
-                <Label Height="30"
-                        BorderBrush="Black" BorderThickness="1"
-                        Padding="5, 2, 5, 2"
-                        VerticalContentAlignment="Center"
-                        FontFamily="Arial" FontSize="13"
-                        Content="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
-                        Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
-                </Label>
-            </StackPanel>
+            <Label Grid.Row="0" Grid.Column="2"
+                   Margin="0, 0, 10, 0"
+                    BorderBrush="Black" BorderThickness="1"
+                    Padding="5, 2, 5, 2"
+                    FontFamily="Arial" FontSize="13">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                    Text="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
+                    Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
+                </TextBlock>
+            </Label>
         </Grid>
 
         <!-- File name -->
@@ -170,11 +162,30 @@
 
         <!-- Return -->
 
-        <Button Grid.Row="7" Grid.Column="0"
-                MaxWidth="180" MaxHeight="50"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Return_Click">
-            Return to main page
-        </Button>
+        <Grid Grid.Row="7" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0"
+                    Width="180" Height="50"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="WaveformPage_Click">
+                Waveform page
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="1"
+                    Width="180" Height="50"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="Return_Click">
+                Return to main page
+            </Button>
+        </Grid>
     </Grid>
 </Page>

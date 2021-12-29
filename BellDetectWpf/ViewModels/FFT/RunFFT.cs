@@ -19,11 +19,7 @@ namespace BellDetectWpf.ViewModels.FFT
             TimeSpan prevElapsed;
             TimeSpan interval;
 
-            SharedVM.StatusMsg = "Running FFTs...";
-            SharedVM.StatusForeground = "black";
-
-            // Give the UI a chance to update the above
-            await Task.Delay(10);
+            await C_Shared.Status("Running FFTs...", "black", 10, false);
 
             FFTVM.Log2N = (uint)Math.Log2(FFTVM.N);
 
@@ -79,7 +75,7 @@ namespace BellDetectWpf.ViewModels.FFT
             
             FFTVM.FilePathName = String.Empty;
 
-            await C_Shared.Status("FFTs completed", "black", 3000);
+            await C_Shared.Status("FFTs completed", "black", 3000, true);
         }
     }
 }

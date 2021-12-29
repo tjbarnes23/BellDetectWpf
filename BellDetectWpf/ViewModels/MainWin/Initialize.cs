@@ -28,7 +28,7 @@ namespace BellDetectWpf.ViewModels.MainWin
             DFTVM.FilePathName = string.Empty;
 
             // Set defaults for status
-            SharedVM.StatusMsg = string.Empty;
+            SharedVM.StatusMsg = "Status:";
             SharedVM.StatusForeground = "black";
 
             // Default text for key press button

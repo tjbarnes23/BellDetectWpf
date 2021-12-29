@@ -28,6 +28,11 @@ namespace BellDetectWpf.Views.ViewPages
             await C_FFT.SaveAsFFT();
         }
 
+        private void WaveformPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\WaveformPage.xaml", UriKind.Relative);
+        }
+
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MainPage.xaml", UriKind.Relative);

@@ -15,8 +15,7 @@ namespace BellDetectWpf.ViewModels.WaveformSpec
             StringBuilder sb;
             bool hasNonZeros;
 
-            SharedVM.StatusMsg = "Saving...";
-            SharedVM.StatusForeground = "black";
+            await C_Shared.Status("Saving waveform specification...", "black", 10, false);
 
             // Check grid contains at least one row of non-zeros
             hasNonZeros = false;
@@ -35,7 +34,7 @@ namespace BellDetectWpf.ViewModels.WaveformSpec
 
             if (hasNonZeros == false)
             {
-                await C_Shared.Status("Grid has all zeros. Not saved", "red", 5000);
+                await C_Shared.Status("Grid has all zeros. Waveform specification not saved", "red", 7000, true);
                 return;
             }
 
@@ -65,7 +64,7 @@ namespace BellDetectWpf.ViewModels.WaveformSpec
                 fs.Write(row, 0, row.Length);
             }
 
-            await C_Shared.Status("Saved", "black", 3000);
+            await C_Shared.Status("Waveform specification saved", "black", 3000, true);
         }
     }
 }

@@ -34,19 +34,19 @@ namespace BellDetectWpf.Views.ViewPages
             await C_Waveform.SaveAsWaveform();
         }
 
+        private void DFTPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\DFTPage.xaml", UriKind.Relative);
+        }
+
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MainPage.xaml", UriKind.Relative);
         }
 
-        private void FFT_Click(object sender, RoutedEventArgs e)
+        private void FFTPage_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\FFTPage.xaml", UriKind.Relative);
-        }
-
-        private void DFT_Click(object sender, RoutedEventArgs e)
-        {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\DFTPage.xaml", UriKind.Relative);
         }
     }
 }

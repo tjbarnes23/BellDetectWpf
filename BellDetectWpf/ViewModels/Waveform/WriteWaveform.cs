@@ -31,8 +31,7 @@ namespace BellDetectWpf.ViewModels.Waveform
                     WaveformVM.NumChannels); // bytes per sample
             fileSize = WaveformVM.LengthBytes + formatParametersSize + 20; // bytes
 
-            SharedVM.StatusMsg = "Saving...";
-            SharedVM.StatusForeground = "black";
+            await C_Shared.Status("Saving waveform...", "black", 10, false);
 
             // Delete file if it already exists
             if (File.Exists(WaveformVM.FilePathName))
@@ -103,7 +102,7 @@ namespace BellDetectWpf.ViewModels.Waveform
                 }
             }
 
-            await C_Shared.Status("Saved", "black", 3000);
+            await C_Shared.Status("Waveform saved", "black", 3000, true);
         }
     }
 }

@@ -27,8 +27,7 @@ namespace BellDetectWpf.ViewModels.Waveform
 
             if (openDlg.ShowDialog() == true)
             {
-                SharedVM.StatusMsg = "Loading...";
-                SharedVM.StatusForeground = "black";
+                await C_Shared.Status("Loading waveform...", "black", 10, false);
 
                 WaveformVM.FilePathName = openDlg.FileName;
 
@@ -109,11 +108,11 @@ namespace BellDetectWpf.ViewModels.Waveform
                         WaveformVM.WaveformArr[i] = br.ReadInt16();
                     }
 
-                    await C_Shared.Status("Loaded", "black", 3000);
+                    await C_Shared.Status("Waveform loaded", "black", 3000, true);
                 }
                 else
                 {
-                    await C_Shared.Status("Not loaded", "red", 5000);
+                    await C_Shared.Status("Waveform not loaded", "red", 7000, true);
                 }
             }
         }

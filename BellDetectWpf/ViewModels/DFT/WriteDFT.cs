@@ -16,8 +16,7 @@ namespace BellDetectWpf.ViewModels.DFT
             byte[] row;
             double freq;
 
-            SharedVM.StatusMsg = "Saving...";
-            SharedVM.StatusForeground = "black";
+            await C_Shared.Status("Saving DFT results...", "black", 10, false);
 
             // Delete file if it already exists
             if (File.Exists(DFTVM.FilePathName))
@@ -67,7 +66,7 @@ namespace BellDetectWpf.ViewModels.DFT
                 fs.Write(row, 0, row.Length);
             }
 
-            await C_Shared.Status("Saved", "black", 3000);
+            await C_Shared.Status("DFT results saved", "black", 3000, true);
         }
     }
 }
