@@ -12,8 +12,13 @@ namespace BellDetectWpf.ViewModels
         public static event EventHandler StartStopTxtChanged;
 
         internal static WaveInEvent waveIn;
-        // internal static List<byte> buffer;
-        internal static WaveFileWriter writer;
+        internal static WaveFormat waveFormat;
+        
+
+        public static double[,] DetectionArr { get; set; }
+        public static List<double[]> ResultArr { get; set; }
+
+        public static string FilePathName { get; set; }
 
         public static string StartStopTxt
         {
@@ -37,6 +42,7 @@ namespace BellDetectWpf.ViewModels
             if (StartStopTxt == "Start streaming")
             {
                 StartStopTxt = "Stop streaming";
+                
                 C_MicStream.StartMicStream();
             }
             else

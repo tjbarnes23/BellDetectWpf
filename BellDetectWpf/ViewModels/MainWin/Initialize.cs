@@ -26,6 +26,7 @@ namespace BellDetectWpf.ViewModels.MainWin
             WaveformVM.FilePathName = string.Empty;
             FFTVM.FilePathName = string.Empty;
             DFTVM.FilePathName = string.Empty;
+            MicStreamVM.FilePathName = @"C:\ProgramData\BellDetect\micFFTresults.txt";
 
             // Set defaults for status
             SharedVM.StatusMsg = "Status:";
