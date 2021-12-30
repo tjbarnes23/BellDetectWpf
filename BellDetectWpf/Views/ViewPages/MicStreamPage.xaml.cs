@@ -12,6 +12,11 @@ namespace BellDetectWpf.Views.ViewPages
             InitializeComponent();
         }
 
+        private void StartStopBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MicStreamVM.StartStop();
+        }
+
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MainPage.xaml", UriKind.Relative);

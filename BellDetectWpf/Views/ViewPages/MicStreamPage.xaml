@@ -34,11 +34,12 @@
             Mic Stream
         </Label>
 
-        <Label Grid.Row="2" Grid.Column="0"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="14">
-            Not yet implemented
-        </Label>
+        <Button Grid.Row="2" Grid.Column="0"
+                Width="180" Height="50"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="StartStopBtn_Click"
+                Content="{Binding Path=(vm:MicStreamVM.StartStopTxt), Mode=OneWay}">
+        </Button>
 
         <Button Grid.Row="3" Grid.Column="0"
                 Width="180" Height="50"
