@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,12 @@ namespace BellDetectWpf.ViewModels.MicStream
 
             // Initialize FFT elements
             C_FFT.InitializeFFT();
+
+            // Initialize stopwatch
+            MicStreamVM.SW = new Stopwatch();
+            MicStreamVM.TS3 = new TimeSpan(0);
+            MicStreamVM.TS4 = new TimeSpan(0);
+            MicStreamVM.SW.Start();
 
             MicStreamVM.waveIn.StartRecording();
         }

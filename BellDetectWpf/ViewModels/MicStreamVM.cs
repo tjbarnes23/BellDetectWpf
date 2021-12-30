@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using BellDetectWpf.ViewModels.MicStream;
 using NAudio.Wave;
@@ -13,7 +14,11 @@ namespace BellDetectWpf.ViewModels
 
         internal static WaveInEvent waveIn;
         internal static WaveFormat waveFormat;
-        
+
+        public static Stopwatch SW { get; set; }
+
+        public static TimeSpan TS3 { get; set; }
+        public static TimeSpan TS4 { get; set; }
 
         public static double[,] DetectionArr { get; set; }
         public static List<double[]> ResultArr { get; set; }

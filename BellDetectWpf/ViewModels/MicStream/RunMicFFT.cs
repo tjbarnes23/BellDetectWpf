@@ -5,18 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BellDetectWpf.ViewModels.FFT;
+using BellDetectWpf.ViewModels.KeyPress;
 using BellDetectWpf.ViewModels.Shared;
 
 namespace BellDetectWpf.ViewModels.MicStream
 {
     public static partial class C_MicStream
     {
+        public const byte JKey = 0x24;
+        public const byte FKey = 0x21;
+
         public static void RunMicFFT(byte[] buffer, int bytesRecorded)
         {
             int bytePos;
             short amp;
             double amplitude;
             double[] fftResult;
+
+            TimeSpan ts3;
+            TimeSpan ts4;
+            TimeSpan interval;
 
             // For testing: log number of bytes recorded
             // MainWinVM.Logger.Info("Bytes Recorded: " + bytesRecorded.ToString());
@@ -73,18 +81,35 @@ namespace BellDetectWpf.ViewModels.MicStream
             // MainWinVM.Logger.Info("1500hz: " + MicStreamVM.DetectionArr[75, 2].ToString());
 
             // Detect whether bells 3 or 4 have struck
+
             // 3rd is at 1680Hz, bucket index 84
             if (MicStreamVM.DetectionArr[84, 2] > 2000 &&
                     ((MicStreamVM.DetectionArr[84, 1] < 1500) || (MicStreamVM.DetectionArr[84, 0] < 1500)))
             {
-                MainWinVM.Logger.Info("3rd detected");
+                ts3 = MicStreamVM.SW.Elapsed;
+                interval = ts3 - MicStreamVM.TS3;
+
+                if (interval.TotalMilliseconds > 1250)
+                {
+                    MainWinVM.Logger.Info("3rd detected");
+                    C_KeyPress.Press(JKey);
+                    MicStreamVM.TS3 = ts3;
+                }
             }
 
             // 4th is at 1500Hz, bucket index 75
             if (MicStreamVM.DetectionArr[75, 2] > 850 &&
                     ((MicStreamVM.DetectionArr[75, 1] < 800) || (MicStreamVM.DetectionArr[75, 0] < 800)))
             {
-                MainWinVM.Logger.Info("4th detected");
+                ts4 = MicStreamVM.SW.Elapsed;
+                interval = ts4 - MicStreamVM.TS4;
+
+                if (interval.TotalMilliseconds > 1250)
+                {
+                    MainWinVM.Logger.Info("4th detected");
+                    C_KeyPress.Press(FKey);
+                    MicStreamVM.TS4 = ts4;
+                }
             }
         }
     }
