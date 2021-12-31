@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using BellDetectWpf.ViewModels.MicStream;
 using BellDetectWpf.ViewModels.WaveformSpec;
 using BellDetectWpf.Views;
 using NLog;
@@ -21,12 +23,15 @@ namespace BellDetectWpf.ViewModels.MainWin
             // Populate zeros into waveform spec array
             C_WaveformSpec.InitializeWaveformSpec();
 
+            // Populate zeros into detection spec array
+            C_MicStream.InitializeDetectionSpec();
+
             // Set default file path names
             WaveformSpecVM.FilePathName = string.Empty;
             WaveformVM.FilePathName = string.Empty;
             FFTVM.FilePathName = string.Empty;
             DFTVM.FilePathName = string.Empty;
-            MicStreamVM.FilePathName = @"C:\ProgramData\BellDetect\micFFTresults.txt";
+            MicStreamVM.FilePathName = string.Empty;
 
             // Set defaults for status
             SharedVM.StatusMsg = "Status:";

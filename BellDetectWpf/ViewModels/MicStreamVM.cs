@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using BellDetectWpf.Models;
 using BellDetectWpf.ViewModels.MicStream;
+using BellDetectWpf.ViewModels.Shared;
 using NAudio.Wave;
 
 namespace BellDetectWpf.ViewModels
@@ -15,10 +18,10 @@ namespace BellDetectWpf.ViewModels
         internal static WaveInEvent waveIn;
         internal static WaveFormat waveFormat;
 
-        public static Stopwatch SW { get; set; }
+        public static ObservableCollection<DetectionSpec> DetectionSpecArr { get; set; }
 
-        public static TimeSpan TS3 { get; set; }
-        public static TimeSpan TS4 { get; set; }
+        public static Stopwatch SW { get; set; }
+        public static TimeSpan[] LastDetectionArr { get; set; }
 
         public static double[,] DetectionArr { get; set; }
         public static List<double[]> ResultArr { get; set; }
@@ -42,18 +45,20 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
-        public static void StartStop()
+        public static async Task StartStop()
         {
-            if (StartStopTxt == "Start streaming")
+            if (StartStopTxt == "Start detection")
             {
-                StartStopTxt = "Stop streaming";
+                await C_Shared.Status("Listening for bell strikes", "red", 10, false);
+                StartStopTxt = "Stop detection";
                 
                 C_MicStream.StartMicStream();
             }
             else
             {
+                await C_Shared.Status(string.Empty, "black", 10, false);
                 C_MicStream.StopMicStream();
-                StartStopTxt = "Start streaming";
+                StartStopTxt = "Start detection";
             }
         }
     }

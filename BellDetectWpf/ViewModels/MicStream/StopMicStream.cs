@@ -16,6 +16,9 @@ namespace BellDetectWpf.ViewModels.MicStream
             int count;
             double time;
             double freq;
+            string micFFT;
+
+            micFFT = @"C:\ProgramData\BellDetect\micFFTresults.txt";
 
             // Stop recording if WaveIn exists
             if (MicStreamVM.waveIn != null)
@@ -24,13 +27,13 @@ namespace BellDetectWpf.ViewModels.MicStream
             }
 
             // Delete file if it already exists
-            if (File.Exists(MicStreamVM.FilePathName))
+            if (File.Exists(micFFT))
             {
-                File.Delete(MicStreamVM.FilePathName);
+                File.Delete(micFFT);
             }
 
             // Create a new file     
-            using FileStream fs = File.Create(MicStreamVM.FilePathName);
+            using FileStream fs = File.Create(micFFT);
 
             // Write header row
             sb = new StringBuilder();

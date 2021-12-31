@@ -45,10 +45,11 @@ namespace BellDetectWpf.ViewModels.MicStream
             // Initialize FFT elements
             C_FFT.InitializeFFT();
 
+            // Initialize last detection array
+            InitializeLastDetection();
+
             // Initialize stopwatch
             MicStreamVM.SW = new Stopwatch();
-            MicStreamVM.TS3 = new TimeSpan(0);
-            MicStreamVM.TS4 = new TimeSpan(0);
             MicStreamVM.SW.Start();
 
             MicStreamVM.waveIn.StartRecording();

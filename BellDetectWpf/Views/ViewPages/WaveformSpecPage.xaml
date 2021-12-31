@@ -27,18 +27,24 @@
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
+        <!-- Title -->
+        
         <Label Grid.Row="0" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Bell Detect
         </Label>
 
+        <!-- Waveform Specification -->
+        
         <Label Grid.Row="1" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Waveform Specification
         </Label>
 
+        <!-- Description -->
+        
         <Label Grid.Row="2" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial" FontSize="13">
@@ -49,6 +55,8 @@
             </TextBlock>
         </Label>
 
+        <!-- Load -->
+        
         <Button Grid.Row="3" Grid.Column="0"
                 Width="180" Height="40"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
@@ -56,6 +64,8 @@
             Load waveform spec
         </Button>
 
+        <!-- Data grid -->
+        
         <DataGrid Name="WaveformSpecDataGrid"
                 Grid.Row="4" Grid.Column="0"
                 RowHeight="25"
@@ -102,7 +112,7 @@
             </Label>
         </Grid>
 
-        <!-- Save -->
+        <!-- Save etc -->
 
         <Grid Grid.Row="6" Grid.Column="0">
             <Grid.ColumnDefinitions>

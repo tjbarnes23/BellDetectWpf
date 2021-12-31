@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
+using BellDetectWpf.ViewModels.MicStream;
 
 namespace BellDetectWpf.Views.ViewPages
 {
@@ -12,9 +13,25 @@ namespace BellDetectWpf.Views.ViewPages
             InitializeComponent();
         }
 
-        private void StartStopBtn_Click(object sender, RoutedEventArgs e)
+        private async void Load_Click(object sender, RoutedEventArgs e)
         {
-            MicStreamVM.StartStop();
+
+            await C_MicStream.LoadDetectionSpec();
+        }
+
+        private async void Save_Click(object sender, RoutedEventArgs e)
+        {
+            await C_MicStream.SaveDetectionSpec();
+        }
+
+        private async void SaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            await C_MicStream.SaveAsDetectionSpec();
+        }
+
+        private async void StartStopBtn_Click(object sender, RoutedEventArgs e)
+        {
+            await MicStreamVM.StartStop();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

@@ -16,17 +16,24 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="0.7*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="0.9*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
+        <!-- Title -->
+        
         <Label Grid.Row="0" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Bell Detect
         </Label>
+
+        <!-- Mic Stream -->
 
         <Label Grid.Row="1" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
@@ -34,18 +41,129 @@
             Mic Stream
         </Label>
 
-        <Button Grid.Row="2" Grid.Column="0"
-                Width="180" Height="50"
+        <!-- Description -->
+
+        <Label Grid.Row="2" Grid.Column="0"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            <TextBlock TextWrapping="Wrap" LineHeight="20">
+                Use this page to enter or load the detection parameters for the bells for which you
+                would like to generate key presses.
+                Entered parameters can also be saved to a .txt file.
+                Then click on the 'Start detection' button to instruct the program
+                to start listening through the microphone for your bells to strike.
+            </TextBlock>
+        </Label>
+
+        <!-- Load -->
+        
+        <Button Grid.Row="3" Grid.Column="0"
+                Width="240" Height="40"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="Load_Click">
+            Load bell detection spec
+        </Button>
+
+        <!-- Data grid -->
+        
+        <DataGrid Name="DectectionSpecDataGrid"
+                Grid.Row="4" Grid.Column="0"
+                RowHeight="25"
+                CanUserAddRows="False"
+                Margin="5, 5, 5, 5"
+                GridLinesVisibility="Vertical" HeadersVisibility="All"
+                ColumnWidth="*"
+                Background="DarkGray" RowBackground="Silver" AlternatingRowBackground="Gainsboro"
+                BorderBrush="Black" BorderThickness="2"
+                ItemsSource="{Binding Path=(vm:MicStreamVM.DetectionSpecArr), Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}">
+        </DataGrid>
+
+        <!-- File name -->
+
+        <Grid Grid.Row="5" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                        Text="File name:">
+                </TextBlock>
+            </Label>
+
+            <Label Grid.Row="0" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial" FontSize="13">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                        Text="{Binding Path=(vm:MicStreamVM.FilePathName), Mode=OneWay}">
+                </TextBlock>
+            </Label>
+        </Grid>
+
+        <!-- Save etc -->
+
+        <Grid Grid.Row="6" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="Save_Click">
+                Save
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="1"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="SaveAs_Click">
+                Save As
+            </Button>
+
+            <Label Grid.Row="0" Grid.Column="2"
+                   Margin="0, 0, 10, 0"
+                    BorderBrush="Black" BorderThickness="1"
+                    Padding="5, 2, 5, 2"
+                    FontFamily="Arial" FontSize="13">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                    Text="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
+                    Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
+                </TextBlock>
+            </Label>
+
+            <Button Grid.Row="1" Grid.Column="1"
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    Click="Return_Click">
+                Return to main page
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="2"
+                Width="180" Height="40"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="StartStopBtn_Click"
                 Content="{Binding Path=(vm:MicStreamVM.StartStopTxt), Mode=OneWay}">
-        </Button>
-
-        <Button Grid.Row="3" Grid.Column="0"
-                Width="180" Height="50"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="Return_Click">
-            Return to main page
-        </Button>
+            </Button>
+        </Grid>
     </Grid>
 </Page>
