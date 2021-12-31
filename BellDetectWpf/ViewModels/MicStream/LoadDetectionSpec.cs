@@ -33,7 +33,7 @@ namespace BellDetectWpf.ViewModels.MicStream
                     MicStreamVM.DetectionSpecArr[i].AmplitudeLow = Convert.ToInt32(tempLine[1]);
                     MicStreamVM.DetectionSpecArr[i].AmplitudeHigh = Convert.ToInt32(tempLine[2]);
                     MicStreamVM.DetectionSpecArr[i].MinTimeBetweenDetectionsMs = Convert.ToInt32(tempLine[3]);
-                    MicStreamVM.DetectionSpecArr[i].MinTimeBetweenDetectionsMs = Convert.ToChar(tempLine[4]);
+                    MicStreamVM.DetectionSpecArr[i].Key = Convert.ToChar(tempLine[4]);
 
                     i++;
                 }

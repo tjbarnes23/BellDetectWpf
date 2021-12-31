@@ -12,7 +12,10 @@ namespace BellDetectWpf.ViewModels
 {
     public static class MicStreamVM
     {
+        private static string filePathName;
         private static string startStopTxt;
+
+        public static event EventHandler FilePathNameChanged;
         public static event EventHandler StartStopTxtChanged;
 
         internal static WaveInEvent waveIn;
@@ -26,7 +29,22 @@ namespace BellDetectWpf.ViewModels
         public static double[,] DetectionArr { get; set; }
         public static List<double[]> ResultArr { get; set; }
 
-        public static string FilePathName { get; set; }
+        public static string FilePathName
+        {
+            get
+            {
+                return filePathName;
+            }
+
+            set
+            {
+                if (filePathName != value)
+                {
+                    filePathName = value;
+                    FilePathNameChanged?.Invoke(null, EventArgs.Empty);
+                }
+            }
+        }
 
         public static string StartStopTxt
         {
@@ -47,10 +65,10 @@ namespace BellDetectWpf.ViewModels
 
         public static async Task StartStop()
         {
-            if (StartStopTxt == "Start detection")
+            if (StartStopTxt == "Start detecting")
             {
                 await C_Shared.Status("Listening for bell strikes", "red", 10, false);
-                StartStopTxt = "Stop detection";
+                StartStopTxt = "Stop detecting";
                 
                 C_MicStream.StartMicStream();
             }
@@ -58,7 +76,7 @@ namespace BellDetectWpf.ViewModels
             {
                 await C_Shared.Status(string.Empty, "black", 10, false);
                 C_MicStream.StopMicStream();
-                StartStopTxt = "Start detection";
+                StartStopTxt = "Start detecting";
             }
         }
     }

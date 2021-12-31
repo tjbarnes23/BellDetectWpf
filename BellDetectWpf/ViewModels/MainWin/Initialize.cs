@@ -38,10 +38,10 @@ namespace BellDetectWpf.ViewModels.MainWin
             SharedVM.StatusForeground = "black";
 
             // Default text for key press button
-            KeyPressVM.StartStopTxt = "Start detecting";
+            KeyPressVM.StartStopTxt = "Start key presses";
 
             // Default text for mic stream button
-            MicStreamVM.StartStopTxt = "Start streaming";
+            MicStreamVM.StartStopTxt = "Start detecting";
 
             // Load main window
             MainWinVM.Mw = new MainWindow();

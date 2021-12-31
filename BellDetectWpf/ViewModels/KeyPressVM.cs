@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using BellDetectWpf.ViewModels.KeyPress;
+using BellDetectWpf.ViewModels.Shared;
 
 namespace BellDetectWpf.ViewModels
 {
@@ -28,18 +29,20 @@ namespace BellDetectWpf.ViewModels
 
         public static async Task StartStop()
         {
-            if (StartStopTxt == "Start detecting")
+            if (StartStopTxt == "Start key presses")
             {
-                StartStopTxt = "Stop detecting";
-                await StartDetecting();
+                await C_Shared.Status("Generating key presses", "red", 10, false);
+                StartStopTxt = "Stop key presses";
+                await StartKeyPresses();
             }
             else
             {
-                StartStopTxt = "Start detecting";
+                await C_Shared.Status(string.Empty, "black", 10, false);
+                StartStopTxt = "Start key presses";
             }
         }
 
-        public static async Task StartDetecting()
+        public static async Task StartKeyPresses()
         {
             var random = new Random();
             await Task.Delay(2000);
@@ -60,7 +63,7 @@ namespace BellDetectWpf.ViewModels
                 C_KeyPress.Press(rand);
                 await Task.Delay(1000);
             }
-            while (StartStopTxt == "Stop detecting");
+            while (StartStopTxt == "Stop key presses");
         }
     }
 }

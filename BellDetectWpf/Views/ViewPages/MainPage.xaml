@@ -72,15 +72,15 @@
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                 Width="240" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="MicStream_Click">
-            Process mic stream
+                Click="KeyPress_Click">
+            Test key presses
         </Button>
-
+        
         <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                 Width="240" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="KeyPress_Click">
-            Generate key presses
+                Click="MicStream_Click">
+            Detect bells through mic
         </Button>
 
         <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"

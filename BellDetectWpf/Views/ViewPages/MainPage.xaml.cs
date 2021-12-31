@@ -32,14 +32,15 @@ namespace BellDetectWpf.Views.ViewPages
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\DFTPage.xaml", UriKind.Relative);
         }
-        private void MicStream_Click(object sender, RoutedEventArgs e)
-        {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MicStreamPage.xaml", UriKind.Relative);
-        }
 
         private void KeyPress_Click(object sender, RoutedEventArgs e)
         {
             MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\KeyPressPage.xaml", UriKind.Relative);
+        }
+
+        private void MicStream_Click(object sender, RoutedEventArgs e)
+        {
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MicStreamPage.xaml", UriKind.Relative);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

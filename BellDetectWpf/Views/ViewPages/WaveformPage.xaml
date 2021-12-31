@@ -41,6 +41,8 @@
             Waveform
         </Label>
 
+        <!-- Description -->
+        
         <Label Grid.Row="2" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial" FontSize="13">

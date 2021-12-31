@@ -20,28 +20,76 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <!-- Title -->
+        
         <Label Grid.Row="0" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
             Bell Detect
         </Label>
 
+        <!-- Test key presses -->
+        
         <Label Grid.Row="1" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
-            Key Presses
+            Test key presses
         </Label>
 
-        <Button Grid.Row="2" Grid.Column="0"
+        <!-- Description -->
+
+        <Label Grid.Row="2" Grid.Column="0"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                FontFamily="Arial" FontSize="13">
+            <TextBlock TextWrapping="Wrap" LineHeight="20">
+                Use this page to test the generation of key presses.
+                When the 'Start key presses' button is clicked,
+                'j' and 'f' key presses will be randomly generated at 1 second intervals.
+                Check this by switching the focus to an app such as Microsoft Word and you
+                should see j's and f's added to a Word document.
+                Click the button again to stop the key presses.
+            </TextBlock>
+        </Label>
+
+        <!-- Start / stop key presses -->
+        
+        <Button Grid.Row="3" Grid.Column="0"
                 Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="StartStopBtn_Click"
                 Content="{Binding Path=(vm:KeyPressVM.StartStopTxt), Mode=OneWay}">
         </Button>
 
-        <Button Grid.Row="3" Grid.Column="0"
+        <Grid Grid.Row="4" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="1"
+                    Margin="0, 0, 10, 0"
+                    BorderBrush="Black" BorderThickness="1"
+                    Padding="5, 2, 5, 2"
+                    FontFamily="Arial" FontSize="13">
+                <TextBlock TextWrapping="Wrap" LineHeight="20"
+                        Text="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
+                        Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
+                </TextBlock>
+            </Label>
+        </Grid>
+
+        <!-- Return -->
+
+        <Button Grid.Row="5" Grid.Column="0"
                 Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="Return_Click">
