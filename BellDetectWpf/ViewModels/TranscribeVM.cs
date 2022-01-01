@@ -1,53 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.Enums;
 using BellDetectWpf.Models;
-using BellDetectWpf.ViewModels.MicStream;
 using BellDetectWpf.ViewModels.Shared;
-using NAudio.Wave;
+using BellDetectWpf.ViewModels.Transcribe;
 
 namespace BellDetectWpf.ViewModels
 {
-    public static class MicStreamVM
+    public static class TranscribeVM
     {
-        private static int sourceId;
+        private static StageEnum stage;
         private static string filePathName;
         private static string startStopTxt;
 
-        public static event EventHandler SourceIdChanged;
+        public static event EventHandler StageChanged;
         public static event EventHandler FilePathNameChanged;
         public static event EventHandler StartStopTxtChanged;
 
-        internal static WaveInEvent waveIn;
-        internal static WaveFormat waveFormat;
-        
-        public static Dictionary<int, string> SourceDict { get; set; }
+        public static ObservableCollection<Row> TranscriptionArr { get; set; }
 
-        public static ObservableCollection<DetectionSpec> DetectionSpecArr { get; set; }
-
-        public static Stopwatch SW { get; set; }
-        public static TimeSpan[] LastDetectionArr { get; set; }
-
-        public static double[,] DetectionArr { get; set; }
-        public static List<double[]> ResultArr { get; set; }
-
-        
-
-        public static int SourceId
+        public static StageEnum Stage
         {
             get
             {
-                return sourceId;
+                return stage;
             }
 
             set
             {
-                if (sourceId != value)
+                if (stage != value)
                 {
-                    sourceId = value;
-                    SourceIdChanged?.Invoke(null, EventArgs.Empty);
+                    stage = value;
+                    StageChanged?.Invoke(null, EventArgs.Empty);
                 }
             }
         }
@@ -88,18 +76,18 @@ namespace BellDetectWpf.ViewModels
 
         public static async Task StartStop()
         {
-            if (StartStopTxt == "Detect / generate key presses")
+            if (StartStopTxt == "Start transcribing")
             {
                 await C_Shared.Status("Listening for bell strikes", "red", 10, false);
-                StartStopTxt = "Stop detecting";
-                
-                C_MicStream.StartMicStream();
+                StartStopTxt = "Stop transcribing";
+
+                C_Transcribe.StartTranscribing();
             }
             else
             {
                 await C_Shared.Status(string.Empty, "black", 10, false);
-                C_MicStream.StopMicStream();
-                StartStopTxt = "Detect / generate key presses";
+                C_Transcribe.StopTranscribing();
+                StartStopTxt = "Start transcribing";
             }
         }
     }

@@ -1,10 +1,11 @@
-﻿<Page x:Class="BellDetectWpf.Views.ViewPages.MicStreamPage"
+﻿<Page x:Class="BellDetectWpf.Views.ViewPages.TranscribePage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:BellDetectWpf.Views.ViewPages"
         xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
+        xmlns:en="clr-namespace:BellDetectWpf.Enums"
         mc:Ignorable="d"
         d:DesignWidth="800"
         d:DesignHeight="600">
@@ -38,7 +39,7 @@
         <Label Grid.Row="1" Grid.Column="0"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
-            Detect bells via audio
+            Transcribe a touch
         </Label>
 
         <!-- Description -->
@@ -47,21 +48,20 @@
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontFamily="Arial" FontSize="13">
             <TextBlock TextWrapping="Wrap" LineHeight="20">
-                Use this page to enter or load the detection parameters for the bells for which you
-                would like to generate key presses.
-                Entered parameters can also be saved to a .txt file.
-                Then click on the 'Start detection' button to instruct the program
-                to start listening through the microphone for your bells to strike.
+                Use this page to generate the rows rung in a touch.
+                The audio input can be a microphone (for a live touch),
+                or a previously recorded touch played back through an app such as Audacity.
+                Select the input source below,
+                and also the stage of the ringing (i.e. the number of bells in each row).
             </TextBlock>
         </Label>
 
-        <!-- Load -->
+        <!-- Option combo boxes -->
 
         <Grid Grid.Row="3" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.8*" />
-                <ColumnDefinition Width="1.6*" />
-                <ColumnDefinition Width="1.6*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -72,29 +72,22 @@
                     Margin="0, 0, 10, 0"
                     HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14">
-                Input source:
+                Number of bells:
             </Label>
-
+            
             <ComboBox Grid.Row="0" Grid.Column="1"
-                    Width="280" Height="40"
+                    Width="120" Height="40"
                     Margin="10, 0, 0, 0"
                     Padding="10, 0, 0, 0"
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
-                    ItemsSource="{Binding Path=(vm:MicStreamVM.SourceDict)}"
+                    ItemsSource="{Binding Path=(en:StageEnumExt.StageEnumDict)}"
                     DisplayMemberPath="Value"
                     SelectedValuePath="Key"
-                    SelectedValue="{Binding Path=(vm:MicStreamVM.SourceId), Mode=TwoWay, 
+                    SelectedValue="{Binding Path=(vm:TranscribeVM.Stage), Mode=TwoWay, 
                             UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
-
-            <Button Grid.Row="0" Grid.Column="2"
-                    Width="240" Height="40"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="Load_Click">
-                Load bell detection spec
-            </Button>
         </Grid>
 
         <!-- Data grid -->
@@ -108,7 +101,7 @@
                 ColumnWidth="*"
                 Background="DarkGray" RowBackground="Silver" AlternatingRowBackground="Gainsboro"
                 BorderBrush="Black" BorderThickness="2"
-                ItemsSource="{Binding Path=(vm:MicStreamVM.DetectionSpecArr), Mode=TwoWay, 
+                ItemsSource="{Binding Path=(vm:TranscribeVM.TranscriptionArr), Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}">
         </DataGrid>
 
@@ -185,10 +178,10 @@
             </Label>
 
             <Button Grid.Row="1" Grid.Column="0"
-                    Width="180" Height="40"
+                    Width="200" Height="40"
                     FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="Transcribe_Click">
-                Transcribe a touch
+                    Click="Detect_Click">
+                Detect bells via audio
             </Button>
 
             <Button Grid.Row="1" Grid.Column="1"
@@ -199,10 +192,10 @@
             </Button>
 
             <Button Grid.Row="1" Grid.Column="2"
-                Width="240" Height="40"
-                FontFamily="Arial Black" FontSize="13" FontWeight="Bold"
+                Width="180" Height="40"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="StartStop_Click"
-                Content="{Binding Path=(vm:MicStreamVM.StartStopTxt), Mode=OneWay}">
+                Content="{Binding Path=(vm:TranscribeVM.StartStopTxt), Mode=OneWay}">
             </Button>
         </Grid>
     </Grid>

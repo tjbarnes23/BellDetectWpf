@@ -11,7 +11,7 @@ namespace BellDetectWpf.ViewModels.WaveformSpec
 {
     public static partial class C_WaveformSpec
     {
-        public static void InitializeWaveformSpec()
+        public static void InitializeWaveformSpecArr()
         {
             WaveformSpecVM.WaveformSpecArr = new ObservableCollection<WaveSpec>();
 

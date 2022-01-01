@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using BellDetectWpf.Enums;
 using BellDetectWpf.ViewModels.MicStream;
+using BellDetectWpf.ViewModels.Transcribe;
 using BellDetectWpf.ViewModels.WaveformSpec;
 using BellDetectWpf.Views;
 using NLog;
@@ -21,10 +23,13 @@ namespace BellDetectWpf.ViewModels.MainWin
             }
 
             // Populate zeros into waveform spec array
-            C_WaveformSpec.InitializeWaveformSpec();
+            C_WaveformSpec.InitializeWaveformSpecArr();
 
             // Populate zeros into detection spec array
-            C_MicStream.InitializeDetectionSpec();
+            C_MicStream.InitializeDetectionSpecArr();
+
+            // Initialize transcription array
+            C_Transcribe.InitializeTranscriptionArr();
 
             // Set default file path names
             WaveformSpecVM.FilePathName = string.Empty;
@@ -32,6 +37,7 @@ namespace BellDetectWpf.ViewModels.MainWin
             FFTVM.FilePathName = string.Empty;
             DFTVM.FilePathName = string.Empty;
             MicStreamVM.FilePathName = string.Empty;
+            TranscribeVM.FilePathName = string.Empty;
 
             // Set defaults for status
             SharedVM.StatusMsg = "Status:";
@@ -41,7 +47,13 @@ namespace BellDetectWpf.ViewModels.MainWin
             KeyPressVM.StartStopTxt = "Start key presses";
 
             // Default text for mic stream button
-            MicStreamVM.StartStopTxt = "Start detecting";
+            MicStreamVM.StartStopTxt = "Detect / generate key presses";
+
+            // Default number of bells for transcription
+            TranscribeVM.Stage = StageEnum.Eight;
+
+            // Default text for transcribe button
+            TranscribeVM.StartStopTxt = "Start transcribing";
 
             // Load main window
             MainWinVM.Mw = new MainWindow();

@@ -11,14 +11,15 @@ namespace BellDetectWpf.ViewModels.MicStream
 {
     public static partial class C_MicStream
     {
-        public static void InitializeDetectionSpec()
+        public static void InitializeDetectionSpecArr()
         {
             MicStreamVM.DetectionSpecArr = new ObservableCollection<DetectionSpec>();
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 12; i++)
             {
                 MicStreamVM.DetectionSpecArr.Add(new DetectionSpec
                 {
+                    Bell = ' ',
                     Frequency = 0,
                     AmplitudeLow = 0,
                     AmplitudeHigh = 0,

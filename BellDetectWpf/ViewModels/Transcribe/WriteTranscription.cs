@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BellDetectWpf.ViewModels.Shared;
 
-namespace BellDetectWpf.ViewModels.MicStream
+namespace BellDetectWpf.ViewModels.Transcribe
 {
-    public static partial class C_MicStream
+    public static partial class C_Transcribe
     { 
-        public static async Task WriteDetectionSpec()
+        public static async Task WriteTranscription()
         {
             StringBuilder sb;
             bool hasNonZeros;

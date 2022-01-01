@@ -90,7 +90,7 @@
                 Width="240" Height="50"
                 FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
                 Click="MicStream_Click">
-            Detect bells through mic
+            Detect bells via audio
         </Button>
 
         <Button Grid.Row="6" Grid.Column="0"

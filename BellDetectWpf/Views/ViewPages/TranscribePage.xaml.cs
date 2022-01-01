@@ -2,41 +2,35 @@
 using System.Windows;
 using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
-using BellDetectWpf.ViewModels.MicStream;
+using BellDetectWpf.ViewModels.Transcribe;
 
 namespace BellDetectWpf.Views.ViewPages
 {
-    public partial class MicStreamPage : Page
+    public partial class TranscribePage : Page
     {
-        public MicStreamPage()
+        public TranscribePage()
         {
             InitializeComponent();
         }
 
-        private async void Load_Click(object sender, RoutedEventArgs e)
-        {
-
-            await C_MicStream.LoadDetectionSpec();
-        }
-
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            await C_MicStream.SaveDetectionSpec();
+            await C_Transcribe.SaveTranscription();
         }
 
         private async void SaveAs_Click(object sender, RoutedEventArgs e)
         {
-            await C_MicStream.SaveAsDetectionSpec();
+            await C_Transcribe.SaveAsTranscription();
         }
 
-        private void Transcribe_Click(object sender, RoutedEventArgs e)
+        private void Detect_Click(object sender, RoutedEventArgs e)
         {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\TranscribePage.xaml", UriKind.Relative);
+            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MicStreamPage.xaml", UriKind.Relative);
         }
 
         private async void StartStop_Click(object sender, RoutedEventArgs e)
         {
-            await MicStreamVM.StartStop();
+            await TranscribeVM.StartStop();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

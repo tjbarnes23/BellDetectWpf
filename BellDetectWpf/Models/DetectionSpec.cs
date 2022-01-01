@@ -4,6 +4,7 @@ namespace BellDetectWpf.Models
 {
     public class DetectionSpec : INotifyPropertyChanged
     {
+        private char bell;
         private int frequency;
         private int amplitudeLow;
         private int amplitudeHigh;
@@ -11,6 +12,22 @@ namespace BellDetectWpf.Models
         private char key;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public char Bell
+        {
+            get
+            {
+                return bell;
+            }
+            set
+            {
+                if (bell != value)
+                {
+                    bell = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Bell)));
+                }
+            }
+        }
 
         public int Frequency
         {

@@ -29,11 +29,12 @@ namespace BellDetectWpf.ViewModels.MicStream
                 foreach (var line in File.ReadLines(MicStreamVM.FilePathName))
                 {
                     var tempLine = line.Split('\t');
-                    MicStreamVM.DetectionSpecArr[i].Frequency = Convert.ToInt32(tempLine[0]);
-                    MicStreamVM.DetectionSpecArr[i].AmplitudeLow = Convert.ToInt32(tempLine[1]);
-                    MicStreamVM.DetectionSpecArr[i].AmplitudeHigh = Convert.ToInt32(tempLine[2]);
-                    MicStreamVM.DetectionSpecArr[i].MinTimeBetweenDetectionsMs = Convert.ToInt32(tempLine[3]);
-                    MicStreamVM.DetectionSpecArr[i].Key = Convert.ToChar(tempLine[4]);
+                    MicStreamVM.DetectionSpecArr[i].Bell = Convert.ToChar(tempLine[0]);
+                    MicStreamVM.DetectionSpecArr[i].Frequency = Convert.ToInt32(tempLine[1]);
+                    MicStreamVM.DetectionSpecArr[i].AmplitudeLow = Convert.ToInt32(tempLine[2]);
+                    MicStreamVM.DetectionSpecArr[i].AmplitudeHigh = Convert.ToInt32(tempLine[3]);
+                    MicStreamVM.DetectionSpecArr[i].MinTimeBetweenDetectionsMs = Convert.ToInt32(tempLine[4]);
+                    MicStreamVM.DetectionSpecArr[i].Key = Convert.ToChar(tempLine[5]);
 
                     i++;
                 }
