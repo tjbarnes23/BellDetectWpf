@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BellDetectWpf.ViewModels.Transcribe
+namespace BellDetectWpf.ViewModels.MicStream
 {
-    public static partial class C_Transcribe
+    public static partial class C_MicStream
     {
-        public static void StopTranscribing()
+        public static void StopAudioStream()
         {
             StringBuilder sb;
             byte[] row;

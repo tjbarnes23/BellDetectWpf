@@ -13,7 +13,14 @@ namespace BellDetectWpf.ViewModels.Transcribe
     {
         public static void InitializeTranscriptionArr()
         {
-            TranscribeVM.TranscriptionArr = new ObservableCollection<Row>();
+            TranscribeVM.TranscriptionArr = new ObservableCollection<Row>
+            {
+                new Row()
+            };
+
+            TranscribeVM.BlowCount = 0;
+            TranscribeVM.CurrRowNum = 0;
+            TranscribeVM.CurrPlace = 0;
         }
     }
 }

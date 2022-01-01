@@ -13,9 +13,9 @@ namespace BellDetectWpf.ViewModels.MicStream
     {
         public static void InitializeLastDetection()
         {
-            MicStreamVM.LastDetectionArr = new TimeSpan[4];
+            MicStreamVM.LastDetectionArr = new TimeSpan[12];
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 12; i++)
             {
                 MicStreamVM.LastDetectionArr[i] = new TimeSpan(0);
             }

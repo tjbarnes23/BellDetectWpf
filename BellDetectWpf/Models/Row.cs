@@ -210,5 +210,47 @@ namespace BellDetectWpf.Models
                 }
             }
         }
+
+        public char this[int index]
+        {
+            get
+            {
+                return index switch
+                {
+                    0 => p1,
+                    1 => p2,
+                    2 => p3,
+                    3 => p4,
+                    4 => p5,
+                    5 => p6,
+                    6 => p7,
+                    7 => p8,
+                    8 => p9,
+                    9 => p0,
+                    10 => pE,
+                    11 => pT,
+                    _ => p1
+                };
+            }
+            set
+            {
+                switch (index)
+                {
+                    case 0: P1 = value; break;
+                    case 1: P2 = value; break;
+                    case 2: P3 = value; break;
+                    case 3: P4 = value; break;
+                    case 4: P5 = value; break;
+                    case 5: P6 = value; break;
+                    case 6: P7 = value; break;
+                    case 7: P8 = value; break;
+                    case 8: P9 = value; break;
+                    case 9: P0 = value; break;
+                    case 10: PE = value; break;
+                    case 11: PT = value; break;
+                    default: P1 = value; break;
+                };
+            }
+        }
     }
 }

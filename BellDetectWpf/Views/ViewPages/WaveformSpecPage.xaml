@@ -66,8 +66,7 @@
 
         <!-- Data grid -->
         
-        <DataGrid Name="WaveformSpecDataGrid"
-                Grid.Row="4" Grid.Column="0"
+        <DataGrid Grid.Row="4" Grid.Column="0"
                 RowHeight="25"
                 CanUserAddRows="False"
                 Margin="5, 5, 5, 5"

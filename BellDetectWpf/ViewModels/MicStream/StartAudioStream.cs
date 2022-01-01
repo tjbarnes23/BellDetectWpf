@@ -4,14 +4,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.Enums;
 using BellDetectWpf.ViewModels.FFT;
+using BellDetectWpf.ViewModels.Transcribe;
 using NAudio.Wave;
 
-namespace BellDetectWpf.ViewModels.Transcribe
+namespace BellDetectWpf.ViewModels.MicStream
 {
-    public static partial class C_Transcribe
+    public static partial class C_MicStream
     {
-        public static void StartTranscribing()
+        public static void StartAudioStream()
         {
             // Set up NAudio variables
             MicStreamVM.waveIn = new();
@@ -46,7 +48,13 @@ namespace BellDetectWpf.ViewModels.Transcribe
             C_FFT.InitializeFFT();
 
             // Initialize last detection array
-            // InitializeLastDetection();
+            InitializeLastDetection();
+
+            // If output is transcription, initialize transcription array
+            if (MicStreamVM.Output == OutputEnum.Transcription)
+            {
+                C_Transcribe.InitializeTranscriptionArr(); 
+            }
 
             // Initialize stopwatch
             MicStreamVM.SW = new Stopwatch();
@@ -57,7 +65,7 @@ namespace BellDetectWpf.ViewModels.Transcribe
 
         public static void MicDataAvailable(object sender, WaveInEventArgs e)
         {
-            // C_MicStream.RunMicFFT(e.Buffer, e.BytesRecorded);
+            C_MicStream.RunAudioFFT(e.Buffer, e.BytesRecorded);
         }
     }
 }

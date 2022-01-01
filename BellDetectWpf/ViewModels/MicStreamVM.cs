@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using BellDetectWpf.Enums;
 using BellDetectWpf.Models;
 using BellDetectWpf.ViewModels.MicStream;
 using BellDetectWpf.ViewModels.Shared;
@@ -24,17 +25,13 @@ namespace BellDetectWpf.ViewModels
         internal static WaveFormat waveFormat;
         
         public static Dictionary<int, string> SourceDict { get; set; }
-
         public static ObservableCollection<DetectionSpec> DetectionSpecArr { get; set; }
-
         public static Stopwatch SW { get; set; }
         public static TimeSpan[] LastDetectionArr { get; set; }
-
         public static double[,] DetectionArr { get; set; }
         public static List<double[]> ResultArr { get; set; }
-
+        public static OutputEnum Output { get; set; }
         
-
         public static int SourceId
         {
             get
@@ -88,18 +85,19 @@ namespace BellDetectWpf.ViewModels
 
         public static async Task StartStop()
         {
-            if (StartStopTxt == "Detect / generate key presses")
+            if (StartStopTxt == "Detect & generate key presses")
             {
+                Output = OutputEnum.KeyPress;
                 await C_Shared.Status("Listening for bell strikes", "red", 10, false);
                 StartStopTxt = "Stop detecting";
                 
-                C_MicStream.StartMicStream();
+                C_MicStream.StartAudioStream();
             }
             else
             {
                 await C_Shared.Status(string.Empty, "black", 10, false);
-                C_MicStream.StopMicStream();
-                StartStopTxt = "Detect / generate key presses";
+                C_MicStream.StopAudioStream();
+                StartStopTxt = "Detect & generate key presses";
             }
         }
     }

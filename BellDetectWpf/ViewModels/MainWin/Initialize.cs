@@ -28,9 +28,6 @@ namespace BellDetectWpf.ViewModels.MainWin
             // Populate zeros into detection spec array
             C_MicStream.InitializeDetectionSpecArr();
 
-            // Initialize transcription array
-            C_Transcribe.InitializeTranscriptionArr();
-
             // Set default file path names
             WaveformSpecVM.FilePathName = string.Empty;
             WaveformVM.FilePathName = string.Empty;
@@ -47,7 +44,7 @@ namespace BellDetectWpf.ViewModels.MainWin
             KeyPressVM.StartStopTxt = "Start key presses";
 
             // Default text for mic stream button
-            MicStreamVM.StartStopTxt = "Detect / generate key presses";
+            MicStreamVM.StartStopTxt = "Detect & generate key presses";
 
             // Default number of bells for transcription
             TranscribeVM.Stage = StageEnum.Eight;
