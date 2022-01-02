@@ -19,7 +19,7 @@ namespace BellDetectWpf.ViewModels.Transcribe
 
             if (saveDlg.ShowDialog() == true)
             {
-                MicStreamVM.FilePathName = saveDlg.FileName;
+                TranscribeVM.FilePathName = saveDlg.FileName;
                 await WriteTranscription();
             }
         }

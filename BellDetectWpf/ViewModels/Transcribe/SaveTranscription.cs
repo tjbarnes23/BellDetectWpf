@@ -12,7 +12,7 @@ namespace BellDetectWpf.ViewModels.Transcribe
     {
         public static async Task SaveTranscription()
         {
-            if (string.IsNullOrEmpty(MicStreamVM.FilePathName))
+            if (string.IsNullOrEmpty(TranscribeVM.FilePathName))
             {
                 SaveFileDialog saveDlg = new SaveFileDialog
                 {
@@ -22,7 +22,7 @@ namespace BellDetectWpf.ViewModels.Transcribe
 
                 if (saveDlg.ShowDialog() == true)
                 {
-                    MicStreamVM.FilePathName = saveDlg.FileName;
+                    TranscribeVM.FilePathName = saveDlg.FileName;
                     await WriteTranscription();
                 }
             }

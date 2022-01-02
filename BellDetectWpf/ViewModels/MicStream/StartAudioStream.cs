@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BellDetectWpf.Enums;
 using BellDetectWpf.ViewModels.FFT;
+using BellDetectWpf.ViewModels.MainWin;
 using BellDetectWpf.ViewModels.Transcribe;
 using NAudio.Wave;
 
@@ -53,7 +54,8 @@ namespace BellDetectWpf.ViewModels.MicStream
             // If output is transcription, initialize transcription array
             if (MicStreamVM.Output == OutputEnum.Transcription)
             {
-                C_Transcribe.InitializeTranscriptionArr(); 
+                C_Transcribe.InitializeTranscriptionArr();
+                MainWinVM.Tp.TranscriptionDataGrid.ItemsSource = TranscribeVM.TranscriptionArr;
             }
 
             // Initialize stopwatch
@@ -65,7 +67,7 @@ namespace BellDetectWpf.ViewModels.MicStream
 
         public static void MicDataAvailable(object sender, WaveInEventArgs e)
         {
-            C_MicStream.RunAudioFFT(e.Buffer, e.BytesRecorded);
+            RunAudioFFT(e.Buffer, e.BytesRecorded);
         }
     }
 }

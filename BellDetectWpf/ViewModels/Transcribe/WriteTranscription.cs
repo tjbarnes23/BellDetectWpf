@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.Enums;
+using BellDetectWpf.Models;
 using BellDetectWpf.ViewModels.Shared;
 
 namespace BellDetectWpf.ViewModels.Transcribe
@@ -13,64 +15,46 @@ namespace BellDetectWpf.ViewModels.Transcribe
         public static async Task WriteTranscription()
         {
             StringBuilder sb;
-            bool hasNonZeros;
+            int numBells;
             byte[] row;
 
-            await C_Shared.Status("Saving bell detection specification...", "black", 10, false);
+            await C_Shared.Status("Saving transcription...", "black", 10, false);
 
-            // Check grid contains at least one row of non-zeros
-            hasNonZeros = false;
-
-            for (int i = 0; i < 12; i++)
+            // Check collection isn't null
+            if (TranscribeVM.TranscriptionArr == null)
             {
-                if (MicStreamVM.DetectionSpecArr[i].Bell != ' ' &&
-                        MicStreamVM.DetectionSpecArr[i].Frequency != 0 &&
-                        MicStreamVM.DetectionSpecArr[i].AmplitudeLow != 0 &&
-                        MicStreamVM.DetectionSpecArr[i].AmplitudeHigh != 0 &&
-                        MicStreamVM.DetectionSpecArr[i].MinTimeBetweenDetectionsMs != 0)
-                {
-                    hasNonZeros = true;
-                    break;
-                }
-            }
-
-            if (hasNonZeros == false)
-            {
-                await C_Shared.Status("Grid is empty. Bell detection specification not saved", "red", 7000, true);
+                await C_Shared.Status("Grid is empty. Transcription not saved", "red", 7000, true);
                 return;
             }
 
-            if (File.Exists(MicStreamVM.FilePathName))
+            if (File.Exists(TranscribeVM.FilePathName))
             {
-                File.Delete(MicStreamVM.FilePathName);
+                File.Delete(TranscribeVM.FilePathName);
             }
 
             // Create a new file     
-            using FileStream fs = File.Create(MicStreamVM.FilePathName);
+            using FileStream fs = File.Create(TranscribeVM.FilePathName);
 
             sb = new StringBuilder();
+            numBells = StageEnumExt.StageBells(TranscribeVM.Stage);
 
-            for (int i = 0; i < 12; i++)
+            foreach (Row transcriptionRow in TranscribeVM.TranscriptionArr)
             {
                 sb.Clear();
-                sb.Append(MicStreamVM.DetectionSpecArr[i].Bell);
-                sb.Append('\t');
-                sb.Append(MicStreamVM.DetectionSpecArr[i].Frequency);
-                sb.Append('\t');
-                sb.Append(MicStreamVM.DetectionSpecArr[i].AmplitudeLow);
-                sb.Append('\t');
-                sb.Append(MicStreamVM.DetectionSpecArr[i].AmplitudeHigh);
-                sb.Append('\t');
-                sb.Append(MicStreamVM.DetectionSpecArr[i].MinTimeBetweenDetectionsMs);
-                sb.Append('\t');
-                sb.Append(MicStreamVM.DetectionSpecArr[i].Key);
+
+                for (int i = 0; i < numBells; i++)
+                {
+                    sb.Append(transcriptionRow[i]);
+                    sb.Append('\t');
+                }
+
                 sb.Append('\n');
 
                 row = new UTF8Encoding(true).GetBytes(sb.ToString());
                 fs.Write(row, 0, row.Length);
             }
 
-            await C_Shared.Status("Bell detection specification saved", "black", 3000, true);
+            await C_Shared.Status("Transcription saved", "black", 3000, true);
         }
     }
 }

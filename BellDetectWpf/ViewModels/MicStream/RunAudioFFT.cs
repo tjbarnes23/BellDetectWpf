@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using BellDetectWpf.Enums;
 using BellDetectWpf.Models;
 using BellDetectWpf.ViewModels.FFT;
@@ -139,15 +140,20 @@ namespace BellDetectWpf.ViewModels.MicStream
                                 }
                                 else
                                 {
+                                    MainWinVM.Logger.Info("BlowCount: " + TranscribeVM.BlowCount.ToString());
+                                    MainWinVM.Logger.Info("RowNum: " + TranscribeVM.CurrRowNum.ToString());
+                                    MainWinVM.Logger.Info("Place: " + TranscribeVM.CurrPlace.ToString());
+                                    MainWinVM.Logger.Info("NumItems in Arr: " + TranscribeVM.TranscriptionArr.Count.ToString());
+
                                     TranscribeVM.TranscriptionArr[TranscribeVM.CurrRowNum][TranscribeVM.CurrPlace] = MicStreamVM.DetectionSpecArr[i].Bell;
                                     TranscribeVM.BlowCount++;
                                     TranscribeVM.CurrPlace = TranscribeVM.BlowCount % StageEnumExt.StageBells(TranscribeVM.Stage);
 
                                     if (TranscribeVM.CurrPlace == 0)
                                     {
-
-                                        TranscribeVM.TranscriptionArr.Add(new Row());
                                         TranscribeVM.CurrRowNum++;
+                                        Application.Current.Dispatcher.BeginInvoke(new Action(() => TranscribeVM.TranscriptionArr.Add(new Row())));
+                                        Application.Current.Dispatcher.BeginInvoke(new Action(() => MainWinVM.Tp.TranscriptionDataGrid.ScrollIntoView(MainWinVM.Tp.TranscriptionDataGrid.Items[^1])));
                                     }
                                 }
 

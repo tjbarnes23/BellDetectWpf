@@ -102,7 +102,7 @@
                 ColumnWidth="*"
                 Background="DarkGray" RowBackground="Silver" AlternatingRowBackground="Gainsboro"
                 BorderBrush="Black" BorderThickness="2"
-                ItemsSource="{Binding Path=(vm:TranscribeVM.TranscriptionArr), Mode=TwoWay, 
+                ItemsSource="{Binding (vm:TranscribeVM.TranscriptionArr), Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}">
         </DataGrid>
 
