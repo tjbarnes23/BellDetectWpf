@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:BellDetectWpf.Views.ViewPages"
         xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
-        xmlns:en="clr-namespace:BellDetectWpf.Enums"
+        xmlns:en="clr-namespace:BellDetectWpf.Enums" 
         mc:Ignorable="d"
         d:DesignWidth="800"
         d:DesignHeight="600">
@@ -92,7 +92,9 @@
 
         <!-- Data grid -->
         
-        <DataGrid Grid.Row="4" Grid.Column="0"
+        <DataGrid x:Name="TranscriptionDataGrid"
+                Grid.Row="4" Grid.Column="0"
+                Width="400"
                 RowHeight="25"
                 CanUserAddRows="False"
                 Margin="5, 5, 5, 5"
