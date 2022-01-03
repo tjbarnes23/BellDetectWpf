@@ -24,7 +24,7 @@ namespace BellDetectWpf.ViewModels.MicStream
             for (int i = 0; i < 12; i++)
             {
                 if (MicStreamVM.DetectionSpecArr[i].Bell != ' ' &&
-                        MicStreamVM.DetectionSpecArr[i].Frequency != 0 &&
+                        MicStreamVM.DetectionSpecArr[i].FrequencyBin != 0 &&
                         MicStreamVM.DetectionSpecArr[i].AmplitudeLow != 0 &&
                         MicStreamVM.DetectionSpecArr[i].AmplitudeHigh != 0 &&
                         MicStreamVM.DetectionSpecArr[i].MinTimeBetweenDetectionsMs != 0)
@@ -55,7 +55,7 @@ namespace BellDetectWpf.ViewModels.MicStream
                 sb.Clear();
                 sb.Append(MicStreamVM.DetectionSpecArr[i].Bell);
                 sb.Append('\t');
-                sb.Append(MicStreamVM.DetectionSpecArr[i].Frequency);
+                sb.Append(MicStreamVM.DetectionSpecArr[i].FrequencyBin);
                 sb.Append('\t');
                 sb.Append(MicStreamVM.DetectionSpecArr[i].AmplitudeLow);
                 sb.Append('\t');

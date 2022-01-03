@@ -20,7 +20,7 @@ namespace BellDetectWpf.ViewModels.MicStream
                 MicStreamVM.DetectionSpecArr.Add(new DetectionSpec
                 {
                     Bell = ' ',
-                    Frequency = 0,
+                    FrequencyBin = 0,
                     AmplitudeLow = 0,
                     AmplitudeHigh = 0,
                     MinTimeBetweenDetectionsMs = 0,

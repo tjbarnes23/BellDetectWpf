@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.Enums;
 
 namespace BellDetectWpf.ViewModels.MicStream
 {
@@ -16,34 +17,50 @@ namespace BellDetectWpf.ViewModels.MicStream
             int count;
             double time;
             double freq;
-            string micFFT;
+            string audioFFT;
 
-            micFFT = @"C:\ProgramData\BellDetect\micFFTresults.txt";
+            audioFFT = @"C:\ProgramData\BellDetect\audioFFTresults.txt";
 
             // Stop recording if WaveIn exists
-            if (MicStreamVM.waveIn != null)
+            if (MicStreamVM.Output == OutputEnum.KeyPress)
             {
-                MicStreamVM.waveIn.StopRecording();
+                if (waveIn != null)
+                {
+                    waveIn.StopRecording();
+                    waveIn.Dispose();
+                }
+            }
+            else
+            {
+                if (capture != null)
+                {
+                    capture.StopRecording();
+                    capture.Dispose();
+                }
             }
 
             // Delete file if it already exists
-            if (File.Exists(micFFT))
+            if (File.Exists(audioFFT))
             {
-                File.Delete(micFFT);
+                File.Delete(audioFFT);
             }
 
             // Create a new file     
-            using FileStream fs = File.Create(micFFT);
+            using FileStream fs = File.Create(audioFFT);
 
             // Write header row
             sb = new StringBuilder();
-            sb.Append("Hz \\ sec\t");
+            sb.Append("Bin #");
+            sb.Append('\t');
+            
+            sb.Append("Hz | sec");
+            sb.Append('\t');
 
             count = 0;
             
             foreach (double[] fft in MicStreamVM.ResultArr)
             {
-                time = Math.Round(((double)FFTVM.N / 20480) * count, 3);
+                time = Math.Round(((double)FFTVM.N / MicStreamVM.SampleFrequency) * count, 3);
                 sb.Append(time);
                 sb.Append('\t');
                 count++;
@@ -60,7 +77,10 @@ namespace BellDetectWpf.ViewModels.MicStream
             {
                 sb.Clear();
 
-                freq = Math.Round(((double)20480 / FFTVM.N) * i, 1);
+                sb.Append(i);
+                sb.Append('\t');
+
+                freq = Math.Round(((double)MicStreamVM.SampleFrequency / FFTVM.N) * i, 1);
                 sb.Append(freq);
                 sb.Append('\t');
 

@@ -5,7 +5,7 @@ namespace BellDetectWpf.Models
     public class DetectionSpec : INotifyPropertyChanged
     {
         private char bell;
-        private int frequency;
+        private int frequencyBin;
         private int amplitudeLow;
         private int amplitudeHigh;
         private int minTimeBetweenDetectionsMs;
@@ -29,18 +29,18 @@ namespace BellDetectWpf.Models
             }
         }
 
-        public int Frequency
+        public int FrequencyBin
         {
             get
             {
-                return frequency;
+                return frequencyBin;
             }
             set
             {
-                if (frequency != value)
+                if (frequencyBin != value)
                 {
-                    frequency = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Frequency)));
+                    frequencyBin = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FrequencyBin)));
                 }
             }
         }

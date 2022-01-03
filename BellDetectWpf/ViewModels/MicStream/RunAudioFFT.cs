@@ -20,9 +20,8 @@ namespace BellDetectWpf.ViewModels.MicStream
         public const byte RKey = 0x13;
         public const byte UKey = 0x16;
 
-        public static void RunAudioFFT(byte[] buffer, int bytesRecorded)
+        public static void RunAudioFFT()
         {
-            int bytePos;
             short amp;
             double amplitude;
             double[] fftResult;
@@ -34,9 +33,9 @@ namespace BellDetectWpf.ViewModels.MicStream
             // For testing: log number of bytes recorded
             // MainWinVM.Logger.Info("Bytes Recorded: " + bytesRecorded.ToString());
 
-            // Don't run FFT if the buffer is not 2048 bytes in length
-            // A shorter buffer will likely be received when the recording is stopped
-            if (bytesRecorded != 2048)
+            // This method should only be called when the buffer has at least FFTVM.N items,
+            // but double check that here
+            if (MicStreamVM.AudioBuffer.Count < FFTVM.N)
             {
                 return;
             }
@@ -50,17 +49,12 @@ namespace BellDetectWpf.ViewModels.MicStream
                 }                
             }
             
-            // Copy items in the buffer into XRe array, and set XIm array values to zero
-            bytePos = 0;
-
+            // Pop items in the buffer into XRe array, and set XIm array values to zero
             for (int i = 0; i < FFTVM.N; i++)
             {
-                // Note: little endianess
-                amp = BitConverter.ToInt16(buffer, bytePos);
+                amp = MicStreamVM.AudioBuffer.Dequeue();
                 FFTVM.XRe[i] = amp;
                 FFTVM.XIm[i] = 0;
-
-                bytePos += 2;
             }
 
             // Run FFT
@@ -91,14 +85,14 @@ namespace BellDetectWpf.ViewModels.MicStream
             // Detect whether bells have struck
             for (int i = 0; i < 12; i++)
             {
-                // Frequency in detection array must be non-zero
-                if (MicStreamVM.DetectionSpecArr[i].Frequency != 0)
+                // Frequency bin in detection array must be non-zero
+                if (MicStreamVM.DetectionSpecArr[i].FrequencyBin != 0)
                 {
 
                     // if output is KeyPress, Key must be populated
                     if (MicStreamVM.Output == OutputEnum.Transcription || MicStreamVM.DetectionSpecArr[i].Key != ' ')
                     {
-                        idx = MicStreamVM.DetectionSpecArr[i].Frequency / 20;
+                        idx = MicStreamVM.DetectionSpecArr[i].FrequencyBin;
 
                         // Amplitude tests
                         if (MicStreamVM.DetectionArr[idx, 2] > MicStreamVM.DetectionSpecArr[i].AmplitudeHigh &&

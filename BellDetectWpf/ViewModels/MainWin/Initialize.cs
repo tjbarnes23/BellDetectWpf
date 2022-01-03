@@ -5,6 +5,7 @@ using BellDetectWpf.ViewModels.MicStream;
 using BellDetectWpf.ViewModels.Transcribe;
 using BellDetectWpf.ViewModels.WaveformSpec;
 using BellDetectWpf.Views;
+using NAudio.CoreAudioApi;
 using NLog;
 
 namespace BellDetectWpf.ViewModels.MainWin
@@ -13,6 +14,8 @@ namespace BellDetectWpf.ViewModels.MainWin
     {
         public static void Initialize()
         {
+            // int count;
+
             // Set up NLog
             MainWinVM.Logger = LogManager.GetCurrentClassLogger();
 
@@ -48,6 +51,23 @@ namespace BellDetectWpf.ViewModels.MainWin
 
             // Default number of bells for transcription
             TranscribeVM.Stage = StageEnum.Eight;
+
+            // Get list of Wasapi devies
+            MicStreamVM.SourceDict = new();
+            // count = 0;
+
+            // *** For now, provide two options: Microphone and Loopback
+            MicStreamVM.SourceDict.Add(0, "Microphone");
+            MicStreamVM.SourceDict.Add(1, "Loopback");
+
+            /*
+            MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
+            foreach (MMDevice device in enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active))
+            {
+                MicStreamVM.SourceDict.Add(count, device.FriendlyName);
+                count++;
+            }
+            */
 
             // Default text for transcribe button
             TranscribeVM.StartStopTxt = "Start transcribing";

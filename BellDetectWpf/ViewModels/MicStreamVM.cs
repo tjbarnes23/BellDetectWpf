@@ -20,9 +20,6 @@ namespace BellDetectWpf.ViewModels
         public static event EventHandler SourceIdChanged;
         public static event EventHandler FilePathNameChanged;
         public static event EventHandler StartStopTxtChanged;
-
-        internal static WaveInEvent waveIn;
-        internal static WaveFormat waveFormat;
         
         public static Dictionary<int, string> SourceDict { get; set; }
         public static ObservableCollection<DetectionSpec> DetectionSpecArr { get; set; }
@@ -31,7 +28,11 @@ namespace BellDetectWpf.ViewModels
         public static double[,] DetectionArr { get; set; }
         public static List<double[]> ResultArr { get; set; }
         public static OutputEnum Output { get; set; }
-        
+        public static int SampleFrequency { get; set; }
+        public static int SampleDepth { get; set; }
+        public static int NumChannels { get; set; }
+        public static Queue<short> AudioBuffer { get; set; }
+
         public static int SourceId
         {
             get
