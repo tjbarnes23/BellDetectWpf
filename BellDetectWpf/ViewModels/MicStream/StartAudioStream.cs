@@ -23,13 +23,14 @@ namespace BellDetectWpf.ViewModels.MicStream
         {
             if (MicStreamVM.SourceId == 0)
             {
-                // Initialize FFT variables
+                // Set parameters for audio stream
                 MicStreamVM.SampleFrequency = 20480;
                 MicStreamVM.SampleDepth = 16;
                 MicStreamVM.NumChannels = 1;
 
+                // Set FFT parameters
                 FFTVM.Log2N = 10;
-                FFTVM.N = 1024;
+                FFTVM.N = (uint)1 << (int)FFTVM.Log2N;
                 FFTVM.NA = 1; // Number of FFTs to be run
 
                 // Set up NAudio variables
@@ -43,25 +44,29 @@ namespace BellDetectWpf.ViewModels.MicStream
             }
             else
             {
-                MicStreamVM.SampleFrequency = 48000;
-
+                // Set FFT parameters
                 FFTVM.Log2N = 11;
-                FFTVM.N = 2048;
+                FFTVM.N = (uint)1 << (int)FFTVM.Log2N;
                 FFTVM.NA = 1; // Number of FFTs to be run
 
                 // Set up NAudio Wasapi variables
                 // *** For now, use the output device specified in Windows Sound settings ***
+                capture = new(); // Uses output device specified in Windows Sound settings
+                capture.DataAvailable += new EventHandler<WaveInEventArgs>(LoopBackDataAvailable);
+
                 // MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
                 // MMDeviceCollection deviceCollection = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
                 // MMDevice device = deviceCollection.FirstOrDefault(d => d.FriendlyName == MicStreamVM.SourceDict[MicStreamVM.SourceId]);
 
-                capture = new(); // Uses output device specified in Windows Sound settings
-                capture.DataAvailable += new EventHandler<WaveInEventArgs>(LoopBackDataAvailable);
+                // Obtain parameters for Wasapi audio stream
+                MicStreamVM.SampleFrequency = capture.WaveFormat.SampleRate;
+                MicStreamVM.SampleDepth = capture.WaveFormat.BitsPerSample;
+                MicStreamVM.NumChannels = capture.WaveFormat.Channels;
 
-                // For testing
-                MainWinVM.Logger.Info($"SampleRate: {capture.WaveFormat.SampleRate}");
-                MainWinVM.Logger.Info($"Bits per sample: {capture.WaveFormat.BitsPerSample}");
-                MainWinVM.Logger.Info($"Num channels: {capture.WaveFormat.Channels}");
+                // Log parameters used by Wasapi
+                MainWinVM.Logger.Info($"Sample rate: {MicStreamVM.SampleFrequency}");
+                MainWinVM.Logger.Info($"Sample depth: {MicStreamVM.SampleDepth}");
+                MainWinVM.Logger.Info($"Num channels: {MicStreamVM.NumChannels}");
                 MainWinVM.Logger.Info(string.Empty);
             }
 
