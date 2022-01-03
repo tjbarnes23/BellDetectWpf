@@ -69,8 +69,9 @@ namespace BellDetectWpf.ViewModels.MicStream
                 MicStreamVM.DetectionArr[i, 2] = Math.Round(amplitude, 0);
             }
 
-            // For the first 30 seconds of mic streaming only, add FFT result to the ResultArr list
-            if (MicStreamVM.SW.Elapsed.TotalSeconds < 30)
+            // Add FFT result to the ResultArr list
+            // Only do this for the first 60 seconds of audio streaming, or the first 8192 FFT results, whichever is less
+            if ((MicStreamVM.ResultArr.Count * FFTVM.N) / MicStreamVM.SampleFrequency < 60 && MicStreamVM.ResultArr.Count < 8192)
             {
                 fftResult = new double[FFTVM.N / 2];
 
@@ -134,11 +135,6 @@ namespace BellDetectWpf.ViewModels.MicStream
                                 }
                                 else
                                 {
-                                    MainWinVM.Logger.Info("BlowCount: " + TranscribeVM.BlowCount.ToString());
-                                    MainWinVM.Logger.Info("RowNum: " + TranscribeVM.CurrRowNum.ToString());
-                                    MainWinVM.Logger.Info("Place: " + TranscribeVM.CurrPlace.ToString());
-                                    MainWinVM.Logger.Info("NumItems in Arr: " + TranscribeVM.TranscriptionArr.Count.ToString());
-
                                     TranscribeVM.TranscriptionArr[TranscribeVM.CurrRowNum][TranscribeVM.CurrPlace] = MicStreamVM.DetectionSpecArr[i].Bell;
                                     TranscribeVM.BlowCount++;
                                     TranscribeVM.CurrPlace = TranscribeVM.BlowCount % StageEnumExt.StageBells(TranscribeVM.Stage);

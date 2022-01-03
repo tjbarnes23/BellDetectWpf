@@ -117,7 +117,6 @@ namespace BellDetectWpf.ViewModels.MicStream
 
             // Convert 2 bytes (16-bit signed int) into int16 and enqueue
             numBytes = e.BytesRecorded;
-            MainWinVM.Logger.Info($"Bytes recorded: {e.BytesRecorded}");
             bytePos = 0;
 
             for (int i = 0; i < numBytes / 2; i++)
@@ -144,36 +143,21 @@ namespace BellDetectWpf.ViewModels.MicStream
             // Convert 4 bytes (32-bit float) into int16 and enqueue
             // Note that 2 channels are received, so ignore every other 8 bytes
             numBytes = e.BytesRecorded;
-            
-            MainWinVM.Logger.Info($"Bytes recorded: {e.BytesRecorded}");
-            
-            // Check num bytes recorded is divisible by 8
-            if (numBytes % 8 != 0)
-            {
-                MainWinVM.Logger.Info("Warning: Bytes recorded are not divisible by 8");
-            }
-
             bytePos = 0;
 
             for (int i = 0; i < numBytes / 8; i++)
             {
                 flAmp = BitConverter.ToSingle(e.Buffer, bytePos);
-                bytePos += 8;
-
                 amp = (short)(flAmp * 32767);
+                bytePos += 8;
+                
                 MicStreamVM.AudioBuffer.Enqueue(amp);
             }
-
-            MainWinVM.Logger.Info($"Queue length before FFT: {MicStreamVM.AudioBuffer.Count}");
 
             while (MicStreamVM.AudioBuffer.Count >= FFTVM.N)
             {
                 RunAudioFFT();
-                MainWinVM.Logger.Info($"Queue length after FFT: {MicStreamVM.AudioBuffer.Count}");
             }
-
-            MainWinVM.Logger.Info($"Queue length on exit: {MicStreamVM.AudioBuffer.Count}");
-            MainWinVM.Logger.Info(string.Empty);
         }
     }
 }

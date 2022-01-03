@@ -134,7 +134,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial" FontSize="13">
                 <TextBlock TextWrapping="Wrap" LineHeight="20"
-                        Text="{Binding Path=(vm:MicStreamVM.FilePathName), Mode=OneWay}">
+                        Text="{Binding Path=(vm:TranscribeVM.FilePathName), Mode=OneWay}">
                 </TextBlock>
             </Label>
         </Grid>
