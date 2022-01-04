@@ -70,8 +70,8 @@ namespace BellDetectWpf.ViewModels.MicStream
             }
 
             // Add FFT result to the ResultArr list
-            // Only do this for the first 60 seconds of audio streaming, or the first 8192 FFT results, whichever is less
-            if ((MicStreamVM.ResultArr.Count * FFTVM.N) / MicStreamVM.SampleFrequency < 60 && MicStreamVM.ResultArr.Count < 8192)
+            // Limit the number of items in ResultArr to 16380 so it can fit into an Excel worksheet
+            if (MicStreamVM.ResultArr.Count < 16380)
             {
                 fftResult = new double[FFTVM.N / 2];
 
