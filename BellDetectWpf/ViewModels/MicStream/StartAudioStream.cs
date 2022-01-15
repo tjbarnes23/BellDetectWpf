@@ -29,7 +29,7 @@ namespace BellDetectWpf.ViewModels.MicStream
                 MicStreamVM.NumChannels = 1;
 
                 // Set FFT parameters
-                FFTVM.Log2N = 10;
+                FFTVM.Log2N = 11;
                 FFTVM.N = (uint)1 << (int)FFTVM.Log2N;
                 FFTVM.NA = 1; // Number of FFTs to be run
 
@@ -38,7 +38,7 @@ namespace BellDetectWpf.ViewModels.MicStream
                 waveFormat = new(MicStreamVM.SampleFrequency, MicStreamVM.SampleDepth, MicStreamVM.NumChannels);
                 waveIn.DeviceNumber = 0; // Uses input device specified in Windows Sound settings
                 waveIn.WaveFormat = waveFormat;
-                waveIn.BufferMilliseconds = 50;
+                waveIn.BufferMilliseconds = 100;
                 waveIn.NumberOfBuffers = 2;
                 waveIn.DataAvailable += new EventHandler<WaveInEventArgs>(MicDataAvailable);
             }
