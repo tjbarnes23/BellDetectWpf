@@ -19,7 +19,75 @@ namespace BellDetectWpf.ViewModels.MicStream
             double freq;
             string audioFFT;
 
-            audioFFT = @"C:\ProgramData\BellDetect\audioFFTresults.txt";
+            DateTime currTime = DateTime.Now;
+            sb = new StringBuilder();
+            sb.Append(@"C:\ProgramData\BellDetect\audioFFTresults");
+            sb.Append('-');
+            sb.Append(currTime.Year);
+            sb.Append('-');
+
+            if (currTime.Month < 10)
+            {
+                sb.Append('0');
+                sb.Append(currTime.Month);
+            }
+            else
+            {
+                sb.Append(currTime.Month);
+            }
+
+            sb.Append('-');
+
+            if (currTime.Day < 10)
+            {
+                sb.Append('0');
+                sb.Append(currTime.Day);
+            }
+            else
+            {
+                sb.Append(currTime.Day);
+            }
+
+            sb.Append('-');
+
+            if (currTime.Hour < 10)
+            {
+                sb.Append('0');
+                sb.Append(currTime.Hour);
+            }
+            else
+            {
+                sb.Append(currTime.Hour);
+            }
+
+            sb.Append('h');
+
+            if (currTime.Minute < 10)
+            {
+                sb.Append('0');
+                sb.Append(currTime.Minute);
+            }
+            else
+            {
+                sb.Append(currTime.Minute);
+            }
+
+            sb.Append('m');
+
+            if (currTime.Second < 10)
+            {
+                sb.Append('0');
+                sb.Append(currTime.Second);
+            }
+            else
+            {
+                sb.Append(currTime.Second);
+            }
+
+            sb.Append('s');
+            sb.Append(".txt");
+
+            audioFFT = sb.ToString();
 
             // Stop recording if WaveIn exists
             if (MicStreamVM.Output == OutputEnum.KeyPress)
