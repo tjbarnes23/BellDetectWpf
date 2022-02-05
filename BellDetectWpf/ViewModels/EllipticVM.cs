@@ -14,6 +14,10 @@ namespace BellDetectWpf.ViewModels
 
         public static double[] FilteredWaveformArrDbl { get; set; } // Double array to use while processing
 
+        public static short[,] FilteredWaveformArr { get; set; } // Array to hold filtered waveforms for each bell
+
+        public static ushort NumChannels { get; set; }
+
         public static string FilePathName
         {
             get
