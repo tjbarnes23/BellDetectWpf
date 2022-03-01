@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BellSamples\" />
     <Folder Include="ViewModels\Main\" />
   </ItemGroup>
 
@@ -39,6 +38,9 @@
     <Compile Update="Views\ViewPages\TranscribePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ViewPages\LoadWavPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +53,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ViewPages\TranscribePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ViewPages\LoadWavPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

@@ -17,6 +17,5 @@
         </LinearGradientBrush>
     </Window.Background>
 
-    <Frame x:Name="MainFrame" x:FieldModifier="public" NavigationUIVisibility="Hidden"
-            ContentRendered="MainFrame_ContentRendered" />
+    <Frame x:Name="MainFrame" x:FieldModifier="public" NavigationUIVisibility="Hidden" />
 </Window>

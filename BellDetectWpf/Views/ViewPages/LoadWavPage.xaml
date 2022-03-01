@@ -1,0 +1,241 @@
+﻿<Page x:Class="BellDetectWpf.Views.LoadWavPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:BellDetectWpf.Views"
+        xmlns:vm="clr-namespace:BellDetectWpf.ViewModels" 
+        mc:Ignorable="d"  
+        d:DataContext="{d:DesignInstance Type=vm:LoadWavVM}"
+        d:DesignWidth="800"
+        d:DesignHeight="600">
+    
+    <Grid MinWidth="800" MaxWidth="1200"
+            MinHeight="600" MaxHeight="900">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+            Bell Detect
+        </TextBlock>
+
+        <!-- Waveform -->
+        
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+            Load .wav file
+        </TextBlock>
+
+        <!-- Description -->
+        
+        <TextBlock Grid.Row="2" Grid.Column="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                TextWrapping="Wrap" LineHeight="20">
+            This page will check whether a .wav file is in the proper format, and if so, load the .wav file.
+        </TextBlock>
+
+        <!-- Create or load waveform -->
+        
+        <Button Grid.Row="3" Grid.Column="0"
+                Width="180" Height="40"
+                Padding="10, 0, 10, 0"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="Load_Click">
+            <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                Load .wav file
+            </TextBlock>
+        </Button>
+
+        <!-- File name -->
+
+        <Grid Grid.Row="4" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                File name:
+            </TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    FontFamily="Arial" FontSize="13"
+                    TextWrapping="Wrap" LineHeight="20"
+                    Text="{Binding Path=FilePathName, Mode=OneWay}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Status:
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    FontFamily="Arial" FontSize="13"
+                    TextWrapping="Wrap" LineHeight="20"
+                    Text="{Binding Path=Status, Mode=OneWay}">
+            </TextBlock>
+        </Grid>
+
+        <!-- Display meta data from .wav file: Row 1 -->
+
+        <Grid Grid.Row="5" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.3*" />
+                <ColumnDefinition Width="0.7*" />
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Sample frequency (Hz):
+            </TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Text="{Binding Path=SampleFrequency, Mode=OneWay}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="2"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Sample depth (bits):
+            </TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="3"
+                    Margin="10, 0, 0, 0"
+                    VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Text="{Binding Path=SampleDepth, Mode=OneWay}">
+            </TextBlock>
+
+            <!-- Display meta data from .wav file: Row 2 -->
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Number of channels:
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Text="{Binding Path=NumChannels, Mode=OneWay}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="2"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Sample size all channels (bytes):
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="3"
+                    Margin="10, 0, 0, 0"
+                    VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Text="{Binding Path=BlockAlignment, Mode=OneWay}">
+            </TextBlock>
+
+            <!-- Display meta data from .wav file: Row 3 -->
+
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Data rate (bytes per second):
+            </TextBlock>
+
+            <TextBlock Grid.Row="2" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Text="{Binding Path=DataRate, Mode=OneWay}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="2" Grid.Column="2"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Wav file data size (bytes):
+            </TextBlock>
+
+            <TextBlock Grid.Row="2" Grid.Column="3"
+                    Margin="10, 0, 0, 0"
+                    VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Text="{Binding Path=DataSize, Mode=OneWay}">
+            </TextBlock>
+
+            <!-- Display meta data from .wav file: Row 4 -->
+
+            <TextBlock Grid.Row="3" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Wav file length (seconds):
+            </TextBlock>
+
+            <TextBlock Grid.Row="3" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Text="{Binding Path=LengthSeconds, Mode=OneWay}">
+            </TextBlock>
+        </Grid>
+
+        <Button Grid.Row="6" Grid.Column="0"
+                Width="180" Height="40"
+                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                Click="Return_Click">
+            Return to main page
+        </Button>
+    </Grid>
+</Page>

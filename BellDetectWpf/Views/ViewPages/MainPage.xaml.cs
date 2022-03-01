@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
 using BellDetectWpf.ViewModels.MainWin;
 
-namespace BellDetectWpf.Views.ViewPages
+namespace BellDetectWpf.Views
 {
     public partial class MainPage : Page
     {
@@ -46,6 +46,11 @@ namespace BellDetectWpf.Views.ViewPages
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             C_MainWin.Exit();
+        }
+
+        private void LoadWav_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.MW.MainFrame.Navigate(new LoadWavPage());
         }
     }
 }
