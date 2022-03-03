@@ -1,14 +1,13 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using BellDetectWpf.Repository;
-using BellDetectWpf.ViewModels.Shared;
 using Microsoft.Win32;
 
 namespace BellDetectWpf.ViewModels
 {
     public partial class LoadWavVM
     {
-        public void LoadWav()
+        public async Task LoadWav()
         {
             string riff;
             uint fileSize;
@@ -26,11 +25,12 @@ namespace BellDetectWpf.ViewModels
 
             if (openDlg.ShowDialog() == true)
             {
-                Status = "Loading waveform...";
-                FilePathName = openDlg.FileName;
+                WavFilePathName = openDlg.FileName;
+                LoadWavStatus = "Loading waveform...";
+                await Task.Delay(25);
 
                 // Read .wav file
-                using FileStream f = new FileStream(FilePathName, FileMode.Open);
+                using FileStream f = new FileStream(WavFilePathName, FileMode.Open);
                 using BinaryReader br = new BinaryReader(f);
 
                 // Read 'RIFF' (4 bytes)
@@ -88,7 +88,7 @@ namespace BellDetectWpf.ViewModels
                         (SampleDepth != 8 && SampleDepth != 16 && SampleDepth != 24 && SampleDepth != 32) ||
                         data != "data")
                 {
-                    Status = "Not a valid .wav file format. File not loaded.";
+                    LoadWavStatus = "Not a valid .wav file format. File not loaded.";
                 }
                 else
                 { 
@@ -108,7 +108,8 @@ namespace BellDetectWpf.ViewModels
 
                             for (int j = 0; j < NumChannels; j++)
                             {
-                                Repo.WavDataInt[j, i] = br.ReadByte();
+                                byte a = br.ReadByte();
+                                Repo.WavDataInt[j, i] = a - 128; // 8-bit wav files use offset binary, not two's complement
                             }
                         }
                     }
@@ -173,8 +174,9 @@ namespace BellDetectWpf.ViewModels
                             }
                         }
                     }
-                    
-                    Status = "Valid .wav file format. File loaded.";
+
+                    LoadWavStatus = "Valid .wav file format. File loaded.";
+                    await Task.Delay(25);
                 }
             }
         }

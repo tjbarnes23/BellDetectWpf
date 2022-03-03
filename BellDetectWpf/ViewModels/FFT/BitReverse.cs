@@ -1,6 +1,6 @@
-﻿namespace BellDetectWpf.ViewModels.FFT
+﻿namespace BellDetectWpf.ViewModels
 {
-    public static partial class C_FFT
+    public partial class FFTVM
     {
         // Do bit reversal of specified number of places of an uint. For example, 1101 bit-reversed is 1011
         // Bits in the uint that are higher than numBits are left unchanged

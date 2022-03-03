@@ -2,8 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using BellDetectWpf.ViewModels;
-using BellDetectWpf.ViewModels.Waveform;
-using BellDetectWpf.Views.ViewPages;
 using Microsoft.Win32;
 
 namespace BellDetectWpf.Views
@@ -19,9 +17,9 @@ namespace BellDetectWpf.Views
             this.DataContext = viewModel;
         }
 
-        private void Load_Click(object sender, RoutedEventArgs e)
+        private async void Load_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.LoadWav();
+            await viewModel.LoadWav();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

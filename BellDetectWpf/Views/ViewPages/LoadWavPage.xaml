@@ -89,7 +89,7 @@
                     HorizontalAlignment="Left" VerticalAlignment="Center"
                     FontFamily="Arial" FontSize="13"
                     TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=FilePathName, Mode=OneWay}">
+                    Text="{Binding Path=WavFilePathName, Mode=OneWay}">
             </TextBlock>
 
             <TextBlock Grid.Row="1" Grid.Column="0"
@@ -105,7 +105,7 @@
                     HorizontalAlignment="Left" VerticalAlignment="Center"
                     FontFamily="Arial" FontSize="13"
                     TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=Status, Mode=OneWay}">
+                    Text="{Binding Path=LoadWavStatus, Mode=OneWay}">
             </TextBlock>
         </Grid>
 

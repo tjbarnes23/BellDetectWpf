@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using BellDetectWpf.ViewModels;
-using BellDetectWpf.ViewModels.MainWin;
 
 namespace BellDetectWpf.Views
 {
@@ -13,44 +11,19 @@ namespace BellDetectWpf.Views
             InitializeComponent();
         }
 
-        private void WaveformSpec_Click(object sender, RoutedEventArgs e)
+        private void LoadWav_Click(object sender, RoutedEventArgs e)
         {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\WaveformSpecPage.xaml", UriKind.Relative);
-        }
-
-        private void Waveform_Click(object sender, RoutedEventArgs e)
-        {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\WaveformPage.xaml", UriKind.Relative);
+            MainWindow.MW.MainFrame.Navigate(new LoadWavPage());
         }
 
         private void FFT_Click(object sender, RoutedEventArgs e)
         {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\FFTPage.xaml", UriKind.Relative);
-        }
-
-        private void DFT_Click(object sender, RoutedEventArgs e)
-        {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\DFTPage.xaml", UriKind.Relative);
-        }
-
-        private void KeyPress_Click(object sender, RoutedEventArgs e)
-        {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\KeyPressPage.xaml", UriKind.Relative);
-        }
-
-        private void MicStream_Click(object sender, RoutedEventArgs e)
-        {
-            MainWinVM.Mw.MainFrame.Source = new Uri(@"..\..\Views\ViewPages\MicStreamPage.xaml", UriKind.Relative);
+            MainWindow.MW.MainFrame.Navigate(new FFTPage());
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            C_MainWin.Exit();
-        }
-
-        private void LoadWav_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.MW.MainFrame.Navigate(new LoadWavPage());
+            Application.Current.Shutdown();
         }
     }
 }

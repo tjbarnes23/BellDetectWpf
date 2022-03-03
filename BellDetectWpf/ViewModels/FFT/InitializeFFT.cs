@@ -1,33 +1,33 @@
 ﻿using BellDetectWpf.Models;
 
-namespace BellDetectWpf.ViewModels.FFT
+namespace BellDetectWpf.ViewModels
 {
-    public static partial class C_FFT
+    public partial class FFTVM
     {
-        public static void InitializeFFT()
+        public void InitializeFFT()
         {
             // Initialize arrays
-            FFTVM.XRe = new double[FFTVM.N];
-            FFTVM.XIm = new double[FFTVM.N];
+            xRe = new double[N];
+            xIm = new double[N];
 
             // Initialize elements for linked list of complex numbers.
-            FFTVM.X = new FFTElement[FFTVM.N];
+            x = new FFTElement[N];
 
-            for (uint i = 0; i < FFTVM.N; i++)
+            for (uint i = 0; i < N; i++)
             {
-                FFTVM.X[i] = new FFTElement(); // Initialize array elements
+                x[i] = new FFTElement(); // Initialize array elements
             }
 
             // Set up 'next' pointers.
-            for (uint i = 0; i < FFTVM.N - 1; i++)
+            for (uint i = 0; i < N - 1; i++)
             {
-                FFTVM.X[i].Next = FFTVM.X[i + 1];
+                x[i].Next = x[i + 1];
             }
 
             // Specify target for bit reversal re-ordering.
-            for (uint i = 0; i < FFTVM.N; i++)
+            for (uint i = 0; i < N; i++)
             {
-                FFTVM.X[i].RevTarget = BitReverse(i, FFTVM.Log2N);
+                x[i].RevTarget = BitReverse(i, log2N);
             }
         }
     }

@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace BellDetectWpf.Repository
 {
     public static class Repo
     {
         /**************************************************
+        * App
+        **************************************************/
+        public static Logger Logger { get; set; }
+
+        /**************************************************
         * LoadWav
         **************************************************/
-        public static string FilePathName { get; set; }
+        public static string WavFilePathName { get; set; }
 
-        public static string Status { get; set; }
+        public static string LoadWavStatus { get; set; }
 
         public static uint SampleFrequency { get; set; }
 
@@ -35,6 +41,13 @@ namespace BellDetectWpf.Repository
 
         public static int[,] WavDataInt { get; set; }
 
-        public static double[,] WavDataFloat { get; set; }
+        /**************************************************
+        * FFT
+        **************************************************/
+        public static uint N { get; set; }
+
+        public static string FFTFilePathName { get; set; }
+
+        public static string FFTStatus { get; set; }
     }
 }

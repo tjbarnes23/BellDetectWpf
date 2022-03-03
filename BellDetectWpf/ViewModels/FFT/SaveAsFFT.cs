@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
-namespace BellDetectWpf.ViewModels.FFT
+namespace BellDetectWpf.ViewModels
 {
-    public static partial class C_FFT
+    public partial class FFTVM
     {
-        public static async Task SaveAsFFT()
+        public async Task SaveAsFFT()
         {
             SaveFileDialog saveDlg = new SaveFileDialog
             {
@@ -19,7 +19,7 @@ namespace BellDetectWpf.ViewModels.FFT
 
             if (saveDlg.ShowDialog() == true)
             {
-                FFTVM.FilePathName = saveDlg.FileName;
+                FFTFilePathName = saveDlg.FileName;
                 await WriteFFT();
             }
         }

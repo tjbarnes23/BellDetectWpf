@@ -1,38 +1,38 @@
 ﻿using System;
 using BellDetectWpf.Models;
 
-namespace BellDetectWpf.ViewModels.FFT
+namespace BellDetectWpf.ViewModels
 {
-    public static partial class C_FFT
+    public partial class FFTVM
     {
         // Perform FFT
         // xRe parameter is the real part of the input/output
         // xIm parameter is the imaginary part of the input/output
         // inverse parameter set to true to do an inverse FFT
-        public static void ExecuteFFT()
+        public void ExecuteFFT()
         {
             bool inverse = false; // below can handle an inverse FFT - we don't need this
-            uint numFlies = FFTVM.N >> 1; // Number of butterflies per sub-FFT
-            uint span = FFTVM.N >> 1; // Width of the butterfly
-            uint spacing = FFTVM.N; // Distance between start of sub-FFTs
+            uint numFlies = N >> 1; // Number of butterflies per sub-FFT
+            uint span = N >> 1; // Width of the butterfly
+            uint spacing = N; // Distance between start of sub-FFTs
             uint wIndexStep = 1; // Increment for twiddle table index
 
             // Copy data into linked complex number objects
             // If it's an IFFT, we divide by N while we're at it
-            FFTElement x = FFTVM.X[0];
+            FFTElement xx = x[0];
             uint k = 0;
-            double scale = inverse ? 1.0 / FFTVM.N : 1.0;
+            double scale = inverse ? 1.0 / N : 1.0;
 
-            while (x != null)
+            while (xx != null)
             {
-                x.Re = scale * FFTVM.XRe[k];
-                x.Im = scale * FFTVM.XIm[k];
-                x = x.Next;
+                xx.Re = scale * xRe[k];
+                xx.Im = scale * xIm[k];
+                xx = xx.Next;
                 k++;
             }
 
             // For each stage of the FFT
-            for (uint stage = 0; stage < FFTVM.Log2N; stage++)
+            for (uint stage = 0; stage < log2N; stage++)
             {
                 // Compute a multiplier factor for the "twiddle factors".
                 // The twiddle factors are complex unit vectors spaced at
@@ -41,7 +41,7 @@ namespace BellDetectWpf.ViewModels.FFT
                 // implementations the twiddle factors are cached, but because
                 // array lookup is relatively slow in C#, it's just
                 // as fast to compute them on the fly.
-                double wAngleInc = wIndexStep * 2.0 * Math.PI / FFTVM.N;
+                double wAngleInc = wIndexStep * 2.0 * Math.PI / N;
 
                 if (inverse == false)
                 {
@@ -51,10 +51,10 @@ namespace BellDetectWpf.ViewModels.FFT
                 double wMulRe = Math.Cos(wAngleInc);
                 double wMulIm = Math.Sin(wAngleInc);
 
-                for (uint start = 0; start < FFTVM.N; start += spacing)
+                for (uint start = 0; start < N; start += spacing)
                 {
-                    FFTElement xTop = FFTVM.X[start];
-                    FFTElement xBot = FFTVM.X[start + span];
+                    FFTElement xTop = x[start];
+                    FFTElement xBot = x[start + span];
 
                     double wRe = 1.0;
                     double wIm = 0.0;
@@ -101,14 +101,14 @@ namespace BellDetectWpf.ViewModels.FFT
             // The algorithm leaves the result in a scrambled order.
             // Unscramble while copying values from the complex
             // linked list elements back to the input/output vectors.
-            x = FFTVM.X[0];
+            xx = x[0];
 
-            while (x != null)
+            while (xx != null)
             {
-                uint target = x.RevTarget;
-                FFTVM.XRe[target] = x.Re;
-                FFTVM.XIm[target] = x.Im;
-                x = x.Next;
+                uint target = xx.RevTarget;
+                xRe[target] = xx.Re;
+                xIm[target] = xx.Im;
+                xx = xx.Next;
             }
         }
     }

@@ -4,13 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BellDetectWpf.ViewModels.Shared;
+using BellDetectWpf.Repository;
 
-namespace BellDetectWpf.ViewModels.FFT
+namespace BellDetectWpf.ViewModels
 {
-    public static partial class C_FFT
+    public partial class FFTVM
     {
-        public static async Task RunFFT()
+        public async Task RunFFT()
         {
             double amplitude;
             Stopwatch sw;
@@ -19,15 +19,16 @@ namespace BellDetectWpf.ViewModels.FFT
             TimeSpan prevElapsed;
             TimeSpan interval;
 
-            await C_Shared.Status("Running FFTs...", "black", 10, false);
+            FFTStatus = "Running FFTs...";
+            await Task.Delay(25);
 
-            FFTVM.Log2N = (uint)Math.Log2(FFTVM.N);
+            log2N = (uint)Math.Log2(N);
 
-            FFTVM.N = (uint)(1 << (int)FFTVM.Log2N); // number of bins recalculated in case a non-power of 2 was entered
-            FFTVM.NA = (uint)(WaveformVM.NumSamples / FFTVM.N); // NA is number of FFTs that will be run
-            FFTVM.Results = new double[FFTVM.N / 2, FFTVM.NA];
+            N = (uint)(1 << (int)log2N); // number of bins recalculated in case a non-power of 2 was entered
+            nA = (uint)(Repo.NumSamples / N); // NA is number of FFTs that will be run
+            results = new double[N / 2, nA];
 
-            C_FFT.InitializeFFT();
+            InitializeFFT();
 
             sw = new Stopwatch();
             sb = new StringBuilder();
@@ -35,26 +36,27 @@ namespace BellDetectWpf.ViewModels.FFT
 
             sw.Start();
 
-            for (int i = 0; i < FFTVM.NA; i++)
+            for (int i = 0; i < nA; i++)
             {
-                FFTVM.Offset = (uint)(FFTVM.N * i);
+                offset = (uint)(N * i);
 
                 // Copy required items in the Waveform array into XRe array, and set XIm array values to zero
-                for (int j = 0; j < FFTVM.N; j++)
+                for (int j = 0; j < N; j++)
                 {
-                    FFTVM.XRe[j] = WaveformVM.WaveformArr[FFTVM.Offset + j];
-                    FFTVM.XIm[j] = 0;
+                    // If the wav file is multi-channel, only channel 0 will be processed
+                    xRe[j] = Repo.WavDataInt[0, offset + j];
+                    xIm[j] = 0;
                 }
 
                 ExecuteFFT();
 
                 // Add to Results array
                 // Double the amplitudes to adjust the 2-sided frequency plot, then divide by the number of samples
-                for (int j = 0; j < (FFTVM.N / 2); j++)
+                for (int j = 0; j < (N / 2); j++)
                 {
-                    amplitude = Math.Sqrt(Math.Pow(FFTVM.XRe[j], 2) + Math.Pow(FFTVM.XIm[j], 2));
-                    amplitude = (amplitude * 2) / FFTVM.N;
-                    FFTVM.Results[j, i] = Math.Round(amplitude, 0);
+                    amplitude = Math.Sqrt(Math.Pow(xRe[j], 2) + Math.Pow(xIm[j], 2));
+                    amplitude = (amplitude * 2) / N;
+                    results[j, i] = Math.Round(amplitude, 0);
                 }
 
                 currElapsed = sw.Elapsed;
@@ -67,15 +69,16 @@ namespace BellDetectWpf.ViewModels.FFT
                 sb.Append("FFT cumulative time: ");
                 sb.Append(currElapsed);
 
-                MainWinVM.Logger.Info(sb.ToString());
+                Repo.Logger.Info(sb.ToString());
                 prevElapsed = currElapsed;
             }
 
             sw.Stop();
             
-            FFTVM.FilePathName = String.Empty;
+            FFTFilePathName = String.Empty;
 
-            await C_Shared.Status("FFTs completed", "black", 3000, true);
+            FFTStatus = "FFTs completed";
+            await Task.Delay(25);
         }
     }
 }
