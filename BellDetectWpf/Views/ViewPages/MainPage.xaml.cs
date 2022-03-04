@@ -21,6 +21,11 @@ namespace BellDetectWpf.Views
             MainWindow.MW.MainFrame.Navigate(new FFTPage());
         }
 
+        private void Elliptic_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.MW.MainFrame.Navigate(new EllipticPage());
+        }
+
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

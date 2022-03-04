@@ -61,10 +61,10 @@ namespace BellDetectWpf.ViewModels
                 }
             }
 
-            // Convert to short (16-bit) and overwrite original values in .wav file
+            // Convert to short (16-bit) and write into output array
             for (int i = 0; i < Repo.NumSamples; i++)
             {
-                Repo.FilteredWaveformArr[i, bell] = (short)Math.Round(y[i, num.GetLength(0) - 1] * gain);
+                Repo.FilteredWaveformArr[bell, i] = (short)Math.Round(y[i, num.GetLength(0) - 1] * gain);
             }
         }
     }

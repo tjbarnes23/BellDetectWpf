@@ -16,7 +16,7 @@ namespace BellDetectWpf.Views
             this.DataContext = viewModel;
         }
 
-        private async void RunFFT_Click(object sender, RoutedEventArgs e)
+        private async void Run_Click(object sender, RoutedEventArgs e)
         {
             await viewModel.RunFFT();
         }

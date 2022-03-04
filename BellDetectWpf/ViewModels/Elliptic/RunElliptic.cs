@@ -15,8 +15,9 @@ namespace BellDetectWpf.ViewModels
             EllipticStatus = "Applying elliptic filter...";
             await Task.Delay(25);
 
-            Repo.FilteredWaveformArr = new short[Repo.NumSamples, 8];
-            Repo.NumChannels = 8;
+            Repo.EllipticNumChannels = 8;
+            Repo.FilteredWaveformArr = new short[Repo.EllipticNumChannels, Repo.NumSamples];
+            
             double gain;
 
             gain = 0.55;

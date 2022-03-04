@@ -15,6 +15,23 @@ namespace BellDetectWpf.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Observable properties
+        public string WavFilePathName
+        {
+            get
+            {
+                return Repo.WavFilePathName;
+            }
+
+            set
+            {
+                if (Repo.WavFilePathName != value)
+                {
+                    Repo.WavFilePathName = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public string EllipticFilePathName
         {
             get

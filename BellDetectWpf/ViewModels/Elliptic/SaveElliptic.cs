@@ -22,12 +22,12 @@ namespace BellDetectWpf.ViewModels
                 if (saveDlg.ShowDialog() == true)
                 {
                     EllipticFilePathName = saveDlg.FileName;
-                    await WriteElliptic();
+                    await WriteEllipticOrigAndFiltered();
                 }
             }
             else
             {
-                await WriteElliptic();
+                await WriteEllipticOrigAndFiltered();
             }
         }
     }

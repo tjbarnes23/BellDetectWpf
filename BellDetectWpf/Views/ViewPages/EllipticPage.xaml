@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:local="clr-namespace:BellDetectWpf.Views.ViewPages"
+        xmlns:local="clr-namespace:BellDetectWpf.Views"
         xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
+        d:DataContext="{d:DesignInstance Type=vm:EllipticVM}"
         mc:Ignorable="d"
         d:DesignWidth="800"
         d:DesignHeight="600">
@@ -22,88 +23,40 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Title -->
 
-        <Label Grid.Row="0" Grid.Column="0"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                FontFamily="Arial Black" FontSize="20">
             Bell Detect
-        </Label>
+        </TextBlock>
 
         <!-- Sub-title -->
 
-        <Label Grid.Row="1" Grid.Column="0"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                FontFamily="Arial Black" FontSize="20">
             Elliptic
-        </Label>
+        </TextBlock>
 
         <!-- Description -->
 
-        <Label Grid.Row="2" Grid.Column="0"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                FontFamily="Arial" FontSize="13">
-            <TextBlock TextWrapping="Wrap" LineHeight="20">
+        <TextBlock Grid.Row="2" Grid.Column="0"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                FontFamily="Arial" FontSize="13"
+                TextWrapping="Wrap" LineHeight="20">
                 This page will apply an elliptic IIR filter to the loaded waveform.
                 Currently the filter parameters are set in code.
                 A future version of this program will enable filter parameters to be entered or imported.
-            </TextBlock>
-        </Label>
+        </TextBlock>
 
         <!-- Run -->
 
-        <Button Grid.Row="3" Grid.Column="0"
-                Width="180" Height="50"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="RunElliptic_Click">
-            Run Elliptic
-        </Button>
-
-        <!-- Save -->
-
-        <Grid Grid.Row="4" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Button Grid.Row="0" Grid.Column="0"
-                    Width="180" Height="40"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="Save_Click">
-                Save
-            </Button>
-
-            <Button Grid.Row="0" Grid.Column="1"
-                    Width="180" Height="40"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="SaveAs_Click">
-                Save As
-            </Button>
-
-            <Label Grid.Row="0" Grid.Column="2"
-                   Margin="0, 0, 10, 0"
-                    BorderBrush="Black" BorderThickness="1"
-                    Padding="5, 2, 5, 2"
-                    FontFamily="Arial" FontSize="13">
-                <TextBlock TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=(vm:SharedVM.StatusMsg), Mode=OneWay}"
-                    Foreground="{Binding Path=(vm:SharedVM.StatusForeground), Mode=OneWay}">
-                </TextBlock>
-            </Label>
-        </Grid>
-
-        <!-- File name -->
-
-        <Grid Grid.Row="5" Grid.Column="0">
+        <Grid Grid.Row="3" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
@@ -113,32 +66,36 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0"
+            <TextBlock Grid.Row="0" Grid.Column="0"
                     Margin="0, 0, 10, 0"
-                    HorizontalAlignment="Right"
-                    HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                <TextBlock TextWrapping="Wrap" LineHeight="20">
-                    File name:
-                </TextBlock>
-            </Label>
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Loaded .wav file:
+            </TextBlock>
 
-            <Label Grid.Row="0" Grid.Column="1"
+            <TextBlock Grid.Row="0" Grid.Column="1"
                     Margin="10, 0, 0, 0"
-                    HorizontalAlignment="Left"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial" FontSize="13">
-                <TextBlock TextWrapping="Wrap" LineHeight="20"
-                        Text="{Binding Path=(vm:EllipticVM.FilePathName), Mode=OneWay}">
-                </TextBlock>
-            </Label>
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    FontFamily="Arial" FontSize="13"
+                    TextWrapping="Wrap" LineHeight="20"
+                    Text="{Binding Path=WavFilePathName, Mode=OneWay}">
+            </TextBlock>
         </Grid>
 
-        <!-- Return -->
+        <!-- Run -->
 
-        <Grid Grid.Row="6" Grid.Column="0">
+        <Button Grid.Row="4" Grid.Column="0"
+                Width="240" Height="40"
+                FontFamily="Arial Black" FontSize="14"
+                Click="Run_Click">
+            Apply elliptic filter
+        </Button>
+
+        <!-- Save -->
+
+        <Grid Grid.Row="5" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -148,18 +105,73 @@
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0" Grid.Column="0"
-                    Width="180" Height="50"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="WaveformPage_Click">
-                Waveform page
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="Save_Click">
+                Save
             </Button>
 
             <Button Grid.Row="0" Grid.Column="1"
-                    Width="180" Height="50"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                    Click="Return_Click">
-                Return to main page
+                    Width="180" Height="40"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="SaveAs_Click">
+                Save As
             </Button>
         </Grid>
+
+        <!-- File name -->
+
+        <Grid Grid.Row="6" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Saved Elliptic file:
+            </TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    FontFamily="Arial" FontSize="13"
+                    TextWrapping="Wrap" LineHeight="20"
+                    Text="{Binding Path=EllipticFilePathName, Mode=OneWay}">
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Status:
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    FontFamily="Arial" FontSize="13"
+                    TextWrapping="Wrap" LineHeight="20"
+                    Text="{Binding Path=EllipticStatus, Mode=OneWay}">
+            </TextBlock>
+        </Grid>
+
+        <!-- Return -->
+
+        <Button Grid.Row="7" Grid.Column="0"
+                Width="180" Height="40"
+                FontFamily="Arial Black" FontSize="14"
+                Click="Return_Click">
+            Return to main page
+        </Button>
     </Grid>
 </Page>

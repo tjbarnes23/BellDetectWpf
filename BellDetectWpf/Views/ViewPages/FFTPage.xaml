@@ -32,7 +32,7 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+                FontFamily="Arial Black" FontSize="20">
             Bell Detect
         </TextBlock>
 
@@ -40,7 +40,7 @@
 
         <TextBlock Grid.Row="1" Grid.Column="0"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                FontFamily="Arial Black" FontSize="20" FontWeight="Bold">
+                FontFamily="Arial Black" FontSize="20">
             FFT
         </TextBlock>
 
@@ -115,8 +115,8 @@
 
         <Button Grid.Row="5" Grid.Column="0"
                 Width="180" Height="40"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
-                Click="RunFFT_Click">
+                FontFamily="Arial Black" FontSize="14"
+                Click="Run_Click">
             Run FFT
         </Button>
 
@@ -134,14 +134,14 @@
 
             <Button Grid.Row="0" Grid.Column="0"
                     Width="180" Height="40"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    FontFamily="Arial Black" FontSize="14"
                     Click="Save_Click">
                 Save
             </Button>
 
             <Button Grid.Row="0" Grid.Column="1"
                     Width="180" Height="40"
-                    FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                    FontFamily="Arial Black" FontSize="14"
                     Click="SaveAs_Click">
                 Save As
             </Button>
@@ -197,7 +197,7 @@
             
         <Button Grid.Row="8" Grid.Column="0"
                 Width="180" Height="40"
-                FontFamily="Arial Black" FontSize="14" FontWeight="Bold"
+                FontFamily="Arial Black" FontSize="14"
                 Click="Return_Click">
             Return to main page
         </Button>

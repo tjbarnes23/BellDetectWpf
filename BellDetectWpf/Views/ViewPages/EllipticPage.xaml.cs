@@ -7,7 +7,7 @@ namespace BellDetectWpf.Views
 {
     public partial class EllipticPage : Page
     {
-        readonly FFTVM viewModel;
+        readonly EllipticVM viewModel;
 
         public EllipticPage()
         {
@@ -16,7 +16,7 @@ namespace BellDetectWpf.Views
             this.DataContext = viewModel;
         }
 
-        private async void RunElliptic_Click(object sender, RoutedEventArgs e)
+        private async void Run_Click(object sender, RoutedEventArgs e)
         {
             await viewModel.RunElliptic();
         }
