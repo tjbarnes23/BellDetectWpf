@@ -9,7 +9,7 @@ namespace BellDetectWpf.ViewModels
 {
     public partial class EllipticVM
     {
-        public static void ExecuteElliptic(int bell, double[,] num, double[,] denom, double gain)
+        public static void ExecuteElliptic(int channel, double[,] num, double[,] denom, double gain)
         {
             double[,] y;
             double nu;
@@ -64,7 +64,7 @@ namespace BellDetectWpf.ViewModels
             // Convert to short (16-bit) and write into output array
             for (int i = 0; i < Repo.NumSamples; i++)
             {
-                Repo.FilteredWaveformArr[bell, i] = (short)Math.Round(y[i, num.GetLength(0) - 1] * gain);
+                Repo.FilteredWaveformArr[channel, i] = (short)Math.Round(y[i, num.GetLength(0) - 1] * gain);
             }
         }
     }

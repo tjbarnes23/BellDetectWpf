@@ -75,7 +75,7 @@ namespace BellDetectWpf.ViewModels
                     for (int i = 0; i < Repo.NumSamples; i++)
                     {
                         wr.Write((short)Repo.WavDataInt[0, i]); // Taking first channel of original wav file
-                        wr.Write(Repo.FilteredWaveformArr[3, i]); // Taking the filter for TJB HB 4
+                        wr.Write(Repo.FilteredWaveformArr[0, i]); // Taking the filter output stored in the 0th index
                     }
                 }
             }
