@@ -25,7 +25,7 @@ namespace BellDetectWpf.ViewModels
 
             // This will apply the coefficients in FIRCoefficients.cs to the first channel of the input .wav file,
             // and store the output in index 0 of Repo.FIRFilteredWaveformArr
-            ExecuteFIR(gain);
+            ExecuteFIR(c, gain);
 
             FIRStatus = "FIR filter applied";
             await Task.Delay(25);
