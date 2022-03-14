@@ -16,7 +16,7 @@ namespace BellDetectWpf.ViewModels
             await Task.Delay(25);
 
             Repo.EllipticNumChannels = 1; // Set this to number of elliptic filtered channels to include in output .wav file
-            Repo.FilteredWaveformArr = new short[Repo.EllipticNumChannels, Repo.NumSamples];
+            Repo.EllipticFilteredWaveformArr = new short[Repo.EllipticNumChannels, Repo.NumSamples];
 
             // This will apply the coefficients in num12 and denom12 to the first channel of the input .wav file,
             // and store the output in the 0th first index of Repo.FilteredWaveformArr

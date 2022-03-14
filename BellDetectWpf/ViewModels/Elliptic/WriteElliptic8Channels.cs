@@ -8,7 +8,7 @@ namespace BellDetectWpf.ViewModels
 {
     public partial class EllipticVM
     {
-        public async Task WriteElliptic8Channel()
+        public async Task WriteElliptic8Channels()
         {
             uint fileSize;
             uint dataSize;
@@ -23,6 +23,7 @@ namespace BellDetectWpf.ViewModels
 
             EllipticStatus = "Saving waveform...";
             await Task.Delay(25);
+
 
             // Set formatParametersSize (uint)
             formatParametersSize = 16; // 16 bytes per the WAV file spec
@@ -39,11 +40,12 @@ namespace BellDetectWpf.ViewModels
                     Repo.EllipticNumChannels); // bytes per sample
 
             // Set dataSize (uint)
-            dataSize = (Repo.DataSize / Repo.NumChannels) * Repo.EllipticNumChannels; // Divide original data size by original num channels
-                                                                                        // because we only processed the first channel
+            dataSize = (Repo.DataSize / Repo.WavNumChannels) * Repo.EllipticNumChannels; // Divide original data size by original num channels
+                                                                                      // because we only processed the first channel
 
             // Set fileSize (uint)
             fileSize = dataSize + formatParametersSize + 20; // bytes
+
 
             // Delete file if it already exists
             if (File.Exists(EllipticFilePathName))
@@ -75,7 +77,7 @@ namespace BellDetectWpf.ViewModels
                     {
                         for (int j = 0; j < Repo.EllipticNumChannels; j++)
                         {
-                            wr.Write(Repo.FilteredWaveformArr[j, i]);
+                            wr.Write(Repo.EllipticFilteredWaveformArr[j, i]);
                         }
                     }
                 }
@@ -119,7 +121,7 @@ namespace BellDetectWpf.ViewModels
 
                     for (int j = 0; j < Repo.EllipticNumChannels; j++)
                     {
-                        sb.Append(Repo.FilteredWaveformArr[j, i]);
+                        sb.Append(Repo.EllipticFilteredWaveformArr[j, i]);
                         sb.Append('\t');
                     }
 

@@ -21,6 +21,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Title -->
@@ -53,6 +54,13 @@
         </Button>
 
         <Button Grid.Row="4" Grid.Column="0"
+                Width="360" Height="50"
+                FontFamily="Arial Black" FontSize="14"
+                Click="FIR_Click">
+            Apply FIR filter to loaded .wav file
+        </Button>
+        
+        <Button Grid.Row="5" Grid.Column="0"
                 Width="180" Height="50"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Exit_Click">

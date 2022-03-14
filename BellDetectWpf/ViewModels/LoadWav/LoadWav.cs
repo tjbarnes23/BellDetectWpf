@@ -52,7 +52,7 @@ namespace BellDetectWpf.ViewModels
                 wavType = br.ReadUInt16();
 
                 // Read numChannels (ushort)
-                NumChannels = br.ReadUInt16();
+                WavNumChannels = br.ReadUInt16();
 
                 // Read sampleFrequency (uint)
                 SampleFrequency = br.ReadUInt32();
@@ -83,8 +83,8 @@ namespace BellDetectWpf.ViewModels
                         wave != "WAVE" ||
                         fmt != "fmt " ||
                         formatParametersSize != 16 ||
-                        DataRate != NumChannels * SampleFrequency * (SampleDepth / 8) ||
-                        BlockAlignment != NumChannels * (SampleDepth / 8) ||
+                        DataRate != WavNumChannels * SampleFrequency * (SampleDepth / 8) ||
+                        BlockAlignment != WavNumChannels * (SampleDepth / 8) ||
                         (SampleDepth != 8 && SampleDepth != 16 && SampleDepth != 24 && SampleDepth != 32) ||
                         data != "data")
                 {
@@ -93,20 +93,20 @@ namespace BellDetectWpf.ViewModels
                 else
                 { 
                     // Read in .wav file data
-                    Repo.NumSamples = (uint)(DataSize / ((SampleDepth / 8) * NumChannels));
+                    Repo.NumSamples = (uint)(DataSize / ((SampleDepth / 8) * WavNumChannels));
                     Repo.Time = new double[Repo.NumSamples];
 
 
                     // Handle 8-bit depth
                     if (SampleDepth == 8)
                     {
-                        Repo.WavDataInt = new int[NumChannels, Repo.NumSamples];
+                        Repo.WavDataInt = new int[WavNumChannels, Repo.NumSamples];
 
                         for (int i = 0; i < Repo.NumSamples; i++)
                         {
                             Repo.Time[i] = (double)i / SampleFrequency;
 
-                            for (int j = 0; j < NumChannels; j++)
+                            for (int j = 0; j < WavNumChannels; j++)
                             {
                                 byte a = br.ReadByte();
                                 Repo.WavDataInt[j, i] = a - 128; // 8-bit wav files use offset binary, not two's complement
@@ -117,13 +117,13 @@ namespace BellDetectWpf.ViewModels
                     // Handle 16-bit signed depth
                     else if (SampleDepth == 16)
                     {
-                        Repo.WavDataInt = new int[NumChannels, Repo.NumSamples];
+                        Repo.WavDataInt = new int[WavNumChannels, Repo.NumSamples];
 
                         for (int i = 0; i < Repo.NumSamples; i++)
                         {
                             Repo.Time[i] = (double)i / SampleFrequency;
 
-                            for (int j = 0; j < NumChannels; j++)
+                            for (int j = 0; j < WavNumChannels; j++)
                             {
                                 Repo.WavDataInt[j, i] = br.ReadInt16();
                             }
@@ -133,13 +133,13 @@ namespace BellDetectWpf.ViewModels
                     // Handle 24-bit signed depth
                     else if (SampleDepth == 24)
                     {
-                        Repo.WavDataInt = new int[NumChannels, Repo.NumSamples];
+                        Repo.WavDataInt = new int[WavNumChannels, Repo.NumSamples];
 
                         for (int i = 0; i < Repo.NumSamples; i++)
                         {
                             Repo.Time[i] = (double)i / SampleFrequency;
 
-                            for (int j = 0; j < NumChannels; j++)
+                            for (int j = 0; j < WavNumChannels; j++)
                             {
                                 byte a = br.ReadByte();
                                 byte b = br.ReadByte();
@@ -162,13 +162,13 @@ namespace BellDetectWpf.ViewModels
                     // Handle 32-bit signed depth
                     else
                     {
-                        Repo.WavDataInt = new int[NumChannels, Repo.NumSamples];
+                        Repo.WavDataInt = new int[WavNumChannels, Repo.NumSamples];
 
                         for (int i = 0; i < Repo.NumSamples; i++)
                         {
                             Repo.Time[i] = (double)i / SampleFrequency;
 
-                            for (int j = 0; j < NumChannels; j++)
+                            for (int j = 0; j < WavNumChannels; j++)
                             {
                                 Repo.WavDataInt[j, i] = br.ReadInt32();
                             }

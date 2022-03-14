@@ -81,17 +81,17 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
-        public ushort NumChannels
+        public ushort WavNumChannels
         {
             get
             {
-                return Repo.NumChannels;
+                return Repo.WavNumChannels;
             }
             set
             {
-                if (Repo.NumChannels != value)
+                if (Repo.WavNumChannels != value)
                 {
-                    Repo.NumChannels = value;
+                    Repo.WavNumChannels = value;
                     NotifyPropertyChanged();
                 }
             }

@@ -7,11 +7,11 @@ using Microsoft.Win32;
 
 namespace BellDetectWpf.ViewModels
 {
-    public partial class EllipticVM
+    public partial class FIRVM
     {
-        public async Task SaveElliptic()
+        public async Task SaveFIR()
         {
-            if (string.IsNullOrEmpty(EllipticFilePathName))
+            if (string.IsNullOrEmpty(FIRFilePathName))
             {
                 SaveFileDialog saveDlg = new SaveFileDialog
                 {
@@ -21,15 +21,13 @@ namespace BellDetectWpf.ViewModels
 
                 if (saveDlg.ShowDialog() == true)
                 {
-                    EllipticFilePathName = saveDlg.FileName;
-                    await WriteEllipticOrigAndFiltered();
-                    // await WriteElliptic8Channels();
+                    FIRFilePathName = saveDlg.FileName;
+                    await WriteFIROrigAndFiltered();
                 }
             }
             else
             {
-                await WriteEllipticOrigAndFiltered();
-                // await WriteElliptic8Channels();
+                await WriteFIROrigAndFiltered();
             }
         }
     }

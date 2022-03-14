@@ -6,9 +6,9 @@ using BellDetectWpf.Repository;
 
 namespace BellDetectWpf.ViewModels
 {
-    public partial class EllipticVM
+    public partial class FIRVM
     {
-        public async Task WriteEllipticOrigAndFiltered()
+        public async Task WriteFIROrigAndFiltered()
         {
             uint fileSize;
             uint dataSize;
@@ -21,7 +21,7 @@ namespace BellDetectWpf.ViewModels
             byte[] row;
             string txtFilePathName;
 
-            EllipticStatus = "Saving waveform...";
+            FIRStatus = "Saving waveform...";
             await Task.Delay(25);
 
             // Set formatParametersSize (uint)
@@ -31,26 +31,26 @@ namespace BellDetectWpf.ViewModels
             wavType = 1; // 1 = PCM
 
             // Set dataRate (uint)
-            dataRate = (uint)(Repo.SampleFrequency * (Repo.SampleDepth / 8) * Repo.EllipticNumChannels); // bytes per second
+            dataRate = (uint)(Repo.SampleFrequency * (Repo.SampleDepth / 8) * Repo.FIRNumChannels); // bytes per second
 
             // Set blockAlignment (ushort)
-            blockAlignment = (ushort)((Repo.SampleDepth / 8) * Repo.EllipticNumChannels); // bytes per sample
+            blockAlignment = (ushort)((Repo.SampleDepth / 8) * Repo.FIRNumChannels); // bytes per sample
 
             // Set dataSize (uint)
-            dataSize = (Repo.DataSize / Repo.WavNumChannels) * Repo.EllipticNumChannels; // Divide original data size by original num channels
-                                                                                         // because we only processed the first channel
+            dataSize = (Repo.DataSize / Repo.WavNumChannels) * Repo.FIRNumChannels; // Divide original data size by original num channels
+                                                                                    // because we only processed the first channel
 
             // Set fileSize (uint)
             fileSize = dataSize + formatParametersSize + 20; // bytes
 
             // Delete file if it already exists
-            if (File.Exists(EllipticFilePathName))
+            if (File.Exists(FIRFilePathName))
             {
-                File.Delete(EllipticFilePathName);
+                File.Delete(FIRFilePathName);
             }
 
             // Create .wav file
-            using FileStream f = new FileStream(EllipticFilePathName, FileMode.Create);
+            using FileStream f = new FileStream(FIRFilePathName, FileMode.Create);
             {
                 using BinaryWriter wr = new BinaryWriter(f);
                 {
@@ -60,7 +60,7 @@ namespace BellDetectWpf.ViewModels
                     wr.Write(Encoding.ASCII.GetBytes("fmt "));
                     wr.Write(formatParametersSize); // 
                     wr.Write(wavType);
-                    wr.Write(Repo.EllipticNumChannels);
+                    wr.Write(Repo.FIRNumChannels);
                     wr.Write(Repo.SampleFrequency);
                     wr.Write(dataRate);
                     wr.Write(blockAlignment);
@@ -68,17 +68,17 @@ namespace BellDetectWpf.ViewModels
                     wr.Write(Encoding.ASCII.GetBytes("data"));
                     wr.Write(dataSize);
 
-                    // Write the filtered waveforms to the binary writer
+                    // Write the original and filtered waveforms
                     for (int i = 0; i < Repo.NumSamples; i++)
                     {
                         wr.Write((short)Repo.WavDataInt[0, i]); // Taking first channel of original wav file
-                        wr.Write(Repo.EllipticFilteredWaveformArr[0, i]); // Taking the filter output stored in the 0th index
+                        wr.Write(Repo.FIRFilteredWaveformArr[0, i]); // Taking the filter output stored in the 0th index
                     }
                 }
             }
 
             // Create .txt file
-            txtFilePathName = Repo.EllipticFilePathName + ".txt";
+            txtFilePathName = Repo.FIRFilePathName + ".txt";
 
             if (File.Exists(txtFilePathName))
             {
@@ -90,10 +90,10 @@ namespace BellDetectWpf.ViewModels
             {
                 // Write header row
                 sb = new StringBuilder();
-                
+
                 sb.Append("Time");
                 sb.Append('\t');
-                
+
                 sb.Append("Original");
                 sb.Append('\t');
 
@@ -109,14 +109,14 @@ namespace BellDetectWpf.ViewModels
                 for (int i = 0; i < Repo.NumSamples; i++)
                 {
                     sb.Clear();
-                    
+
                     sb.Append(Math.Round(Repo.Time[i], 6));
                     sb.Append('\t');
 
                     sb.Append(Repo.WavDataInt[0, i]);
                     sb.Append('\t');
 
-                    sb.Append(Repo.EllipticFilteredWaveformArr[0, i]);
+                    sb.Append(Repo.FIRFilteredWaveformArr[0, i]);
                     sb.Append('\t');
 
                     sb.Append('\n');
@@ -126,7 +126,7 @@ namespace BellDetectWpf.ViewModels
                 }
             }
 
-            EllipticStatus = "Waveform saved";
+            FIRStatus = "Waveform saved";
             await Task.Delay(25);
         }
     }

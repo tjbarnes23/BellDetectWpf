@@ -25,7 +25,7 @@ namespace BellDetectWpf.Repository
 
         public static ushort SampleDepth { get; set; }
 
-        public static ushort NumChannels { get; set; }
+        public static ushort WavNumChannels { get; set; }
 
         public static ushort BlockAlignment { get; set; }
 
@@ -41,6 +41,7 @@ namespace BellDetectWpf.Repository
 
         public static int[,] WavDataInt { get; set; }
 
+
         /**************************************************
         * FFT
         **************************************************/
@@ -49,6 +50,7 @@ namespace BellDetectWpf.Repository
         public static string FFTFilePathName { get; set; }
 
         public static string FFTStatus { get; set; }
+
 
         /**************************************************
         * Elliptic
@@ -59,8 +61,18 @@ namespace BellDetectWpf.Repository
 
         public static ushort EllipticNumChannels { get; set; }
 
-        public static double[] FilteredWaveformArrDbl { get; set; } // Double array to use while processing
+        public static short[,] EllipticFilteredWaveformArr { get; set; } // Array to hold filtered waveforms for each bell
 
-        public static short[,] FilteredWaveformArr { get; set; } // Array to hold filtered waveforms for each bell
+
+        /**************************************************
+        * FIR
+        **************************************************/
+        public static string FIRFilePathName { get; set; }
+
+        public static string FIRStatus { get; set; }
+
+        public static ushort FIRNumChannels { get; set; }
+
+        public static short[,] FIRFilteredWaveformArr { get; set; } // Array to hold filtered waveforms for each bell
     }
 }
