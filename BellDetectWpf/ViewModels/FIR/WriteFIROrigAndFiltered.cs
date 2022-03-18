@@ -73,6 +73,7 @@ namespace BellDetectWpf.ViewModels
                     {
                         wr.Write((short)Repo.WavDataInt[0, i]); // Taking first channel of original wav file
                         wr.Write(Repo.FIRFilteredWaveformArr[0, i]); // Taking the filter output stored in the 0th index
+                        wr.Write(Repo.FIRFilteredWaveformArr[1, i]); // This has the phase change signal
                     }
                 }
             }
@@ -100,6 +101,9 @@ namespace BellDetectWpf.ViewModels
                 sb.Append("Filtered");
                 sb.Append('\t');
 
+                sb.Append("Phase");
+                sb.Append('\t');
+
                 sb.Append('\n');
 
                 row = new UTF8Encoding(true).GetBytes(sb.ToString());
@@ -117,6 +121,9 @@ namespace BellDetectWpf.ViewModels
                     sb.Append('\t');
 
                     sb.Append(Repo.FIRFilteredWaveformArr[0, i]);
+                    sb.Append('\t');
+
+                    sb.Append(Repo.FIRFilteredWaveformArr[1, i]);
                     sb.Append('\t');
 
                     sb.Append('\n');

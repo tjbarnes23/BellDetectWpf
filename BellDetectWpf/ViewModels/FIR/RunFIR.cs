@@ -17,15 +17,20 @@ namespace BellDetectWpf.ViewModels
             FIRStatus = "Applying FIR filter...";
             await Task.Delay(25);
 
-            Repo.FIRNumChannels = 2;
+            Repo.FIRNumChannels = 3; // This is the number of channels that will be in the output .wav file
             
-            Repo.FIRFilteredWaveformArr = new short[1, Repo.NumSamples];
+            Repo.FIRFilteredWaveformArr = new short[Repo.FIRNumChannels - 1, Repo.NumSamples]; // FIRNumChannels - 1 because 1 channel in the
+                                                                                               // output .wav file is for the original signal
 
-            gain = 2.0;
+            gain = 3.0;
 
             // This will apply the coefficients in FIRCoefficients.cs to the first channel of the input .wav file,
             // and store the output in index 0 of Repo.FIRFilteredWaveformArr
             ExecuteFIR(c, gain);
+
+            // This method looks for phase changes in the filtered signal and puts a phase change signal in channel 3
+            // of the output .wav file
+            AddPhase();
 
             FIRStatus = "FIR filter applied";
             await Task.Delay(25);
