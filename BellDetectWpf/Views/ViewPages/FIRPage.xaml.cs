@@ -16,6 +16,11 @@ namespace BellDetectWpf.Views
             this.DataContext = viewModel;
         }
 
+        private void FilterFIRCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         private async void Run_Click(object sender, RoutedEventArgs e)
         {
             await viewModel.RunFIR();

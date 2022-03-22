@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.Enums;
 using NLog;
 
 namespace BellDetectWpf.Repository
@@ -68,6 +69,8 @@ namespace BellDetectWpf.Repository
         * FIR
         **************************************************/
         public static string FIRFilePathName { get; set; }
+
+        public static FilterFIREnum FilterFIR { get; set; }
 
         public static string FIRStatus { get; set; }
 

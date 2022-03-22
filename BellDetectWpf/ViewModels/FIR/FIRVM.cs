@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.Enums;
 using BellDetectWpf.Repository;
 
 namespace BellDetectWpf.ViewModels
@@ -27,6 +28,22 @@ namespace BellDetectWpf.ViewModels
                 if (Repo.WavFilePathName != value)
                 {
                     Repo.WavFilePathName = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public FilterFIREnum FilterFIR
+        {
+            get
+            {
+                return Repo.FilterFIR;
+            }
+            set
+            {
+                if (Repo.FilterFIR != value)
+                {
+                    Repo.FilterFIR = value;
                     NotifyPropertyChanged();
                 }
             }

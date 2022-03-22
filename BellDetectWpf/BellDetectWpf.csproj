@@ -51,4 +51,8 @@
     </Page>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\FIR\Coefficients\TJB\" />
+  </ItemGroup>
+
 </Project>
