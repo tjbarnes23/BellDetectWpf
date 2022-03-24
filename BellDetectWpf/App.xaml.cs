@@ -30,9 +30,6 @@ namespace BellDetectWpf
                 Directory.CreateDirectory(@"C:\ProgramData\BellDetect");
             }
 
-            Repo.WavFilePathName = string.Empty;
-            Repo.FFTFilePathName = string.Empty;
-
             /**************************************************
             * Load main window
             **************************************************/

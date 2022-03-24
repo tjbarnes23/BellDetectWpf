@@ -18,6 +18,8 @@ namespace BellDetectWpf.Repository
         /**************************************************
         * LoadWav
         **************************************************/
+        public static string WavInitialDirectory { get; set; }
+
         public static string WavFilePathName { get; set; }
 
         public static string LoadWavStatus { get; set; }
@@ -48,14 +50,28 @@ namespace BellDetectWpf.Repository
         **************************************************/
         public static uint N { get; set; }
 
+        public static string FFTInitialDirectory { get; set; }
+
         public static string FFTFilePathName { get; set; }
 
         public static string FFTStatus { get; set; }
 
 
         /**************************************************
+        * DFT
+        **************************************************/
+        public static string DFTInitialDirectory { get; set; }
+
+        public static string DFTFilePathName { get; set; }
+
+        public static string DFTStatus { get; set; }
+
+
+        /**************************************************
         * Elliptic
         **************************************************/
+        public static string EllipticInitialDirectory { get; set; }
+        
         public static string EllipticFilePathName { get; set; }
 
         public static string EllipticStatus { get; set; }
@@ -68,6 +84,8 @@ namespace BellDetectWpf.Repository
         /**************************************************
         * FIR
         **************************************************/
+        public static string FIRInitialDirectory { get; set; }
+
         public static string FIRFilePathName { get; set; }
 
         public static FilterFIREnum FilterFIR { get; set; }

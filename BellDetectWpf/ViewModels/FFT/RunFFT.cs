@@ -75,7 +75,7 @@ namespace BellDetectWpf.ViewModels
 
             sw.Stop();
             
-            FFTFilePathName = String.Empty;
+            FFTFilePathName = string.Empty;
 
             FFTStatus = "FFTs completed";
             await Task.Delay(25);

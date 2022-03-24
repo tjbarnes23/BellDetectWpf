@@ -26,11 +26,6 @@ namespace BellDetectWpf.Views
             await viewModel.SaveFFT();
         }
 
-        private async void SaveAs_Click(object sender, RoutedEventArgs e)
-        {
-            await viewModel.SaveAsFFT();
-        }
-
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.MW.MainFrame.Navigate(new MainPage());

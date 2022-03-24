@@ -9,19 +9,19 @@ using Microsoft.Win32;
 
 namespace BellDetectWpf.ViewModels
 {
-    public partial class EllipticVM
+    public partial class DFTVM
     {
-        public async Task SaveElliptic()
+        public async Task SaveDFT()
         {
             string initialDirectory;
 
-            if (string.IsNullOrEmpty(Repo.EllipticInitialDirectory) == true)
+            if (string.IsNullOrEmpty(Repo.DFTInitialDirectory) == true)
             {
                 initialDirectory = @"C:\ProgramData\BellDetect";
             }
             else
             {
-                initialDirectory = Repo.EllipticInitialDirectory;
+                initialDirectory = Repo.DFTInitialDirectory;
             }
 
             SaveFileDialog saveDlg = new SaveFileDialog
@@ -32,14 +32,13 @@ namespace BellDetectWpf.ViewModels
 
             if (saveDlg.ShowDialog() == true)
             {
-                EllipticFilePathName = saveDlg.FileName;
+                DFTFilePathName = saveDlg.FileName;
 
-                FileInfo fi = new FileInfo(EllipticFilePathName);
+                FileInfo fi = new FileInfo(DFTFilePathName);
                 DirectoryInfo di = fi.Directory;
-                Repo.EllipticInitialDirectory = di.FullName;
+                Repo.DFTInitialDirectory = di.FullName;
 
-                await WriteEllipticOrigAndFiltered();
-                // await WriteElliptic8Channels();
+                await WriteDFT();
             }
         }
     }

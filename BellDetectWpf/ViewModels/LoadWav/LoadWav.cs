@@ -16,16 +16,31 @@ namespace BellDetectWpf.ViewModels
             uint formatParametersSize;
             ushort wavType;
             string data;
+            string initialDirectory;
+
+            if (string.IsNullOrEmpty(Repo.WavInitialDirectory) == true)
+            {
+                initialDirectory = @"C:\ProgramData\BellDetect";
+            }
+            else
+            {
+                initialDirectory = Repo.WavInitialDirectory;
+            }
 
             OpenFileDialog openDlg = new OpenFileDialog
             {
                 Filter = string.Empty,
-                InitialDirectory = @"C:\ProgramData\BellDetect"
+                InitialDirectory = initialDirectory
             };
 
             if (openDlg.ShowDialog() == true)
             {
                 WavFilePathName = openDlg.FileName;
+
+                FileInfo fi = new FileInfo(WavFilePathName);
+                DirectoryInfo di = fi.Directory;
+                Repo.WavInitialDirectory = di.FullName;
+
                 LoadWavStatus = "Loading waveform...";
                 await Task.Delay(25);
 

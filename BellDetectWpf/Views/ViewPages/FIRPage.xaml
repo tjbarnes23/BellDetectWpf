@@ -134,34 +134,12 @@
 
         <!-- Save -->
 
-        <Grid Grid.Row="6" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Button Grid.Row="0" Grid.Column="0"
-                    Width="180" Height="40"
-                    HorizontalAlignment="Right"
-                    Margin="0, 0, 20, 0"
-                    FontFamily="Arial Black" FontSize="14"
-                    Click="Save_Click">
-                Save
-            </Button>
-
-            <Button Grid.Row="0" Grid.Column="1"
-                    Width="180" Height="40"
-                    HorizontalAlignment="Left"
-                    Margin="20, 0, 0, 0"
-                    FontFamily="Arial Black" FontSize="14"
-                    Click="SaveAs_Click">
-                Save As
-            </Button>
-        </Grid>
+        <Button Grid.Row="6" Grid.Column="0"
+                Width="240" Height="40"
+                FontFamily="Arial Black" FontSize="14"
+                Click="Save_Click">
+            Save filtered waveform
+        </Button>
 
         <!-- File name -->
 

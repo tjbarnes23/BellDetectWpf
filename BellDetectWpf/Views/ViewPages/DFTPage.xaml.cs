@@ -5,11 +5,11 @@ using BellDetectWpf.ViewModels;
 
 namespace BellDetectWpf.Views
 {
-    public partial class EllipticPage : Page
+    public partial class DFTPage : Page
     {
-        readonly EllipticVM viewModel;
+        readonly DFTVM viewModel;
 
-        public EllipticPage()
+        public DFTPage()
         {
             InitializeComponent();
             viewModel = new();
@@ -18,12 +18,12 @@ namespace BellDetectWpf.Views
 
         private async void Run_Click(object sender, RoutedEventArgs e)
         {
-            await viewModel.RunElliptic();
+            await viewModel.RunDFT();
         }
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            await viewModel.SaveElliptic();
+            await viewModel.SaveDFT();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
