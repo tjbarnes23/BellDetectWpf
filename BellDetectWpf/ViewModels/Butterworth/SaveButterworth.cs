@@ -39,7 +39,6 @@ namespace BellDetectWpf.ViewModels
                 Repo.ButterworthInitialDirectory = di.FullName;
 
                 await WriteButterworth();
-                // await WriteElliptic8Channels();
             }
         }
     }

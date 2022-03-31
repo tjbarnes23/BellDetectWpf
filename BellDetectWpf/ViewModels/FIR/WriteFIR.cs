@@ -8,12 +8,13 @@ namespace BellDetectWpf.ViewModels
 {
     public partial class FIRVM
     {
-        public async Task WriteFIROrigAndFiltered()
+        public async Task WriteFIR()
         {
             uint fileSize;
             uint dataSize;
             uint formatParametersSize;
             ushort wavType;
+            ushort numChannels;
             uint dataRate;
             ushort blockAlignment;
 
@@ -30,14 +31,17 @@ namespace BellDetectWpf.ViewModels
             // Set wavType (ushort)
             wavType = 1; // 1 = PCM
 
+            // Set numChannels (ushort)
+            numChannels = (ushort)(Repo.FIRNumChannels + 1); // Number of channels in filter output array, plus 1 for first channel of the input wav file
+
             // Set dataRate (uint)
-            dataRate = (uint)(Repo.SampleFrequency * (Repo.SampleDepth / 8) * Repo.FIRNumChannels); // bytes per second
+            dataRate = (uint)(Repo.SampleFrequency * (Repo.SampleDepth / 8) * numChannels); // bytes per second
 
             // Set blockAlignment (ushort)
-            blockAlignment = (ushort)((Repo.SampleDepth / 8) * Repo.FIRNumChannels); // bytes per sample
+            blockAlignment = (ushort)((Repo.SampleDepth / 8) * numChannels); // bytes per sample
 
             // Set dataSize (uint)
-            dataSize = (Repo.DataSize / Repo.WavNumChannels) * Repo.FIRNumChannels; // Divide original data size by original num channels
+            dataSize = (Repo.DataSize / Repo.WavNumChannels) * numChannels; // Divide original data size by original num channels
                                                                                     // because we only processed the first channel
 
             // Set fileSize (uint)
@@ -60,7 +64,7 @@ namespace BellDetectWpf.ViewModels
                     wr.Write(Encoding.ASCII.GetBytes("fmt "));
                     wr.Write(formatParametersSize); // 
                     wr.Write(wavType);
-                    wr.Write(Repo.FIRNumChannels);
+                    wr.Write(numChannels);
                     wr.Write(Repo.SampleFrequency);
                     wr.Write(dataRate);
                     wr.Write(blockAlignment);
@@ -72,8 +76,11 @@ namespace BellDetectWpf.ViewModels
                     for (int i = 0; i < Repo.NumSamples; i++)
                     {
                         wr.Write((short)Repo.WavDataInt[0, i]); // Taking first channel of original wav file
-                        wr.Write(Repo.FIRFilteredWaveformArr[0, i]); // Taking the filter output stored in the 0th index
-                        wr.Write(Repo.FIRFilteredWaveformArr[1, i]); // This has the phase change signal
+
+                        for (int j = 0; j < Repo.FIRNumChannels; j++)
+                        {
+                            wr.Write(Repo.FIRFilteredWaveformArr[j, i]);
+                        }
                     }
                 }
             }
@@ -95,15 +102,13 @@ namespace BellDetectWpf.ViewModels
                 sb.Append("Time");
                 sb.Append('\t');
 
-                sb.Append("Original");
-                sb.Append('\t');
-
-                sb.Append("Filtered");
-                sb.Append('\t');
-
-                sb.Append("Phase");
-                sb.Append('\t');
-
+                for (int j = 0; j < numChannels; j++)
+                {
+                    sb.Append("Channel ");
+                    sb.Append(j + 1);
+                    sb.Append('\t');
+                }
+                
                 sb.Append('\n');
 
                 row = new UTF8Encoding(true).GetBytes(sb.ToString());
@@ -117,14 +122,14 @@ namespace BellDetectWpf.ViewModels
                     sb.Append(Math.Round(Repo.Time[i], 6));
                     sb.Append('\t');
 
-                    sb.Append(Repo.WavDataInt[0, i]);
+                    sb.Append(Repo.WavDataInt[0, i]); // First channel of original wav file
                     sb.Append('\t');
 
-                    sb.Append(Repo.FIRFilteredWaveformArr[0, i]);
-                    sb.Append('\t');
-
-                    sb.Append(Repo.FIRFilteredWaveformArr[1, i]);
-                    sb.Append('\t');
+                    for (int j = 0; j < Repo.FIRNumChannels; j++)
+                    {
+                        sb.Append(Repo.FIRFilteredWaveformArr[j, i]);
+                        sb.Append('\t');
+                    }
 
                     sb.Append('\n');
 

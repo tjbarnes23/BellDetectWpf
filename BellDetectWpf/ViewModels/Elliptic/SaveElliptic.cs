@@ -38,8 +38,7 @@ namespace BellDetectWpf.ViewModels
                 DirectoryInfo di = fi.Directory;
                 Repo.EllipticInitialDirectory = di.FullName;
 
-                await WriteEllipticOrigAndFiltered();
-                // await WriteElliptic8Channels();
+                await WriteElliptic();
             }
         }
     }

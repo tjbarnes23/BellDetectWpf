@@ -8,12 +8,13 @@ namespace BellDetectWpf.ViewModels
 {
     public partial class EllipticVM
     {
-        public async Task WriteElliptic8Channels()
+        public async Task WriteElliptic()
         {
             uint fileSize;
             uint dataSize;
             uint formatParametersSize;
             ushort wavType;
+            ushort numChannels;
             uint dataRate;
             ushort blockAlignment;
 
@@ -24,28 +25,27 @@ namespace BellDetectWpf.ViewModels
             EllipticStatus = "Saving waveform...";
             await Task.Delay(25);
 
-
             // Set formatParametersSize (uint)
             formatParametersSize = 16; // 16 bytes per the WAV file spec
 
             // Set wavType (ushort)
             wavType = 1; // 1 = PCM
 
+            // Set numChannels (ushort)
+            numChannels = (ushort)(Repo.EllipticNumChannels + 1); // Number of channels in filter output array, plus 1 for first channel of the input wav file
+
             // Set dataRate (uint)
-            dataRate = (uint)(Repo.SampleFrequency * (Repo.SampleDepth / 8) *
-                    Repo.EllipticNumChannels); // bytes per second
+            dataRate = (uint)(Repo.SampleFrequency * (Repo.SampleDepth / 8) * numChannels); // bytes per second
 
             // Set blockAlignment (ushort)
-            blockAlignment = (ushort)((Repo.SampleDepth / 8) *
-                    Repo.EllipticNumChannels); // bytes per sample
+            blockAlignment = (ushort)((Repo.SampleDepth / 8) * numChannels); // bytes per sample
 
             // Set dataSize (uint)
-            dataSize = (Repo.DataSize / Repo.WavNumChannels) * Repo.EllipticNumChannels; // Divide original data size by original num channels
+            dataSize = (Repo.DataSize / Repo.WavNumChannels) * numChannels; // Divide original data size by original num channels
                                                                                       // because we only processed the first channel
 
             // Set fileSize (uint)
             fileSize = dataSize + formatParametersSize + 20; // bytes
-
 
             // Delete file if it already exists
             if (File.Exists(EllipticFilePathName))
@@ -64,7 +64,7 @@ namespace BellDetectWpf.ViewModels
                     wr.Write(Encoding.ASCII.GetBytes("fmt "));
                     wr.Write(formatParametersSize); // 
                     wr.Write(wavType);
-                    wr.Write(Repo.EllipticNumChannels);
+                    wr.Write(numChannels);
                     wr.Write(Repo.SampleFrequency);
                     wr.Write(dataRate);
                     wr.Write(blockAlignment);
@@ -75,6 +75,8 @@ namespace BellDetectWpf.ViewModels
                     // Write the filtered waveforms to the binary writer
                     for (int i = 0; i < Repo.NumSamples; i++)
                     {
+                        wr.Write((short)Repo.WavDataInt[0, i]); // Taking first channel of original wav file
+
                         for (int j = 0; j < Repo.EllipticNumChannels; j++)
                         {
                             wr.Write(Repo.EllipticFilteredWaveformArr[j, i]);
@@ -96,13 +98,13 @@ namespace BellDetectWpf.ViewModels
             {
                 // Write header row
                 sb = new StringBuilder();
-                sb.Clear();
+                
                 sb.Append("Time");
                 sb.Append('\t');
 
-                for (int j = 0; j < Repo.EllipticNumChannels; j++)
+                for (int j = 0; j < numChannels; j++)
                 {
-                    sb.Append("Bell ");
+                    sb.Append("Channel ");
                     sb.Append(j + 1);
                     sb.Append('\t');
                 }
@@ -116,7 +118,11 @@ namespace BellDetectWpf.ViewModels
                 for (int i = 0; i < Repo.NumSamples; i++)
                 {
                     sb.Clear();
+
                     sb.Append(Math.Round(Repo.Time[i], 6));
+                    sb.Append('\t');
+
+                    sb.Append(Repo.WavDataInt[0, i]); // First channel of original wav file
                     sb.Append('\t');
 
                     for (int j = 0; j < Repo.EllipticNumChannels; j++)
