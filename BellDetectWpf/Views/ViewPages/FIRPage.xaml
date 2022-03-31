@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:BellDetectWpf.Views"
         xmlns:en="clr-namespace:BellDetectWpf.Enums"
         xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
-        d:DataContext="{d:DesignInstance Type=vm:FIRVM}"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:FIRVM}"
         d:DesignWidth="800"
         d:DesignHeight="600">
 
@@ -55,8 +55,8 @@
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 FontFamily="Arial" FontSize="13"
                 TextWrapping="Wrap" LineHeight="20">
-                This page will apply an FIR filter to the loaded waveform.
-                Select the filter to be applied using the dropdown below.
+            This page will apply an FIR filter to the loaded waveform.
+            Select the filter to be applied using the dropdown below.
         </TextBlock>
 
         <!-- Loaded file -->
@@ -115,7 +115,6 @@
                 Margin="10, 0, 0, 0"
                 Padding="10, 10, 0, 0"
                 FontFamily="Arial Black" FontSize="14"
-                SelectionChanged="FilterFIRCB_SelectionChanged"
                 ItemsSource="{Binding Path=(en:FilterFIRExt.FilterFIRDict)}"
                 DisplayMemberPath="Value"
                 SelectedValuePath="Key"
@@ -159,7 +158,7 @@
                     HorizontalAlignment="Right" VerticalAlignment="Center"
                     FontFamily="Arial Black" FontSize="14" Foreground="#444"
                     TextWrapping="Wrap" LineHeight="20">
-                Saved FIR file:
+                Saved file:
             </TextBlock>
 
             <TextBlock Grid.Row="0" Grid.Column="1"

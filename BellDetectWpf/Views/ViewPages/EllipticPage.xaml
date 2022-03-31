@@ -4,12 +4,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:BellDetectWpf.Views"
+        xmlns:en="clr-namespace:BellDetectWpf.Enums"
         xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
+        mc:Ignorable="d"  
         d:DataContext="{d:DesignInstance Type=vm:EllipticVM}"
-        mc:Ignorable="d"
         d:DesignWidth="800"
         d:DesignHeight="600">
 
+    <Page.Resources>
+        <en:FilterEllipticConverter x:Key="FilterEllipticConverter" />
+    </Page.Resources>
+    
     <Grid MinWidth="800" MaxWidth="1200"
             MinHeight="600" MaxHeight="900">
         <Grid.ColumnDefinitions>
@@ -17,6 +22,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -49,12 +55,11 @@
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 FontFamily="Arial" FontSize="13"
                 TextWrapping="Wrap" LineHeight="20">
-                This page will apply an elliptic IIR filter to the loaded waveform.
-                Currently the filter parameters are set in code.
-                A future version of this program will enable filter parameters to be entered or imported.
+            This page will apply an elliptic IIR filter to the loaded waveform.
+            Select the filter to be applied using the dropdown below.
         </TextBlock>
 
-        <!-- Run -->
+        <!-- Loaded file -->
 
         <Grid Grid.Row="3" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -83,9 +88,43 @@
             </TextBlock>
         </Grid>
 
+        <!-- Select filter -->
+
+        <Grid Grid.Row="4" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Select filter:
+            </TextBlock>
+
+            <ComboBox x:Name="FilterFIRCB"
+                Grid.Row="0" Grid.Column="1"
+                Width="600" Height="40"
+                HorizontalAlignment="Left" VerticalAlignment="Center"
+                Margin="10, 0, 0, 0"
+                Padding="10, 10, 0, 0"
+                FontFamily="Arial Black" FontSize="14"
+                ItemsSource="{Binding Path=(en:FilterEllipticExt.FilterEllipticDict)}"
+                DisplayMemberPath="Value"
+                SelectedValuePath="Key"
+                SelectedValue="{Binding Path=FilterElliptic, Mode=TwoWay}">
+            </ComboBox>
+        </Grid>
+
         <!-- Run -->
 
-        <Button Grid.Row="4" Grid.Column="0"
+        <Button Grid.Row="5" Grid.Column="0"
                 Width="240" Height="40"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Run_Click">
@@ -94,7 +133,7 @@
 
         <!-- Save -->
 
-        <Button Grid.Row="5" Grid.Column="0"
+        <Button Grid.Row="6" Grid.Column="0"
                 Width="240" Height="40"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Save_Click">
@@ -103,7 +142,7 @@
 
         <!-- File name -->
 
-        <Grid Grid.Row="6" Grid.Column="0">
+        <Grid Grid.Row="7" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
@@ -119,7 +158,7 @@
                     HorizontalAlignment="Right" VerticalAlignment="Center"
                     FontFamily="Arial Black" FontSize="14" Foreground="#444"
                     TextWrapping="Wrap" LineHeight="20">
-                Saved filtered file:
+                Saved file:
             </TextBlock>
 
             <TextBlock Grid.Row="0" Grid.Column="1"
@@ -149,7 +188,7 @@
 
         <!-- Return -->
 
-        <Button Grid.Row="7" Grid.Column="0"
+        <Button Grid.Row="8" Grid.Column="0"
                 Width="180" Height="40"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Return_Click">

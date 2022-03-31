@@ -10,7 +10,7 @@ using BellDetectWpf.Repository;
 
 namespace BellDetectWpf.ViewModels
 {
-    public partial class EllipticVM : INotifyPropertyChanged
+    public partial class ButterworthVM : INotifyPropertyChanged
     {
         // Events
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,51 +33,51 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
-        public FilterEllipticEnum FilterElliptic
+        public FilterButterworthEnum FilterButterworth
         {
             get
             {
-                return Repo.FilterElliptic;
+                return Repo.FilterButterworth;
             }
             set
             {
-                if (Repo.FilterElliptic != value)
+                if (Repo.FilterButterworth != value)
                 {
-                    Repo.FilterElliptic = value;
+                    Repo.FilterButterworth = value;
                     NotifyPropertyChanged();
                 }
             }
         }
 
-        public string EllipticFilePathName
+        public string ButterworthFilePathName
         {
             get
             {
-                return Repo.EllipticFilePathName;
+                return Repo.ButterworthFilePathName;
             }
 
             set
             {
-                if (Repo.EllipticFilePathName != value)
+                if (Repo.ButterworthFilePathName != value)
                 {
-                    Repo.EllipticFilePathName = value;
+                    Repo.ButterworthFilePathName = value;
                     NotifyPropertyChanged();
                 }
             }
         }
 
-        public string EllipticStatus
+        public string ButterworthStatus
         {
             get
             {
-                return Repo.EllipticStatus;
+                return Repo.ButterworthStatus;
             }
 
             set
             {
-                if (Repo.EllipticStatus != value)
+                if (Repo.ButterworthStatus != value)
                 {
-                    Repo.EllipticStatus = value;
+                    Repo.ButterworthStatus = value;
                     NotifyPropertyChanged();
                 }
             }

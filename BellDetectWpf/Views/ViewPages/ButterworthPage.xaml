@@ -1,15 +1,20 @@
-﻿<Page x:Class="BellDetectWpf.Views.FFTPage"
+﻿<Page x:Class="BellDetectWpf.Views.ButterworthPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:BellDetectWpf.Views"
+        xmlns:en="clr-namespace:BellDetectWpf.Enums"
         xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
-        mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=vm:FFTVM}"
+        mc:Ignorable="d"  
+        d:DataContext="{d:DesignInstance Type=vm:ButterworthVM}"
         d:DesignWidth="800"
         d:DesignHeight="600">
 
+    <Page.Resources>
+        <en:FilterButterworthConverter x:Key="FilterButterworthConverter" />
+    </Page.Resources>
+    
     <Grid MinWidth="800" MaxWidth="1200"
             MinHeight="600" MaxHeight="900">
         <Grid.ColumnDefinitions>
@@ -17,9 +22,9 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.7*" />
-            <RowDefinition Height="0.7*" />
-            <RowDefinition Height="2.3*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -41,7 +46,7 @@
         <TextBlock Grid.Row="1" Grid.Column="0"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 FontFamily="Arial Black" FontSize="20">
-            FFT
+            Butterworth
         </TextBlock>
 
         <!-- Description -->
@@ -50,19 +55,11 @@
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 FontFamily="Arial" FontSize="13"
                 TextWrapping="Wrap" LineHeight="20">
-            This page will run Fast Fourier Transforms on the loaded waveform.
-            Use the box below to set the number of frequency bins to be used (must be a power of 2).
-            The frequency resolution = the waveform sampling frequency / number of bins.
-            E.g. if the sampling frequency is 44.1kHz and the number of bins is 1024,
-            the frequency resolution will be 43.066Hz.
-            The duration of the waveform required for each FFT = the number of bins / sampling frequency,
-            which equals 1 / frequency resolution.
-            So for a 43.066Hz frequency resolution, each FFT will cover 23ms of the waveform.
-            In this scenario, an FFT will be run every 23ms until the end of the waveform is reached.
-            E.g. if the waveform is 5s in duration, then 5 / 0.023 FFTs will be run = 215 FFTs.
+            This page will apply a Butterworth IIR filter to the loaded waveform.
+            Select the filter to be applied using the dropdown below.
         </TextBlock>
 
-        <!-- Loaded .wav file -->
+        <!-- Loaded file -->
 
         <Grid Grid.Row="3" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -91,42 +88,56 @@
             </TextBlock>
         </Grid>
 
-        <!-- Number of bins -->
+        <!-- Select filter -->
 
-        <StackPanel Grid.Row="4" Grid.Column="0"
-                Orientation="Horizontal"
-                HorizontalAlignment="Center">
-            <TextBlock Margin="0, 0, 10, 0"
+        <Grid Grid.Row="4" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
                     HorizontalAlignment="Right" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14">
-                Number of bins (a power of 2):
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Select filter:
             </TextBlock>
 
-            <TextBox Margin="10, 0, 0, 0"
-                    Width="120" Height="40"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=N, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-        </StackPanel>
+            <ComboBox x:Name="FilterFIRCB"
+                Grid.Row="0" Grid.Column="1"
+                Width="600" Height="40"
+                HorizontalAlignment="Left" VerticalAlignment="Center"
+                Margin="10, 0, 0, 0"
+                Padding="10, 10, 0, 0"
+                FontFamily="Arial Black" FontSize="14"
+                ItemsSource="{Binding Path=(en:FilterButterworthExt.FilterButterworthDict)}"
+                DisplayMemberPath="Value"
+                SelectedValuePath="Key"
+                SelectedValue="{Binding Path=FilterButterworth, Mode=TwoWay}">
+            </ComboBox>
+        </Grid>
 
         <!-- Run -->
 
         <Button Grid.Row="5" Grid.Column="0"
-                Width="180" Height="40"
+                Width="240" Height="40"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Run_Click">
-            Run FFT
+            Apply Butterworth filter
         </Button>
 
         <!-- Save -->
 
         <Button Grid.Row="6" Grid.Column="0"
-                Width="180" Height="40"
+                Width="240" Height="40"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Save_Click">
-            Save FFT
+            Save Butterworth waveform
         </Button>
 
         <!-- File name -->
@@ -147,7 +158,7 @@
                     HorizontalAlignment="Right" VerticalAlignment="Center"
                     FontFamily="Arial Black" FontSize="14" Foreground="#444"
                     TextWrapping="Wrap" LineHeight="20">
-                Saved FFT file:
+                Saved file:
             </TextBlock>
 
             <TextBlock Grid.Row="0" Grid.Column="1"
@@ -155,9 +166,9 @@
                     HorizontalAlignment="Left" VerticalAlignment="Center"
                     FontFamily="Arial" FontSize="13"
                     TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=FFTFilePathName, Mode=OneWay}">
+                    Text="{Binding Path=ButterworthFilePathName, Mode=OneWay}">
             </TextBlock>
-            
+
             <TextBlock Grid.Row="1" Grid.Column="0"
                     Margin="0, 0, 10, 0"
                     HorizontalAlignment="Right" VerticalAlignment="Center"
@@ -171,12 +182,12 @@
                     HorizontalAlignment="Left" VerticalAlignment="Center"
                     FontFamily="Arial" FontSize="13"
                     TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=FFTStatus, Mode=OneWay}">
+                    Text="{Binding Path=ButterworthStatus, Mode=OneWay}">
             </TextBlock>
         </Grid>
 
         <!-- Return -->
-            
+
         <Button Grid.Row="8" Grid.Column="0"
                 Width="180" Height="40"
                 FontFamily="Arial Black" FontSize="14"

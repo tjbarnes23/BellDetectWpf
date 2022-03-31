@@ -5,7 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:local="clr-namespace:BellDetectWpf.Views"
         xmlns:vm="clr-namespace:BellDetectWpf.ViewModels"
-        mc:Ignorable="d"
+        mc:Ignorable="d"  
+        d:DataContext="{d:DesignInstance Type=vm:MainVM}"
         d:DesignWidth="800"
         d:DesignHeight="600">
     
@@ -16,12 +17,13 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
 
         <!-- Title -->
@@ -32,15 +34,65 @@
             Bell Detect
         </TextBlock>
 
-        <Button Grid.Row="1" Grid.Column="0"
-                Width="180" Height="50"
-                FontFamily="Arial Black" FontSize="14"
-                Click="LoadWav_Click">
-            Load .wav file
-        </Button>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0"
+                    Width="180" Height="60"
+                    HorizontalAlignment="Right"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="LoadWav_Click">
+                Load .wav file
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="2"
+                    Width="180" Height="60"
+                    HorizontalAlignment="Left"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="CreateWav_Click">
+                Create .wav file
+            </Button>
+        </Grid>
 
         <Grid Grid.Row="2" Grid.Column="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0"
+                    Width="240" Height="60"
+                    HorizontalAlignment="Right"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="FFT_Click">
+                Run FFT on loaded .wav file
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="2"
+                    Width="240" Height="60"
+                    HorizontalAlignment="Left"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="DFT_Click">
+                Run DFT on loaded .wav file
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -50,39 +102,79 @@
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0" Grid.Column="0"
-                    Width="280" Height="50"
+                    Width="240" Height="60"
                     FontFamily="Arial Black" FontSize="14"
-                    Click="FFT_Click">
-                Run FFT on loaded .wav file
+                    Click="Butterworth_Click">
+                <TextBlock TextWrapping="Wrap" LineHeight="20" TextAlignment="Center">
+                    Apply Butterworth filter to loaded .wav file
+                </TextBlock>
             </Button>
 
             <Button Grid.Row="0" Grid.Column="1"
-                    Width="280" Height="50"
+                    Width="240" Height="60"
                     FontFamily="Arial Black" FontSize="14"
-                    Click="DFT_Click">
-                Run DFT on loaded .wav file
+                    Click="Elliptic_Click">
+                <TextBlock TextWrapping="Wrap" LineHeight="20" TextAlignment="Center">
+                    Apply elliptic filter to loaded .wav file
+                </TextBlock>
+            </Button>
+            
+            <Button Grid.Row="0" Grid.Column="2"
+                    Width="240" Height="60"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="FIR_Click">
+                <TextBlock TextWrapping="Wrap" LineHeight="20" TextAlignment="Center">
+                    Apply FIR filter to loaded .wav file
+                </TextBlock>
             </Button>
         </Grid>
 
-        <Button Grid.Row="3" Grid.Column="0"
-                Width="360" Height="50"
-                FontFamily="Arial Black" FontSize="14"
-                Click="Elliptic_Click">
-            Apply elliptic filter to loaded .wav file
+        <Button Grid.Row="4" Grid.Column="0"
+                    Width="240" Height="60"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="KeyPress_Click">
+            <TextBlock TextWrapping="Wrap" LineHeight="20" TextAlignment="Center">
+                    Test key press generation
+            </TextBlock>
         </Button>
 
-        <Button Grid.Row="4" Grid.Column="0"
-                Width="360" Height="50"
-                FontFamily="Arial Black" FontSize="14"
-                Click="FIR_Click">
-            Apply FIR filter to loaded .wav file
-        </Button>
-        
         <Button Grid.Row="5" Grid.Column="0"
-                Width="180" Height="50"
+                Width="180" Height="60"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Exit_Click">
             Exit
         </Button>
+
+        <!-- Loaded file -->
+
+        <Border Grid.Row="6" Grid.Column="0"
+                BorderBrush="#444" BorderThickness="0 1 0 0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                        Margin="0, 0, 10, 0"
+                        HorizontalAlignment="Right" VerticalAlignment="Center"
+                        FontFamily="Arial" FontSize="14" Foreground="#444"
+                        TextWrapping="Wrap" LineHeight="20">
+                    Loaded .wav file:
+                </TextBlock>
+
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                        Margin="10, 0, 0, 0"
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        FontFamily="Arial" FontSize="13"
+                        TextWrapping="Wrap" LineHeight="20"
+                        Text="{Binding Path=WavFilePathName, Mode=OneWay}">
+                </TextBlock>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

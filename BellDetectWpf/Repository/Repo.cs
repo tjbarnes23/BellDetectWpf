@@ -15,6 +15,7 @@ namespace BellDetectWpf.Repository
         **************************************************/
         public static Logger Logger { get; set; }
 
+
         /**************************************************
         * LoadWav
         **************************************************/
@@ -46,6 +47,16 @@ namespace BellDetectWpf.Repository
 
 
         /**************************************************
+        * CreateWav
+        **************************************************/
+        public static string CreateWavInitialDirectory { get; set; }
+
+        public static string CreateWavFilePathName { get; set; }
+
+        public static string CreateWavStatus { get; set; }
+
+
+        /**************************************************
         * FFT
         **************************************************/
         public static uint N { get; set; }
@@ -68,17 +79,35 @@ namespace BellDetectWpf.Repository
 
 
         /**************************************************
+        * Butterworth
+        **************************************************/
+        public static string ButterworthInitialDirectory { get; set; }
+
+        public static string ButterworthFilePathName { get; set; }
+
+        public static FilterButterworthEnum FilterButterworth { get; set; }
+
+        public static string ButterworthStatus { get; set; }
+
+        public static ushort ButterworthNumChannels { get; set; }
+
+        public static short[,] ButterworthFilteredWaveformArr { get; set; }
+
+
+        /**************************************************
         * Elliptic
         **************************************************/
         public static string EllipticInitialDirectory { get; set; }
         
         public static string EllipticFilePathName { get; set; }
 
+        public static FilterEllipticEnum FilterElliptic { get; set; }
+
         public static string EllipticStatus { get; set; }
 
         public static ushort EllipticNumChannels { get; set; }
 
-        public static short[,] EllipticFilteredWaveformArr { get; set; } // Array to hold filtered waveforms for each bell
+        public static short[,] EllipticFilteredWaveformArr { get; set; }
 
 
         /**************************************************
@@ -94,6 +123,16 @@ namespace BellDetectWpf.Repository
 
         public static ushort FIRNumChannels { get; set; }
 
-        public static short[,] FIRFilteredWaveformArr { get; set; } // Array to hold filtered waveforms for each bell
+        public static short[,] FIRFilteredWaveformArr { get; set; }
+
+
+        /**************************************************
+        * Key Press
+        **************************************************/
+        public static KeyPressModeEnum KeyPressMode { get; set; }
+        
+        public static string StartStopTxt { get; set; }
+
+        public static string KeyPressStatus { get; set; }
     }
 }

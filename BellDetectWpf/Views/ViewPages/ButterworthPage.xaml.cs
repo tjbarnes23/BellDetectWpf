@@ -5,11 +5,11 @@ using BellDetectWpf.ViewModels;
 
 namespace BellDetectWpf.Views
 {
-    public partial class FIRPage : Page
+    public partial class ButterworthPage : Page
     {
-        readonly FIRVM viewModel;
+        readonly ButterworthVM viewModel;
 
-        public FIRPage()
+        public ButterworthPage()
         {
             InitializeComponent();
             viewModel = new();
@@ -18,12 +18,12 @@ namespace BellDetectWpf.Views
 
         private async void Run_Click(object sender, RoutedEventArgs e)
         {
-            await viewModel.RunFIR();
+            await viewModel.RunButterworth();
         }
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            await viewModel.SaveFIR();
+            await viewModel.SaveButterworth();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)

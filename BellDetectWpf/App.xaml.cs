@@ -30,6 +30,9 @@ namespace BellDetectWpf
                 Directory.CreateDirectory(@"C:\ProgramData\BellDetect");
             }
 
+            // Initialize StartStop button text
+            Repo.StartStopTxt = "Start key presses";
+
             /**************************************************
             * Load main window
             **************************************************/
