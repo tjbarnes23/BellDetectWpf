@@ -7,9 +7,9 @@ using BellDetectWpf.Repository;
 
 namespace BellDetectWpf.ViewModels
 {
-    public partial class EllipticVM
+    public partial class ButterworthVM
     {
-        public static void ExecuteElliptic(int channel, List<double[,]> coefs, double gain)
+        public static void ExecuteButterworth(int channel, List<double[,]> coefs, double gain)
         {
             double[,] num;
             double[,] denom;

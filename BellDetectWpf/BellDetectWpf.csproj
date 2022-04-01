@@ -73,6 +73,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\Butterworth\Coefficients\TJB\" />
     <Folder Include="ViewModels\FIR\Coefficients\TJB\" />
   </ItemGroup>
 

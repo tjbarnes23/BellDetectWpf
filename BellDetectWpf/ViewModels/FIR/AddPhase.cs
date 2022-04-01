@@ -9,7 +9,7 @@ namespace BellDetectWpf.ViewModels
 {
     public partial class FIRVM
     {
-        public static void AddPhase()
+        public static void AddPhase(int channel)
         {
             int[] zeroPoints;
             int[] zeroGaps;
@@ -108,7 +108,7 @@ namespace BellDetectWpf.ViewModels
 
                 if (counter > 0)
                 {
-                    Repo.FIRFilteredWaveformArr[1, i] = 20000;
+                    Repo.FIRFilteredWaveformArr[channel, i] = 20000;
                     counter--;
                 }
             }

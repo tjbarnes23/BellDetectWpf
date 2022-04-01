@@ -10,16 +10,14 @@ namespace BellDetectWpf.Enums
 {
     public enum FilterButterworthEnum
     {
-        TestButterworth1,
-        TestButterworth2
+        pm_C15_1
     }
 
     public static class FilterButterworthExt
     {
         public static Dictionary<FilterButterworthEnum, string> FilterButterworthDict { get; } = new Dictionary<FilterButterworthEnum, string>()
         {
-            {FilterButterworthEnum.TestButterworth1, "Test Butterworth 1"},
-            {FilterButterworthEnum.TestButterworth2, "Test Butterworth 2"}
+            {FilterButterworthEnum.pm_C15_1, "PM C15; 495-515-530-550 Hz; 12th order; 48 kHz; -60/-5 dB"}
         };
     }
 

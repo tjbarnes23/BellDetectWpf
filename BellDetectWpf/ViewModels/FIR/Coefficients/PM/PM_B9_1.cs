@@ -9,12 +9,11 @@ namespace BellDetectWpf.ViewModels
     public partial class FIRVM
     {
         /*************************************************
-        * PM B9 handbell
-        * 592-order band-pass FIR filter at 1048, 1098, 1335, 1385; 44.1 kHz; -30/-5dB
+        * PM B9; 1048-1098-1335-1385 Hz; 592 order; 44.1 kHz; -30/-5 dB
         *************************************************/
         const int PM_B9_1_LEN = 593;
         
-        static readonly double[] pm_b9_1 = new double[PM_B9_1_LEN]
+        static readonly double[] pm_B9_1 = new double[PM_B9_1_LEN]
         {
             0.01445480961051,-0.009129925090438,-0.006861650411119,-0.005265836073165,
           -0.004137175915421, -0.00333102711918,-0.002741540006568,-0.002295978177131,
