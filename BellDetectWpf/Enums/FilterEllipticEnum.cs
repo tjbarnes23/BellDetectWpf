@@ -11,6 +11,8 @@ namespace BellDetectWpf.Enums
     public enum FilterEllipticEnum
     {
         pm_B9_1,
+        pm_C15_1,
+        pm_C15_2,
         tjb_B2_1,
         tjb_As3_1,
         tjb_Gs4_1,
@@ -26,6 +28,8 @@ namespace BellDetectWpf.Enums
         public static Dictionary<FilterEllipticEnum, string> FilterEllipticDict { get; } = new Dictionary<FilterEllipticEnum, string>()
         {
             {FilterEllipticEnum.pm_B9_1, "PM B9: 1096-1136-1178-1218 Hz; 4th order; 44.1 kHz; -30/-5 dB"},
+            {FilterEllipticEnum.pm_C15_1, "PM C15: 495-515-530-550 Hz; 6th order; 48 kHz; -40/-3 dB"},
+            {FilterEllipticEnum.pm_C15_2, "PM C15: 480-515-530-565 Hz; 4th order; 48 kHz; -40/-3 dB"},
             {FilterEllipticEnum.tjb_B2_1,"TJB B2:1924-1962-2081-2163 Hz; 8th order; 44.1 kHz; -40/-3 dB"},
             {FilterEllipticEnum.tjb_As3_1,"TJB As3: 1749-1817-1924-1962 Hz; 8th order; 44.1 kHz; -40/-3 dB"},
             {FilterEllipticEnum.tjb_Gs4_1,"TJB Gs4: 1558-1619-1749-1817 Hz; 6th order; 44.1 kHz; -40/-3 dB"},

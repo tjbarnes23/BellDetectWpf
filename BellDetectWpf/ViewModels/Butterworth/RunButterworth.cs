@@ -32,7 +32,7 @@ namespace BellDetectWpf.ViewModels
 
             idx = (int)Repo.FilterButterworth;
 
-            gain = 1.0;
+            gain = 2.5;
 
             // This will apply the selected coefficients to the first channel of the input .wav file,
             // and store the output in index 0 of Repo.ButterworthFilteredWaveformArr

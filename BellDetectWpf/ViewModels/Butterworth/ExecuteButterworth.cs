@@ -69,7 +69,7 @@ namespace BellDetectWpf.ViewModels
             // Convert to short (16-bit) and write into specified index of output array
             for (int i = 0; i < Repo.NumSamples; i++)
             {
-                Repo.EllipticFilteredWaveformArr[channel, i] = (short)Math.Round(y[i, num.GetLength(0) - 1] * gain);
+                Repo.ButterworthFilteredWaveformArr[channel, i] = (short)Math.Round(y[i, num.GetLength(0) - 1] * gain);
             }
         }
     }

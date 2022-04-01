@@ -28,6 +28,8 @@ namespace BellDetectWpf.ViewModels
             coefs = new()
             {
                 new List<double[,]>() { pm_B9_1_num, pm_B9_1_denom },
+                new List<double[,]>() { pm_C15_1_num, pm_C15_1_denom },
+                new List<double[,]>() { pm_C15_2_num, pm_C15_2_denom },
                 new List<double[,]>() { tjb_B2_1_num, tjb_B2_1_denom },
                 new List<double[,]>() { tjb_As3_1_num, tjb_As3_1_denom },
                 new List<double[,]>() { tjb_Gs4_1_num, tjb_Gs4_1_denom },
@@ -38,9 +40,9 @@ namespace BellDetectWpf.ViewModels
                 new List<double[,]>() { tjb_B9_1_num, tjb_B9_1_denom }
             };
 
-            idx = (int)Repo.FilterFIR;
+            idx = (int)Repo.FilterElliptic;
 
-            gain = 1.0;
+            gain = 2.5;
 
             // This will apply the selected coefficients to the first channel of the input .wav file,
             // and store the output in index 0 of Repo.EllipticFilteredWaveformArr
