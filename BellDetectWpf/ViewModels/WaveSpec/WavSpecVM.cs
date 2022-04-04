@@ -9,41 +9,24 @@ using BellDetectWpf.Repository;
 
 namespace BellDetectWpf.ViewModels
 {
-    public partial class CreateWavVM : INotifyPropertyChanged
+    public partial class WavSpecVM : INotifyPropertyChanged
     {
         // Events
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Observable properties
-        public string WavFilePathName
+        public string WavSpecFilePathName
         {
             get
             {
-                return Repo.WavFilePathName;
+                return Repo.WavSpecFilePathName;
             }
 
             set
             {
-                if (Repo.WavFilePathName != value)
+                if (Repo.WavSpecFilePathName != value)
                 {
-                    Repo.WavFilePathName = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-
-        public string CreateWavStatus
-        {
-            get
-            {
-                return Repo.CreateWavStatus;
-            }
-
-            set
-            {
-                if (Repo.CreateWavStatus != value)
-                {
-                    Repo.CreateWavStatus = value;
+                    Repo.WavSpecFilePathName = value;
                     NotifyPropertyChanged();
                 }
             }

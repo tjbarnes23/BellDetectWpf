@@ -47,12 +47,28 @@ namespace BellDetectWpf.Repository
 
 
         /**************************************************
+        * WavSpec
+        **************************************************/
+        public static string WavSpecFilePathName { get; set; }
+
+
+        /**************************************************
+        * LoadWavSpec
+        **************************************************/
+        public static string LoadWavSpecStatus { get; set; }
+
+        public static string WavSpecInitialDirectory { get; set; }
+
+
+        /**************************************************
+        * CreateWavSpec
+        **************************************************/
+        public static string CreateWavSpecStatus { get; set; }
+
+
+        /**************************************************
         * CreateWav
         **************************************************/
-        public static string CreateWavInitialDirectory { get; set; }
-
-        public static string CreateWavFilePathName { get; set; }
-
         public static string CreateWavStatus { get; set; }
 
 

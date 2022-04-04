@@ -23,7 +23,7 @@ namespace BellDetectWpf.Views
 
         private void CreateWav_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.MW.MainFrame.Navigate(new CreateWavPage());
+            MainWindow.MW.MainFrame.Navigate(new WavSpecPage());
         }
 
         private void FFT_Click(object sender, RoutedEventArgs e)
