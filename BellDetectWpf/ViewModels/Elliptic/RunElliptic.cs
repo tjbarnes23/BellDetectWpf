@@ -42,7 +42,7 @@ namespace BellDetectWpf.ViewModels
 
             idx = (int)Repo.FilterElliptic;
 
-            gain = 2.5;
+            gain = 1.2;
 
             // This will apply the selected coefficients to the first channel of the input .wav file,
             // and store the output in index 0 of Repo.EllipticFilteredWaveformArr

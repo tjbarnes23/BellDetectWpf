@@ -190,7 +190,7 @@ namespace BellDetectWpf.ViewModels
                         }
                     }
 
-                    LoadWavStatus = "Valid .wav file format. File loaded.";
+                    LoadWavStatus = "Valid .wav file format. File loaded";
                     await Task.Delay(25);
                 }
             }

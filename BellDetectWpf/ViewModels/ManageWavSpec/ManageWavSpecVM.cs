@@ -1,18 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.Models;
 using BellDetectWpf.Repository;
 
 namespace BellDetectWpf.ViewModels
 {
-    public partial class CreateWavSpecVM : INotifyPropertyChanged
+    public partial class ManageWavSpecVM : INotifyPropertyChanged
     {
         // Events
         public event PropertyChangedEventHandler PropertyChanged;
+
+        // Observable collections
+        public static ObservableCollection<WavSpec> WavSpecs
+        {
+            get
+            {
+                return Repo.WavSpecs;
+            }
+
+            set
+            {
+                if (Repo.WavSpecs != value)
+                {
+                    Repo.WavSpecs = value;
+                }
+            }
+        }
 
         // Observable properties
         public string WavSpecFilePathName
@@ -32,18 +52,18 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
-        public string CreateWavSpecStatus
+        public string ManageWavSpecStatus
         {
             get
             {
-                return Repo.CreateWavSpecStatus;
+                return Repo.ManageWavSpecStatus;
             }
 
             set
             {
-                if (Repo.CreateWavSpecStatus != value)
+                if (Repo.ManageWavSpecStatus != value)
                 {
-                    Repo.CreateWavSpecStatus = value;
+                    Repo.ManageWavSpecStatus = value;
                     NotifyPropertyChanged();
                 }
             }

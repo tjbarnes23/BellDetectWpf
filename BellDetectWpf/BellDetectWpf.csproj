@@ -40,10 +40,7 @@
     <Compile Update="Views\ViewPages\CreateWavPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ViewPages\CreateWavSpecPage.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\ViewPages\LoadWavSpecPage.xaml.cs">
+    <Compile Update="Views\ViewPages\ManageWavSpecPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ViewPages\WavSpecPage.xaml.cs">
@@ -75,11 +72,7 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ViewPages\CreateWavSpecPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\ViewPages\LoadWavSpecPage.xaml">
+    <Page Update="Views\ViewPages\ManageWavSpecPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

@@ -15,6 +15,23 @@ namespace BellDetectWpf.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Observable properties
+        public string WavSpecFilePathName
+        {
+            get
+            {
+                return Repo.WavSpecFilePathName;
+            }
+
+            set
+            {
+                if (Repo.WavSpecFilePathName != value)
+                {
+                    Repo.WavSpecFilePathName = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public string WavFilePathName
         {
             get

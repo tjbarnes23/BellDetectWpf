@@ -1,28 +1,33 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace BellDetectWpf.Models
 {
-    public class WaveSpec : INotifyPropertyChanged
+    public class WavSpec : INotifyPropertyChanged
     {
-        private int frequency;
-        private int amplitude;
-        private double timeToPeak;
-        private double timeToDecayTo50pc;
+        // Private backing fields
+        int frequency;
+        int amplitude;
+        double timeToPeak;
+        double timeToDecayTo50pc;
 
+        // Events
         public event PropertyChangedEventHandler PropertyChanged;
 
+        // Observable properties
         public int Frequency
         {
             get
             {
                 return frequency;
             }
+            
             set
             {
                 if (frequency != value)
                 {
                     frequency = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Frequency)));
+                    NotifyPropertyChanged();
                 }
             }
         }
@@ -33,15 +38,15 @@ namespace BellDetectWpf.Models
             {
                 return amplitude;
             }
+
             set
             {
                 if (amplitude != value)
                 {
                     amplitude = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Amplitude)));
+                    NotifyPropertyChanged();
                 }
             }
-
         }
 
         public double TimeToPeak
@@ -50,12 +55,13 @@ namespace BellDetectWpf.Models
             {
                 return timeToPeak;
             }
+
             set
             {
                 if (timeToPeak != value)
                 {
                     timeToPeak = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeToPeak)));
+                    NotifyPropertyChanged();
                 }
             }
         }
@@ -66,14 +72,21 @@ namespace BellDetectWpf.Models
             {
                 return timeToDecayTo50pc;
             }
+
             set
             {
                 if (timeToDecayTo50pc != value)
                 {
                     timeToDecayTo50pc = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TimeToDecayTo50pc)));
+                    NotifyPropertyChanged();
                 }
             }
+        }
+
+        // Notification method
+        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

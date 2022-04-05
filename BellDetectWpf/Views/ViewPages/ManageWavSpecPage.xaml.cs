@@ -6,30 +6,32 @@ using Microsoft.Win32;
 
 namespace BellDetectWpf.Views
 {
-    public partial class CreateWavPage : Page
+    public partial class ManageWavSpecPage : Page
     {
-        readonly CreateWavVM viewModel;
+        readonly ManageWavSpecVM viewModel;
 
-        public CreateWavPage()
+        public ManageWavSpecPage()
         {
             InitializeComponent();
             viewModel = new();
             this.DataContext = viewModel;
         }
 
-        private async void Create_Click(object sender, RoutedEventArgs e)
+        private async void Load_Click(object sender, RoutedEventArgs e)
         {
-            await viewModel.CreateWav();
+            await viewModel.LoadWavSpec();
+            WaveSpecGrid.ItemsSource = null;
+            WaveSpecGrid.ItemsSource = ManageWavSpecVM.WavSpecs;
         }
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            await viewModel.SaveWav();
+            await viewModel.SaveWavSpec();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.MW.MainFrame.Navigate(new MainPage());
+            MainWindow.MW.MainFrame.Navigate(new WavSpecPage());
         }
     }
 }

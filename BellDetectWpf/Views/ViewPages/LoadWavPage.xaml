@@ -167,7 +167,7 @@
                     Margin="10, 0, 0, 0"
                     VerticalAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
-                    Text="{Binding Path=NumChannels, Mode=OneWay}">
+                    Text="{Binding Path=WavNumChannels, Mode=OneWay}">
             </TextBlock>
 
             <TextBlock Grid.Row="1" Grid.Column="2"

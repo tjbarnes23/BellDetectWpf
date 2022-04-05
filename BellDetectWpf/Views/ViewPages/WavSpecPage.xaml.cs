@@ -17,14 +17,9 @@ namespace BellDetectWpf.Views
             this.DataContext = viewModel;
         }
 
-        private void LoadWavSpec_Click(object sender, RoutedEventArgs e)
+        private void ManageWavSpec_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.MW.MainFrame.Navigate(new LoadWavSpecPage());
-        }
-
-        private void CreateWavSpec_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.MW.MainFrame.Navigate(new CreateWavSpecPage());
+            MainWindow.MW.MainFrame.Navigate(new ManageWavSpecPage());
         }
 
         private void CreateWav_Click(object sender, RoutedEventArgs e)

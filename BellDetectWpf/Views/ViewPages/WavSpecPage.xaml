@@ -43,33 +43,12 @@
 
         <!-- Load and create buttons -->
 
-        <Grid Grid.Row="2" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="0.2*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Button Grid.Row="0" Grid.Column="0"
-                    Width="180" Height="40"
-                    HorizontalAlignment="Right"
-                    FontFamily="Arial Black" FontSize="14"
-                    Click="LoadWavSpec_Click">
-                Load wave spec file
-            </Button>
-
-            <Button Grid.Row="0" Grid.Column="2"
-                    Width="180" Height="40"
-                    HorizontalAlignment="Left"
-                    FontFamily="Arial Black" FontSize="14"
-                    Click="CreateWavSpec_Click">
-                Create wave spec file
-            </Button>
-        </Grid>
+        <Button Grid.Row="2" Grid.Column="0"
+                Width="360" Height="40"
+                FontFamily="Arial Black" FontSize="14"
+                Click="ManageWavSpec_Click">
+            Load / create / edit / save wave spec file
+        </Button>
 
         <!-- Create .wav file from wave spec -->
 
@@ -108,7 +87,7 @@
                         HorizontalAlignment="Right" VerticalAlignment="Center"
                         FontFamily="Arial" FontSize="14" Foreground="#444"
                         TextWrapping="Wrap" LineHeight="20">
-                    Loaded wave spec file:
+                    Wave spec file:
                 </TextBlock>
 
                 <TextBlock Grid.Row="0" Grid.Column="1"

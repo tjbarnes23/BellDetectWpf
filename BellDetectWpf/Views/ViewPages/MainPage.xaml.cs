@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using BellDetectWpf.Utilities;
 using BellDetectWpf.ViewModels;
 
 namespace BellDetectWpf.Views
@@ -58,6 +59,8 @@ namespace BellDetectWpf.Views
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            Utils.SaveSettings();
+
             Application.Current.Shutdown();
         }
     }

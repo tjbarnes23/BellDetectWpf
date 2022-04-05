@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BellDetectWpf.Enums;
+using BellDetectWpf.Models;
 using NLog;
 
 namespace BellDetectWpf.Repository
@@ -53,17 +55,13 @@ namespace BellDetectWpf.Repository
 
 
         /**************************************************
-        * LoadWavSpec
+        * ManageWavSpec
         **************************************************/
-        public static string LoadWavSpecStatus { get; set; }
+        public static string ManageWavSpecStatus { get; set; }
 
         public static string WavSpecInitialDirectory { get; set; }
 
-
-        /**************************************************
-        * CreateWavSpec
-        **************************************************/
-        public static string CreateWavSpecStatus { get; set; }
+        public static ObservableCollection<WavSpec> WavSpecs { get; set; }
 
 
         /**************************************************
