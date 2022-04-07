@@ -36,7 +36,6 @@ namespace BellDetectWpf.ViewModels
             Repo.SampleFrequency = 48000;
             Repo.SampleDepth = 16;
             Repo.WavNumChannels = 1;
-
             Repo.LengthSeconds = 5.0;
             
             Repo.NumSamples = (uint)(Repo.SampleFrequency * Repo.LengthSeconds);

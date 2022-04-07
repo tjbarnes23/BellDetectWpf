@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.Detection;
 using BellDetectWpf.Repository;
 using Microsoft.Win32;
 
@@ -50,7 +51,7 @@ namespace BellDetectWpf.ViewModels
 
             // This method looks for phase changes in the filtered signal and puts a phase change signal in index 1
             // of Repo.EllipticFilteredWaveformArr
-            // AddPhase(1);
+            Detect.AddFreqShiftDetection(Repo.EllipticFilteredWaveformArr);
 
             EllipticStatus = "Elliptic filter applied";
             await Task.Delay(25);

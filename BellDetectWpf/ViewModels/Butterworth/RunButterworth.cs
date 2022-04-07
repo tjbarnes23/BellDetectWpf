@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using BellDetectWpf.Detection;
 using BellDetectWpf.Repository;
-using Microsoft.Win32;
 
 namespace BellDetectWpf.ViewModels
 {
@@ -40,7 +37,7 @@ namespace BellDetectWpf.ViewModels
 
             // This method looks for phase changes in the filtered signal and puts a phase change signal in index 1
             // of Repo.ButterworthFilteredWaveformArr
-            // AddPhase(1);
+            Detect.AddFreqShiftDetection(Repo.ButterworthFilteredWaveformArr);
 
             ButterworthStatus = "Butterworth filter applied";
             await Task.Delay(25);

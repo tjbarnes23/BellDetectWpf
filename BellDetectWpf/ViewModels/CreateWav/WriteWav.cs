@@ -10,15 +10,21 @@ namespace BellDetectWpf.ViewModels
     {
         public async Task WriteWav()
         {
-            uint fileSize;
-            uint dataSize;
             uint formatParametersSize;
             ushort wavType;
-            uint dataRate;
-            ushort blockAlignment;
+            uint fileSize;
 
             CreateWavStatus = "Saving .wav file...";
             await Task.Delay(25);
+
+            // Set dataRate (uint)
+            Repo.DataRate = (uint)(Repo.SampleFrequency * (Repo.SampleDepth / 8) * Repo.WavNumChannels); // bytes per second
+
+            // Set blockAlignment (ushort)
+            Repo.BlockAlignment = (ushort)((Repo.SampleDepth / 8) * Repo.WavNumChannels); // bytes per sample
+
+            // Set dataSize (uint)
+            Repo.DataSize = (uint)(Repo.NumSamples * (Repo.SampleDepth / 8) * Repo.WavNumChannels);
 
             // Set formatParametersSize (uint)
             formatParametersSize = 16; // 16 bytes per the WAV file spec
@@ -26,17 +32,8 @@ namespace BellDetectWpf.ViewModels
             // Set wavType (ushort)
             wavType = 1; // 1 = PCM
 
-            // Set dataRate (uint)
-            dataRate = (uint)(Repo.SampleFrequency * (Repo.SampleDepth / 8) * Repo.WavNumChannels); // bytes per second
-
-            // Set blockAlignment (ushort)
-            blockAlignment = (ushort)((Repo.SampleDepth / 8) * Repo.WavNumChannels); // bytes per sample
-
-            // Set dataSize (uint)
-            dataSize = (uint)(Repo.NumSamples * (Repo.SampleDepth / 8) * Repo.WavNumChannels);
-
             // Set fileSize (uint)
-            fileSize = dataSize + formatParametersSize + 20; // bytes
+            fileSize = Repo.DataSize + formatParametersSize + 20; // bytes
 
             // Delete file if it already exists
             if (File.Exists(WavFilePathName))
@@ -57,11 +54,11 @@ namespace BellDetectWpf.ViewModels
                     wr.Write(wavType);
                     wr.Write(Repo.WavNumChannels);
                     wr.Write(Repo.SampleFrequency);
-                    wr.Write(dataRate);
-                    wr.Write(blockAlignment);
+                    wr.Write(Repo.DataRate);
+                    wr.Write(Repo.BlockAlignment);
                     wr.Write(Repo.SampleDepth);
                     wr.Write(Encoding.ASCII.GetBytes("data"));
-                    wr.Write(dataSize);
+                    wr.Write(Repo.DataSize);
 
                     // Write .wav file
                     for (int i = 0; i < Repo.NumSamples; i++)
