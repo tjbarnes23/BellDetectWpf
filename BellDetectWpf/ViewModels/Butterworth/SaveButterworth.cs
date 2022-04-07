@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BellDetectWpf.Detection;
 using BellDetectWpf.Repository;
 using Microsoft.Win32;
 
@@ -39,6 +40,8 @@ namespace BellDetectWpf.ViewModels
                 Repo.ButterworthInitialDirectory = di.FullName;
 
                 await WriteButterworth();
+
+                Detect.WriteDetection(ButterworthFilePathName);
             }
         }
     }

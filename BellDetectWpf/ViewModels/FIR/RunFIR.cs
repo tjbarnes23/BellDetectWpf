@@ -39,7 +39,7 @@ namespace BellDetectWpf.ViewModels
 
             // This method looks for phase changes in the filtered signal and puts a phase change signal in index 1
             // of Repo.FIRFilteredWaveformArr
-            Detect.AddFreqShiftDetection(Repo.FIRFilteredWaveformArr);
+            Detect.DetectionV2(Repo.FIRFilteredWaveformArr);
 
             FIRStatus = "FIR filter applied";
             await Task.Delay(25);

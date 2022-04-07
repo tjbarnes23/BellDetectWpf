@@ -11,7 +11,7 @@ namespace BellDetectWpf.Detection
 {
     public static partial class Detect
     {
-        public static void AddFreqShiftDetection(short[,] filteredWaveformArr)
+        public static void DetectionV1(short[,] filteredWaveformArr)
         {
             int numSamples;
             int nextTestPoint;

@@ -141,6 +141,13 @@ namespace BellDetectWpf.Repository
 
 
         /**************************************************
+        * Detection
+        **************************************************/
+
+        public static List<SampleInfo> Samples { get; set; }
+
+
+        /**************************************************
         * Key Press
         **************************************************/
         public static KeyPressModeEnum KeyPressMode { get; set; }

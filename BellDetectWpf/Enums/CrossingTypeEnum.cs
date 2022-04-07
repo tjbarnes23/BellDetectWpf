@@ -9,6 +9,7 @@ namespace BellDetectWpf.Enums
     public enum CrossingTypeEnum
     {
         NegToPos,
-        PosToNeg
+        PosToNeg,
+        NA
     }
 }
