@@ -110,10 +110,10 @@ namespace BellDetectWpf.Detection
                     {
                         found = false;
 
-                        // Ensure amplitude reached at least 1000 during this cycle
+                        // Ensure amplitude reached at least 2000 during this cycle
                         for (int k = i - Repo.Samples[i].NearestCrossing92Prior; k <= i; k++)
                         {
-                            if (Repo.Samples[k].Amplitude >= 1000)
+                            if (Repo.Samples[k].Amplitude >= 2000)
                             {
                                 found = true;
                                 break;
