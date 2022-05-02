@@ -41,7 +41,7 @@ namespace BellDetectWpf.ViewModels
 
                 await WriteElliptic();
 
-                Detect.WriteDetection(EllipticFilePathName);
+                // Detect.WriteDetection(EllipticFilePathName);
             }
         }
     }

@@ -131,7 +131,33 @@ namespace BellDetectWpf.Repository
 
         public static string FIRFilePathName { get; set; }
 
-        public static FilterFIREnum FilterFIR { get; set; }
+        public static FilterFIREnum FilterFIRLeft { get; set; }
+
+        public static FilterFIREnum FilterFIRRight { get; set; }
+
+        public static double LeftLowLow { get; set; }
+
+        public static double LeftLowHigh { get; set; }
+
+        public static double LeftMid { get; set; }
+
+        public static double LeftHighLow { get; set; }
+
+        public static double LeftHighHigh { get; set; }
+
+        public static double RightLowLow { get; set; }
+
+        public static double RightLowHigh { get; set; }
+
+        public static double RightMid { get; set; }
+
+        public static double RightHighLow { get; set; }
+
+        public static double RightHighHigh { get; set; }
+
+        public static int AmplitudeCutoff { get; set; }
+
+        public static double Gain { get; set; }
 
         public static string FIRStatus { get; set; }
 

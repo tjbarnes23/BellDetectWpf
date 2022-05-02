@@ -41,7 +41,7 @@ namespace BellDetectWpf.ViewModels
 
                 await WriteButterworth();
 
-                Detect.WriteDetection(ButterworthFilePathName);
+                // Detect.WriteDetection(ButterworthFilePathName);
             }
         }
     }

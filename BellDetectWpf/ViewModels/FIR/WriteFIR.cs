@@ -32,7 +32,14 @@ namespace BellDetectWpf.ViewModels
             wavType = 1; // 1 = PCM
 
             // Set numChannels (ushort)
-            numChannels = (ushort)(Repo.FIRNumChannels + 1); // Number of channels in filter output array, plus 1 for first channel of the input wav file
+            if (Repo.FIRNumChannels == 2)
+            {
+                numChannels = (ushort)(Repo.FIRNumChannels + 1); // Number of channels in filter output array, plus 1 for first channel of the input wav file
+            }
+            else // = 4
+            {
+                numChannels = (ushort)(Repo.FIRNumChannels + 2); // Number of channels in filter output array, plus 1 for each of the stereo input wav file channels
+            }
 
             // Set dataRate (uint)
             dataRate = (uint)(Repo.SampleFrequency * (Repo.SampleDepth / 8) * numChannels); // bytes per second
@@ -77,9 +84,19 @@ namespace BellDetectWpf.ViewModels
                     {
                         wr.Write((short)Repo.WavDataInt[0, i]); // Taking first channel of original wav file
 
-                        for (int j = 0; j < Repo.FIRNumChannels; j++)
+                        for (int j = 0; j < 2; j++)
                         {
                             wr.Write(Repo.FIRFilteredWaveformArr[j, i]);
+                        }
+
+                        if (numChannels == 6)
+                        {
+                            wr.Write((short)Repo.WavDataInt[1, i]); // Taking second channel of original wav file
+
+                            for (int j = 2; j < 4; j++)
+                            {
+                                wr.Write(Repo.FIRFilteredWaveformArr[j, i]);
+                            }
                         }
                     }
                 }
@@ -125,10 +142,22 @@ namespace BellDetectWpf.ViewModels
                     sb.Append(Repo.WavDataInt[0, i]); // First channel of original wav file
                     sb.Append('\t');
 
-                    for (int j = 0; j < Repo.FIRNumChannels; j++)
+                    for (int j = 0; j < 2; j++)
                     {
                         sb.Append(Repo.FIRFilteredWaveformArr[j, i]);
                         sb.Append('\t');
+                    }
+
+                    if (numChannels == 6)
+                    {
+                        sb.Append(Repo.WavDataInt[1, i]); // Second channel of original wav file
+                        sb.Append('\t');
+
+                        for (int j = 2; j < 4; j++)
+                        {
+                            sb.Append(Repo.FIRFilteredWaveformArr[j, i]);
+                            sb.Append('\t');
+                        }
                     }
 
                     sb.Append('\n');

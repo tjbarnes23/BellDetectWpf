@@ -62,6 +62,10 @@ namespace BellDetectWpf
             // Initialize WaveSpec list
             Repo.WavSpecs = new();
 
+            // Set default amplitude cutoff and gain
+            Repo.AmplitudeCutoff = 2000;
+            Repo.Gain = 3.0;
+
             /**************************************************
             * Load main window
             **************************************************/

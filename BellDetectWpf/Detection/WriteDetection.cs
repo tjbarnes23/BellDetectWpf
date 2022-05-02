@@ -10,7 +10,7 @@ namespace BellDetectWpf.Detection
 {
     public static partial class Detect
     {
-        public static void WriteDetection(string filePathName)
+        public static void WriteDetection(string filePathName, double lowLow, double lowHigh, double mid, double highLow, double highHigh, int amplitudeCutoff)
         {
             StringBuilder sb;
 
@@ -29,6 +29,8 @@ namespace BellDetectWpf.Detection
                 File.Delete(filePathName);
             }
 
+            int samplesMid = Convert.ToInt32(48000 / mid);
+
             using Stream s = File.Create(filePathName);
             using StreamWriter sw = new(s, new UTF8Encoding(false));
 
@@ -39,9 +41,9 @@ namespace BellDetectWpf.Detection
             sb.Append($"Amplitude\t");
             sb.Append($"Crossing?\t");
             sb.Append($"Crossing type\t");
-            sb.Append($"Closest matching crossing to 92 prior\t");
+            sb.Append($"Closest matching crossing to {samplesMid} prior\t");
             sb.Append($"Implied frequency\t");
-            sb.Append($"Strike? (< 472.5 Hz or > 572.5 Hz and peak cycle amplitude >= 1000)\t");
+            sb.Append($"Strike? ((>= {lowLow} Hz and >= {lowHigh} Hz) or (>= {highLow} Hz and <= {highHigh} Hz)) and (amplitude >= {amplitudeCutoff})\t");
 
             sw.WriteLine(sb.ToString());
 
@@ -63,9 +65,9 @@ namespace BellDetectWpf.Detection
                     sb.Append(Repo.Samples[i].CrossingType);
                     sb.Append('\t');
 
-                    if (Repo.Samples[i].NearestCrossing92Prior != 0)
+                    if (Repo.Samples[i].NearestCrossingMidPrior != 0)
                     {
-                        sb.Append(Repo.Samples[i].NearestCrossing92Prior);
+                        sb.Append(Repo.Samples[i].NearestCrossingMidPrior);
                         sb.Append('\t');
                         sb.Append(Repo.Samples[i].ImpliedFrequency);
                         sb.Append('\t');

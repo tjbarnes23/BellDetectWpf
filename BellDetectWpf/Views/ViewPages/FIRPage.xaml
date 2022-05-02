@@ -22,14 +22,17 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.75*" />
+            <RowDefinition Height="0.75*" />
+            <RowDefinition Height="0.75*" />
+            <RowDefinition Height="0.75*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2.5*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="1.5*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -88,7 +91,7 @@
             </TextBlock>
         </Grid>
 
-        <!-- Select filter -->
+        <!-- Select filter left hand bell-->
 
         <Grid Grid.Row="4" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -105,27 +108,280 @@
                     HorizontalAlignment="Right" VerticalAlignment="Center"
                     FontFamily="Arial Black" FontSize="14" Foreground="#444"
                     TextWrapping="Wrap" LineHeight="20">
-                Select filter:
+                Left bell filter:
             </TextBlock>
 
-            <ComboBox x:Name="FilterFIRCB"
+            <ComboBox x:Name="FilterFIRCBLeft"
                 Grid.Row="0" Grid.Column="1"
-                Width="600" Height="40"
+                Width="600" Height="30"
                 HorizontalAlignment="Left" VerticalAlignment="Center"
                 Margin="10, 0, 0, 0"
-                Padding="10, 10, 0, 0"
+                Padding="10, 7, 0, 0"
                 FontFamily="Arial Black" FontSize="14"
                 ItemsSource="{Binding Path=(en:FilterFIRExt.FilterFIRDict)}"
                 DisplayMemberPath="Value"
                 SelectedValuePath="Key"
-                SelectedValue="{Binding Path=FilterFIR, Mode=TwoWay}">
+                SelectedValue="{Binding Path=FilterFIRLeft, Mode=TwoWay}">
             </ComboBox>
+        </Grid>
+
+        <!-- Select filter right hand bell -->
+
+        <Grid Grid.Row="5" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Right bell filter:
+            </TextBlock>
+
+            <ComboBox x:Name="FilterFIRCBRight"
+                Grid.Row="0" Grid.Column="1"
+                Width="600" Height="30"
+                HorizontalAlignment="Left" VerticalAlignment="Center"
+                Margin="10, 0, 0, 0"
+                Padding="10, 7, 0, 0"
+                FontFamily="Arial Black" FontSize="14"
+                ItemsSource="{Binding Path=(en:FilterFIRExt.FilterFIRDict)}"
+                DisplayMemberPath="Value"
+                SelectedValuePath="Key"
+                SelectedValue="{Binding Path=FilterFIRRight, Mode=TwoWay}">
+            </ComboBox>
+        </Grid>
+
+        <!-- Detection paramters -->
+
+        <Grid Grid.Row="6" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Detection params
+            </TextBlock>
+            
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Low / low
+            </TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="2"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Low / high
+            </TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="3"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Mid
+            </TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="4"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                High / low
+            </TextBlock>
+
+            <TextBlock Grid.Row="0" Grid.Column="5"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                High / high
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Left:
+            </TextBlock>
+            
+            <TextBox Grid.Row="1" Grid.Column="1"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=LeftLowLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBox Grid.Row="1" Grid.Column="2"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=LeftLowHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBox Grid.Row="1" Grid.Column="3"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=LeftMid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBox Grid.Row="1" Grid.Column="4"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=LeftHighLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBox Grid.Row="1" Grid.Column="5"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=LeftHighHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Right:
+            </TextBlock>
+
+            <TextBox Grid.Row="2" Grid.Column="1"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=RightLowLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBox Grid.Row="2" Grid.Column="2"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=RightLowHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBox Grid.Row="2" Grid.Column="3"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=RightMid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBox Grid.Row="2" Grid.Column="4"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=RightHighLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBox Grid.Row="2" Grid.Column="5"
+                    Margin="10, 0, 10, 0"
+                    Width="80" Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=RightHighHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+        </Grid>
+
+        <!-- Amplitude cutoff and gain -->
+
+        <Grid Grid.Row="7" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Amplitude cutoff:
+            </TextBlock>
+
+            <TextBox Grid.Row="0" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    Width="120" Height="30"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=AmplitudeCutoff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBlock Grid.Row="0" Grid.Column="2"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Gain:
+            </TextBlock>
+
+            <TextBox Grid.Row="0" Grid.Column="3"
+                    Margin="10, 0, 0, 0"
+                    Width="120" Height="30"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=Gain, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
         </Grid>
 
         <!-- Run -->
 
-        <Button Grid.Row="5" Grid.Column="0"
-                Width="240" Height="40"
+        <Button Grid.Row="8" Grid.Column="0"
+                Width="240" Height="30"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Run_Click">
             Apply FIR filter
@@ -133,8 +389,8 @@
 
         <!-- Save -->
 
-        <Button Grid.Row="6" Grid.Column="0"
-                Width="240" Height="40"
+        <Button Grid.Row="9" Grid.Column="0"
+                Width="240" Height="30"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Save_Click">
             Save filtered waveform
@@ -142,7 +398,7 @@
 
         <!-- File name -->
 
-        <Grid Grid.Row="7" Grid.Column="0">
+        <Grid Grid.Row="10" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
@@ -188,8 +444,8 @@
 
         <!-- Return -->
 
-        <Button Grid.Row="8" Grid.Column="0"
-                Width="180" Height="40"
+        <Button Grid.Row="11" Grid.Column="0"
+                Width="180" Height="30"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Return_Click">
             Return to main page

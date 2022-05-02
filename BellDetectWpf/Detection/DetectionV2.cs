@@ -12,7 +12,8 @@ namespace BellDetectWpf.Detection
 {
     public static partial class Detect
     {
-        public static void DetectionV2(short[,] filteredWaveformArr)
+        public static void DetectionV2(short[,] filteredWaveformArr, int inputChannel, int outputChannel, int amplitudeCutoff,
+                double lowLow, double lowHigh, double mid, double highLow, double highHigh, bool isLeft)
         {
             int numSamples;
             SampleInfo si;
@@ -29,7 +30,7 @@ namespace BellDetectWpf.Detection
             for (int i = 1; i < numSamples; i++) // start at 1 because we compare to previous idx
             {
                 // Look for crossing from negative to positive
-                if (filteredWaveformArr[0, i - 1] < 0 && filteredWaveformArr[0, i] >= 0)
+                if (filteredWaveformArr[inputChannel, i - 1] < 0 && filteredWaveformArr[inputChannel, i] >= 0)
                 {
                     si = new()
                     {
@@ -42,13 +43,13 @@ namespace BellDetectWpf.Detection
 
                     Repo.Samples.Add(si);
                 }
-                else if (filteredWaveformArr[0, i - 1] >= 0 && filteredWaveformArr[0, i] < 0)
+                else if (filteredWaveformArr[inputChannel, i - 1] >= 0 && filteredWaveformArr[inputChannel, i] < 0)
                 {
                     si = new()
                     {
                         SampleNum = i,
                         Time = i / 48000.0,
-                        Amplitude = filteredWaveformArr[0, i],
+                        Amplitude = filteredWaveformArr[inputChannel, i],
                         Crossing = true,
                         CrossingType = CrossingTypeEnum.PosToNeg
                     };
@@ -61,7 +62,7 @@ namespace BellDetectWpf.Detection
                     {
                         SampleNum = i,
                         Time = i / 48000.0,
-                        Amplitude = filteredWaveformArr[0, i],
+                        Amplitude = filteredWaveformArr[inputChannel, i],
                         Crossing = false,
                         CrossingType = CrossingTypeEnum.NA
                     };
@@ -76,26 +77,32 @@ namespace BellDetectWpf.Detection
             // If implied frequency < 510 or > 535, mark that a strike is detected
             counter = 0;
 
-            for (int i = 150; i < (numSamples - 1); i++) // start at 150 because we go back 92 samples and then look up to +/- 50 from that sample
+            int samplesLowLow = Convert.ToInt32(48000 / lowLow);
+            int samplesMid = Convert.ToInt32(48000 / mid);
+            int samplesHighHigh = Convert.ToInt32(48000 / highHigh);
+
+            int range = Math.Max(Math.Abs(samplesLowLow - samplesMid), Math.Abs(samplesMid - samplesHighHigh));
+
+            for (int i = samplesMid + range + 1; i < (numSamples - 1); i++) // start at samplesMid + range + 1 to avoid falling off the front of the array
             {
                 if (Repo.Samples[i].Crossing == true)
                 {
                     ct = Repo.Samples[i].CrossingType;
-                    j = i - 92;
+                    j = i - samplesMid;
                     found = false;
 
-                    for (int k = 0; k < 50; k++)
+                    for (int k = 0; k <= range; k++)
                     {
                         if (Repo.Samples[j + k].Crossing == true && Repo.Samples[j + k].CrossingType == ct)
                         {
-                            Repo.Samples[i].NearestCrossing92Prior = 92 - k;
+                            Repo.Samples[i].NearestCrossingMidPrior = samplesMid - k;
                             found = true;
                             break;
                         }
 
                         if (Repo.Samples[j - k].Crossing == true && Repo.Samples[j - k].CrossingType == ct)
                         {
-                            Repo.Samples[i].NearestCrossing92Prior = 92 + k;
+                            Repo.Samples[i].NearestCrossingMidPrior = samplesMid + k;
                             found = true;
                             break;
                         }
@@ -103,17 +110,18 @@ namespace BellDetectWpf.Detection
 
                     if (found == true)
                     {
-                        Repo.Samples[i].ImpliedFrequency = 48000.0 / Repo.Samples[i].NearestCrossing92Prior;
+                        Repo.Samples[i].ImpliedFrequency = 48000.0 / Repo.Samples[i].NearestCrossingMidPrior;
                     }
 
-                    if (Repo.Samples[i].ImpliedFrequency < 472.5 || Repo.Samples[i].ImpliedFrequency > 572.5)
+                    if ((Repo.Samples[i].ImpliedFrequency >= lowLow && Repo.Samples[i].ImpliedFrequency <= lowHigh) ||
+                            (Repo.Samples[i].ImpliedFrequency >= highLow && Repo.Samples[i].ImpliedFrequency <= highHigh))
                     {
                         found = false;
 
-                        // Ensure amplitude reached at least 2000 during this cycle
-                        for (int k = i - Repo.Samples[i].NearestCrossing92Prior; k <= i; k++)
+                        // Ensure amplitude reached at least amplitudeCutoff during this cycle
+                        for (int k = i - Repo.Samples[i].NearestCrossingMidPrior; k <= i; k++)
                         {
-                            if (Repo.Samples[k].Amplitude >= 2000)
+                            if (Repo.Samples[k].Amplitude >= amplitudeCutoff)
                             {
                                 found = true;
                                 break;
@@ -132,9 +140,19 @@ namespace BellDetectWpf.Detection
 
                 if (counter > 0)
                 {
-                    filteredWaveformArr[1, i] = 20000;
+                    filteredWaveformArr[outputChannel, i] = 20000;
                     counter--;
                 }
+            }
+
+            // Write detection data to text
+            if (isLeft == true)
+            {
+                WriteDetection(@"C:\ProgramData\BellDetect\DetectionLeft.txt", Repo.LeftLowLow, Repo.LeftLowHigh, Repo.LeftMid, Repo.LeftHighLow, Repo.LeftHighHigh, Repo.AmplitudeCutoff);
+            }
+            else
+            {
+                WriteDetection(@"C:\ProgramData\BellDetect\DetectionRight.txt", Repo.RightLowLow, Repo.RightLowHigh, Repo.RightMid, Repo.RightHighLow, Repo.RightHighHigh, Repo.AmplitudeCutoff);
             }
         }
     }

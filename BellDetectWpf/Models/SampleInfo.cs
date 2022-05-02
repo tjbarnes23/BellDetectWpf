@@ -19,7 +19,7 @@ namespace BellDetectWpf.Models
 
         public CrossingTypeEnum CrossingType { get; set; }
 
-        public int NearestCrossing92Prior { get; set; }
+        public int NearestCrossingMidPrior { get; set; }
 
         public double ImpliedFrequency { get; set; }
 

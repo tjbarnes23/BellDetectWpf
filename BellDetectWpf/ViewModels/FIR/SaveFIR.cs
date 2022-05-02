@@ -40,8 +40,6 @@ namespace BellDetectWpf.ViewModels
                 Repo.FIRInitialDirectory = di.FullName;
 
                 await WriteFIR();
-
-                Detect.WriteDetection(FIRFilePathName);
             }
         }
     }

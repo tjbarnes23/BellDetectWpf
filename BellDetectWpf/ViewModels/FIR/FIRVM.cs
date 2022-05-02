@@ -33,17 +33,225 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
-        public FilterFIREnum FilterFIR
+        public FilterFIREnum FilterFIRLeft
         {
             get
             {
-                return Repo.FilterFIR;
+                return Repo.FilterFIRLeft;
             }
             set
             {
-                if (Repo.FilterFIR != value)
+                if (Repo.FilterFIRLeft != value)
                 {
-                    Repo.FilterFIR = value;
+                    Repo.FilterFIRLeft = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public FilterFIREnum FilterFIRRight
+        {
+            get
+            {
+                return Repo.FilterFIRRight;
+            }
+            set
+            {
+                if (Repo.FilterFIRRight != value)
+                {
+                    Repo.FilterFIRRight = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double LeftLowLow
+        {
+            get
+            {
+                return Repo.LeftLowLow;
+            }
+            set
+            {
+                if (Repo.LeftLowLow != value)
+                {
+                    Repo.LeftLowLow = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double LeftLowHigh
+        {
+            get
+            {
+                return Repo.LeftLowHigh;
+            }
+            set
+            {
+                if (Repo.LeftLowHigh != value)
+                {
+                    Repo.LeftLowHigh = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double LeftMid
+        {
+            get
+            {
+                return Repo.LeftMid;
+            }
+            set
+            {
+                if (Repo.LeftMid != value)
+                {
+                    Repo.LeftMid = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double LeftHighLow
+        {
+            get
+            {
+                return Repo.LeftHighLow;
+            }
+            set
+            {
+                if (Repo.LeftHighLow != value)
+                {
+                    Repo.LeftHighLow = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double LeftHighHigh
+        {
+            get
+            {
+                return Repo.LeftHighHigh;
+            }
+            set
+            {
+                if (Repo.LeftHighHigh != value)
+                {
+                    Repo.LeftHighHigh = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double RightLowLow
+        {
+            get
+            {
+                return Repo.RightLowLow;
+            }
+            set
+            {
+                if (Repo.RightLowLow != value)
+                {
+                    Repo.RightLowLow = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double RightLowHigh
+        {
+            get
+            {
+                return Repo.RightLowHigh;
+            }
+            set
+            {
+                if (Repo.RightLowHigh != value)
+                {
+                    Repo.RightLowHigh = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double RightMid
+        {
+            get
+            {
+                return Repo.RightMid;
+            }
+            set
+            {
+                if (Repo.RightMid != value)
+                {
+                    Repo.RightMid = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double RightHighLow
+        {
+            get
+            {
+                return Repo.RightHighLow;
+            }
+            set
+            {
+                if (Repo.RightHighLow != value)
+                {
+                    Repo.RightHighLow = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double RightHighHigh
+        {
+            get
+            {
+                return Repo.RightHighHigh;
+            }
+            set
+            {
+                if (Repo.RightHighHigh != value)
+                {
+                    Repo.RightHighHigh = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public int AmplitudeCutoff
+        {
+            get
+            {
+                return Repo.AmplitudeCutoff;
+            }
+            set
+            {
+                if (Repo.AmplitudeCutoff != value)
+                {
+                    Repo.AmplitudeCutoff = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public double Gain
+        {
+            get
+            {
+                return Repo.Gain;
+            }
+            set
+            {
+                if (Repo.Gain != value)
+                {
+                    Repo.Gain = value;
                     NotifyPropertyChanged();
                 }
             }
