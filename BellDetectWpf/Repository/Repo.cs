@@ -135,6 +135,22 @@ namespace BellDetectWpf.Repository
 
         public static FilterFIREnum FilterFIRRight { get; set; }
 
+        public static string FIRStatus { get; set; }
+
+        public static ushort FIRNumChannels { get; set; }
+
+        public static double Gain { get; set; }
+
+        public static short[,] FIRFilteredWaveformArr { get; set; }
+
+
+        /**************************************************
+        * Detection
+        **************************************************/
+        public static string DetectionInitialDirectory { get; set; }
+
+        public static string DetectionFilePathName { get; set; }
+
         public static double LeftLowLow { get; set; }
 
         public static double LeftLowHigh { get; set; }
@@ -157,20 +173,13 @@ namespace BellDetectWpf.Repository
 
         public static int AmplitudeCutoff { get; set; }
 
-        public static double Gain { get; set; }
-
-        public static string FIRStatus { get; set; }
-
-        public static ushort FIRNumChannels { get; set; }
-
-        public static short[,] FIRFilteredWaveformArr { get; set; }
-
-
-        /**************************************************
-        * Detection
-        **************************************************/
-
         public static List<SampleInfo> Samples { get; set; }
+
+        public static FilterTypeEnum FilterType { get; set; }
+
+        public static string DetectionStatus { get; set; }
+
+        public static short[,] DetectionWaveformArr { get; set; }
 
 
         /**************************************************

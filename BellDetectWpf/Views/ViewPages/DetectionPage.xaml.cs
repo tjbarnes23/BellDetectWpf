@@ -5,11 +5,11 @@ using BellDetectWpf.ViewModels;
 
 namespace BellDetectWpf.Views
 {
-    public partial class FIRPage : Page
+    public partial class DetectionPage : Page
     {
-        readonly FIRVM viewModel;
+        readonly DetectionVM viewModel;
 
-        public FIRPage()
+        public DetectionPage()
         {
             InitializeComponent();
             viewModel = new();
@@ -18,22 +18,17 @@ namespace BellDetectWpf.Views
 
         private async void Run_Click(object sender, RoutedEventArgs e)
         {
-            await viewModel.RunFIR();
+            await viewModel.RunDetection();
         }
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            await viewModel.SaveFIR();
+            await viewModel.SaveDetection();
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.MW.MainFrame.Navigate(new MainPage());
-        }
-
-        private void Detection_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.MW.MainFrame.Navigate(new DetectionPage());
         }
     }
 }

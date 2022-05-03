@@ -5,10 +5,12 @@ using BellDetectWpf.Repository;
 
 namespace BellDetectWpf.ViewModels
 {
-    public partial class FIRVM
+    public partial class DetectionVM
     {
-        public async Task RunFIR()
+        public async Task RunDetection()
         {
+            await Task.Delay(25);
+            /*
             List<double[]> coefs;
             int idx;
 
@@ -27,15 +29,6 @@ namespace BellDetectWpf.ViewModels
 
             Repo.FIRFilteredWaveformArr = new short[Repo.FIRNumChannels, Repo.NumSamples];
 
-            // Copy WavFile into FIRFilteredWaveformArr
-            for (int i = 0; i < Repo.FIRNumChannels; i += 2)
-            {
-                for (int j = 0; j < Repo.NumSamples; j++)
-                {
-                    Repo.FIRFilteredWaveformArr[i, j] = (short)Repo.WavDataInt[i / 2, j];
-                }
-            }
-
             // Load a list of filter coefficients
             coefs = new()
             {
@@ -52,6 +45,13 @@ namespace BellDetectWpf.ViewModels
             // Second param specifies the index of the filter array to store the results in
             ExecuteFIR(0, 0, coefs[idx], Repo.Gain);
 
+            // This method looks for strikes in the filtered signal and creates a signal if found
+            // First param specifies the index of the filter array to use
+            // Second param specifies the index of the filter array to store the detection signal in
+            Detect.DetectionV2(Repo.FIRFilteredWaveformArr, 0, 1, Repo.AmplitudeCutoff,
+                    Repo.LeftLowLow, Repo.LeftLowHigh, Repo.LeftMid, Repo.LeftHighLow, Repo.LeftHighHigh,
+                    true);
+
             if (Repo.WavNumChannels > 1)
             {
                 // Process the second channel of the input wav file, if it exists
@@ -61,10 +61,18 @@ namespace BellDetectWpf.ViewModels
                 // First param specifies the input channel to use
                 // Second param specifies the index of the filter array to store the results in
                 ExecuteFIR(1, 2, coefs[idx], Repo.Gain);
+
+                // This method looks for strikes in the filtered signal and creates a signal if found
+                // First param specifies the index of the filter array to use
+                // Second param specifies the index of the filter array to store the detection signal in
+                Detect.DetectionV2(Repo.FIRFilteredWaveformArr, 2, 3, Repo.AmplitudeCutoff,
+                    Repo.RightLowLow, Repo.RightLowHigh, Repo.RightMid, Repo.RightHighLow, Repo.RightHighHigh,
+                    false);
             }
 
             FIRStatus = "FIR filter applied";
             await Task.Delay(25);
+            */
         }
     }
 }

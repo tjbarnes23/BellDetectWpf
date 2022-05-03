@@ -28,7 +28,6 @@
             <RowDefinition Height="0.75*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="2.5*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -159,215 +158,27 @@
             </ComboBox>
         </Grid>
 
-        <!-- Detection paramters -->
 
         <Grid Grid.Row="6" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <TextBlock Grid.Row="0" Grid.Column="0"
-                    Margin="0, 0, 10, 0"
-                    HorizontalAlignment="Right" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Detection params
-            </TextBlock>
-            
-            <TextBlock Grid.Row="0" Grid.Column="1"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Low / low
-            </TextBlock>
-
-            <TextBlock Grid.Row="0" Grid.Column="2"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Low / high
-            </TextBlock>
-
-            <TextBlock Grid.Row="0" Grid.Column="3"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Mid
-            </TextBlock>
-
-            <TextBlock Grid.Row="0" Grid.Column="4"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                High / low
-            </TextBlock>
-
-            <TextBlock Grid.Row="0" Grid.Column="5"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                High / high
-            </TextBlock>
-
-            <TextBlock Grid.Row="1" Grid.Column="0"
-                    Margin="0, 0, 10, 0"
-                    HorizontalAlignment="Right" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Left:
-            </TextBlock>
-            
-            <TextBox Grid.Row="1" Grid.Column="1"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftLowLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBox Grid.Row="1" Grid.Column="2"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftLowHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBox Grid.Row="1" Grid.Column="3"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftMid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBox Grid.Row="1" Grid.Column="4"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftHighLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBox Grid.Row="1" Grid.Column="5"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftHighHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBlock Grid.Row="2" Grid.Column="0"
-                    Margin="0, 0, 10, 0"
-                    HorizontalAlignment="Right" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Right:
-            </TextBlock>
-
-            <TextBox Grid.Row="2" Grid.Column="1"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightLowLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBox Grid.Row="2" Grid.Column="2"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightLowHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBox Grid.Row="2" Grid.Column="3"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightMid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBox Grid.Row="2" Grid.Column="4"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightHighLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBox Grid.Row="2" Grid.Column="5"
-                    Margin="10, 0, 10, 0"
-                    Width="80" Height="30"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightHighHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-        </Grid>
-
-        <!-- Amplitude cutoff and gain -->
-
-        <Grid Grid.Row="7" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
+            <!-- Gain -->
+
             <TextBlock Grid.Row="0" Grid.Column="0"
-                    Margin="0, 0, 10, 0"
-                    HorizontalAlignment="Right" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Amplitude cutoff:
+                        Margin="0, 0, 10, 0"
+                        HorizontalAlignment="Right" VerticalAlignment="Center"
+                        FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                    Gain:
             </TextBlock>
 
             <TextBox Grid.Row="0" Grid.Column="1"
-                    Margin="10, 0, 0, 0"
-                    Width="120" Height="30"
-                    HorizontalAlignment="Left"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14"
-                    Padding="6, 0, 0, 0"
-                    Text="{Binding Path=AmplitudeCutoff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-
-            <TextBlock Grid.Row="0" Grid.Column="2"
-                    Margin="0, 0, 10, 0"
-                    HorizontalAlignment="Right" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Gain:
-            </TextBlock>
-
-            <TextBox Grid.Row="0" Grid.Column="3"
                     Margin="10, 0, 0, 0"
                     Width="120" Height="30"
                     HorizontalAlignment="Left"
@@ -380,7 +191,7 @@
 
         <!-- Run -->
 
-        <Button Grid.Row="8" Grid.Column="0"
+        <Button Grid.Row="7" Grid.Column="0"
                 Width="240" Height="30"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Run_Click">
@@ -389,7 +200,7 @@
 
         <!-- Save -->
 
-        <Button Grid.Row="9" Grid.Column="0"
+        <Button Grid.Row="8" Grid.Column="0"
                 Width="240" Height="30"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Save_Click">
@@ -398,7 +209,7 @@
 
         <!-- File name -->
 
-        <Grid Grid.Row="10" Grid.Column="0">
+        <Grid Grid.Row="9" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
@@ -444,11 +255,32 @@
 
         <!-- Return -->
 
-        <Button Grid.Row="11" Grid.Column="0"
-                Width="180" Height="30"
-                FontFamily="Arial Black" FontSize="14"
-                Click="Return_Click">
-            Return to main page
-        </Button>
+        <Grid Grid.Row="10" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0"
+                    Width="180" Height="30"
+                    HorizontalAlignment="Right"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="Return_Click">
+                Return to main page
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="2"
+                    Width="180" Height="30"
+                    HorizontalAlignment="Left"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="Detection_Click">
+                Strike detection
+            </Button>
+        </Grid>
     </Grid>
 </Page>

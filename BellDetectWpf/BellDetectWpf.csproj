@@ -31,6 +31,9 @@
     <Compile Update="Views\ViewPages\ButterworthPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ViewPages\DetectionPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ViewPages\FIRPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -57,6 +60,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ViewPages\ButterworthPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ViewPages\DetectionPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
