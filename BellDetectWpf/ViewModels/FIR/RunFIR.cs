@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BellDetectWpf.Detection;
+using BellDetectWpf.Enums;
 using BellDetectWpf.Repository;
 
 namespace BellDetectWpf.ViewModels
@@ -28,11 +29,11 @@ namespace BellDetectWpf.ViewModels
             Repo.FIRFilteredWaveformArr = new short[Repo.FIRNumChannels, Repo.NumSamples];
 
             // Copy WavFile into FIRFilteredWaveformArr
-            for (int i = 0; i < Repo.FIRNumChannels; i += 2)
+            for (int i = 0; i < Repo.NumSamples; i++)
             {
-                for (int j = 0; j < Repo.NumSamples; j++)
+                for (int j = 0; j < Repo.FIRNumChannels; j += 2)
                 {
-                    Repo.FIRFilteredWaveformArr[i, j] = (short)Repo.WavDataInt[i / 2, j];
+                    Repo.FIRFilteredWaveformArr[j, i] = (short)Repo.WavDataInt[j / 2, i];
                 }
             }
 
@@ -50,7 +51,7 @@ namespace BellDetectWpf.ViewModels
             // This will apply the selected coefficients in FIRCoefficients.cs to the input .wav file
             // First param specifies the input channel to use
             // Second param specifies the index of the filter array to store the results in
-            ExecuteFIR(0, 0, coefs[idx], Repo.Gain);
+            ExecuteFIR(0, 1, coefs[idx]);
 
             if (Repo.WavNumChannels > 1)
             {
@@ -60,8 +61,11 @@ namespace BellDetectWpf.ViewModels
                 // This will apply the selected coefficients in FIRCoefficients.cs to the input .wav file
                 // First param specifies the input channel to use
                 // Second param specifies the index of the filter array to store the results in
-                ExecuteFIR(1, 2, coefs[idx], Repo.Gain);
+                ExecuteFIR(1, 3, coefs[idx]);
             }
+
+            // Set FilterType for use by detection page
+            Repo.FilterType = FilterTypeEnum.FIR;
 
             FIRStatus = "FIR filter applied";
             await Task.Delay(25);

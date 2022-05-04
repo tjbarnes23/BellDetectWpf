@@ -21,5 +21,7 @@ namespace BellDetectWpf.Models
         public string SavedEllipticInitialDirectory { get; set; }
 
         public string SavedFIRInitialDirectory { get; set; }
+
+        public string SavedDetectionInitialDirectory { get; set; }
     }
 }

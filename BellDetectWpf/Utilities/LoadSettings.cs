@@ -30,6 +30,7 @@ namespace BellDetectWpf.Utilities
             Repo.ButterworthInitialDirectory = ss.SavedButterworthInitialDirectory;
             Repo.EllipticInitialDirectory = ss.SavedEllipticInitialDirectory;
             Repo.FIRInitialDirectory = ss.SavedFIRInitialDirectory;
+            Repo.DetectionInitialDirectory = ss.SavedDetectionInitialDirectory;
         }
     }
 }

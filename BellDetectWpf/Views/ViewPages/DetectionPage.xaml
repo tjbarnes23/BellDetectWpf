@@ -115,7 +115,7 @@
                     HorizontalAlignment="Left" VerticalAlignment="Center"
                     FontFamily="Arial" FontSize="13"
                     TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=WavFilePathName, Mode=OneWay}">
+                    Text="{Binding Path=FilterType, Mode=OneWay}">
             </TextBlock>
         </Grid>
 
@@ -363,7 +363,7 @@
                     HorizontalAlignment="Left" VerticalAlignment="Center"
                     FontFamily="Arial" FontSize="13"
                     TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=FIRFilePathName, Mode=OneWay}">
+                    Text="{Binding Path=DetectionFilePathName, Mode=OneWay}">
             </TextBlock>
 
             <TextBlock Grid.Row="1" Grid.Column="0"
@@ -379,7 +379,7 @@
                     HorizontalAlignment="Left" VerticalAlignment="Center"
                     FontFamily="Arial" FontSize="13"
                     TextWrapping="Wrap" LineHeight="20"
-                    Text="{Binding Path=FIRStatus, Mode=OneWay}">
+                    Text="{Binding Path=DetectionStatus, Mode=OneWay}">
             </TextBlock>
         </Grid>
 

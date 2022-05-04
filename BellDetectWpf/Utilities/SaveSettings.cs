@@ -22,7 +22,8 @@ namespace BellDetectWpf.Utilities
                 SavedDFTInitialDirectory = Repo.DFTInitialDirectory,
                 SavedButterworthInitialDirectory = Repo.ButterworthInitialDirectory,
                 SavedEllipticInitialDirectory = Repo.EllipticInitialDirectory,
-                SavedFIRInitialDirectory = Repo.FIRInitialDirectory
+                SavedFIRInitialDirectory = Repo.FIRInitialDirectory,
+                SavedDetectionInitialDirectory = Repo.DetectionInitialDirectory
             };
 
             JsonSerializerOptions options = new()

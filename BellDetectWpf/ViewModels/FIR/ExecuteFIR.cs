@@ -9,7 +9,7 @@ namespace BellDetectWpf.ViewModels
 {
     public partial class FIRVM
     {
-        public static void ExecuteFIR(int inputChannel, int outputChannel, double[] coefs, double gain)
+        public static void ExecuteFIR(int inputChannel, int outputChannel, double[] coefs)
         {
             int m;
             double t;
@@ -30,8 +30,8 @@ namespace BellDetectWpf.ViewModels
                         continue;
                     }
 
-                    // Use waveform data in the 0th channel of the source .wav file (i.e. channel 1)
-                    t += coefs[j] * gain * Repo.WavDataInt[inputChannel, i - j];
+                    // Use waveform data in the specified input channel of the source .wav file (zero-based)
+                    t += coefs[j] * Repo.Gain * Repo.WavDataInt[inputChannel, i - j];
                 }
 
                 // Convert to short (16-bit) and write into specified index of output array

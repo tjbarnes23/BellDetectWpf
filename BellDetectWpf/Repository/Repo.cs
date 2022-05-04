@@ -173,6 +173,8 @@ namespace BellDetectWpf.Repository
 
         public static int AmplitudeCutoff { get; set; }
 
+        public static ushort DetectionNumChannels { get; set; }
+
         public static List<SampleInfo> Samples { get; set; }
 
         public static FilterTypeEnum FilterType { get; set; }
