@@ -15,6 +15,7 @@ namespace BellDetectWpf.ViewModels
         public static void ExecuteDetection(int inputChannel, int outputChannel,
                 double lowLow, double lowHigh, double mid, double highLow, double highHigh)
         {
+            int hand;
             SampleInfo si;
 
             CrossingTypeEnum ct;
@@ -22,7 +23,15 @@ namespace BellDetectWpf.ViewModels
             bool found;
             int counter;
 
-            Repo.Samples = new();
+            // 
+            if (inputChannel == 1)
+            {
+                hand = 0;
+            }
+            else
+            {
+                hand = 1;
+            }
 
             // Loop through audio samples identifying crossings
             for (int i = 1; i < Repo.NumSamples; i++) // start at 1 because we compare to previous idx
@@ -39,7 +48,7 @@ namespace BellDetectWpf.ViewModels
                         CrossingType = CrossingTypeEnum.NegToPos
                     };
 
-                    Repo.Samples.Add(si);
+                    Repo.Samples[hand].Add(si);
                 }
                 else if (Repo.DetectionWaveformArr[inputChannel, i - 1] >= 0 && Repo.DetectionWaveformArr[inputChannel, i] < 0)
                 {
@@ -52,7 +61,7 @@ namespace BellDetectWpf.ViewModels
                         CrossingType = CrossingTypeEnum.PosToNeg
                     };
 
-                    Repo.Samples.Add(si);
+                    Repo.Samples[hand].Add(si);
                 }
                 else
                 {
@@ -65,7 +74,7 @@ namespace BellDetectWpf.ViewModels
                         CrossingType = CrossingTypeEnum.NA
                     };
 
-                    Repo.Samples.Add(si);
+                    Repo.Samples[hand].Add(si);
                 }
             }
 
@@ -83,24 +92,24 @@ namespace BellDetectWpf.ViewModels
 
             for (int i = samplesMid + range + 1; i < (Repo.NumSamples - 1); i++) // start at samplesMid + range + 1 to avoid falling off the front of the array
             {
-                if (Repo.Samples[i].Crossing == true)
+                if (Repo.Samples[hand][i].Crossing == true)
                 {
-                    ct = Repo.Samples[i].CrossingType;
+                    ct = Repo.Samples[hand][i].CrossingType;
                     j = i - samplesMid;
                     found = false;
 
                     for (int k = 0; k <= range; k++)
                     {
-                        if (Repo.Samples[j + k].Crossing == true && Repo.Samples[j + k].CrossingType == ct)
+                        if (Repo.Samples[hand][j + k].Crossing == true && Repo.Samples[hand][j + k].CrossingType == ct)
                         {
-                            Repo.Samples[i].NearestCrossingMidPrior = samplesMid - k;
+                            Repo.Samples[hand][i].NearestCrossingMidPrior = samplesMid - k;
                             found = true;
                             break;
                         }
 
-                        if (Repo.Samples[j - k].Crossing == true && Repo.Samples[j - k].CrossingType == ct)
+                        if (Repo.Samples[hand][j - k].Crossing == true && Repo.Samples[hand][j - k].CrossingType == ct)
                         {
-                            Repo.Samples[i].NearestCrossingMidPrior = samplesMid + k;
+                            Repo.Samples[hand][i].NearestCrossingMidPrior = samplesMid + k;
                             found = true;
                             break;
                         }
@@ -108,18 +117,20 @@ namespace BellDetectWpf.ViewModels
 
                     if (found == true)
                     {
-                        Repo.Samples[i].ImpliedFrequency = 48000.0 / Repo.Samples[i].NearestCrossingMidPrior;
+                        Repo.Samples[hand][i].ImpliedFrequency = 48000.0 / Repo.Samples[hand][i].NearestCrossingMidPrior;
                     }
 
-                    if ((Repo.Samples[i].ImpliedFrequency >= lowLow && Repo.Samples[i].ImpliedFrequency <= lowHigh) ||
-                            (Repo.Samples[i].ImpliedFrequency >= highLow && Repo.Samples[i].ImpliedFrequency <= highHigh))
+                    if ((Repo.Samples[hand][i].ImpliedFrequency >= lowLow && Repo.Samples[hand][i].ImpliedFrequency <= lowHigh) ||
+                            (Repo.Samples[hand][i].ImpliedFrequency >= highLow && Repo.Samples[hand][i].ImpliedFrequency <= highHigh))
                     {
                         found = false;
 
-                        // Ensure amplitude reached at least amplitudeCutoff during this cycle
-                        for (int k = i - Repo.Samples[i].NearestCrossingMidPrior; k <= i; k++)
+                        // Ensure amplitude reached at least amplitudeCutoff during the past n cycles where n = Repo.AmplitudeLookback
+                        int lk = samplesMid * Repo.AmplitudeLookback;
+
+                        for (int k = Math.Max(i - lk, 0); k <= i; k++)
                         {
-                            if (Repo.Samples[k].Amplitude >= Repo.AmplitudeCutoff)
+                            if (Repo.Samples[hand][k].Amplitude >= Repo.AmplitudeCutoff)
                             {
                                 found = true;
                                 break;
@@ -128,7 +139,7 @@ namespace BellDetectWpf.ViewModels
 
                         if (found == true)
                         {
-                            Repo.Samples[i].StrikeDetected = true;
+                            Repo.Samples[hand][i].StrikeDetected = true;
 
                             // Set the counter that controls the writing out of the square wave
                             counter = 480;

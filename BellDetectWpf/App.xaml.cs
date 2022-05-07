@@ -65,9 +65,24 @@ namespace BellDetectWpf
             // Set default gain for FIR filter
             Repo.Gain = 3.0;
 
+            // Set default detection frequencies
+            Repo.LeftLowLow = 475.0;
+            Repo.LeftLowHigh = 500.0;
+            Repo.LeftMid = 522.5;
+            Repo.LeftHighLow = 550.0;
+            Repo.LeftHighHigh = 575.0;
+            Repo.RightLowLow = 475.0;
+            Repo.RightLowHigh = 500.0;
+            Repo.RightMid = 522.5;
+            Repo.RightHighLow = 550.0;
+            Repo.RightHighHigh = 575.0;
+
             // Set default amplitude cutoff for detection
             Repo.AmplitudeCutoff = 2000;
-            
+
+            // Set default amplitude lookback
+            Repo.AmplitudeLookback = 3;
+
 
             /**************************************************
             * Load main window

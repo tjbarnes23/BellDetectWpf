@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BellDetectWpf.Detection;
+using BellDetectWpf.Models;
 using BellDetectWpf.Repository;
 
 namespace BellDetectWpf.ViewModels
@@ -25,6 +26,18 @@ namespace BellDetectWpf.ViewModels
 
             Repo.DetectionWaveformArr = new short[Repo.DetectionNumChannels, Repo.NumSamples];
 
+            // Set up SampleInfo container
+            if (Repo.DetectionNumChannels == 3)
+            {
+                Repo.Samples = new List<SampleInfo>[1];
+                Repo.Samples[0] = new List<SampleInfo>();
+            }
+            else
+            {
+                Repo.Samples = new List<SampleInfo>[2];
+                Repo.Samples[0] = new List<SampleInfo>();
+                Repo.Samples[1] = new List<SampleInfo>();
+            }
 
             // Copy the original and filtered channels
             for (int i = 0; i < Repo.NumSamples; i++)

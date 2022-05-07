@@ -225,6 +225,22 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
+        public int AmplitudeLookback
+        {
+            get
+            {
+                return Repo.AmplitudeLookback;
+            }
+            set
+            {
+                if (Repo.AmplitudeLookback != value)
+                {
+                    Repo.AmplitudeLookback = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public string DetectionFilePathName
         {
             get

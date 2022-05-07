@@ -188,7 +188,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftLowLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=LeftLowLow, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
 
             <TextBox Grid.Row="1" Grid.Column="2"
@@ -198,7 +198,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftLowHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=LeftLowHigh, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
 
             <TextBox Grid.Row="1" Grid.Column="3"
@@ -208,7 +208,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftMid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=LeftMid, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
 
             <TextBox Grid.Row="1" Grid.Column="4"
@@ -218,7 +218,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftHighLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=LeftHighLow, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
 
             <TextBox Grid.Row="1" Grid.Column="5"
@@ -228,7 +228,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=LeftHighHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=LeftHighHigh, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
 
             <TextBlock Grid.Row="2" Grid.Column="0"
@@ -245,7 +245,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightLowLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=RightLowLow, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
 
             <TextBox Grid.Row="2" Grid.Column="2"
@@ -255,7 +255,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightLowHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=RightLowHigh, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
 
             <TextBox Grid.Row="2" Grid.Column="3"
@@ -265,7 +265,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightMid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=RightMid, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
 
             <TextBox Grid.Row="2" Grid.Column="4"
@@ -275,7 +275,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightHighLow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=RightHighLow, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
 
             <TextBox Grid.Row="2" Grid.Column="5"
@@ -285,7 +285,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=RightHighHigh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=RightHighHigh, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
             </TextBox>
         </Grid>
 
@@ -293,7 +293,9 @@
 
         <Grid Grid.Row="6" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -316,6 +318,23 @@
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
                     Text="{Binding Path=AmplitudeCutoff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBlock Grid.Row="0" Grid.Column="2"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Amplitude lookback:
+            </TextBlock>
+
+            <TextBox Grid.Row="0" Grid.Column="3"
+                    Margin="10, 0, 0, 0"
+                    Width="120" Height="30"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=AmplitudeLookback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
         </Grid>
 

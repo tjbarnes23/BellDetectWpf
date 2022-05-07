@@ -126,56 +126,59 @@ namespace BellDetectWpf.ViewModels
                 
                 int samplesMid = Convert.ToInt32(48000 / mid);
 
-                using Stream s = File.Create(filePathName);
-                using StreamWriter sw = new(s, new UTF8Encoding(false));
-
-                // Write header row
-                sb.Clear();
-                sb.Append($"Sample #\t");
-                sb.Append($"Time (ms)\t");
-                sb.Append($"Amplitude\t");
-                sb.Append($"Crossing?\t");
-                sb.Append($"Crossing type\t");
-                sb.Append($"Closest matching crossing to {samplesMid} prior\t");
-                sb.Append($"Implied frequency\t");
-                sb.Append($"Strike? ((>= {lowLow} Hz and >= {lowHigh} Hz) or (>= {highLow} Hz and <= {highHigh} Hz)) and (amplitude >= {Repo.AmplitudeCutoff})\t");
-
-                sw.WriteLine(sb.ToString());
-
-                // Write data rows
-                for (int j = 0; i < Repo.Samples.Count; i++)
+                using (Stream s = File.Create(filePathName))
                 {
-                    sb.Clear();
-                    sb.Append(Repo.Samples[i].SampleNum);
-                    sb.Append('\t');
-                    sb.Append(Repo.Samples[i].Time);
-                    sb.Append('\t');
-                    sb.Append(Repo.Samples[i].Amplitude);
-                    sb.Append('\t');
-
-                    if (Repo.Samples[i].Crossing == true)
+                    using (StreamWriter sw = new(s, new UTF8Encoding(false)))
                     {
-                        sb.Append(Repo.Samples[i].Crossing);
-                        sb.Append('\t');
-                        sb.Append(Repo.Samples[i].CrossingType);
-                        sb.Append('\t');
+                        // Write header row
+                        sb.Clear();
+                        sb.Append($"Sample #\t");
+                        sb.Append($"Time (ms)\t");
+                        sb.Append($"Amplitude\t");
+                        sb.Append($"Crossing?\t");
+                        sb.Append($"Crossing type\t");
+                        sb.Append($"Closest matching crossing to {samplesMid} prior\t");
+                        sb.Append($"Implied frequency\t");
+                        sb.Append($"Strike? ((>= {lowLow} Hz and <= {lowHigh} Hz) or (>= {highLow} Hz and <= {highHigh} Hz)) and (amplitude >= {Repo.AmplitudeCutoff})\t");
 
-                        if (Repo.Samples[i].NearestCrossingMidPrior != 0)
+                        sw.WriteLine(sb.ToString());
+
+                        // Write data rows
+                        for (int j = 0; j < Repo.Samples[i].Count; j++)
                         {
-                            sb.Append(Repo.Samples[i].NearestCrossingMidPrior);
+                            sb.Clear();
+                            sb.Append(Repo.Samples[i][j].SampleNum);
                             sb.Append('\t');
-                            sb.Append(Repo.Samples[i].ImpliedFrequency);
+                            sb.Append(Repo.Samples[i][j].Time);
+                            sb.Append('\t');
+                            sb.Append(Repo.Samples[i][j].Amplitude);
                             sb.Append('\t');
 
-                            if (Repo.Samples[i].StrikeDetected == true)
+                            if (Repo.Samples[i][j].Crossing == true)
                             {
-                                sb.Append(Repo.Samples[i].StrikeDetected);
+                                sb.Append(Repo.Samples[i][j].Crossing);
                                 sb.Append('\t');
+                                sb.Append(Repo.Samples[i][j].CrossingType);
+                                sb.Append('\t');
+
+                                if (Repo.Samples[i][j].NearestCrossingMidPrior != 0)
+                                {
+                                    sb.Append(Repo.Samples[i][j].NearestCrossingMidPrior);
+                                    sb.Append('\t');
+                                    sb.Append(Repo.Samples[i][j].ImpliedFrequency);
+                                    sb.Append('\t');
+
+                                    if (Repo.Samples[i][j].StrikeDetected == true)
+                                    {
+                                        sb.Append(Repo.Samples[i][j].StrikeDetected);
+                                        sb.Append('\t');
+                                    }
+                                }
                             }
+
+                            sw.WriteLine(sb.ToString());
                         }
                     }
-
-                    sw.WriteLine(sb.ToString());
                 }
             }
 
