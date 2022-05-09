@@ -12,9 +12,9 @@ namespace BellDetectWpf.ViewModels
         *   Note    Fstop1  Fpass1  Fpass2  Fstop2  Astop1  Apass   Astop2  Order
         *   PM D14  532     581     601     647     40      3       40      1129
         *************************************************/
-        const int PM_D14_LEN = 1130;
+        const int PM_D14_2_LEN = 1130;
         
-        static readonly double[] pm_D14 = new double[PM_D14_LEN]
+        static readonly double[] pm_D14_2 = new double[PM_D14_2_LEN]
         {
             0.01038567121605,-9.933440954577e-05,-0.0001061707708365,-0.0001062939412015,
   -0.0001170039324823,-0.0001208600670642,-0.0001352192608445,-0.000142505270723,
