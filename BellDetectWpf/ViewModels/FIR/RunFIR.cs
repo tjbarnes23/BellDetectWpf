@@ -40,9 +40,10 @@ namespace BellDetectWpf.ViewModels
             // Load a list of filter coefficients
             coefs = new()
             {
-                pm_B9_1,
-                pm_C15_1,
-                pm_C15_2
+                pm_C8,
+                pm_B9,
+                pm_D14,
+                pm_C15
             };
 
             // Process the first channel of the input wav file
