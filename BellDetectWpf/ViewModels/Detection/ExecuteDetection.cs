@@ -139,13 +139,48 @@ namespace BellDetectWpf.ViewModels
 
                         if (found == true)
                         {
-                            Repo.Samples[hand][i].StrikeDetected = true;
+                            // Run tests to ensure there is a sufficient amplitude increase over the specified
+                            // following timespan
 
-                            // Set the counter that controls the writing out of the square wave
-                            counter = 480;
+                            // Get the peak absolute amplitude in the half cycle prior to time zero.
+                            int priorHalfCyclePeak = 0;
+
+                            for (int k = i - samplesMid / 2; k <= i; k++)
+                            {
+                                if (Math.Abs(Repo.Samples[hand][k].Amplitude) > priorHalfCyclePeak)
+                                {
+                                    priorHalfCyclePeak = Repo.Samples[hand][k].Amplitude;
+                                }
+                            }
+
+                            // Get positive and negative peaks over next Repo.AmplitudeIncreaseTS timespan
+                            int posPeak = 0;
+                            int negPeak = 0;
+
+                            for (int k = i; k <= i + ((Repo.AmplitudeIncreaseTS / 1000.0) * 48000); k++)
+                            {
+                                if (Repo.Samples[hand][k].Amplitude > posPeak)
+                                {
+                                    posPeak = Repo.Samples[hand][k].Amplitude;
+                                }
+
+                                if (Repo.Samples[hand][k].Amplitude < negPeak)
+                                {
+                                    negPeak = Repo.Samples[hand][k].Amplitude;
+                                }
+                            }
+
+                            if (posPeak > priorHalfCyclePeak * (1 + (Repo.AmplitudeIncreasePC / 100.0)) && negPeak * -1 > priorHalfCyclePeak * (1 + (Repo.AmplitudeIncreasePC / 100.0)))
+                            {
+                                Repo.Samples[hand][i].StrikeDetected = true;
+
+                                // Set the counter that controls the writing out of the square wave
+                                counter = 480;
+                            }
                         }
                     }
                 }
+
 
                 if (counter > 0)
                 {

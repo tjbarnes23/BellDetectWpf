@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using BellDetectWpf.Detection;
 using BellDetectWpf.Models;
 using BellDetectWpf.Repository;
 

@@ -175,6 +175,10 @@ namespace BellDetectWpf.Repository
 
         public static int AmplitudeLookback { get; set; }
 
+        public static int AmplitudeIncreaseTS { get; set; }
+
+        public static int AmplitudeIncreasePC { get; set; }
+
         public static ushort DetectionNumChannels { get; set; }
 
         public static List<SampleInfo>[] Samples { get; set; }

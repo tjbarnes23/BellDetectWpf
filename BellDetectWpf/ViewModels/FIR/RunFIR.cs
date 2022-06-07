@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using BellDetectWpf.Detection;
 using BellDetectWpf.Enums;
 using BellDetectWpf.Repository;
 
@@ -42,12 +41,16 @@ namespace BellDetectWpf.ViewModels
             {
                 pm_C8_1,
                 pm_C8_2,
+                pm_C8_3,
                 pm_B9_1,
                 pm_B9_2,
+                pm_B9_3,
                 pm_D14_1,
                 pm_D14_2,
+                pm_D14_3,
                 pm_C15_1,
-                pm_C15_2
+                pm_C15_2,
+                pm_C15_3
             };
 
             // Process the first channel of the input wav file

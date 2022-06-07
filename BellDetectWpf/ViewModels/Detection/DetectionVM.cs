@@ -241,6 +241,38 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
+        public int AmplitudeIncreaseTS
+        {
+            get
+            {
+                return Repo.AmplitudeIncreaseTS;
+            }
+            set
+            {
+                if (Repo.AmplitudeIncreaseTS != value)
+                {
+                    Repo.AmplitudeIncreaseTS = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public int AmplitudeIncreasePC
+        {
+            get
+            {
+                return Repo.AmplitudeIncreasePC;
+            }
+            set
+            {
+                if (Repo.AmplitudeIncreasePC != value)
+                {
+                    Repo.AmplitudeIncreasePC = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public string DetectionFilePathName
         {
             get

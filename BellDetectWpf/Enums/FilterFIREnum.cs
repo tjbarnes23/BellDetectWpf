@@ -36,10 +36,10 @@ namespace BellDetectWpf.Enums
             {FilterFIREnum.pm_B9_3, "PM B9; 865/982/1002/1119 Hz; -60/-3/-60 dB; 661 order; 48 kHz"},
             {FilterFIREnum.pm_D14_1, "PM D14; 464/581/601/718 Hz; -30/-5/-30 dB; 276 order; 48 kHz"},
             {FilterFIREnum.pm_D14_2, "PM D14; 532/581/601/647 Hz; -40/-3/-40 dB; 1129 order; 48 kHz"},
-            {FilterFIREnum.pm_D14_3, "PM D14; 464/581/601/718 Hz; -60/-5/-60 dB; 661 order; 48 kHz"},
+            {FilterFIREnum.pm_D14_3, "PM D14; 464/581/601/718 Hz; -60/-3/-60 dB; 661 order; 48 kHz"},
             {FilterFIREnum.pm_C15_1, "PM C15; 395/512/532/650 Hz; -30/-5/-30 dB; 276 order; 48 kHz"},
             {FilterFIREnum.pm_C15_2, "PM C15; 463/512/532/581 Hz; -40/-3/-40 dB; 1060 order; 48 kHz"},
-            {FilterFIREnum.pm_C15_3, "PM C15; 395/512/532/650 Hz; -60/-5/-60 dB; 661 order; 48 kHz"}
+            {FilterFIREnum.pm_C15_3, "PM C15; 395/512/532/650 Hz; -60/-3/-60 dB; 661 order; 48 kHz"}
         };
     }
 

@@ -83,6 +83,12 @@ namespace BellDetectWpf
             // Set default amplitude lookback
             Repo.AmplitudeLookback = 3;
 
+            // Set default amplitude increase timespan
+            Repo.AmplitudeIncreaseTS = 5;
+
+            // Set default amplitude increase percentage
+            Repo.AmplitudeIncreasePC = 40;
+
 
             /**************************************************
             * Load main window

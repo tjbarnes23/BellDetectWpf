@@ -31,6 +31,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="1.5*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -289,7 +290,7 @@
             </TextBox>
         </Grid>
 
-        <!-- Amplitude cutoff -->
+        <!-- Amplitude cutoff and lookback -->
 
         <Grid Grid.Row="6" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -338,9 +339,59 @@
             </TextBox>
         </Grid>
 
+        <!-- Amplitude cutoff and lookback -->
+
+        <Grid Grid.Row="7" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Amplitude increase timespan (ms):
+            </TextBlock>
+
+            <TextBox Grid.Row="0" Grid.Column="1"
+                    Margin="10, 0, 0, 0"
+                    Width="120" Height="30"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=AmplitudeIncreaseTS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+
+            <TextBlock Grid.Row="0" Grid.Column="2"
+                    Margin="0, 0, 10, 0"
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
+                Amplitude increase %:
+            </TextBlock>
+
+            <TextBox Grid.Row="0" Grid.Column="3"
+                    Margin="10, 0, 0, 0"
+                    Width="120" Height="30"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial Black" FontSize="14"
+                    Padding="6, 0, 0, 0"
+                    Text="{Binding Path=AmplitudeIncreasePC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </TextBox>
+        </Grid>
+
         <!-- Run -->
 
-        <Button Grid.Row="7" Grid.Column="0"
+        <Button Grid.Row="8" Grid.Column="0"
                 Width="240" Height="30"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Run_Click">
@@ -349,7 +400,7 @@
 
         <!-- Save -->
 
-        <Button Grid.Row="8" Grid.Column="0"
+        <Button Grid.Row="9" Grid.Column="0"
                 Width="240" Height="30"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Save_Click">
@@ -358,7 +409,7 @@
 
         <!-- File name -->
 
-        <Grid Grid.Row="9" Grid.Column="0">
+        <Grid Grid.Row="10" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
@@ -404,7 +455,7 @@
 
         <!-- Return -->
 
-        <Button Grid.Row="10" Grid.Column="0"
+        <Button Grid.Row="11" Grid.Column="0"
                 Width="180" Height="30"
                 FontFamily="Arial Black" FontSize="14"
                 Click="Return_Click">
