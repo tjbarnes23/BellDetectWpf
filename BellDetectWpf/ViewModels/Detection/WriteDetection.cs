@@ -139,7 +139,10 @@ namespace BellDetectWpf.ViewModels
                         sb.Append($"Crossing type\t");
                         sb.Append($"Closest matching crossing to {samplesMid} prior\t");
                         sb.Append($"Implied frequency\t");
-                        sb.Append($"Strike? ((>= {lowLow} Hz and <= {lowHigh} Hz) or (>= {highLow} Hz and <= {highHigh} Hz)) and (amplitude >= {Repo.AmplitudeCutoff})\t");
+                        sb.Append($"Implied freq in shift range?\t");
+                        sb.Append($"Amp cutoff met?\t");
+                        sb.Append($"Amp increase met?\t");
+                        sb.Append($"Strike detected?\t");
 
                         sw.WriteLine(sb.ToString());
 
@@ -167,11 +170,25 @@ namespace BellDetectWpf.ViewModels
                                     sb.Append('\t');
                                     sb.Append(Repo.Samples[i][j].ImpliedFrequency);
                                     sb.Append('\t');
+                                    sb.Append(Repo.Samples[i][j].ImpFreqInShiftRange);
+                                    sb.Append('\t');
 
-                                    if (Repo.Samples[i][j].StrikeDetected == true)
+                                    if (Repo.Samples[i][j].ImpFreqInShiftRange == true)
                                     {
-                                        sb.Append(Repo.Samples[i][j].StrikeDetected);
+                                        sb.Append(Repo.Samples[i][j].AmpCutoffMet);
                                         sb.Append('\t');
+
+                                        if (Repo.Samples[i][j].AmpCutoffMet == true)
+                                        {
+                                            sb.Append(Repo.Samples[i][j].AmpIncreaseMet);
+                                            sb.Append('\t');
+
+                                            if (Repo.Samples[i][j].AmpIncreaseMet == true)
+                                            {
+                                                sb.Append(Repo.Samples[i][j].StrikeDetected);
+                                                sb.Append('\t');
+                                            }
+                                        }
                                     }
                                 }
                             }

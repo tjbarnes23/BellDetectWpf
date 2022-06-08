@@ -23,6 +23,12 @@ namespace BellDetectWpf.Models
 
         public double ImpliedFrequency { get; set; }
 
+        public bool ImpFreqInShiftRange { get; set; }
+
+        public bool AmpCutoffMet { get; set; }
+
+        public bool AmpIncreaseMet { get; set; }
+
         public bool StrikeDetected { get; set; }
     }
 }

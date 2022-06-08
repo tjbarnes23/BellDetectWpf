@@ -90,7 +90,10 @@ namespace BellDetectWpf.ViewModels
 
             int range = Math.Max(Math.Abs(samplesLowLow - samplesMid), Math.Abs(samplesMid - samplesHighHigh));
 
-            for (int i = samplesMid + range + 1; i < (Repo.NumSamples - 1); i++) // start at samplesMid + range + 1 to avoid falling off the front of the array
+            // From starting point, we go back samplesMid, and then from there look at +/- range
+            for (int i = samplesMid + range + 1; i < (Repo.NumSamples - ((Repo.AmplitudeIncreaseTS / 1000.0) * 48000) - 1); i++)
+                    // start at samplesMid + range + 1 to avoid falling off the front of the array
+                    // Finish at Repo.NumSamples - ((Repo.AmplitudeIncreaseTS / 1000.0) * 48000) - 1 to avoid falling off the end of the array
             {
                 if (Repo.Samples[hand][i].Crossing == true)
                 {
@@ -123,7 +126,7 @@ namespace BellDetectWpf.ViewModels
                     if ((Repo.Samples[hand][i].ImpliedFrequency >= lowLow && Repo.Samples[hand][i].ImpliedFrequency <= lowHigh) ||
                             (Repo.Samples[hand][i].ImpliedFrequency >= highLow && Repo.Samples[hand][i].ImpliedFrequency <= highHigh))
                     {
-                        found = false;
+                        Repo.Samples[hand][i].ImpFreqInShiftRange = true;
 
                         // Ensure amplitude reached at least amplitudeCutoff during the past n cycles where n = Repo.AmplitudeLookback
                         int lk = samplesMid * Repo.AmplitudeLookback;
@@ -132,12 +135,12 @@ namespace BellDetectWpf.ViewModels
                         {
                             if (Repo.Samples[hand][k].Amplitude >= Repo.AmplitudeCutoff)
                             {
-                                found = true;
+                                Repo.Samples[hand][i].AmpCutoffMet = true;
                                 break;
                             }
                         }
 
-                        if (found == true)
+                        if (Repo.Samples[hand][i].AmpCutoffMet == true)
                         {
                             // Run tests to ensure there is a sufficient amplitude increase over the specified
                             // following timespan
@@ -172,6 +175,7 @@ namespace BellDetectWpf.ViewModels
 
                             if (posPeak > priorHalfCyclePeak * (1 + (Repo.AmplitudeIncreasePC / 100.0)) && negPeak * -1 > priorHalfCyclePeak * (1 + (Repo.AmplitudeIncreasePC / 100.0)))
                             {
+                                Repo.Samples[hand][i].AmpIncreaseMet = true;
                                 Repo.Samples[hand][i].StrikeDetected = true;
 
                                 // Set the counter that controls the writing out of the square wave
