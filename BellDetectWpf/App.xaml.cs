@@ -78,16 +78,16 @@ namespace BellDetectWpf
             Repo.RightHighHigh = 575.0;
 
             // Set default amplitude cutoff for detection
-            Repo.AmplitudeCutoff = 2000;
+            Repo.MinAmplitudeValue = 2000;
 
             // Set default amplitude lookback
-            Repo.AmplitudeLookback = 3;
+            Repo.MinAmplitudeCycles = 3;
 
             // Set default amplitude increase timespan
-            Repo.AmplitudeIncreaseTS = 5;
+            Repo.MinAmplitudeIncreaseTS = 5;
 
             // Set default amplitude increase percentage
-            Repo.AmplitudeIncreasePC = 40;
+            Repo.MinAmplitudeIncreasePC = 40;
 
 
             /**************************************************

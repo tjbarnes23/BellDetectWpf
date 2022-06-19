@@ -209,65 +209,65 @@ namespace BellDetectWpf.ViewModels
             }
         }
 
-        public int AmplitudeCutoff
+        public int MinAmplitudeValue
         {
             get
             {
-                return Repo.AmplitudeCutoff;
+                return Repo.MinAmplitudeValue;
             }
             set
             {
-                if (Repo.AmplitudeCutoff != value)
+                if (Repo.MinAmplitudeValue != value)
                 {
-                    Repo.AmplitudeCutoff = value;
+                    Repo.MinAmplitudeValue = value;
                     NotifyPropertyChanged();
                 }
             }
         }
 
-        public int AmplitudeLookback
+        public int MinAmplitudeCycles
         {
             get
             {
-                return Repo.AmplitudeLookback;
+                return Repo.MinAmplitudeCycles;
             }
             set
             {
-                if (Repo.AmplitudeLookback != value)
+                if (Repo.MinAmplitudeCycles != value)
                 {
-                    Repo.AmplitudeLookback = value;
+                    Repo.MinAmplitudeCycles = value;
                     NotifyPropertyChanged();
                 }
             }
         }
 
-        public int AmplitudeIncreaseTS
+        public int MinAmplitudeIncreasePC
         {
             get
             {
-                return Repo.AmplitudeIncreaseTS;
+                return Repo.MinAmplitudeIncreasePC;
             }
             set
             {
-                if (Repo.AmplitudeIncreaseTS != value)
+                if (Repo.MinAmplitudeIncreasePC != value)
                 {
-                    Repo.AmplitudeIncreaseTS = value;
+                    Repo.MinAmplitudeIncreasePC = value;
                     NotifyPropertyChanged();
                 }
             }
         }
 
-        public int AmplitudeIncreasePC
+        public int MinAmplitudeIncreaseTS
         {
             get
             {
-                return Repo.AmplitudeIncreasePC;
+                return Repo.MinAmplitudeIncreaseTS;
             }
             set
             {
-                if (Repo.AmplitudeIncreasePC != value)
+                if (Repo.MinAmplitudeIncreaseTS != value)
                 {
-                    Repo.AmplitudeIncreasePC = value;
+                    Repo.MinAmplitudeIncreaseTS = value;
                     NotifyPropertyChanged();
                 }
             }

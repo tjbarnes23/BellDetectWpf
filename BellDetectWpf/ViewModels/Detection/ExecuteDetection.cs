@@ -16,14 +16,7 @@ namespace BellDetectWpf.ViewModels
                 double lowLow, double lowHigh, double mid, double highLow, double highHigh)
         {
             int hand;
-            SampleInfo si;
-
-            CrossingTypeEnum ct;
-            int j;
-            bool found;
-            int counter;
-
-            // 
+            
             if (inputChannel == 1)
             {
                 hand = 0;
@@ -39,7 +32,7 @@ namespace BellDetectWpf.ViewModels
                 // Look for crossing from negative to positive
                 if (Repo.DetectionWaveformArr[inputChannel, i - 1] < 0 && Repo.DetectionWaveformArr[inputChannel, i] >= 0)
                 {
-                    si = new()
+                    SampleInfo si = new()
                     {
                         SampleNum = i,
                         Time = i / 48000.0,
@@ -52,7 +45,7 @@ namespace BellDetectWpf.ViewModels
                 }
                 else if (Repo.DetectionWaveformArr[inputChannel, i - 1] >= 0 && Repo.DetectionWaveformArr[inputChannel, i] < 0)
                 {
-                    si = new()
+                    SampleInfo si = new()
                     {
                         SampleNum = i,
                         Time = i / 48000.0,
@@ -65,7 +58,7 @@ namespace BellDetectWpf.ViewModels
                 }
                 else
                 {
-                    si = new()
+                    SampleInfo si = new()
                     {
                         SampleNum = i,
                         Time = i / 48000.0,
@@ -78,28 +71,39 @@ namespace BellDetectWpf.ViewModels
                 }
             }
 
-            // Loop through samples
-            // if sample is a crossing, find closest sample to 92 samples prior that is a matching crossing
-            // Use the sample gap to calculate implied frequency
-            // If implied frequency < 510 or > 535, mark that a strike is detected
-            counter = 0;
-
+            /*******************************************************************************
+            * At this point all the crossings are identified
+            * 
+            * Now add the following to the sample info objects:
+            * If sample is a crossing, find closest sample to the mid number of samples
+            * prior that is a crossing in the same direction
+            * From the resulting number of samples, calculate implied frequency
+            * If implied frequency is within the range defined by lowLow and highLow,
+            * or within the range defined by lowHigh and highHigh,
+            * then mark that a strike is detected
+            *******************************************************************************/
+            
             int samplesLowLow = Convert.ToInt32(48000 / lowLow);
             int samplesMid = Convert.ToInt32(48000 / mid);
             int samplesHighHigh = Convert.ToInt32(48000 / highHigh);
 
+            // range represents the furthest we need to look for finding a matching crossing
             int range = Math.Max(Math.Abs(samplesLowLow - samplesMid), Math.Abs(samplesMid - samplesHighHigh));
 
+            int numMinAmplitudeSamples = samplesMid * Repo.MinAmplitudeCycles;
+            int numMinAmplitudeIncreaseSamples = (int)(48000 * (Repo.MinAmplitudeIncreaseTS / 1000.0));
+
             // From starting point, we go back samplesMid, and then from there look at +/- range
-            for (int i = samplesMid + range + 1; i < (Repo.NumSamples - ((Repo.AmplitudeIncreaseTS / 1000.0) * 48000) - 1); i++)
-                    // start at samplesMid + range + 1 to avoid falling off the front of the array
-                    // Finish at Repo.NumSamples - ((Repo.AmplitudeIncreaseTS / 1000.0) * 48000) - 1 to avoid falling off the end of the array
+            // start at samplesMid + range to avoid falling off the front of the array
+            // Finish at Repo.NumSamples - numMinAmplitudeSamples - numMinAmplitudeIncreaseSamples to avoid falling off the end of the array
+
+            for (int i = samplesMid + range; i < (Repo.NumSamples - numMinAmplitudeSamples - numMinAmplitudeIncreaseSamples); i++)
             {
                 if (Repo.Samples[hand][i].Crossing == true)
                 {
-                    ct = Repo.Samples[hand][i].CrossingType;
-                    j = i - samplesMid;
-                    found = false;
+                    CrossingTypeEnum ct = Repo.Samples[hand][i].CrossingType;
+                    int j = i - samplesMid;
+                    bool found = false;
 
                     for (int k = 0; k <= range; k++)
                     {
@@ -121,71 +125,95 @@ namespace BellDetectWpf.ViewModels
                     if (found == true)
                     {
                         Repo.Samples[hand][i].ImpliedFrequency = 48000.0 / Repo.Samples[hand][i].NearestCrossingMidPrior;
+
+                        if ((Repo.Samples[hand][i].ImpliedFrequency >= lowLow && Repo.Samples[hand][i].ImpliedFrequency <= lowHigh) ||
+                                (Repo.Samples[hand][i].ImpliedFrequency >= highLow && Repo.Samples[hand][i].ImpliedFrequency <= highHigh))
+                        {
+                            Repo.Samples[hand][i].ImpFreqInShiftRange = true;
+                        }
+                    }
+                }
+            }
+
+            /*******************************************************************************
+            * At this point all the prior crossings are indentified and their
+            * implied frequencies are recorded
+            * The sampleInfo objects are also marked with whether the implied frequency is
+            * within the range we are looking for
+            *
+            * Now loop through the sampleInfo objects again
+            * If a sample has ImpFreqInShiftRange == true, then
+            * see if MinAmplitudeValue is found in the next MinAmplitudeCycles
+            * 
+            * If the above is found, then
+            * see if MinAmplitudeIncreasePC is found in the next MinAmplitudeIncreaseTS
+            *******************************************************************************/
+
+            int counter = 0;
+
+            for (int i = 0; i < (Repo.NumSamples - numMinAmplitudeSamples - numMinAmplitudeIncreaseSamples); i++)
+            { 
+                if (Repo.Samples[hand][i].ImpFreqInShiftRange == true)
+                {
+                    int maxAmplitudeFound = 0;
+                    int maxAmplitudeSampleNum = 0;
+
+                    // Test whether amplitude reached at least Repo.MinAmplitudeValue during the next n cycles where n = Repo.MinAmplitudeCycles
+                    for (int j = i; j < i + numMinAmplitudeSamples; j++)
+                    {
+                        if (Math.Abs(Repo.Samples[hand][j].Amplitude) > maxAmplitudeFound)
+                        {
+                            maxAmplitudeFound = Math.Abs(Repo.Samples[hand][j].Amplitude);
+                            maxAmplitudeSampleNum = j;
+                        }
                     }
 
-                    if ((Repo.Samples[hand][i].ImpliedFrequency >= lowLow && Repo.Samples[hand][i].ImpliedFrequency <= lowHigh) ||
-                            (Repo.Samples[hand][i].ImpliedFrequency >= highLow && Repo.Samples[hand][i].ImpliedFrequency <= highHigh))
+                    if (maxAmplitudeFound >= Repo.MinAmplitudeValue)
                     {
-                        Repo.Samples[hand][i].ImpFreqInShiftRange = true;
+                        Repo.Samples[hand][i].MinAmplitudeMet = true;
+                        Repo.Samples[hand][i].MaxAmplitudeFound = maxAmplitudeFound;
+                        Repo.Samples[hand][i].MaxAmplitudeSampleNum = maxAmplitudeSampleNum;
+                    }
 
-                        // Ensure amplitude reached at least amplitudeCutoff during the past n cycles where n = Repo.AmplitudeLookback
-                        int lk = samplesMid * Repo.AmplitudeLookback;
+                    // If the minimum amplitude was met in the previous test,
+                    // check whether the max amplitude found increases by at least the percent specified
+                    // by MinAmplitudeIncreasePC in the next MinAmplitudeIncreaseTS
 
-                        for (int k = Math.Max(i - lk, 0); k <= i; k++)
+                    if (Repo.Samples[hand][i].MinAmplitudeMet == true)
+                    {
+                        int maxAmplitudeIncreaseFound = 0;
+                        int maxAmplitudeIncreaseSampleNum = 0;
+
+                        for (int j = i + numMinAmplitudeSamples; j < i + numMinAmplitudeSamples + numMinAmplitudeIncreaseSamples; j++)
                         {
-                            if (Repo.Samples[hand][k].Amplitude >= Repo.AmplitudeCutoff)
+                            if (Math.Abs(Repo.Samples[hand][j].Amplitude) > maxAmplitudeIncreaseFound)
                             {
-                                Repo.Samples[hand][i].AmpCutoffMet = true;
-                                break;
+                                maxAmplitudeIncreaseFound = Math.Abs(Repo.Samples[hand][j].Amplitude);
+                                maxAmplitudeIncreaseSampleNum = j;
                             }
                         }
 
-                        if (Repo.Samples[hand][i].AmpCutoffMet == true)
+                        double maxAmplitudeIncreasePC = maxAmplitudeIncreaseFound / (double)maxAmplitudeFound;
+
+                        if (maxAmplitudeIncreasePC >= (1 + (Repo.MinAmplitudeIncreasePC / 100.0)))
                         {
-                            // Run tests to ensure there is a sufficient amplitude increase over the specified
-                            // following timespan
+                            Repo.Samples[hand][i].MinAmplitudeIncreaseMet = true;
+                            Repo.Samples[hand][i].MaxAmplitudeIncreaseFound = maxAmplitudeIncreasePC;
+                            Repo.Samples[hand][i].MaxAmplitudeIncreaseSampleNum = maxAmplitudeIncreaseSampleNum;
+                        }
 
-                            // Get the peak absolute amplitude in the half cycle prior to time zero.
-                            int priorHalfCyclePeak = 0;
+                        // If the minimum amplitude increase was met in the previous test,
+                        // record that a strike was detected
 
-                            for (int k = i - samplesMid / 2; k <= i; k++)
-                            {
-                                if (Math.Abs(Repo.Samples[hand][k].Amplitude) > priorHalfCyclePeak)
-                                {
-                                    priorHalfCyclePeak = Repo.Samples[hand][k].Amplitude;
-                                }
-                            }
-
-                            // Get positive and negative peaks over next Repo.AmplitudeIncreaseTS timespan
-                            int posPeak = 0;
-                            int negPeak = 0;
-
-                            for (int k = i; k <= i + ((Repo.AmplitudeIncreaseTS / 1000.0) * 48000); k++)
-                            {
-                                if (Repo.Samples[hand][k].Amplitude > posPeak)
-                                {
-                                    posPeak = Repo.Samples[hand][k].Amplitude;
-                                }
-
-                                if (Repo.Samples[hand][k].Amplitude < negPeak)
-                                {
-                                    negPeak = Repo.Samples[hand][k].Amplitude;
-                                }
-                            }
-
-                            if (posPeak > priorHalfCyclePeak * (1 + (Repo.AmplitudeIncreasePC / 100.0)) && negPeak * -1 > priorHalfCyclePeak * (1 + (Repo.AmplitudeIncreasePC / 100.0)))
-                            {
-                                Repo.Samples[hand][i].AmpIncreaseMet = true;
-                                Repo.Samples[hand][i].StrikeDetected = true;
-
-                                // Set the counter that controls the writing out of the square wave
-                                counter = 480;
-                            }
+                        if (Repo.Samples[hand][i].MinAmplitudeIncreaseMet == true)
+                        {
+                            Repo.Samples[hand][i].StrikeDetected = true;
+                            counter = 480;
                         }
                     }
                 }
 
-
+                // Write out strike detection signal to waveform
                 if (counter > 0)
                 {
                     Repo.DetectionWaveformArr[outputChannel, i] = 20000;

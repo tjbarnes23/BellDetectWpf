@@ -133,15 +133,19 @@ namespace BellDetectWpf.ViewModels
                         // Write header row
                         sb.Clear();
                         sb.Append($"Sample #\t");
-                        sb.Append($"Time (ms)\t");
+                        sb.Append($"Time (s)\t");
                         sb.Append($"Amplitude\t");
                         sb.Append($"Crossing?\t");
                         sb.Append($"Crossing type\t");
                         sb.Append($"Closest matching crossing to {samplesMid} prior\t");
                         sb.Append($"Implied frequency\t");
                         sb.Append($"Implied freq in shift range?\t");
-                        sb.Append($"Amp cutoff met?\t");
-                        sb.Append($"Amp increase met?\t");
+                        sb.Append($"Min amplitude met?\t");
+                        sb.Append($"Max amplitude found\t");
+                        sb.Append($"Max amplitude sample #\t");
+                        sb.Append($"Min amplitude increase met?\t");
+                        sb.Append($"Max amplitude increase found\t");
+                        sb.Append($"Max amplitude increase sample #\t");
                         sb.Append($"Strike detected?\t");
 
                         sw.WriteLine(sb.ToString());
@@ -175,16 +179,24 @@ namespace BellDetectWpf.ViewModels
 
                                     if (Repo.Samples[i][j].ImpFreqInShiftRange == true)
                                     {
-                                        sb.Append(Repo.Samples[i][j].AmpCutoffMet);
+                                        sb.Append(Repo.Samples[i][j].MinAmplitudeMet);
                                         sb.Append('\t');
 
-                                        if (Repo.Samples[i][j].AmpCutoffMet == true)
+                                        if (Repo.Samples[i][j].MinAmplitudeMet == true)
                                         {
-                                            sb.Append(Repo.Samples[i][j].AmpIncreaseMet);
+                                            sb.Append(Repo.Samples[i][j].MaxAmplitudeFound);
+                                            sb.Append('\t');
+                                            sb.Append(Repo.Samples[i][j].MaxAmplitudeSampleNum);
+                                            sb.Append('\t');
+                                            sb.Append(Repo.Samples[i][j].MinAmplitudeIncreaseMet);
                                             sb.Append('\t');
 
-                                            if (Repo.Samples[i][j].AmpIncreaseMet == true)
+                                            if (Repo.Samples[i][j].MinAmplitudeIncreaseMet == true)
                                             {
+                                                sb.Append(Repo.Samples[i][j].MaxAmplitudeIncreaseFound);
+                                                sb.Append('\t');
+                                                sb.Append(Repo.Samples[i][j].MaxAmplitudeIncreaseSampleNum);
+                                                sb.Append('\t');
                                                 sb.Append(Repo.Samples[i][j].StrikeDetected);
                                                 sb.Append('\t');
                                             }

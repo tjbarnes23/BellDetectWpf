@@ -290,7 +290,7 @@
             </TextBox>
         </Grid>
 
-        <!-- Amplitude cutoff and lookback -->
+        <!-- Min amplitude -->
 
         <Grid Grid.Row="6" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -307,8 +307,9 @@
             <TextBlock Grid.Row="0" Grid.Column="0"
                     Margin="0, 0, 10, 0"
                     HorizontalAlignment="Right" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Amplitude cutoff:
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Min amplitude value:
             </TextBlock>
 
             <TextBox Grid.Row="0" Grid.Column="1"
@@ -318,14 +319,15 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=AmplitudeCutoff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=MinAmplitudeValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
 
             <TextBlock Grid.Row="0" Grid.Column="2"
                     Margin="0, 0, 10, 0"
                     HorizontalAlignment="Right" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Amplitude lookback:
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Min amplitude cycles:
             </TextBlock>
 
             <TextBox Grid.Row="0" Grid.Column="3"
@@ -335,11 +337,11 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=AmplitudeLookback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=MinAmplitudeCycles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
         </Grid>
 
-        <!-- Amplitude cutoff and lookback -->
+        <!-- Min amplitude increase -->
 
         <Grid Grid.Row="7" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -358,7 +360,7 @@
                     HorizontalAlignment="Right" VerticalAlignment="Center"
                     FontFamily="Arial Black" FontSize="14" Foreground="#444"
                     TextWrapping="Wrap" LineHeight="20">
-                Amplitude increase timespan (ms):
+                Min amplitude increase %:
             </TextBlock>
 
             <TextBox Grid.Row="0" Grid.Column="1"
@@ -368,14 +370,15 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=AmplitudeIncreaseTS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=MinAmplitudeIncreasePC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
-
+            
             <TextBlock Grid.Row="0" Grid.Column="2"
                     Margin="0, 0, 10, 0"
                     HorizontalAlignment="Right" VerticalAlignment="Center"
-                    FontFamily="Arial Black" FontSize="14" Foreground="#444">
-                Amplitude increase %:
+                    FontFamily="Arial Black" FontSize="14" Foreground="#444"
+                    TextWrapping="Wrap" LineHeight="20">
+                Min amplitude increase timespan (ms):
             </TextBlock>
 
             <TextBox Grid.Row="0" Grid.Column="3"
@@ -385,7 +388,7 @@
                     VerticalContentAlignment="Center"
                     FontFamily="Arial Black" FontSize="14"
                     Padding="6, 0, 0, 0"
-                    Text="{Binding Path=AmplitudeIncreasePC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Path=MinAmplitudeIncreaseTS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
         </Grid>
 

@@ -171,13 +171,13 @@ namespace BellDetectWpf.Repository
 
         public static double RightHighHigh { get; set; }
 
-        public static int AmplitudeCutoff { get; set; }
+        public static int MinAmplitudeValue { get; set; }
 
-        public static int AmplitudeLookback { get; set; }
+        public static int MinAmplitudeCycles { get; set; }
 
-        public static int AmplitudeIncreaseTS { get; set; }
+        public static int MinAmplitudeIncreasePC { get; set; }
 
-        public static int AmplitudeIncreasePC { get; set; }
+        public static int MinAmplitudeIncreaseTS { get; set; }
 
         public static ushort DetectionNumChannels { get; set; }
 
