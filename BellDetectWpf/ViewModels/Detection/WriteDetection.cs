@@ -138,13 +138,13 @@ namespace BellDetectWpf.ViewModels
                         sb.Append($"Crossing?\t");
                         sb.Append($"Crossing type\t");
                         sb.Append($"Closest matching crossing to {samplesMid} prior\t");
-                        sb.Append($"Implied frequency\t");
+                        sb.Append($"Implied frequency (Hz)\t");
                         sb.Append($"Implied freq in shift range?\t");
                         sb.Append($"Min amplitude met?\t");
                         sb.Append($"Max amplitude found\t");
                         sb.Append($"Max amplitude sample #\t");
                         sb.Append($"Min amplitude increase met?\t");
-                        sb.Append($"Max amplitude increase found\t");
+                        sb.Append($"Max amplitude increase found (%)\t");
                         sb.Append($"Max amplitude increase sample #\t");
                         sb.Append($"Strike detected?\t");
 

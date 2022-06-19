@@ -33,7 +33,7 @@ namespace BellDetectWpf.Models
 
         public bool MinAmplitudeIncreaseMet { get; set; }
 
-        public double MaxAmplitudeIncreaseFound { get; set; }
+        public int MaxAmplitudeIncreaseFound { get; set; }
 
         public int MaxAmplitudeIncreaseSampleNum { get; set; }
 

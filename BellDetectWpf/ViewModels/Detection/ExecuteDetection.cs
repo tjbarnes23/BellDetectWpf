@@ -26,13 +26,25 @@ namespace BellDetectWpf.ViewModels
                 hand = 1;
             }
 
+            // Create a sampleInfo record for the first sample (can't do a comparison on this item)
+            SampleInfo si = new()
+            {
+                SampleNum = 0,
+                Time = 0 / 48000.0,
+                Amplitude = Repo.DetectionWaveformArr[inputChannel, 0],
+                Crossing = false,
+                CrossingType = CrossingTypeEnum.NA
+            };
+
+            Repo.Samples[hand].Add(si);
+
             // Loop through audio samples identifying crossings
             for (int i = 1; i < Repo.NumSamples; i++) // start at 1 because we compare to previous idx
             {
                 // Look for crossing from negative to positive
                 if (Repo.DetectionWaveformArr[inputChannel, i - 1] < 0 && Repo.DetectionWaveformArr[inputChannel, i] >= 0)
                 {
-                    SampleInfo si = new()
+                    si = new()
                     {
                         SampleNum = i,
                         Time = i / 48000.0,
@@ -45,7 +57,7 @@ namespace BellDetectWpf.ViewModels
                 }
                 else if (Repo.DetectionWaveformArr[inputChannel, i - 1] >= 0 && Repo.DetectionWaveformArr[inputChannel, i] < 0)
                 {
-                    SampleInfo si = new()
+                    si = new()
                     {
                         SampleNum = i,
                         Time = i / 48000.0,
@@ -58,7 +70,7 @@ namespace BellDetectWpf.ViewModels
                 }
                 else
                 {
-                    SampleInfo si = new()
+                    si = new()
                     {
                         SampleNum = i,
                         Time = i / 48000.0,
@@ -193,9 +205,9 @@ namespace BellDetectWpf.ViewModels
                             }
                         }
 
-                        double maxAmplitudeIncreasePC = maxAmplitudeIncreaseFound / (double)maxAmplitudeFound;
+                        int maxAmplitudeIncreasePC = (int)(((maxAmplitudeIncreaseFound / (double)maxAmplitudeFound) - 1) * 100);
 
-                        if (maxAmplitudeIncreasePC >= (1 + (Repo.MinAmplitudeIncreasePC / 100.0)))
+                        if (maxAmplitudeIncreasePC >= Repo.MinAmplitudeIncreasePC)
                         {
                             Repo.Samples[hand][i].MinAmplitudeIncreaseMet = true;
                             Repo.Samples[hand][i].MaxAmplitudeIncreaseFound = maxAmplitudeIncreasePC;
