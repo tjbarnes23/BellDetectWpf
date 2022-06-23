@@ -25,17 +25,29 @@ namespace BellDetectWpf.Models
 
         public bool ImpFreqInShiftRange { get; set; }
 
-        public bool MinAmplitudeMet { get; set; }
-
         public int MaxAmplitudeFound { get; set; }
 
         public int MaxAmplitudeSampleNum { get; set; }
 
-        public bool MinAmplitudeIncreaseMet { get; set; }
+        public bool MinAmplitudeMet { get; set; }
 
-        public int MaxAmplitudeIncreaseFound { get; set; }
+        public int HalfCyclePeakPositiveValue { get; set; }
+
+        public int HalfCyclePeakPositiveSampleNum { get; set; }
+
+        public int HalfCyclePeakNegativeValue { get; set; }
+
+        public int HalfCyclePeakNegativeSampleNum { get; set; }
+
+        public int Denominator { get; set; }
+
+        public int Numerator { get; set; }
+
+        public int MaxAmplitudeIncreasePC { get; set; }
 
         public int MaxAmplitudeIncreaseSampleNum { get; set; }
+
+        public bool MinAmplitudeIncreaseMet { get; set; }
 
         public bool StrikeDetected { get; set; }
     }

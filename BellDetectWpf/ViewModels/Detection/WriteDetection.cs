@@ -126,88 +126,108 @@ namespace BellDetectWpf.ViewModels
                 
                 int samplesMid = Convert.ToInt32(48000 / mid);
 
-                using (Stream s = File.Create(filePathName))
+                using Stream s = File.Create(filePathName);
+                using StreamWriter sw = new(s, new UTF8Encoding(false));
+
+                // Write header row
+                sb.Clear();
+                sb.Append($"Sample #\t");
+                sb.Append($"Time (s)\t");
+                sb.Append($"Amplitude\t");
+                sb.Append($"Crossing?\t");
+
+                sb.Append($"Crossing type\t");
+                sb.Append($"Closest matching crossing to {samplesMid} prior\t");
+
+                sb.Append($"Implied frequency (Hz)\t");
+                sb.Append($"Implied freq in shift range?\t");
+
+                sb.Append($"Max amplitude found\t");
+                sb.Append($"Max amplitude sample #\t");
+                sb.Append($"Min amplitude met?\t");
+
+                sb.Append($"Half-cycle peak positive value\t");
+                sb.Append($"Half-cycle peak positive sample #\t");
+                sb.Append($"Half-cycle peak negative value\t");
+                sb.Append($"Half-cycle peak negative sample #\t");
+                sb.Append($"Denominator\t");
+                sb.Append($"Numerator\t");
+                sb.Append($"Max amplitude increase %\t");
+                sb.Append($"Max amplitude increase sample #\t");
+                sb.Append($"Min amplitude increase met?\t");
+
+                sb.Append($"Strike detected?\t");
+
+                sw.WriteLine(sb.ToString());
+
+                // Write data rows
+                for (int j = 0; j < Repo.Samples[i].Count; j++)
                 {
-                    using (StreamWriter sw = new(s, new UTF8Encoding(false)))
+                    sb.Clear();
+                    sb.Append(Repo.Samples[i][j].SampleNum);
+                    sb.Append('\t');
+                    sb.Append(Repo.Samples[i][j].Time);
+                    sb.Append('\t');
+                    sb.Append(Repo.Samples[i][j].Amplitude);
+                    sb.Append('\t');
+                    sb.Append(Repo.Samples[i][j].Crossing);
+                    sb.Append('\t');
+
+                    if (Repo.Samples[i][j].Crossing == true)
                     {
-                        // Write header row
-                        sb.Clear();
-                        sb.Append($"Sample #\t");
-                        sb.Append($"Time (s)\t");
-                        sb.Append($"Amplitude\t");
-                        sb.Append($"Crossing?\t");
-                        sb.Append($"Crossing type\t");
-                        sb.Append($"Closest matching crossing to {samplesMid} prior\t");
-                        sb.Append($"Implied frequency (Hz)\t");
-                        sb.Append($"Implied freq in shift range?\t");
-                        sb.Append($"Min amplitude met?\t");
-                        sb.Append($"Max amplitude found\t");
-                        sb.Append($"Max amplitude sample #\t");
-                        sb.Append($"Min amplitude increase met?\t");
-                        sb.Append($"Max amplitude increase found (%)\t");
-                        sb.Append($"Max amplitude increase sample #\t");
-                        sb.Append($"Strike detected?\t");
+                        sb.Append(Repo.Samples[i][j].CrossingType);
+                        sb.Append('\t');
+                        sb.Append(Repo.Samples[i][j].NearestCrossingMidPrior);
+                        sb.Append('\t');
 
-                        sw.WriteLine(sb.ToString());
-
-                        // Write data rows
-                        for (int j = 0; j < Repo.Samples[i].Count; j++)
+                        if (Repo.Samples[i][j].NearestCrossingMidPrior != 0)
                         {
-                            sb.Clear();
-                            sb.Append(Repo.Samples[i][j].SampleNum);
+                            sb.Append(Repo.Samples[i][j].ImpliedFrequency);
                             sb.Append('\t');
-                            sb.Append(Repo.Samples[i][j].Time);
-                            sb.Append('\t');
-                            sb.Append(Repo.Samples[i][j].Amplitude);
+                            sb.Append(Repo.Samples[i][j].ImpFreqInShiftRange);
                             sb.Append('\t');
 
-                            if (Repo.Samples[i][j].Crossing == true)
+                            if (Repo.Samples[i][j].ImpFreqInShiftRange == true)
                             {
-                                sb.Append(Repo.Samples[i][j].Crossing);
+                                sb.Append(Repo.Samples[i][j].MaxAmplitudeFound);
                                 sb.Append('\t');
-                                sb.Append(Repo.Samples[i][j].CrossingType);
+                                sb.Append(Repo.Samples[i][j].MaxAmplitudeSampleNum);
+                                sb.Append('\t');
+                                sb.Append(Repo.Samples[i][j].MinAmplitudeMet);
                                 sb.Append('\t');
 
-                                if (Repo.Samples[i][j].NearestCrossingMidPrior != 0)
+                                if (Repo.Samples[i][j].MinAmplitudeMet == true)
                                 {
-                                    sb.Append(Repo.Samples[i][j].NearestCrossingMidPrior);
+                                    sb.Append(Repo.Samples[i][j].HalfCyclePeakPositiveValue);
                                     sb.Append('\t');
-                                    sb.Append(Repo.Samples[i][j].ImpliedFrequency);
+                                    sb.Append(Repo.Samples[i][j].HalfCyclePeakPositiveSampleNum);
                                     sb.Append('\t');
-                                    sb.Append(Repo.Samples[i][j].ImpFreqInShiftRange);
+                                    sb.Append(Repo.Samples[i][j].HalfCyclePeakNegativeValue);
+                                    sb.Append('\t');
+                                    sb.Append(Repo.Samples[i][j].HalfCyclePeakNegativeSampleNum);
+                                    sb.Append('\t');
+                                    sb.Append(Repo.Samples[i][j].Denominator);
+                                    sb.Append('\t');
+                                    sb.Append(Repo.Samples[i][j].Numerator);
+                                    sb.Append('\t');
+                                    sb.Append(Repo.Samples[i][j].MaxAmplitudeIncreasePC);
+                                    sb.Append('\t');
+                                    sb.Append(Repo.Samples[i][j].MaxAmplitudeIncreaseSampleNum);
+                                    sb.Append('\t');
+                                    sb.Append(Repo.Samples[i][j].MinAmplitudeIncreaseMet);
                                     sb.Append('\t');
 
-                                    if (Repo.Samples[i][j].ImpFreqInShiftRange == true)
+                                    if (Repo.Samples[i][j].MinAmplitudeIncreaseMet == true)
                                     {
-                                        sb.Append(Repo.Samples[i][j].MinAmplitudeMet);
+                                        sb.Append(Repo.Samples[i][j].StrikeDetected);
                                         sb.Append('\t');
-
-                                        if (Repo.Samples[i][j].MinAmplitudeMet == true)
-                                        {
-                                            sb.Append(Repo.Samples[i][j].MaxAmplitudeFound);
-                                            sb.Append('\t');
-                                            sb.Append(Repo.Samples[i][j].MaxAmplitudeSampleNum);
-                                            sb.Append('\t');
-                                            sb.Append(Repo.Samples[i][j].MinAmplitudeIncreaseMet);
-                                            sb.Append('\t');
-
-                                            if (Repo.Samples[i][j].MinAmplitudeIncreaseMet == true)
-                                            {
-                                                sb.Append(Repo.Samples[i][j].MaxAmplitudeIncreaseFound);
-                                                sb.Append('\t');
-                                                sb.Append(Repo.Samples[i][j].MaxAmplitudeIncreaseSampleNum);
-                                                sb.Append('\t');
-                                                sb.Append(Repo.Samples[i][j].StrikeDetected);
-                                                sb.Append('\t');
-                                            }
-                                        }
                                     }
                                 }
                             }
-
-                            sw.WriteLine(sb.ToString());
                         }
                     }
+
+                    sw.WriteLine(sb.ToString());
                 }
             }
 
