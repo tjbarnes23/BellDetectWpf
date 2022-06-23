@@ -185,18 +185,13 @@ namespace BellDetectWpf.ViewModels
             
             int counter = 0;
 
-            int maxAmplitudeFound = 0;
-            int maxAmplitudeSampleNum = 0;
-
-            int maxPosAmplitudeFound = 0;
-            int maxPosAmplitudeSampleNum = 0;
-            int maxNegAmplitudeFound = 0;
-            int maxNegAmplitudeSampleNum = 0;
-
             for (int i = 0; i < (Repo.NumSamples - maxOffset); i++)
             {
                 if (Repo.Samples[hand][i].ImpFreqInShiftRange == true)
                 {
+                    int maxAmplitudeFound = 0;
+                    int maxAmplitudeSampleNum = 0;
+
                     // Test whether amplitude reached at least Repo.MinAmplitudeValue during the next n cycles where n = Repo.MinAmplitudeCycles
                     for (int j = i; j < i + numMinAmplitudeSamples; j++)
                     {
@@ -214,6 +209,11 @@ namespace BellDetectWpf.ViewModels
                     {
                         // Record location of maxAmplitude found
                         Repo.Samples[hand][i].MinAmplitudeMet = true;
+
+                        int maxPosAmplitudeFound = 0;
+                        int maxPosAmplitudeSampleNum = 0;
+                        int maxNegAmplitudeFound = 0;
+                        int maxNegAmplitudeSampleNum = 0;
 
                         // Calc denominator
                         if (Repo.Samples[hand][i].CrossingType == CrossingTypeEnum.PosToNeg)
