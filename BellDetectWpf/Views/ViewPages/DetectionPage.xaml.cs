@@ -26,9 +26,20 @@ namespace BellDetectWpf.Views
             await viewModel.SaveDetection();
         }
 
+        private void FIR_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.MW.MainFrame.Navigate(new FIRPage());
+        }
+
+
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.MW.MainFrame.Navigate(new MainPage());
+        }
+
+        private void MicStream_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.MW.MainFrame.Navigate(new MicStreamPage());
         }
     }
 }

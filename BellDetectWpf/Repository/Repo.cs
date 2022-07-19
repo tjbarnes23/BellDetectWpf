@@ -191,6 +191,16 @@ namespace BellDetectWpf.Repository
 
 
         /**************************************************
+        * MicStream
+        **************************************************/
+        public static string MicStreamStartStopTxt { get; set; }
+
+        public static string MicStreamStatus { get; set; }
+
+        public static bool Recording { get; set; }
+
+
+        /**************************************************
         * Key Press
         **************************************************/
         public static KeyPressModeEnum KeyPressMode { get; set; }

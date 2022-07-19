@@ -458,11 +458,37 @@
 
         <!-- Return -->
 
-        <Button Grid.Row="11" Grid.Column="0"
+        <Grid Grid.Row="11" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0"
+                    Width="180" Height="30"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="FIR_Click">
+                FIR Filter page
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="1"
+                    Width="180" Height="30"
+                    FontFamily="Arial Black" FontSize="14"
+                    Click="Return_Click">
+                Return to main page
+            </Button>
+
+            <Button Grid.Row="0" Grid.Column="2"
                 Width="180" Height="30"
                 FontFamily="Arial Black" FontSize="14"
-                Click="Return_Click">
-            Return to main page
-        </Button>
+                Click="MicStream_Click">
+                Mic Stream
+            </Button>
+        </Grid>
     </Grid>
 </Page>
