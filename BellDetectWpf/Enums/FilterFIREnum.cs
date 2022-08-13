@@ -10,6 +10,8 @@ namespace BellDetectWpf.Enums
 {
     public enum FilterFIREnum
     {
+        pm_E6_1,
+        pm_D7_1,
         pm_C8_1,
         pm_C8_2,
         pm_C8_3,
@@ -28,6 +30,8 @@ namespace BellDetectWpf.Enums
     {
         public static Dictionary<FilterFIREnum, string> FilterFIRDict { get; } = new Dictionary<FilterFIREnum, string>()
         {
+            {FilterFIREnum.pm_E6_1, "PM E6; 1207/1324/1344/1461 Hz; -60/-3/-60 dB; 661 order; 48 kHz"},
+            {FilterFIREnum.pm_D7_1, "PM D7; 1066/1183/1203/1320 Hz; -60/-3/-60 dB; 661 order; 48 kHz"},
             {FilterFIREnum.pm_C8_1, "PM C8; 923/1040/1060/1177 Hz; -30/-5/-30 dB; 276 order; 48 kHz"},
             {FilterFIREnum.pm_C8_2, "PM C8; 1002/1040/1060/1189 Hz; -40/-3/-40 dB; 1366 order; 48 kHz"},
             {FilterFIREnum.pm_C8_3, "PM C8; 923/1040/1060/1177 Hz; -60/-3/-60 dB; 661 order; 48 kHz"},

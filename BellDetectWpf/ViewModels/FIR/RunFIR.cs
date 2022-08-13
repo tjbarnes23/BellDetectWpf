@@ -39,6 +39,8 @@ namespace BellDetectWpf.ViewModels
             // Load a list of filter coefficients
             coefs = new()
             {
+                pm_E6_1,
+                pm_D7_1,
                 pm_C8_1,
                 pm_C8_2,
                 pm_C8_3,
